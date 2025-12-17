@@ -84,6 +84,7 @@ export default {
           DEFAULT: "hsl(var(--success))",
           foreground: "hsl(var(--success-foreground))",
         },
+        rating: "hsl(var(--rating))",
       },
       borderRadius: {
         lg: "var(--radius)",

@@ -54,7 +54,7 @@ export function Testimonials() {
             <div className="text-center">
               <div className="flex items-center gap-1 justify-center mb-1">
                 <span className="text-2xl font-bold text-foreground">4.9</span>
-                <Star className="h-5 w-5 fill-primary text-primary" />
+                <Star className="h-5 w-5 fill-rating text-rating" />
               </div>
               <p className="text-xs text-muted-foreground">Average Rating</p>
             </div>
@@ -100,7 +100,7 @@ export function Testimonials() {
               <div className="flex items-center justify-between mb-3">
                 <div className="flex gap-0.5">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-primary text-primary" />
+                    <Star key={i} className="h-4 w-4 fill-rating text-rating" />
                   ))}
                 </div>
                 <span className="text-xs text-muted-foreground">{testimonial.date}</span>
