@@ -1,47 +1,43 @@
-import { Sun, Home, Truck, Anchor, Factory, Wrench } from "lucide-react";
+import { useState } from "react";
 
 const categories = [
   {
-    icon: Sun,
     title: "Solar Systems",
     description: "Grid-tied & off-grid solutions",
-    productCount: 24,
+    image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80",
   },
   {
-    icon: Home,
     title: "Home Backup",
     description: "Reliable power storage",
-    productCount: 18,
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
   },
   {
-    icon: Truck,
     title: "RV & Campers",
     description: "Mobile power freedom",
-    productCount: 15,
+    image: "https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?w=800&q=80",
   },
   {
-    icon: Anchor,
     title: "Marine",
     description: "Boats & watercraft",
-    productCount: 12,
+    image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80",
   },
   {
-    icon: Factory,
     title: "Industrial",
     description: "Heavy-duty applications",
-    productCount: 8,
+    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80",
   },
   {
-    icon: Wrench,
     title: "Accessories",
     description: "Chargers, cables & more",
-    productCount: 32,
+    image: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=800&q=80",
   },
 ];
 
 export function Categories() {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(1);
+
   return (
-    <section className="py-16 lg:py-24 bg-background">
+    <section className="py-16 lg:py-24 bg-secondary/30">
       <div className="container">
         {/* Section Header */}
         <div className="text-center mb-12 lg:mb-16">
@@ -56,26 +52,54 @@ export function Categories() {
           </p>
         </div>
 
-        {/* Categories Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 lg:gap-6 stagger-children">
-          {categories.map((category) => (
+        {/* Categories - Expand on Hover */}
+        <div className="flex gap-3 lg:gap-4 h-[400px] lg:h-[500px]">
+          {categories.map((category, index) => (
             <a
               key={category.title}
               href="#"
-              className="group relative flex flex-col items-center p-6 lg:p-8 rounded-2xl bg-card border border-border hover:border-primary/20 hover:shadow-product-hover transition-all duration-300"
+              className={`relative overflow-hidden rounded-2xl lg:rounded-3xl cursor-pointer transition-all duration-500 ease-out ${
+                hoveredIndex === index 
+                  ? "flex-[3]" 
+                  : "flex-1"
+              }`}
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
             >
-              <div className="w-14 h-14 rounded-2xl bg-secondary flex items-center justify-center mb-4 group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
-                <category.icon className="h-7 w-7" />
+              {/* Background Image */}
+              <img
+                src={category.image}
+                alt={category.title}
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+              />
+              
+              {/* Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+              
+              {/* Content */}
+              <div className={`absolute bottom-0 left-0 right-0 p-4 lg:p-6 transition-all duration-500 ${
+                hoveredIndex === index ? "opacity-100 translate-y-0" : "opacity-70"
+              }`}>
+                <h3 className={`font-semibold text-white transition-all duration-500 ${
+                  hoveredIndex === index 
+                    ? "text-xl lg:text-2xl mb-2" 
+                    : "text-sm lg:text-base writing-mode-vertical lg:writing-mode-horizontal"
+                }`}>
+                  {category.title}
+                </h3>
+                <p className={`text-white/80 text-sm transition-all duration-500 ${
+                  hoveredIndex === index 
+                    ? "opacity-100 max-h-20" 
+                    : "opacity-0 max-h-0 overflow-hidden"
+                }`}>
+                  {category.description}
+                </p>
               </div>
-              <h3 className="font-semibold text-foreground text-center mb-1">
-                {category.title}
-              </h3>
-              <p className="text-xs text-muted-foreground text-center">
-                {category.description}
-              </p>
-              <span className="mt-3 text-caption text-muted-foreground">
-                {category.productCount} Products
-              </span>
+
+              {/* Hover Glow Effect */}
+              <div className={`absolute inset-0 bg-primary/10 transition-opacity duration-500 ${
+                hoveredIndex === index ? "opacity-100" : "opacity-0"
+              }`} />
             </a>
           ))}
         </div>
