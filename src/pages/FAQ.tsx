@@ -23,7 +23,9 @@ const faqCategories = [
       },
       {
         q: "DC-DC Chargers and why we need them",
-        a: "DC-DC chargers are essential when charging lithium batteries from your vehicle's alternator. Unlike lead-acid batteries, lithium batteries have very low internal resistance and can draw excessive current, potentially damaging your alternator. A DC-DC charger acts as an intelligent intermediary—it regulates voltage and current to match the lithium charging profile, isolates the batteries to prevent voltage spikes during engine start/stop, and protects against reverse current flow. Modern DC-DC chargers like those from Victron, Redarc, or Renogy also support solar input, giving you a dual-charging solution. For most setups, we recommend sizing your DC-DC charger to match your driving habits—a 40A unit charges approximately 40Ah per hour of driving."
+        a: "DC-DC chargers are essential when charging lithium batteries from your vehicle's alternator. Unlike lead-acid batteries, lithium batteries have very low internal resistance and can draw excessive current, potentially damaging your alternator. A DC-DC charger acts as an intelligent intermediary—it regulates voltage and current to match the lithium charging profile, isolates the batteries to prevent voltage spikes during engine start/stop, and protects against reverse current flow. Modern DC-DC chargers like those from Victron, Redarc, or Renogy also support solar input, giving you a dual-charging solution. For most setups, we recommend sizing your DC-DC charger to match your driving habits—a 40A unit charges approximately 40Ah per hour of driving.",
+        link: "/blog/FAQ/dc-dc-chargers-and-why-we-need-them",
+        linkText: "Read our complete guide"
       },
       {
         q: "SOK Battery Unpacking and Initial Charging",
