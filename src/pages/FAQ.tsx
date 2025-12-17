@@ -15,26 +15,26 @@ const faqCategories = [
     icon: Zap,
     questions: [
       {
-        q: "How do I change over from lead-acid to lithium batteries?",
-        a: "Switching to lithium batteries involves evaluating your current system's voltage and capacity requirements, ensuring your charger is compatible with LiFePO4 chemistry, and potentially upgrading your DC-DC charger. SOK batteries are designed as drop-in replacements for most applications, but we recommend reviewing your charging equipment settings.",
-        link: "https://sokbattery-frontline-shine-zq4jf.myshopify.com/blogs/news/changing-over-to-lithium",
+        q: "Changing over to Lithium",
+        a: "Transitioning from lead-acid to lithium batteries is one of the best upgrades you can make for your caravan, motorhome, or off-grid setup. LiFePO4 batteries offer 3-4x more usable capacity, are 60% lighter, and last 10+ years with proper care. The key considerations are: ensuring your charger supports lithium profiles (14.2-14.6V absorption for 12V systems), upgrading to a DC-DC charger if charging from your vehicle, and verifying your inverter settings. SOK batteries are designed as drop-in replacements with built-in BMS protection, making the switch straightforward for most applications.",
+        link: "/blog/changing-over-to-lithium",
         linkText: "Read our complete guide"
       },
       {
-        q: "What should I do when I first receive my SOK battery?",
-        a: "When you receive your SOK battery, unpack it carefully and inspect for any shipping damage. Before first use, charge the battery fully using a compatible LiFePO4 charger. This initial charge helps calibrate the Battery Management System (BMS) and ensures optimal performance."
+        q: "DC-DC Chargers and why we need them",
+        a: "DC-DC chargers are essential when charging lithium batteries from your vehicle's alternator. Unlike lead-acid batteries, lithium batteries have very low internal resistance and can draw excessive current, potentially damaging your alternator. A DC-DC charger acts as an intelligent intermediary—it regulates voltage and current to match the lithium charging profile, isolates the batteries to prevent voltage spikes during engine start/stop, and protects against reverse current flow. Modern DC-DC chargers like those from Victron, Redarc, or Renogy also support solar input, giving you a dual-charging solution. For most setups, we recommend sizing your DC-DC charger to match your driving habits—a 40A unit charges approximately 40Ah per hour of driving."
       },
       {
-        q: "How do I install and calibrate the SOK Bluetooth module?",
-        a: "The SOK Bluetooth module connects to your battery's BMS port. Download the SOK Battery app from your app store, power on your battery, and follow the in-app pairing instructions. After connection, perform a full charge cycle to calibrate the State of Charge (SOC) readings."
+        q: "SOK Battery Unpacking and Initial Charging",
+        a: "When your SOK battery arrives, carefully unpack and inspect for any shipping damage—document and photograph anything concerning before proceeding. Batteries are shipped at approximately 50% state of charge per shipping regulations. Before first use: 1) Check the voltage with a multimeter (should read 13.0-13.2V for 12V batteries at 50% SOC), 2) Perform a full charge using a LiFePO4-compatible charger set to 14.2-14.6V absorption and 13.6V float, 3) Allow the battery to rest for 1-2 hours after charging, then check voltage again (should settle around 13.4V). This initial full charge calibrates the BMS and ensures accurate state-of-charge readings going forward."
       },
       {
-        q: "Why do I need a DC-DC charger for lithium batteries?",
-        a: "DC-DC chargers are essential because lithium batteries have different charging profiles than lead-acid. They require specific voltage and current curves. A DC-DC charger isolates the battery from the alternator and provides the correct charging algorithm, protecting both your battery investment and vehicle's electrical system."
+        q: "SOK Bluetooth Install & Calibration",
+        a: "The SOK Bluetooth module provides real-time monitoring of your battery's voltage, current, temperature, and state of charge directly on your smartphone. Installation is simple: 1) Locate the BMS communication port on your SOK battery (usually near the terminals), 2) Connect the Bluetooth module's cable to the port—it only fits one way, 3) Download the 'SOK Battery' app from the Apple App Store or Google Play, 4) Enable Bluetooth on your phone and open the app to pair with your battery. For accurate SOC calibration, perform a complete charge-discharge-charge cycle after installation. The app will display real-time data including individual cell voltages, which is invaluable for monitoring battery health and diagnosing any issues."
       },
       {
-        q: "How do I size my MPPT solar charge controller?",
-        a: "To size your MPPT controller, calculate your solar panel array's total wattage and divide by your battery voltage to get the required amperage. Add a 25% safety margin. For example, 400W of solar at 12V needs at least a 40A controller. SOK batteries can accept high charge rates, so don't undersize your controller."
+        q: "Understanding MPPT Solar Charge Controller Sizing",
+        a: "Properly sizing your MPPT (Maximum Power Point Tracking) solar charge controller ensures you capture maximum energy from your panels without damaging your equipment. The calculation involves two factors: 1) Amperage rating—divide your total solar panel wattage by your battery voltage, then add 25% margin. Example: 400W of solar ÷ 12V = 33A, so choose at least a 40A controller. 2) Voltage rating—ensure the controller's maximum input voltage exceeds your panels' open-circuit voltage (Voc), especially in cold weather when Voc increases by 10-15%. SOK batteries can accept high charge rates (up to 100A for the 206Ah model), so don't undersize your controller. MPPT controllers are 20-30% more efficient than PWM types, making them worth the investment for systems over 200W."
       }
     ]
   },
