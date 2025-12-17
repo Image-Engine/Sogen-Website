@@ -18,7 +18,7 @@ export function Hero() {
           <h1 className="animate-slide-up" style={{
           animationDelay: "0.1s"
         }}>
-            <span className="block text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight">
+            <span className="block text-5xl md:text-6xl font-bold text-white tracking-tight lg:text-6xl">
               Power You Can Rely On.
             </span>
           </h1>
