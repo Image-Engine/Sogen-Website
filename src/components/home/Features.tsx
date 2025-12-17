@@ -1,76 +1,68 @@
-import { Shield, Truck, Headphones, Award, Clock, CreditCard } from "lucide-react";
-
-const features = [
-  {
-    icon: Shield,
-    title: "10-Year Warranty",
-    description: "Industry-leading protection on all batteries. Peace of mind guaranteed.",
-  },
-  {
-    icon: Truck,
-    title: "Free NZ Shipping",
-    description: "Complimentary delivery on orders over $500 throughout New Zealand.",
-  },
-  {
-    icon: Headphones,
-    title: "Expert Support",
-    description: "Our battery specialists are here to help you find the perfect solution.",
-  },
-  {
-    icon: Award,
-    title: "Premium Quality",
-    description: "A-grade LiFePO4 cells with advanced BMS for maximum performance.",
-  },
-  {
-    icon: Clock,
-    title: "Fast Dispatch",
-    description: "Same-day shipping on orders placed before 2pm (Mon-Fri).",
-  },
-  {
-    icon: CreditCard,
-    title: "Flexible Payment",
-    description: "Afterpay, Laybuy, and interest-free options available.",
-  },
-];
-
 export function Features() {
+  const advantages = [
+    "Longer lifespan",
+    "Increased safety",
+    "High thermal stability",
+    "Low self-discharge rate",
+    "Lower maintenance cost",
+    "High efficiency",
+    "Faster charging times",
+    "Higher power density",
+    "Longer cycle life",
+    "Lighter weight",
+    "No off-gassing",
+  ];
+
+  const features = [
+    "Manufacturer backed warranty & technical assistance",
+    "Genuine new Grade A prismatic cells",
+    "Up to 20 year lifespan (4000-8000 cycles)",
+    "High quality Bluetooth battery management system (BMS)",
+    "Superior build quality and components",
+    "Robust and durable user serviceable enclosures",
+  ];
+
   return (
-    <section className="py-16 lg:py-24 bg-background">
-      <div className="container">
-        {/* Section Header */}
-        <div className="text-center mb-12 lg:mb-16">
-          <p className="text-caption uppercase tracking-widest text-muted-foreground mb-3">
-            Why Choose Us
+    <section className="py-0">
+      <div className="grid lg:grid-cols-3">
+        {/* Column 1 - Dark Navy Introduction */}
+        <div className="bg-[#1a2744] p-10 lg:p-14 flex flex-col justify-center min-h-[400px]">
+          <p className="text-white/90 text-lg lg:text-xl font-light leading-relaxed mb-6">
+            Unlock the full potential of your off-grid, RV, motorhome or home power needs with our high-performance LiFePO4 batteries.
           </p>
-          <h2 className="text-display-md text-foreground mb-4">
-            The SOK Battery Difference
-          </h2>
-          <p className="text-body-md text-muted-foreground max-w-2xl mx-auto">
-            We're committed to providing New Zealand with the highest quality battery solutions and exceptional service.
+          <p className="text-white/70 text-base leading-relaxed">
+            With longer lifespan, faster charging times, and superior efficiency, SOK LiFePO4 batteries are the ultimate power storage solution.
           </p>
         </div>
 
-        {/* Features Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
-          {features.map((feature, index) => (
-            <div 
-              key={feature.title} 
-              className="flex gap-5 animate-fade-in"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <div className="shrink-0 w-12 h-12 rounded-xl bg-primary/5 flex items-center justify-center">
-                <feature.icon className="h-6 w-6 text-primary" />
-              </div>
-              <div>
-                <h3 className="font-semibold text-foreground mb-2">
-                  {feature.title}
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {feature.description}
-                </p>
-              </div>
-            </div>
-          ))}
+        {/* Column 2 - Rust Red Advantages */}
+        <div className="bg-[#a63c32] p-10 lg:p-14 min-h-[400px]">
+          <h3 className="text-white text-lg font-semibold mb-6 tracking-wide">
+            The SOK LiFePO4 Battery Advantage
+          </h3>
+          <ul className="space-y-2.5">
+            {advantages.map((item) => (
+              <li key={item} className="flex items-start gap-3">
+                <span className="text-white/80 mt-0.5">•</span>
+                <span className="text-white/90 text-sm leading-relaxed">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Column 3 - Amber Features */}
+        <div className="bg-[#d4883a] p-10 lg:p-14 min-h-[400px]">
+          <h3 className="text-white text-lg font-semibold mb-6 tracking-wide">
+            Features of SOK LiFePO4 Batteries
+          </h3>
+          <ul className="space-y-3">
+            {features.map((item) => (
+              <li key={item} className="flex items-start gap-3">
+                <span className="text-white/80 mt-0.5">•</span>
+                <span className="text-white/90 text-sm leading-relaxed">{item}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>
