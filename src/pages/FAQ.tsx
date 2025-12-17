@@ -7,7 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Battery, Zap, ExternalLink, ArrowRight, HelpCircle } from "lucide-react";
+import { Battery, Zap, ExternalLink, ArrowRight, HelpCircle, MoreHorizontal } from "lucide-react";
 
 const faqCategories = [
   {
@@ -159,6 +159,43 @@ const faqCategories = [
         q: "SOK Bluetooth Install & Calibration",
         a: "How to install and calibrate the Bluetooth module for real-time battery monitoring.",
         link: "/blog/FAQ/sok-bluetooth-install-calibration",
+        linkText: "Read our complete guide",
+      },
+    ],
+  },
+  {
+    id: "others",
+    title: "Others",
+    icon: MoreHorizontal,
+    questions: [
+      {
+        q: "Calculating Fuse Sizes",
+        a: "How to correctly calculate and select fuse sizes for your SOK battery installation to ensure safety and protection.",
+        link: "/blog/FAQ/calculating-fuse-sizes",
+        linkText: "Read our complete guide",
+      },
+      {
+        q: "Shipping and Returns",
+        a: "Information about our shipping policies, delivery times, and returns process.",
+        link: "/blog/FAQ/shipping-and-returns",
+        linkText: "Read our complete guide",
+      },
+      {
+        q: "SOK and AS/NZS3004.2 Certification",
+        a: "Information about SOK battery compliance with Australian and New Zealand caravan and motorhome electrical standards.",
+        link: "/blog/FAQ/sok-and-as-nzs3004-2-certification",
+        linkText: "Read our complete guide",
+      },
+      {
+        q: "Solar Assistant Integration",
+        a: "How to connect and configure Solar Assistant for monitoring your SOK battery system.",
+        link: "/blog/FAQ/solar-assistant-integration",
+        linkText: "Read our complete guide",
+      },
+      {
+        q: "Victron - Generator Start/Stop using the Virtual Switch",
+        a: "How to configure automatic generator start/stop based on battery state using Victron's Virtual Switch feature.",
+        link: "/blog/FAQ/victron-generator-start-stop-using-the-virtual-switch",
         linkText: "Read our complete guide",
       },
     ],
