@@ -4,7 +4,12 @@ import { toast } from "sonner";
 const SHOPIFY_API_VERSION = '2025-07';
 const SHOPIFY_STORE_PERMANENT_DOMAIN = 'sokbattery-frontline-shine-zq4jf.myshopify.com';
 const SHOPIFY_STOREFRONT_URL = `https://${SHOPIFY_STORE_PERMANENT_DOMAIN}/api/${SHOPIFY_API_VERSION}/graphql.json`;
+
+// Products & Checkout (Lovable Integration)
 const SHOPIFY_STOREFRONT_TOKEN = '256f91dfddaeb67d0754c2f244378c30';
+
+// Blog Content (Blog Reader App - has unauthenticated_read_content scope)
+const SHOPIFY_BLOG_TOKEN = 'a8338a20b12c0be60e50caaf1c8c67b3';
 
 // Types
 export interface ShopifyProduct {
@@ -87,7 +92,7 @@ export interface CartItem {
   }>;
 }
 
-// Storefront API helper function
+// Storefront API helper function (Products & Checkout)
 export async function storefrontApiRequest(query: string, variables: Record<string, unknown> = {}) {
   const response = await fetch(SHOPIFY_STOREFRONT_URL, {
     method: 'POST',
@@ -104,6 +109,40 @@ export async function storefrontApiRequest(query: string, variables: Record<stri
   if (response.status === 402) {
     toast.error("Shopify: Payment required", {
       description: "Shopify API access requires an active Shopify billing plan. Your store needs to be upgraded to a paid plan.",
+    });
+    return null;
+  }
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  const data = await response.json();
+  
+  if (data.errors) {
+    throw new Error(`Error calling Shopify: ${data.errors.map((e: { message: string }) => e.message).join(', ')}`);
+  }
+
+  return data;
+}
+
+// Blog API helper function (Blog Reader App)
+async function blogApiRequest(query: string, variables: Record<string, unknown> = {}) {
+  const response = await fetch(SHOPIFY_STOREFRONT_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Shopify-Storefront-Access-Token': SHOPIFY_BLOG_TOKEN
+    },
+    body: JSON.stringify({
+      query,
+      variables,
+    }),
+  });
+
+  if (response.status === 402) {
+    toast.error("Shopify: Payment required", {
+      description: "Shopify API access requires an active Shopify billing plan.",
     });
     return null;
   }
@@ -317,10 +356,10 @@ export async function createStorefrontCheckout(items: CartItem[]): Promise<strin
   }
 }
 
-// Fetch blog articles
+// Fetch blog articles (uses Blog Reader token)
 export async function fetchBlogArticles(blogHandle: string = 'faq', first: number = 20): Promise<ShopifyArticle[]> {
   try {
-    const data = await storefrontApiRequest(GET_BLOG_ARTICLES, { blogHandle, first });
+    const data = await blogApiRequest(GET_BLOG_ARTICLES, { blogHandle, first });
     if (!data || !data.data.blog) return [];
     return data.data.blog.articles.edges;
   } catch (error) {
@@ -329,10 +368,10 @@ export async function fetchBlogArticles(blogHandle: string = 'faq', first: numbe
   }
 }
 
-// Fetch single article by handle
+// Fetch single article by handle (uses Blog Reader token)
 export async function fetchArticleByHandle(blogHandle: string, articleHandle: string): Promise<ShopifyArticle['node'] | null> {
   try {
-    const data = await storefrontApiRequest(GET_ARTICLE_BY_HANDLE, { blogHandle, articleHandle });
+    const data = await blogApiRequest(GET_ARTICLE_BY_HANDLE, { blogHandle, articleHandle });
     if (!data || !data.data.blog) return null;
     return data.data.blog.articleByHandle;
   } catch (error) {
