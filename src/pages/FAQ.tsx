@@ -17,7 +17,7 @@ const faqCategories = [
       {
         q: "How do I change over from lead-acid to lithium batteries?",
         a: "Switching to lithium batteries involves evaluating your current system's voltage and capacity requirements, ensuring your charger is compatible with LiFePO4 chemistry, and potentially upgrading your DC-DC charger. SOK batteries are designed as drop-in replacements for most applications, but we recommend reviewing your charging equipment settings.",
-        link: "https://sokbattery.co.nz/faq/changing-over-to-lithium/",
+        link: "https://sokbattery-frontline-shine-zq4jf.myshopify.com/blogs/news/changing-over-to-lithium",
         linkText: "Read our complete guide"
       },
       {
