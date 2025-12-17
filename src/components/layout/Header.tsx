@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Search, User, Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import sokLogo from "@/assets/sok-logo.webp";
 import { CartDrawer } from "@/components/cart/CartDrawer";
+
 const navItems = [{
   label: "Solar Systems",
   href: "#"
@@ -18,6 +20,9 @@ const navItems = [{
 }, {
   label: "Accessories",
   href: "#"
+}, {
+  label: "FAQ",
+  href: "/faq"
 }];
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -38,10 +43,20 @@ export function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-1">
-            {navItems.map(item => <Button key={item.label} variant="nav" size="default">
-                {item.label}
-                <ChevronDown className="h-3 w-3 ml-0.5 opacity-50" />
-              </Button>)}
+            {navItems.map(item => 
+              item.href.startsWith('/') ? (
+                <Link key={item.label} to={item.href}>
+                  <Button variant="nav" size="default">
+                    {item.label}
+                  </Button>
+                </Link>
+              ) : (
+                <Button key={item.label} variant="nav" size="default">
+                  {item.label}
+                  <ChevronDown className="h-3 w-3 ml-0.5 opacity-50" />
+                </Button>
+              )
+            )}
           </nav>
 
           {/* Right side actions */}
@@ -83,10 +98,18 @@ export function Header() {
                   <input type="text" placeholder="Search batteries..." className="w-full h-10 pl-10 pr-4 text-sm bg-secondary rounded-lg border-0 focus:outline-none focus:ring-2 focus:ring-primary/20" />
                 </div>
               </div>
-              {navItems.map(item => <a key={item.label} href={item.href} className="flex items-center justify-between px-4 py-3 text-foreground hover:bg-accent rounded-lg transition-colors">
-                  <span className="font-medium">{item.label}</span>
-                  <ChevronDown className="h-4 w-4 opacity-50 -rotate-90" />
-                </a>)}
+              {navItems.map(item => 
+                item.href.startsWith('/') ? (
+                  <Link key={item.label} to={item.href} className="flex items-center justify-between px-4 py-3 text-foreground hover:bg-accent rounded-lg transition-colors">
+                    <span className="font-medium">{item.label}</span>
+                  </Link>
+                ) : (
+                  <a key={item.label} href={item.href} className="flex items-center justify-between px-4 py-3 text-foreground hover:bg-accent rounded-lg transition-colors">
+                    <span className="font-medium">{item.label}</span>
+                    <ChevronDown className="h-4 w-4 opacity-50 -rotate-90" />
+                  </a>
+                )
+              )}
             </div>
           </nav>}
       </div>
