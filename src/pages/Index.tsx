@@ -7,7 +7,6 @@ import { Features } from "@/components/home/Features";
 import { TrustBadges } from "@/components/home/TrustBadges";
 import { PromoBanner } from "@/components/home/PromoBanner";
 import { Testimonials } from "@/components/home/Testimonials";
-import { VideoGallery } from "@/components/home/VideoGallery";
 
 const Index = () => {
   return (
@@ -21,7 +20,6 @@ const Index = () => {
         <Features />
         <PromoBanner />
         <Testimonials />
-        <VideoGallery />
       </main>
       <Footer />
     </div>
