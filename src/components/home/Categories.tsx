@@ -19,7 +19,7 @@ const categories = [
   {
     title: "Marine",
     description: "Boats & watercraft",
-    image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=800&q=80",
   },
   {
     title: "Industrial",
@@ -29,7 +29,7 @@ const categories = [
   {
     title: "Accessories",
     description: "Chargers, cables & more",
-    image: "https://images.unsplash.com/photo-1597075687490-8f673c6c17f6?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=800&q=80",
   },
 ];
 
