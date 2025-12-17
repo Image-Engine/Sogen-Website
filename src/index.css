@@ -57,6 +57,9 @@
     /* Success accent for trust badges */
     --success: 142 72% 29%;
     --success-foreground: 0 0% 100%;
+    
+    /* Rating stars */
+    --rating: 204 88% 57%;
 
     /* Sidebar */
     --sidebar-background: 0 0% 98%;
