@@ -51,6 +51,27 @@ export interface ShopifyProduct {
   };
 }
 
+export interface ShopifyArticle {
+  node: {
+    id: string;
+    title: string;
+    handle: string;
+    publishedAt: string;
+    excerpt: string | null;
+    contentHtml: string;
+    image: {
+      url: string;
+      altText: string | null;
+    } | null;
+    author: {
+      name: string;
+    };
+    blog: {
+      handle: string;
+    };
+  };
+}
+
 export interface CartItem {
   product: ShopifyProduct;
   variantId: string;
@@ -195,6 +216,60 @@ const CART_CREATE_MUTATION = `
   }
 `;
 
+const GET_BLOG_ARTICLES = `
+  query GetBlogArticles($blogHandle: String!, $first: Int!) {
+    blog(handle: $blogHandle) {
+      title
+      articles(first: $first, sortKey: PUBLISHED_AT, reverse: true) {
+        edges {
+          node {
+            id
+            title
+            handle
+            publishedAt
+            excerpt
+            contentHtml
+            image {
+              url
+              altText
+            }
+            author {
+              name
+            }
+            blog {
+              handle
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+const GET_ARTICLE_BY_HANDLE = `
+  query GetArticleByHandle($blogHandle: String!, $articleHandle: String!) {
+    blog(handle: $blogHandle) {
+      articleByHandle(handle: $articleHandle) {
+        id
+        title
+        handle
+        publishedAt
+        contentHtml
+        image {
+          url
+          altText
+        }
+        author {
+          name
+        }
+        blog {
+          handle
+        }
+      }
+    }
+  }
+`;
+
 // Fetch products
 export async function fetchProducts(first: number = 20, query?: string): Promise<ShopifyProduct[]> {
   try {
@@ -239,5 +314,29 @@ export async function createStorefrontCheckout(items: CartItem[]): Promise<strin
   } catch (error) {
     console.error('Error creating storefront checkout:', error);
     throw error;
+  }
+}
+
+// Fetch blog articles
+export async function fetchBlogArticles(blogHandle: string = 'news', first: number = 20): Promise<ShopifyArticle[]> {
+  try {
+    const data = await storefrontApiRequest(GET_BLOG_ARTICLES, { blogHandle, first });
+    if (!data || !data.data.blog) return [];
+    return data.data.blog.articles.edges;
+  } catch (error) {
+    console.error('Error fetching blog articles:', error);
+    return [];
+  }
+}
+
+// Fetch single article by handle
+export async function fetchArticleByHandle(blogHandle: string, articleHandle: string): Promise<ShopifyArticle['node'] | null> {
+  try {
+    const data = await storefrontApiRequest(GET_ARTICLE_BY_HANDLE, { blogHandle, articleHandle });
+    if (!data || !data.data.blog) return null;
+    return data.data.blog.articleByHandle;
+  } catch (error) {
+    console.error('Error fetching article:', error);
+    return null;
   }
 }
