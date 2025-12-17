@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Search, ShoppingCart, User, Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import sokLogo from "@/assets/sok-logo.webp";
 
 const navItems = [
   { label: "Solar Systems", href: "#" },
@@ -29,22 +30,12 @@ export function Header() {
       <div className="container">
         <div className="flex h-16 items-center justify-between gap-4 lg:h-18">
           {/* Logo */}
-          <a href="/" className="flex items-center gap-2 shrink-0">
-            <div className="flex items-center gap-2">
-              <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center">
-                <svg viewBox="0 0 24 24" className="w-6 h-6 text-primary-foreground" fill="currentColor">
-                  <path d="M17 4h-3V2h-4v2H7v18h10V4zm-2 16H9V6h2v2h2V6h2v14zm-3-8h2v6h-2v-6z"/>
-                </svg>
-              </div>
-              <div className="flex flex-col">
-                <span className="font-display text-lg font-semibold tracking-tight text-foreground">
-                  SOK Battery
-                </span>
-                <span className="text-[10px] text-muted-foreground tracking-wider uppercase">
-                  Power Solutions NZ
-                </span>
-              </div>
-            </div>
+          <a href="/" className="flex items-center shrink-0">
+            <img 
+              src={sokLogo} 
+              alt="SOK Battery - New Zealand" 
+              className="h-12 lg:h-14 w-auto"
+            />
           </a>
 
           {/* Desktop Navigation */}
