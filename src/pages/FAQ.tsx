@@ -6,7 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Battery, Zap, Settings, HelpCircle, Truck } from "lucide-react";
+import { Battery, Zap, Settings, HelpCircle, Truck, ExternalLink } from "lucide-react";
 
 const faqCategories = [
   {
@@ -16,7 +16,9 @@ const faqCategories = [
     questions: [
       {
         q: "How do I change over from lead-acid to lithium batteries?",
-        a: "Switching to lithium batteries involves evaluating your current system's voltage and capacity requirements, ensuring your charger is compatible with LiFePO4 chemistry, and potentially upgrading your DC-DC charger. SOK batteries are designed as drop-in replacements for most applications, but we recommend reviewing your charging equipment settings."
+        a: "Switching to lithium batteries involves evaluating your current system's voltage and capacity requirements, ensuring your charger is compatible with LiFePO4 chemistry, and potentially upgrading your DC-DC charger. SOK batteries are designed as drop-in replacements for most applications, but we recommend reviewing your charging equipment settings.",
+        link: "https://sokbattery.co.nz/faq/changing-over-to-lithium/",
+        linkText: "Read our complete guide"
       },
       {
         q: "What should I do when I first receive my SOK battery?",
@@ -178,7 +180,18 @@ export default function FAQ() {
                           {item.q}
                         </AccordionTrigger>
                         <AccordionContent className="text-muted-foreground leading-relaxed pb-4">
-                          {item.a}
+                          <p>{item.a}</p>
+                          {item.link && (
+                            <a 
+                              href={item.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 mt-3 text-primary hover:text-primary/80 font-medium transition-colors"
+                            >
+                              {item.linkText || "Read more"}
+                              <ExternalLink className="h-4 w-4" />
+                            </a>
+                          )}
                         </AccordionContent>
                       </AccordionItem>
                     ))}
