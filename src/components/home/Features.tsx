@@ -31,7 +31,7 @@ export function Features() {
       }}
     >
       {/* Dark overlay for contrast */}
-      <div className="absolute inset-0 bg-black/40" />
+      <div className="absolute inset-0 bg-black/25" />
       
       <div className="container max-w-6xl relative z-10">
         {/* Section Header */}
@@ -47,14 +47,14 @@ export function Features() {
         {/* Liquid Glass Cards */}
         <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
           {/* Advantages Card */}
-          <div className="rounded-3xl p-8 lg:p-10 backdrop-blur-xl bg-white/10 border border-white/20 shadow-2xl">
+          <div className="rounded-3xl p-8 lg:p-10 backdrop-blur-2xl bg-white/20 border border-white/40 shadow-2xl">
             <h3 className="text-xs uppercase tracking-[0.2em] text-white/60 mb-8">
               Advantages
             </h3>
             <ul className="space-y-4">
               {advantages.map((item) => (
                 <li key={item} className="flex items-center gap-4 group">
-                  <div className="w-6 h-6 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center shrink-0 group-hover:bg-white/30 transition-colors">
+                  <div className="w-6 h-6 rounded-full bg-white/30 backdrop-blur-sm flex items-center justify-center shrink-0 group-hover:bg-white/50 transition-colors">
                     <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />
                   </div>
                   <span className="text-white text-base font-light">{item}</span>
@@ -64,14 +64,14 @@ export function Features() {
           </div>
 
           {/* Features Card */}
-          <div className="rounded-3xl p-8 lg:p-10 backdrop-blur-xl bg-white/10 border border-white/20 shadow-2xl">
+          <div className="rounded-3xl p-8 lg:p-10 backdrop-blur-2xl bg-white/20 border border-white/40 shadow-2xl">
             <h3 className="text-xs uppercase tracking-[0.2em] text-white/60 mb-8">
               Features
             </h3>
             <ul className="space-y-4">
               {features.map((item) => (
                 <li key={item} className="flex items-center gap-4 group">
-                  <div className="w-6 h-6 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center shrink-0 group-hover:bg-white/30 transition-colors">
+                  <div className="w-6 h-6 rounded-full bg-white/30 backdrop-blur-sm flex items-center justify-center shrink-0 group-hover:bg-white/50 transition-colors">
                     <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />
                   </div>
                   <span className="text-white text-base font-light">{item}</span>
@@ -83,7 +83,7 @@ export function Features() {
 
         {/* Bottom Statement */}
         <div className="mt-16 lg:mt-20 text-center">
-          <div className="inline-block rounded-2xl px-8 py-4 backdrop-blur-xl bg-white/10 border border-white/20">
+          <div className="inline-block rounded-2xl px-8 py-4 backdrop-blur-2xl bg-white/25 border border-white/40">
             <p className="text-white/90 text-sm max-w-lg mx-auto leading-relaxed">
               With longer lifespan, faster charging times, and superior efficiency, SOK LiFePO4 batteries are the ultimate power storage solution.
             </p>
