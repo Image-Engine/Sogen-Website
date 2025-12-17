@@ -47,24 +47,64 @@ const faqCategories = [
     icon: Battery,
     questions: [
       {
-        q: "What are the recommended charger and inverter settings for SOK batteries?",
-        a: "For SOK LiFePO4 batteries, set your charger to: Bulk/Absorption voltage: 14.2-14.6V (12V) or 28.4-29.2V (24V). Float voltage: 13.6V (12V) or 27.2V (24V). Charge current: Up to 0.5C (e.g., 100A for 206Ah battery). Disable temperature compensation and equalization."
+        q: "Charger and Inverter Settings",
+        a: "Overview of recommended voltage and current settings for SOK LiFePO4 batteries with common chargers and inverters. Proper configuration ensures safe charging and maximizes battery lifespan.",
+        link: "/blog/FAQ/charger-and-inverter-settings",
+        linkText: "Read our complete guide"
       },
       {
-        q: "Can I charge lithium batteries while driving my vehicle?",
-        a: "Yes, but use a proper DC-DC charger designed for lithium batteries. Never connect directly to your alternator as this can damage both the battery and alternator. Modern DC-DC chargers regulate the charge properly and protect against voltage spikes during engine start/stop."
+        q: "Charging Lithium Batteries in Vehicles: Considerations and Safeguards",
+        a: "Key considerations for safely charging lithium batteries from your vehicle's electrical system, including alternator compatibility and protection measures.",
+        link: "/blog/FAQ/charging-lithium-batteries-in-vehicles-considerations-and-safeguards",
+        linkText: "Read our complete guide"
       },
       {
-        q: "How do I set up batteries in series correctly?",
-        a: "Before connecting batteries in series, ensure all batteries are at the same voltage (within 0.1V). Charge each battery individually to 100% SOC. Connect positive of one battery to negative of the next. Use a balancer for long-term series operation to prevent capacity drift between batteries."
+        q: "DC-DC Chargers and why we need them",
+        a: "Why DC-DC chargers are essential for protecting both your lithium batteries and vehicle alternator when charging on the road.",
+        link: "/blog/FAQ/dc-dc-chargers-and-why-we-need-them",
+        linkText: "Read our complete guide"
       },
       {
-        q: "How do I wake up a sleeping LiFePO4 battery?",
-        a: "If your battery's BMS has entered sleep mode due to low voltage, apply a brief charging voltage to 'wake' it. Connect your charger for 30-60 seconds. If the battery doesn't respond, try a low-current charger (1-2A) first. Never force-charge a deeply discharged battery without monitoring."
+        q: "Growatt Communication",
+        a: "How to establish communication between your SOK batteries and Growatt inverters for integrated monitoring and control.",
+        link: "/blog/FAQ/growatt-communication",
+        linkText: "Read our complete guide"
       },
       {
-        q: "What are the Victron settings for SOK batteries?",
-        a: "For Victron equipment with SOK batteries: Absorption voltage: 14.2V, Float: 13.5V, Equalization: OFF, Temperature compensation: OFF, Low voltage disconnect: 12.0V, Rebulk offset: 0.4V. Enable DVCC and set SVS/SCS if using multiple charge sources."
+        q: "How to Correctly Balance & Setup Your Batteries in Series",
+        a: "Step-by-step guide to safely connecting SOK batteries in series while maintaining proper balance across all cells.",
+        link: "/blog/FAQ/how-to-correctly-balance-setup-your-batteries-in-series",
+        linkText: "Read our complete guide"
+      },
+      {
+        q: "How to Wake Up A Sleeping LIFePO4 Battery",
+        a: "Methods to safely reactivate a lithium battery whose BMS has entered protection mode due to low voltage.",
+        link: "/blog/FAQ/how-to-wake-up-a-sleeping-lifepo4-battery",
+        linkText: "Read our complete guide"
+      },
+      {
+        q: "Managing Victron Over Voltage Alarms with DVCC",
+        a: "How to use Victron's DVCC feature to coordinate charging sources and prevent over-voltage alarms with SOK batteries.",
+        link: "/blog/FAQ/managing-victron-over-voltage-alarms-with-dvcc",
+        linkText: "Read our complete guide"
+      },
+      {
+        q: "SOK - Victron settings",
+        a: "Recommended configuration settings for integrating SOK batteries with Victron charge controllers and inverters.",
+        link: "/blog/FAQ/sok-victron-settings",
+        linkText: "Read our complete guide"
+      },
+      {
+        q: "Understanding MPPT Solar Charge Controller Sizing",
+        a: "How to calculate the correct MPPT controller size for your solar array and SOK battery bank.",
+        link: "/blog/FAQ/understanding-mppt-solar-charge-controller-sizing",
+        linkText: "Read our complete guide"
+      },
+      {
+        q: "Victron Smart Shunt settings for SOK",
+        a: "Optimal Smart Shunt configuration for accurate state-of-charge monitoring with SOK LiFePO4 batteries.",
+        link: "/blog/FAQ/victron-smart-shunt-settings-for-sok",
+        linkText: "Read our complete guide"
       }
     ]
   },
