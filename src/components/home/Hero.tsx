@@ -1,4 +1,4 @@
-import { ArrowRight, Shield, Truck, Zap } from "lucide-react";
+import { ArrowRight, Headset, Package, Award, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroBg from "@/assets/hero-bg.png";
 export function Hero() {
@@ -44,21 +44,29 @@ export function Hero() {
             </Button>
           </div>
 
-          {/* Trust Indicators */}
-          <div className="flex flex-wrap items-center justify-center gap-8 pt-6 animate-slide-up" style={{
+          {/* Trust Indicators Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-8 animate-slide-up" style={{
           animationDelay: "0.4s"
         }}>
-            <div className="flex items-center gap-2">
-              <Shield className="h-5 w-5 text-green-400" />
-              <span className="text-sm text-white/80">10-Year Warranty</span>
+            <div className="flex flex-col items-center gap-2 text-center">
+              <Headset className="h-10 w-10 text-white" strokeWidth={1.5} />
+              <span className="text-sm font-semibold text-white">NZ Support</span>
+              <span className="text-xs text-white/60">LiveChat · Call · Email</span>
             </div>
-            <div className="flex items-center gap-2">
-              <Truck className="h-5 w-5 text-green-400" />
-              <span className="text-sm text-white/80">Free NZ Shipping</span>
+            <div className="flex flex-col items-center gap-2 text-center">
+              <Package className="h-10 w-10 text-white" strokeWidth={1.5} />
+              <span className="text-sm font-semibold text-white">Fast Shipping</span>
+              <span className="text-xs text-white/60">NZ Warehousing</span>
             </div>
-            <div className="flex items-center gap-2">
-              <Zap className="h-5 w-5 text-green-400" />
-              <span className="text-sm text-white/80">Expert Support</span>
+            <div className="flex flex-col items-center gap-2 text-center">
+              <Award className="h-10 w-10 text-white" strokeWidth={1.5} />
+              <span className="text-sm font-semibold text-white">10-Year Warranty</span>
+              <span className="text-xs text-white/60">Full Battery Coverage</span>
+            </div>
+            <div className="flex flex-col items-center gap-2 text-center">
+              <ShieldCheck className="h-10 w-10 text-white" strokeWidth={1.5} />
+              <span className="text-sm font-semibold text-white">Safest Batteries</span>
+              <span className="text-xs text-white/60">Reliable LFP Chemistry</span>
             </div>
           </div>
         </div>
