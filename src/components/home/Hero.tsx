@@ -24,9 +24,9 @@ export function Hero() {
           </h1>
 
           {/* Subheadline */}
-          <p className="text-lg md:text-xl text-white/70 max-w-lg animate-slide-up" style={{
+          <p style={{
           animationDelay: "0.2s"
-        }}>
+        }} className="text-lg md:text-xl text-white/70 max-w-lg animate-slide-up text-center">
             Industry-leading lithium batteries for solar, off-grid, RV, and marine applications. 
             Built to perform in New Zealand conditions.
           </p>
