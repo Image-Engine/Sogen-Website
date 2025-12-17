@@ -13,7 +13,7 @@ const videos: Video[] = [{
   id: "1",
   title: "SOK Battery Review",
   category: "reviews",
-  thumbnail: "https://img.youtube.com/vi/nY0BSsF-aSY/maxresdefault.jpg",
+  thumbnail: "https://img.youtube.com/vi/nY0BSsF-aSY/hqdefault.jpg",
   duration: "12:45",
   views: "24K",
   youtubeId: "nY0BSsF-aSY"
@@ -21,7 +21,7 @@ const videos: Video[] = [{
   id: "2",
   title: "SOK Battery Guide",
   category: "guides",
-  thumbnail: "https://img.youtube.com/vi/zJmIS5tmzPU/maxresdefault.jpg",
+  thumbnail: "https://img.youtube.com/vi/zJmIS5tmzPU/hqdefault.jpg",
   duration: "8:30",
   views: "18K",
   youtubeId: "zJmIS5tmzPU"
@@ -29,7 +29,7 @@ const videos: Video[] = [{
   id: "3",
   title: "SOK Battery Installation",
   category: "howto",
-  thumbnail: "https://img.youtube.com/vi/EwHTOsy5_70/maxresdefault.jpg",
+  thumbnail: "https://img.youtube.com/vi/EwHTOsy5_70/hqdefault.jpg",
   duration: "15:20",
   views: "32K",
   youtubeId: "EwHTOsy5_70"
@@ -37,7 +37,7 @@ const videos: Video[] = [{
   id: "4",
   title: "SOK Battery Setup",
   category: "guides",
-  thumbnail: "https://img.youtube.com/vi/POf424nczxg/maxresdefault.jpg",
+  thumbnail: "https://img.youtube.com/vi/POf424nczxg/hqdefault.jpg",
   duration: "10:15",
   views: "12K",
   youtubeId: "POf424nczxg"
