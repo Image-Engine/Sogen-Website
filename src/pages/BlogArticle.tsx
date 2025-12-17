@@ -16,7 +16,7 @@ export default function BlogArticle() {
     async function loadArticle() {
       if (!handle) return;
       setIsLoading(true);
-      const data = await fetchArticleByHandle('FAQ', handle);
+      const data = await fetchArticleByHandle('faq', handle);
       setArticle(data);
       setIsLoading(false);
     }

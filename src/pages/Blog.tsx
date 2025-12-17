@@ -13,7 +13,7 @@ export default function Blog() {
   useEffect(() => {
     async function loadArticles() {
       setIsLoading(true);
-      const data = await fetchBlogArticles('FAQ', 20);
+      const data = await fetchBlogArticles('faq', 20);
       setArticles(data);
       setIsLoading(false);
     }
