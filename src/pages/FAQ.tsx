@@ -7,7 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Battery, Zap, Settings, HelpCircle, Truck, ExternalLink, ArrowRight } from "lucide-react";
+import { Battery, Zap, ExternalLink, ArrowRight } from "lucide-react";
 
 const faqCategories = [
   {
@@ -105,75 +105,6 @@ const faqCategories = [
         a: "Optimal Smart Shunt configuration for accurate state-of-charge monitoring with SOK LiFePO4 batteries.",
         link: "/blog/FAQ/victron-smart-shunt-settings-for-sok",
         linkText: "Read our complete guide"
-      }
-    ]
-  },
-  {
-    id: "technical",
-    title: "Technical Support",
-    icon: Settings,
-    questions: [
-      {
-        q: "How do I calculate the correct fuse size for my system?",
-        a: "Calculate your maximum expected current draw and add 25-50% safety margin. For example, a 2000W inverter at 12V draws about 167A, so use a 200-250A fuse. Place the fuse as close to the battery positive terminal as possible. Use ANL, MEGA, or Class T fuses rated for DC applications."
-      },
-      {
-        q: "How do I integrate SOK batteries with Solar Assistant?",
-        a: "Solar Assistant supports SOK batteries via Bluetooth or serial connection. Configure your SOK battery's communication port, connect to your Solar Assistant device, and select the SOK battery profile in the app. This enables detailed monitoring and logging of battery performance."
-      },
-      {
-        q: "How do I configure Victron Smart Shunt for SOK batteries?",
-        a: "In VictronConnect, set: Battery capacity to your SOK battery's Ah rating, Charged voltage: 14.0V, Discharge floor: 20%, Peukert exponent: 1.05, Charge efficiency: 99%, Current threshold: 0.04A. These settings optimize SOC accuracy for lithium chemistry."
-      },
-      {
-        q: "How do I manage Victron over-voltage alarms with DVCC?",
-        a: "Enable DVCC (Distributed Voltage and Current Control) in your Victron GX device. Set the 'Limit charge voltage' option and specify your maximum voltage. This coordinates all chargers to prevent over-voltage situations that can trigger BMS protection."
-      },
-      {
-        q: "How do I set up generator start/stop with Victron?",
-        a: "Use Victron's Virtual Switch or Generator Start/Stop function in the GX device. Configure start conditions (SOC percentage, battery voltage, load) and stop conditions. Set appropriate delays to prevent short cycling. This automates backup power management."
-      }
-    ]
-  },
-  {
-    id: "general",
-    title: "General Questions",
-    icon: HelpCircle,
-    questions: [
-      {
-        q: "Are SOK batteries certified for use in New Zealand?",
-        a: "Yes, SOK batteries meet AS/NZS3004.2 certification requirements for electrical installations in caravans and boats in Australia and New Zealand. This ensures they meet local safety and performance standards for mobile applications."
-      },
-      {
-        q: "What warranty do SOK batteries come with?",
-        a: "SOK batteries come with an industry-leading warranty. The exact terms depend on the model and application. All warranties cover manufacturing defects and premature capacity loss under normal use conditions. Register your battery after purchase to activate your warranty."
-      },
-      {
-        q: "Can I use SOK batteries in extreme temperatures?",
-        a: "SOK batteries feature built-in low-temperature protection. They can discharge from -20°C to 60°C. Charging should occur between 0°C and 45°C. The internal BMS will prevent charging below 0°C to protect cell health. For extreme cold climates, consider models with internal heating."
-      },
-      {
-        q: "How long do SOK batteries last?",
-        a: "SOK LiFePO4 batteries are rated for 4000+ cycles at 80% depth of discharge, which equates to over 10 years of daily cycling. Lifespan can be extended by avoiding full discharges and storing at 50% SOC when not in use for extended periods."
-      }
-    ]
-  },
-  {
-    id: "shipping",
-    title: "Shipping & Returns",
-    icon: Truck,
-    questions: [
-      {
-        q: "How is shipping calculated for batteries?",
-        a: "Due to the weight of lithium batteries, shipping is calculated based on your delivery address. We offer free shipping on orders over $500 within New Zealand. Rural delivery may incur additional charges. You'll see the exact shipping cost at checkout."
-      },
-      {
-        q: "What is your returns policy?",
-        a: "We accept returns of unused, unopened batteries within 30 days of purchase. Due to safety regulations, batteries that have been installed or show signs of use cannot be returned. Faulty batteries are covered under warranty and will be replaced or repaired."
-      },
-      {
-        q: "How are batteries shipped safely?",
-        a: "All SOK batteries are shipped in compliance with lithium battery transport regulations. They're packed in protective materials and shipped via approved carriers. Batteries are shipped at partial charge (approximately 50% SOC) as required by shipping regulations."
       }
     ]
   }
