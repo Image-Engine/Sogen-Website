@@ -50,9 +50,9 @@ const footerLinks = {
   }]
 };
 export function Footer() {
-  return <footer className="bg-primary text-primary-foreground">
+  return <footer className="bg-background text-foreground border-t border-border">
       {/* Newsletter Section */}
-      <div className="border-b border-primary-foreground/10">
+      <div className="border-b border-border/50">
         
       </div>
 
@@ -64,15 +64,15 @@ export function Footer() {
             <div className="flex items-center gap-2 mb-4">
               <img src={sokLogo} alt="SOK Battery" className="h-10 w-auto" />
             </div>
-            <p className="text-primary-foreground/70 text-sm mb-6 max-w-xs">
+            <p className="text-muted-foreground text-sm mb-6 max-w-xs">
               New Zealand's trusted source for premium LiFePO4 batteries and solar power solutions.
             </p>
-            <div className="flex flex-col gap-3 text-sm text-primary-foreground/70">
-              <a href="tel:+6409123456" className="flex items-center gap-2 hover:text-primary-foreground transition-colors">
+            <div className="flex flex-col gap-3 text-sm text-muted-foreground">
+              <a href="tel:+6409123456" className="flex items-center gap-2 hover:text-foreground transition-colors">
                 <Phone className="h-4 w-4" />
                 0800 765 228
               </a>
-              <a href="mailto:hello@sokbattery.co.nz" className="flex items-center gap-2 hover:text-primary-foreground transition-colors">
+              <a href="mailto:hello@sokbattery.co.nz" className="flex items-center gap-2 hover:text-foreground transition-colors">
                 <Mail className="h-4 w-4" />
                 hello@sokbattery.co.nz
               </a>
@@ -85,12 +85,12 @@ export function Footer() {
 
           {/* Products */}
           <div>
-            <h4 className="font-semibold text-sm uppercase tracking-wider mb-4 text-primary-foreground/90">
+            <h4 className="font-semibold text-sm uppercase tracking-wider mb-4 text-foreground">
               Products
             </h4>
             <ul className="space-y-3">
               {footerLinks.products.map(link => <li key={link.label}>
-                  <a href={link.href} className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                  <a href={link.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                     {link.label}
                   </a>
                 </li>)}
@@ -99,12 +99,12 @@ export function Footer() {
 
           {/* Support */}
           <div>
-            <h4 className="font-semibold text-sm uppercase tracking-wider mb-4 text-primary-foreground/90">
+            <h4 className="font-semibold text-sm uppercase tracking-wider mb-4 text-foreground">
               Support
             </h4>
             <ul className="space-y-3">
               {footerLinks.support.map(link => <li key={link.label}>
-                  <a href={link.href} className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                  <a href={link.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                     {link.label}
                   </a>
                 </li>)}
@@ -113,12 +113,12 @@ export function Footer() {
 
           {/* Company */}
           <div>
-            <h4 className="font-semibold text-sm uppercase tracking-wider mb-4 text-primary-foreground/90">
+            <h4 className="font-semibold text-sm uppercase tracking-wider mb-4 text-foreground">
               Company
             </h4>
             <ul className="space-y-3">
               {footerLinks.company.map(link => <li key={link.label}>
-                  <a href={link.href} className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                  <a href={link.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                     {link.label}
                   </a>
                 </li>)}
@@ -128,17 +128,17 @@ export function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-primary-foreground/10">
+      <div className="border-t border-border">
         <div className="container py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-sm text-primary-foreground/60">
+            <p className="text-sm text-muted-foreground">
               © 2024 SOK Battery NZ. All rights reserved.
             </p>
-            <div className="flex items-center gap-6 text-sm text-primary-foreground/60">
-              <a href="#" className="hover:text-primary-foreground transition-colors">
+            <div className="flex items-center gap-6 text-sm text-muted-foreground">
+              <a href="#" className="hover:text-foreground transition-colors">
                 Privacy Policy
               </a>
-              <a href="#" className="hover:text-primary-foreground transition-colors">
+              <a href="#" className="hover:text-foreground transition-colors">
                 Terms of Service
               </a>
             </div>
