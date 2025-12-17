@@ -70,7 +70,7 @@ export default function Blog() {
               {articles.map((article) => (
                 <Link
                   key={article.node.id}
-                  to={`/blog/${article.node.handle}`}
+                  to={`/blog/FAQ/${article.node.handle}`}
                   className="group block"
                 >
                   <article className="h-full flex flex-col">

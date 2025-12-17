@@ -18,7 +18,7 @@ const faqCategories = [
       {
         q: "Changing over to Lithium",
         a: "Transitioning from lead-acid to lithium batteries is one of the best upgrades you can make for your caravan, motorhome, or off-grid setup. LiFePO4 batteries offer 3-4x more usable capacity, are 60% lighter, and last 10+ years with proper care. The key considerations are: ensuring your charger supports lithium profiles (14.2-14.6V absorption for 12V systems), upgrading to a DC-DC charger if charging from your vehicle, and verifying your inverter settings. SOK batteries are designed as drop-in replacements with built-in BMS protection, making the switch straightforward for most applications.",
-        link: "/blog/changing-over-to-lithium",
+        link: "/blog/FAQ/changing-over-to-lithium",
         linkText: "Read our complete guide"
       },
       {

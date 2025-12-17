@@ -8,20 +8,20 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 
 export default function BlogArticle() {
-  const { handle } = useParams<{ handle: string }>();
+  const { blogHandle, articleHandle } = useParams<{ blogHandle: string; articleHandle: string }>();
   const [article, setArticle] = useState<ShopifyArticle['node'] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function loadArticle() {
-      if (!handle) return;
+      if (!blogHandle || !articleHandle) return;
       setIsLoading(true);
-      const data = await fetchArticleByHandle('faq', handle);
+      const data = await fetchArticleByHandle(blogHandle, articleHandle);
       setArticle(data);
       setIsLoading(false);
     }
     loadArticle();
-  }, [handle]);
+  }, [blogHandle, articleHandle]);
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-NZ', {
