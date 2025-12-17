@@ -21,6 +21,9 @@ const navItems = [{
   label: "Accessories",
   href: "#"
 }, {
+  label: "Blog",
+  href: "/blog"
+}, {
   label: "FAQ",
   href: "/faq"
 }];
