@@ -1,5 +1,7 @@
 import { Mail, Phone, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import sokLogo from "@/assets/sok-logo.webp";
+
 const footerLinks = {
   products: [{
     label: "Solar Systems",
@@ -60,12 +62,7 @@ export function Footer() {
           {/* Brand Column */}
           <div className="col-span-2 md:col-span-4 lg:col-span-1 mb-4 lg:mb-0">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 bg-primary-foreground rounded-xl flex items-center justify-center">
-                <svg viewBox="0 0 24 24" className="w-6 h-6 text-primary" fill="currentColor">
-                  <path d="M17 4h-3V2h-4v2H7v18h10V4zm-2 16H9V6h2v2h2V6h2v14zm-3-8h2v6h-2v-6z" />
-                </svg>
-              </div>
-              <span className="font-display text-lg font-semibold">SOK Battery</span>
+              <img src={sokLogo} alt="SOK Battery" className="h-10 w-auto" />
             </div>
             <p className="text-primary-foreground/70 text-sm mb-6 max-w-xs">
               New Zealand's trusted source for premium LiFePO4 batteries and solar power solutions.
