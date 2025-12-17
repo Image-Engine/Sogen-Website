@@ -1,4 +1,5 @@
 import { Check } from "lucide-react";
+import featuresBg from "@/assets/features-bg.webp";
 
 export function Features() {
   const advantages = [
@@ -20,49 +21,60 @@ export function Features() {
   ];
 
   return (
-    <section className="py-24 lg:py-32 bg-background">
-      <div className="container max-w-5xl">
+    <section 
+      className="relative py-24 lg:py-32 overflow-hidden"
+      style={{
+        backgroundImage: `url(${featuresBg})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed'
+      }}
+    >
+      {/* Dark overlay for contrast */}
+      <div className="absolute inset-0 bg-black/40" />
+      
+      <div className="container max-w-6xl relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16 lg:mb-24">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground tracking-tight mb-6">
+        <div className="text-center mb-16 lg:mb-20">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-white tracking-tight mb-6">
             The SOK Battery Difference
           </h2>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed font-light">
+          <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed font-light">
             Unlock the full potential of your off-grid, RV, motorhome or home power needs with our high-performance LiFePO4 batteries.
           </p>
         </div>
 
-        {/* Two Column Feature Lists */}
-        <div className="grid md:grid-cols-2 gap-16 lg:gap-24">
-          {/* Left Column */}
-          <div>
-            <h3 className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-8">
+        {/* Liquid Glass Cards */}
+        <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+          {/* Advantages Card */}
+          <div className="rounded-3xl p-8 lg:p-10 backdrop-blur-xl bg-white/10 border border-white/20 shadow-2xl">
+            <h3 className="text-xs uppercase tracking-[0.2em] text-white/60 mb-8">
               Advantages
             </h3>
-            <ul className="space-y-5">
+            <ul className="space-y-4">
               {advantages.map((item) => (
-                <li key={item} className="flex items-center gap-4">
-                  <div className="w-5 h-5 rounded-full bg-foreground flex items-center justify-center shrink-0">
-                    <Check className="w-3 h-3 text-background" strokeWidth={3} />
+                <li key={item} className="flex items-center gap-4 group">
+                  <div className="w-6 h-6 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center shrink-0 group-hover:bg-white/30 transition-colors">
+                    <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />
                   </div>
-                  <span className="text-foreground text-base">{item}</span>
+                  <span className="text-white text-base font-light">{item}</span>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Right Column */}
-          <div>
-            <h3 className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-8">
+          {/* Features Card */}
+          <div className="rounded-3xl p-8 lg:p-10 backdrop-blur-xl bg-white/10 border border-white/20 shadow-2xl">
+            <h3 className="text-xs uppercase tracking-[0.2em] text-white/60 mb-8">
               Features
             </h3>
-            <ul className="space-y-5">
+            <ul className="space-y-4">
               {features.map((item) => (
-                <li key={item} className="flex items-center gap-4">
-                  <div className="w-5 h-5 rounded-full bg-foreground flex items-center justify-center shrink-0">
-                    <Check className="w-3 h-3 text-background" strokeWidth={3} />
+                <li key={item} className="flex items-center gap-4 group">
+                  <div className="w-6 h-6 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center shrink-0 group-hover:bg-white/30 transition-colors">
+                    <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />
                   </div>
-                  <span className="text-foreground text-base">{item}</span>
+                  <span className="text-white text-base font-light">{item}</span>
                 </li>
               ))}
             </ul>
@@ -70,10 +82,12 @@ export function Features() {
         </div>
 
         {/* Bottom Statement */}
-        <div className="mt-20 lg:mt-28 text-center">
-          <p className="text-muted-foreground text-sm max-w-lg mx-auto leading-relaxed">
-            With longer lifespan, faster charging times, and superior efficiency, SOK LiFePO4 batteries are the ultimate power storage solution.
-          </p>
+        <div className="mt-16 lg:mt-20 text-center">
+          <div className="inline-block rounded-2xl px-8 py-4 backdrop-blur-xl bg-white/10 border border-white/20">
+            <p className="text-white/90 text-sm max-w-lg mx-auto leading-relaxed">
+              With longer lifespan, faster charging times, and superior efficiency, SOK LiFePO4 batteries are the ultimate power storage solution.
+            </p>
+          </div>
         </div>
       </div>
     </section>
