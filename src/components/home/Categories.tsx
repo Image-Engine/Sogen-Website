@@ -29,7 +29,7 @@ const categories = [
   {
     title: "Accessories",
     description: "Chargers, cables & more",
-    image: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1597075687490-8f673c6c17f6?w=800&q=80",
   },
 ];
 
