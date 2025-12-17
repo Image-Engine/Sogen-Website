@@ -47,7 +47,7 @@ export function Features() {
             </h3>
             <ul className="space-y-4">
               {features.map(item => <li key={item} className="flex items-center gap-4 group">
-                  <div className="w-6 h-6 rounded-full bg-white/30 backdrop-blur-sm flex items-center justify-center shrink-0 group-hover:bg-white/50 transition-colors">
+                  <div className="w-6 h-6 rounded-full backdrop-blur-sm flex items-center justify-center shrink-0 transition-colors bg-blue-500">
                     <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />
                   </div>
                   <span className="text-white text-base font-light">{item}</span>
