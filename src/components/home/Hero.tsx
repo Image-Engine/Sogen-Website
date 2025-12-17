@@ -12,11 +12,8 @@ export function Hero() {
       </div>
 
       {/* Content */}
-      <div className="container relative z-10 py-20 lg:py-32">
-        <div className="max-w-2xl space-y-8">
-          {/* Badge */}
-          
-
+      <div className="container relative z-10 py-20 lg:py-32 flex items-center justify-center">
+        <div className="max-w-2xl space-y-8 text-center flex flex-col items-center">
           {/* Main Headline */}
           <h1 className="animate-slide-up" style={{
           animationDelay: "0.1s"
@@ -24,7 +21,6 @@ export function Hero() {
             <span className="block text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight">
               Power You Can Rely On.
             </span>
-            
           </h1>
 
           {/* Subheadline */}
@@ -49,7 +45,7 @@ export function Hero() {
           </div>
 
           {/* Trust Indicators */}
-          <div className="flex flex-wrap items-center gap-8 pt-6 animate-slide-up" style={{
+          <div className="flex flex-wrap items-center justify-center gap-8 pt-6 animate-slide-up" style={{
           animationDelay: "0.4s"
         }}>
             <div className="flex items-center gap-2">
