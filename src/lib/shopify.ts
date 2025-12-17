@@ -318,7 +318,7 @@ export async function createStorefrontCheckout(items: CartItem[]): Promise<strin
 }
 
 // Fetch blog articles
-export async function fetchBlogArticles(blogHandle: string = 'news', first: number = 20): Promise<ShopifyArticle[]> {
+export async function fetchBlogArticles(blogHandle: string = 'FAQ', first: number = 20): Promise<ShopifyArticle[]> {
   try {
     const data = await storefrontApiRequest(GET_BLOG_ARTICLES, { blogHandle, first });
     if (!data || !data.data.blog) return [];
