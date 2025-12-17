@@ -121,7 +121,18 @@ export default function BlogArticle() {
 
           {/* Content */}
           <div 
-            className="prose prose-lg max-w-none prose-headings:font-semibold prose-headings:tracking-tight prose-p:text-muted-foreground prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl prose-strong:text-foreground"
+            className="prose prose-lg max-w-none 
+              prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-foreground
+              prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-h4:text-lg
+              prose-p:text-muted-foreground prose-p:leading-relaxed
+              prose-a:text-primary prose-a:no-underline hover:prose-a:underline
+              prose-strong:text-foreground prose-strong:font-semibold
+              prose-ul:list-disc prose-ul:pl-6 prose-ul:text-muted-foreground
+              prose-ol:list-decimal prose-ol:pl-6 prose-ol:text-muted-foreground
+              prose-li:my-2
+              prose-blockquote:border-l-primary prose-blockquote:text-muted-foreground prose-blockquote:italic
+              prose-img:rounded-xl
+              prose-hr:border-border"
             dangerouslySetInnerHTML={{ __html: article.contentHtml }}
           />
 
