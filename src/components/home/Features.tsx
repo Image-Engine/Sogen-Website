@@ -1,35 +1,14 @@
 import { Check } from "lucide-react";
 import featuresBg from "@/assets/features-bg.webp";
-
 export function Features() {
-  const advantages = [
-    "Longer lifespan",
-    "Increased safety",
-    "High thermal stability",
-    "Low self-discharge rate",
-    "Lower maintenance cost",
-    "High efficiency",
-  ];
-
-  const features = [
-    "Faster charging times",
-    "Higher power density",
-    "Longer cycle life",
-    "Lighter weight",
-    "No off-gassing",
-    "Grade A prismatic cells",
-  ];
-
-  return (
-    <section 
-      className="relative py-24 lg:py-32 overflow-hidden"
-      style={{
-        backgroundImage: `url(${featuresBg})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed'
-      }}
-    >
+  const advantages = ["Longer lifespan", "Increased safety", "High thermal stability", "Low self-discharge rate", "Lower maintenance cost", "High efficiency"];
+  const features = ["Faster charging times", "Higher power density", "Longer cycle life", "Lighter weight", "No off-gassing", "Grade A prismatic cells"];
+  return <section className="relative py-24 lg:py-32 overflow-hidden" style={{
+    backgroundImage: `url(${featuresBg})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundAttachment: 'fixed'
+  }}>
       {/* Dark overlay for contrast */}
       <div className="absolute inset-0 bg-black/25" />
       
@@ -48,35 +27,31 @@ export function Features() {
         <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
           {/* Advantages Card */}
           <div className="rounded-3xl p-8 lg:p-10 backdrop-blur-2xl bg-white/20 border border-white/40 shadow-2xl">
-            <h3 className="text-xs uppercase tracking-[0.2em] text-white/60 mb-8">
+            <h3 className="uppercase tracking-[0.2em] text-white/60 mb-8 text-2xl text-center font-bold">
               Advantages
             </h3>
             <ul className="space-y-4">
-              {advantages.map((item) => (
-                <li key={item} className="flex items-center gap-4 group">
-                  <div className="w-6 h-6 rounded-full bg-white/30 backdrop-blur-sm flex items-center justify-center shrink-0 group-hover:bg-white/50 transition-colors">
+              {advantages.map(item => <li key={item} className="flex items-center gap-4 group">
+                  <div className="w-6 h-6 rounded-full backdrop-blur-sm flex items-center justify-center shrink-0 transition-colors text-white bg-green-500">
                     <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />
                   </div>
                   <span className="text-white text-base font-light">{item}</span>
-                </li>
-              ))}
+                </li>)}
             </ul>
           </div>
 
           {/* Features Card */}
           <div className="rounded-3xl p-8 lg:p-10 backdrop-blur-2xl bg-white/20 border border-white/40 shadow-2xl">
-            <h3 className="text-xs uppercase tracking-[0.2em] text-white/60 mb-8">
+            <h3 className="uppercase tracking-[0.2em] text-white/60 mb-8 text-2xl text-center font-bold">
               Features
             </h3>
             <ul className="space-y-4">
-              {features.map((item) => (
-                <li key={item} className="flex items-center gap-4 group">
+              {features.map(item => <li key={item} className="flex items-center gap-4 group">
                   <div className="w-6 h-6 rounded-full bg-white/30 backdrop-blur-sm flex items-center justify-center shrink-0 group-hover:bg-white/50 transition-colors">
                     <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />
                   </div>
                   <span className="text-white text-base font-light">{item}</span>
-                </li>
-              ))}
+                </li>)}
             </ul>
           </div>
         </div>
@@ -90,6 +65,5 @@ export function Features() {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 }
