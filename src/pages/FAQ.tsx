@@ -7,7 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Battery, Zap, ExternalLink, ArrowRight } from "lucide-react";
+import { Battery, Zap, ExternalLink, ArrowRight, HelpCircle } from "lucide-react";
 
 const faqCategories = [
   {
@@ -107,7 +107,62 @@ const faqCategories = [
         linkText: "Read our complete guide"
       }
     ]
-  }
+  },
+  {
+    id: "faqs",
+    title: "FAQs",
+    icon: HelpCircle,
+    questions: [
+      {
+        q: "Charger and Inverter Settings",
+        a: "Recommended voltage and current settings for SOK LiFePO4 batteries with common chargers and inverters.",
+        link: "/blog/FAQ/charger-and-inverter-settings",
+        linkText: "Read our complete guide",
+      },
+      {
+        q: "Charging Lithium Batteries in Vehicles: Considerations and Safeguards",
+        a: "Key considerations for safely charging lithium batteries from your vehicle's electrical system.",
+        link: "/blog/FAQ/charging-lithium-batteries-in-vehicles-considerations-and-safeguards",
+        linkText: "Read our complete guide",
+      },
+      {
+        q: "DC-DC Chargers and why we need them",
+        a: "Why DC-DC chargers are essential for protecting your batteries and vehicle alternator.",
+        link: "/blog/FAQ/dc-dc-chargers-and-why-we-need-them",
+        linkText: "Read our complete guide",
+      },
+      {
+        q: "How to Correctly Balance & Setup Your Batteries in Series",
+        a: "Step-by-step guide to safely connecting SOK batteries in series.",
+        link: "/blog/FAQ/how-to-correctly-balance-setup-your-batteries-in-series",
+        linkText: "Read our complete guide",
+      },
+      {
+        q: "How to Wake Up A Sleeping LIFePO4 Battery",
+        a: "Methods to safely reactivate a battery whose BMS has entered protection mode.",
+        link: "/blog/FAQ/how-to-wake-up-a-sleeping-lifepo4-battery",
+        linkText: "Read our complete guide",
+      },
+      {
+        q: "SOK - Victron settings",
+        a: "Recommended configuration settings for integrating SOK batteries with Victron equipment.",
+        link: "/blog/FAQ/sok-victron-settings",
+        linkText: "Read our complete guide",
+      },
+      {
+        q: "SOK and AS/NZS3004.2 Certification",
+        a: "Information about SOK battery compliance with Australian and New Zealand caravan and motorhome electrical standards.",
+        link: "/blog/FAQ/sok-and-as-nzs3004-2-certification",
+        linkText: "Read our complete guide",
+      },
+      {
+        q: "SOK Bluetooth Install & Calibration",
+        a: "How to install and calibrate the Bluetooth module for real-time battery monitoring.",
+        link: "/blog/FAQ/sok-bluetooth-install-calibration",
+        linkText: "Read our complete guide",
+      },
+    ],
+  },
 ];
 
 export default function FAQ() {
