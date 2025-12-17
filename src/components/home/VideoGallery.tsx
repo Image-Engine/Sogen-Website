@@ -11,52 +11,36 @@ interface Video {
 }
 const videos: Video[] = [{
   id: "1",
-  title: "SOK 206Ah Battery Full Review",
+  title: "SOK Battery Review",
   category: "reviews",
-  thumbnail: "https://images.unsplash.com/photo-1620714223084-8fcacc6dfd8d?w=800&q=80",
+  thumbnail: "https://img.youtube.com/vi/nY0BSsF-aSY/maxresdefault.jpg",
   duration: "12:45",
   views: "24K",
-  youtubeId: "dQw4w9WgXcQ"
+  youtubeId: "nY0BSsF-aSY"
 }, {
   id: "2",
-  title: "How to Choose the Right Battery",
+  title: "SOK Battery Guide",
   category: "guides",
-  thumbnail: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+  thumbnail: "https://img.youtube.com/vi/zJmIS5tmzPU/maxresdefault.jpg",
   duration: "8:30",
   views: "18K",
-  youtubeId: "dQw4w9WgXcQ"
+  youtubeId: "zJmIS5tmzPU"
 }, {
   id: "3",
-  title: "Installing Your SOK Battery System",
+  title: "SOK Battery Installation",
   category: "howto",
-  thumbnail: "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=800&q=80",
+  thumbnail: "https://img.youtube.com/vi/EwHTOsy5_70/maxresdefault.jpg",
   duration: "15:20",
   views: "32K",
-  youtubeId: "dQw4w9WgXcQ"
+  youtubeId: "EwHTOsy5_70"
 }, {
   id: "4",
-  title: "Marine Battery Setup Guide",
+  title: "SOK Battery Setup",
   category: "guides",
-  thumbnail: "https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=800&q=80",
+  thumbnail: "https://img.youtube.com/vi/POf424nczxg/maxresdefault.jpg",
   duration: "10:15",
   views: "12K",
-  youtubeId: "dQw4w9WgXcQ"
-}, {
-  id: "5",
-  title: "SOK vs Competition - Honest Review",
-  category: "reviews",
-  thumbnail: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=80",
-  duration: "18:40",
-  views: "45K",
-  youtubeId: "dQw4w9WgXcQ"
-}, {
-  id: "6",
-  title: "Solar Integration Tutorial",
-  category: "howto",
-  thumbnail: "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=800&q=80",
-  duration: "22:10",
-  views: "28K",
-  youtubeId: "dQw4w9WgXcQ"
+  youtubeId: "POf424nczxg"
 }];
 const categories = [{
   id: "all",
