@@ -1,3 +1,3 @@
 export function TrustBadges() {
-  return;
+  return null;
 }
