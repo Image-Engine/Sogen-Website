@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import {
@@ -6,7 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Battery, Zap, Settings, HelpCircle, Truck, ExternalLink } from "lucide-react";
+import { Battery, Zap, Settings, HelpCircle, Truck, ExternalLink, ArrowRight } from "lucide-react";
 
 const faqCategories = [
   {
@@ -182,15 +183,25 @@ export default function FAQ() {
                         <AccordionContent className="text-muted-foreground leading-relaxed pb-4">
                           <p>{item.a}</p>
                           {item.link && (
-                            <a 
-                              href={item.link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1.5 mt-3 text-primary hover:text-primary/80 font-medium transition-colors"
-                            >
-                              {item.linkText || "Read more"}
-                              <ExternalLink className="h-4 w-4" />
-                            </a>
+                            item.link.startsWith('/') ? (
+                              <Link 
+                                to={item.link}
+                                className="inline-flex items-center gap-1.5 mt-3 text-primary hover:text-primary/80 font-medium transition-colors"
+                              >
+                                {item.linkText || "Read more"}
+                                <ArrowRight className="h-4 w-4" />
+                              </Link>
+                            ) : (
+                              <a 
+                                href={item.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1.5 mt-3 text-primary hover:text-primary/80 font-medium transition-colors"
+                              >
+                                {item.linkText || "Read more"}
+                                <ExternalLink className="h-4 w-4" />
+                              </a>
+                            )
                           )}
                         </AccordionContent>
                       </AccordionItem>
