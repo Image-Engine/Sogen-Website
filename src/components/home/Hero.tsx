@@ -22,11 +22,9 @@ export function Hero() {
           animationDelay: "0.1s"
         }}>
             <span className="block text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight">
-              Premium LiFePO4
+              Power You Can Rely On.
             </span>
-            <span className="block text-5xl md:text-6xl lg:text-7xl font-bold text-white/60 tracking-tight mt-2">
-              Power Solutions
-            </span>
+            
           </h1>
 
           {/* Subheadline */}
