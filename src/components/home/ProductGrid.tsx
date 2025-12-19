@@ -25,7 +25,7 @@ export function ProductGrid() {
   useEffect(() => {
     async function loadProducts() {
       setLoading(true);
-      const collection = await fetchCollectionByHandle("12v-lithium-batteries-lvl1", 8);
+      const collection = await fetchCollectionByHandle("12v-lithium-batteries-copy", 8);
       setProducts(collection?.products || []);
       setLoading(false);
     }
@@ -45,7 +45,7 @@ export function ProductGrid() {
               Best Selling Batteries
             </h2>
           </div>
-          <Link to="/collections/12v-lithium-batteries-lvl1" className="self-start sm:self-auto">
+          <Link to="/collections/12v-lithium-batteries-copy" className="self-start sm:self-auto">
             <Button variant="outline" className="text-sm sm:text-base">
               View All 12V Batteries
               <ArrowRight className="h-4 w-4 ml-2" />
