@@ -18,6 +18,9 @@ const navItems = [
   { label: "RV & Marine", href: "#" },
   { label: "Industrial", href: "#" },
   { label: "Accessories", href: "#" },
+];
+
+const resourceItems = [
   { label: "Blog", href: "/blog" },
   { label: "FAQ", href: "/faq" },
 ];
@@ -99,10 +102,29 @@ export function Header() {
                 </Button>
               )
             )}
+
+            {/* Resources Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="nav" size="default">
+                  Resources
+                  <ChevronDown className="h-3 w-3 ml-0.5 opacity-50" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start" className="w-48">
+                {resourceItems.map((item) => (
+                  <DropdownMenuItem key={item.label} asChild>
+                    <Link to={item.href} className="cursor-pointer">
+                      {item.label}
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </nav>
 
           {/* Right side actions */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 shrink-0">
             {/* Search - Desktop */}
             <div className="hidden md:flex items-center">
               {searchOpen ? (
@@ -110,13 +132,14 @@ export function Header() {
                   <input
                     type="text"
                     placeholder="Search batteries..."
-                    className="w-48 lg:w-64 h-9 px-4 text-sm bg-secondary rounded-lg border-0 focus:outline-none focus:ring-2 focus:ring-primary/20"
+                    className="w-40 lg:w-56 h-9 px-4 text-sm bg-secondary rounded-lg border-0 focus:outline-none focus:ring-2 focus:ring-primary/20 shrink-0"
                     autoFocus
                   />
                   <Button
                     variant="ghost"
                     size="icon-sm"
                     onClick={() => setSearchOpen(false)}
+                    className="shrink-0"
                   >
                     <X className="h-4 w-4" />
                   </Button>
@@ -126,6 +149,7 @@ export function Header() {
                   variant="ghost"
                   size="icon"
                   onClick={() => setSearchOpen(true)}
+                  className="shrink-0"
                 >
                   <Search className="h-5 w-5" />
                 </Button>
@@ -229,6 +253,23 @@ export function Header() {
                   </a>
                 )
               )}
+
+              {/* Resources - Mobile */}
+              <div className="px-2 pt-2 border-t border-border mt-2">
+                <span className="px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                  Resources
+                </span>
+                {resourceItems.map((item) => (
+                  <Link
+                    key={item.label}
+                    to={item.href}
+                    className="flex items-center px-4 py-3 text-foreground hover:bg-accent rounded-lg transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <span className="font-medium">{item.label}</span>
+                  </Link>
+                ))}
+              </div>
             </div>
           </nav>
         )}
