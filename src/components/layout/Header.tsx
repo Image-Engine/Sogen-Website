@@ -75,13 +75,10 @@ export function Header() {
                 {collections.map((collection) => (
                   <DropdownMenuItem key={collection.node.id} asChild>
                     <Link
-                      to={`/collections/${collection.node.handle}`}
-                      className="cursor-pointer flex items-center justify-between"
+                      to={`/products`}
+                      className="cursor-pointer"
                     >
-                      <span>{collection.node.title}</span>
-                      <span className="text-xs text-muted-foreground">
-                        ({collection.node.productsCount.count})
-                      </span>
+                      {collection.node.title}
                     </Link>
                   </DropdownMenuItem>
                 ))}
@@ -200,14 +197,11 @@ export function Header() {
                     {collections.map((collection) => (
                       <Link
                         key={collection.node.id}
-                        to={`/collections/${collection.node.handle}`}
-                        className="flex items-center justify-between px-4 py-2 text-sm text-foreground hover:bg-accent rounded-lg transition-colors"
+                        to={`/products`}
+                        className="flex items-center px-4 py-2 text-sm text-foreground hover:bg-accent rounded-lg transition-colors"
                         onClick={() => setMobileMenuOpen(false)}
                       >
-                        <span>{collection.node.title}</span>
-                        <span className="text-xs text-muted-foreground">
-                          ({collection.node.productsCount.count})
-                        </span>
+                        {collection.node.title}
                       </Link>
                     ))}
                   </div>
