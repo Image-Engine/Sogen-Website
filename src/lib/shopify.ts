@@ -77,6 +77,22 @@ export interface ShopifyArticle {
   };
 }
 
+export interface ShopifyCollection {
+  node: {
+    id: string;
+    title: string;
+    handle: string;
+    description: string;
+    image: {
+      url: string;
+      altText: string | null;
+    } | null;
+    productsCount: {
+      count: number;
+    };
+  };
+}
+
 export interface CartItem {
   product: ShopifyProduct;
   variantId: string;
@@ -309,6 +325,28 @@ const GET_ARTICLE_BY_HANDLE = `
   }
 `;
 
+const GET_COLLECTIONS = `
+  query GetCollections($first: Int!) {
+    collections(first: $first) {
+      edges {
+        node {
+          id
+          title
+          handle
+          description
+          image {
+            url
+            altText
+          }
+          productsCount {
+            count
+          }
+        }
+      }
+    }
+  }
+`;
+
 // Fetch products
 export async function fetchProducts(first: number = 20, query?: string): Promise<ShopifyProduct[]> {
   try {
@@ -377,5 +415,17 @@ export async function fetchArticleByHandle(blogHandle: string, articleHandle: st
   } catch (error) {
     console.error('Error fetching article:', error);
     return null;
+  }
+}
+
+// Fetch collections
+export async function fetchCollections(first: number = 50): Promise<ShopifyCollection[]> {
+  try {
+    const data = await storefrontApiRequest(GET_COLLECTIONS, { first });
+    if (!data) return [];
+    return data.data.collections.edges;
+  } catch (error) {
+    console.error('Error fetching collections:', error);
+    return [];
   }
 }
