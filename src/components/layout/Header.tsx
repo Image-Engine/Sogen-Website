@@ -75,7 +75,7 @@ export function Header() {
                 {collections.map((collection) => (
                   <DropdownMenuItem key={collection.node.id} asChild>
                     <Link
-                      to={`/products`}
+                      to={`/collections/${collection.node.handle}`}
                       className="cursor-pointer"
                     >
                       {collection.node.title}
@@ -197,7 +197,7 @@ export function Header() {
                     {collections.map((collection) => (
                       <Link
                         key={collection.node.id}
-                        to={`/products`}
+                        to={`/collections/${collection.node.handle}`}
                         className="flex items-center px-4 py-2 text-sm text-foreground hover:bg-accent rounded-lg transition-colors"
                         onClick={() => setMobileMenuOpen(false)}
                       >
