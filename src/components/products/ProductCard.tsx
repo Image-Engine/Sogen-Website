@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { ShoppingCart, Package } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ShopifyProduct } from "@/lib/shopify";
@@ -37,8 +36,7 @@ export function ProductCard({ product }: ProductCardProps) {
   };
 
   return (
-    <Link 
-      to={`/product/${node.handle}`}
+    <div 
       className="group relative flex flex-col rounded-2xl bg-card border border-border overflow-hidden hover:shadow-product-hover transition-all duration-300"
     >
       {/* Product Image */}
@@ -86,6 +84,6 @@ export function ProductCard({ product }: ProductCardProps) {
           </Button>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }
