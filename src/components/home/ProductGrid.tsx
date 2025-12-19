@@ -23,7 +23,7 @@ export function ProductGrid() {
   useEffect(() => {
     async function loadProducts() {
       setLoading(true);
-      const collection = await fetchCollectionByHandle("12v-lithium-batteries-copy", 8);
+      const collection = await fetchCollectionByHandle("12v-lithium-batteries", 8);
       setProducts(collection?.products || []);
       setLoading(false);
     }
