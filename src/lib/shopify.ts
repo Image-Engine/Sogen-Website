@@ -87,9 +87,6 @@ export interface ShopifyCollection {
       url: string;
       altText: string | null;
     } | null;
-    productsCount: {
-      count: number;
-    };
   };
 }
 
@@ -337,9 +334,6 @@ const GET_COLLECTIONS = `
           image {
             url
             altText
-          }
-          productsCount {
-            count
           }
         }
       }
