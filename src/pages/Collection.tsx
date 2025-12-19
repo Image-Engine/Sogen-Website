@@ -147,7 +147,7 @@ export default function Collection() {
         <section className="py-8 sm:py-12 lg:py-16">
           <div className="container">
             {loading ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
                 <ProductGridSkeleton count={8} />
               </div>
             ) : !collection ? (
@@ -177,7 +177,7 @@ export default function Collection() {
                   Showing {filteredProducts.length} product{filteredProducts.length !== 1 ? 's' : ''}
                   {searchQuery && ` for "${searchQuery}"`}
                 </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
                   {filteredProducts.map((product) => (
                     <ProductCard key={product.node.id} product={product} />
                   ))}

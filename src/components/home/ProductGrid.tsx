@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import { ArrowRight, Package } from "lucide-react";
-import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+import { Package } from "lucide-react";
 import { fetchCollectionByHandle, ShopifyProduct } from "@/lib/shopify";
 import { ProductCard } from "@/components/products/ProductCard";
 import { ProductGridSkeleton } from "@/components/products/ProductGridSkeleton";
@@ -35,26 +33,17 @@ export function ProductGrid() {
   return (
     <section className="py-12 sm:py-16 lg:py-24 bg-surface-sunken">
       <div className="container">
-        {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-12">
-          <div>
-            <p className="text-caption uppercase tracking-widest text-muted-foreground mb-2 sm:mb-3">
-              Featured Products
-            </p>
-            <h2 className="text-display-sm sm:text-display-md text-foreground">
-              Best Selling Batteries
-            </h2>
-          </div>
-          <Link to="/collections/12v-lithium-batteries-copy" className="self-start sm:self-auto">
-            <Button variant="outline" className="text-sm sm:text-base">
-              View All 12V Batteries
-              <ArrowRight className="h-4 w-4 ml-2" />
-            </Button>
-          </Link>
+        <div className="mb-8 sm:mb-12">
+          <p className="text-caption uppercase tracking-widest text-muted-foreground mb-2 sm:mb-3">
+            Featured Products
+          </p>
+          <h2 className="text-display-sm sm:text-display-md text-foreground">
+            Best Selling Batteries
+          </h2>
         </div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {loading ? (
             <ProductGridSkeleton count={8} />
           ) : products.length === 0 ? (
