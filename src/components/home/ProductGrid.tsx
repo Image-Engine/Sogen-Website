@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { ArrowRight, Package } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
+import { fetchCollectionByHandle, ShopifyProduct } from "@/lib/shopify";
 import { ProductCard } from "@/components/products/ProductCard";
 import { ProductGridSkeleton } from "@/components/products/ProductGridSkeleton";
 
@@ -25,8 +25,8 @@ export function ProductGrid() {
   useEffect(() => {
     async function loadProducts() {
       setLoading(true);
-      const data = await fetchProducts(8);
-      setProducts(data);
+      const collection = await fetchCollectionByHandle("12v-lithium-batteries-lvl1", 8);
+      setProducts(collection?.products || []);
       setLoading(false);
     }
     loadProducts();
@@ -45,9 +45,9 @@ export function ProductGrid() {
               Best Selling Batteries
             </h2>
           </div>
-          <Link to="/products" className="self-start sm:self-auto">
+          <Link to="/collections/12v-lithium-batteries-lvl1" className="self-start sm:self-auto">
             <Button variant="outline" className="text-sm sm:text-base">
-              View All Products
+              View All 12V Batteries
               <ArrowRight className="h-4 w-4 ml-2" />
             </Button>
           </Link>
