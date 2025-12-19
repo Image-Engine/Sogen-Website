@@ -1,4 +1,4 @@
-import { Clock, ShieldCheck, Thermometer, BatteryLow, Wrench, Zap, Timer, RefreshCw, Feather, Wind, Gauge, Award, Battery, Bluetooth, Shield, Settings } from "lucide-react";
+import { Clock, ShieldCheck, Thermometer, BatteryLow, Wrench, Zap, Timer, RefreshCw, Feather, Wind, Gauge, Award, Battery, Bluetooth, Shield, Settings, Gem } from "lucide-react";
 import featuresBg from "@/assets/features-bg.webp";
 const advantages = [{
   icon: Clock,
@@ -44,6 +44,10 @@ const advantages = [{
   icon: Wind,
   title: "No Off-Gassing",
   desc: "Safe for indoor use"
+}, {
+  icon: Gem,
+  title: "Superior Build",
+  desc: "Premium quality construction"
 }];
 const features = [{
   icon: Award,
