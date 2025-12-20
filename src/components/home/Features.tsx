@@ -1,56 +1,54 @@
+import { useState, useEffect } from "react";
 import { Clock, ShieldCheck, Thermometer, BatteryLow, Wrench, Zap, Timer, RefreshCw, Feather, Wind, Gauge, Award, Battery, Bluetooth, Shield, Settings, Gem, Star } from "lucide-react";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import featuresBg from "@/assets/features-bg.webp";
 
-// Superstar hero stat
-const superstarStat = {
-  icon: RefreshCw,
-  title: "8000+",
-  subtitle: "Charge Cycles",
-  desc: "Industry-leading longevity"
-};
-
-// Supporting hero stats
-const supportingStats = [
+// Unified hero carousel data - each hero stat links to its advantages
+const heroCarouselData = [
+  {
+    icon: RefreshCw,
+    title: "8000+",
+    subtitle: "Charge Cycles",
+    desc: "Industry-leading longevity",
+    badge: "Industry Leading",
+    advantages: {
+      label: "Safety & Reliability",
+      items: [
+        { icon: ShieldCheck, title: "Increased Safety" },
+        { icon: Thermometer, title: "Thermal Stability" },
+        { icon: BatteryLow, title: "Low Self-Discharge" }
+      ]
+    }
+  },
   {
     icon: Clock,
     title: "20 Year",
     subtitle: "Lifespan",
-    desc: "Decades of reliable power"
+    desc: "Decades of reliable power",
+    badge: "Long Lasting",
+    advantages: {
+      label: "Performance",
+      items: [
+        { icon: Timer, title: "Fast Charging" },
+        { icon: Gauge, title: "High Power Density" },
+        { icon: Gem, title: "Premium Build" }
+      ]
+    }
   },
   {
     icon: Zap,
     title: "99%",
     subtitle: "Efficiency",
-    desc: "Maximum power delivery"
-  }
-];
-
-// Grouped secondary advantages by category
-const advantageCategories = [
-  {
-    label: "Safety & Reliability",
-    items: [
-      { icon: ShieldCheck, title: "Increased Safety" },
-      { icon: Thermometer, title: "Thermal Stability" },
-      { icon: BatteryLow, title: "Low Self-Discharge" }
-    ]
-  },
-  {
-    label: "Performance",
-    items: [
-      { icon: Timer, title: "Fast Charging" },
-      { icon: Gauge, title: "High Power Density" },
-      { icon: Gem, title: "Premium Build" }
-    ]
-  },
-  {
-    label: "Convenience",
-    items: [
-      { icon: Wrench, title: "Low Maintenance" },
-      { icon: Feather, title: "Lightweight" },
-      { icon: Wind, title: "No Off-Gassing" }
-    ]
+    desc: "Maximum power delivery",
+    badge: "Maximum Power",
+    advantages: {
+      label: "Convenience",
+      items: [
+        { icon: Wrench, title: "Low Maintenance" },
+        { icon: Feather, title: "Lightweight" },
+        { icon: Wind, title: "No Off-Gassing" }
+      ]
+    }
   }
 ];
 
@@ -88,6 +86,24 @@ const features = [
 ];
 
 export function Features() {
+  const [api, setApi] = useState<CarouselApi>();
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (!api) return;
+
+    const onSelect = () => {
+      setCurrentIndex(api.selectedScrollSnap());
+    };
+
+    api.on("select", onSelect);
+    return () => {
+      api.off("select", onSelect);
+    };
+  }, [api]);
+
+  const currentAdvantages = heroCarouselData[currentIndex].advantages;
+
   return (
     <section
       className="relative py-16 sm:py-20 lg:py-32 overflow-hidden"
@@ -113,106 +129,70 @@ export function Features() {
           </p>
         </div>
 
-        {/* Advantages Section - Hierarchical Layout */}
+        {/* Advantages Section - Carousel Layout */}
         <div className="mb-10 sm:mb-14 lg:mb-20">
           <h3 className="uppercase tracking-[0.15em] sm:tracking-[0.2em] text-white/70 mb-6 sm:mb-8 text-sm sm:text-base text-center font-semibold">
             Advantages
           </h3>
           
-          {/* Hero Stats - Superstar Layout */}
-          <div className="flex flex-col lg:flex-row items-center justify-center gap-4 sm:gap-6 mb-8 sm:mb-10">
-            {/* Left Supporting Stat */}
-            {(() => {
-              const LeftIcon = supportingStats[0].icon;
-              return (
-                <div className="hidden lg:block w-full lg:w-56 opacity-85">
-                  <div className="group relative rounded-2xl p-5 backdrop-blur-xl bg-white/10 border border-white/20 hover:bg-white/20 hover:border-white/40 transition-all duration-300 text-center">
-                    <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform duration-300">
-                      <LeftIcon className="w-5 h-5 text-white" strokeWidth={1.5} />
-                    </div>
-                    <div className="text-2xl font-bold text-white mb-0.5">
-                      {supportingStats[0].title}
-                    </div>
-                    <div className="text-sm text-white/80 font-medium mb-1">
-                      {supportingStats[0].subtitle}
-                    </div>
-                    <div className="text-xs text-white/50">
-                      {supportingStats[0].desc}
-                    </div>
-                  </div>
-                </div>
-              );
-            })()}
-
-            {/* Superstar Center Stat */}
-            {(() => {
-              const SuperstarIcon = superstarStat.icon;
-              return (
-                <div className="w-full lg:w-auto lg:flex-1 max-w-md">
-                  <div className="group relative rounded-3xl p-8 sm:p-10 backdrop-blur-xl bg-gradient-to-br from-amber-500/20 to-orange-500/10 border-2 border-amber-400/50 hover:border-amber-400/70 shadow-[0_0_40px_rgba(251,191,36,0.15)] hover:shadow-[0_0_60px_rgba(251,191,36,0.25)] transition-all duration-300 text-center">
-                    {/* Industry Leading Badge */}
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-4 py-1.5 bg-amber-500 rounded-full text-xs font-bold text-black uppercase tracking-wider shadow-lg">
-                      <Star className="w-3.5 h-3.5 fill-current" />
-                      Industry Leading
-                    </div>
-                    
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-amber-500/30 backdrop-blur-sm flex items-center justify-center mx-auto mb-5 group-hover:scale-110 transition-transform duration-300">
-                      <SuperstarIcon className="w-8 h-8 sm:w-10 sm:h-10 text-amber-300" strokeWidth={1.5} />
-                    </div>
-                    <div className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-2">
-                      {superstarStat.title}
-                    </div>
-                    <div className="text-lg sm:text-xl text-amber-200 font-semibold mb-2">
-                      {superstarStat.subtitle}
-                    </div>
-                    <div className="text-sm text-white/70">
-                      {superstarStat.desc}
-                    </div>
-                  </div>
-                </div>
-              );
-            })()}
-
-            {/* Right Supporting Stat */}
-            {(() => {
-              const RightIcon = supportingStats[1].icon;
-              return (
-                <div className="hidden lg:block w-full lg:w-56 opacity-85">
-                  <div className="group relative rounded-2xl p-5 backdrop-blur-xl bg-white/10 border border-white/20 hover:bg-white/20 hover:border-white/40 transition-all duration-300 text-center">
-                    <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform duration-300">
-                      <RightIcon className="w-5 h-5 text-white" strokeWidth={1.5} />
-                    </div>
-                    <div className="text-2xl font-bold text-white mb-0.5">
-                      {supportingStats[1].title}
-                    </div>
-                    <div className="text-sm text-white/80 font-medium mb-1">
-                      {supportingStats[1].subtitle}
-                    </div>
-                    <div className="text-xs text-white/50">
-                      {supportingStats[1].desc}
-                    </div>
-                  </div>
-                </div>
-              );
-            })()}
-
-            {/* Mobile: Supporting Stats Row */}
-            <div className="grid grid-cols-2 gap-3 w-full lg:hidden">
-              {supportingStats.map((stat) => (
-                <div
-                  key={stat.title}
-                  className="group relative rounded-2xl p-4 backdrop-blur-xl bg-white/10 border border-white/20 hover:bg-white/20 hover:border-white/40 transition-all duration-300 text-center"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform duration-300">
-                    <stat.icon className="w-5 h-5 text-white" strokeWidth={1.5} />
-                  </div>
-                  <div className="text-xl font-bold text-white mb-0.5">
-                    {stat.title}
-                  </div>
-                  <div className="text-xs text-white/80 font-medium">
-                    {stat.subtitle}
-                  </div>
-                </div>
+          {/* Hero Stats Carousel */}
+          <div className="max-w-md mx-auto mb-6">
+            <Carousel
+              setApi={setApi}
+              opts={{
+                align: "center",
+                loop: true,
+              }}
+              className="w-full"
+            >
+              <CarouselContent>
+                {heroCarouselData.map((stat, index) => {
+                  const StatIcon = stat.icon;
+                  return (
+                    <CarouselItem key={index}>
+                      <div className="group relative rounded-3xl p-8 sm:p-10 backdrop-blur-xl bg-gradient-to-br from-amber-500/20 to-orange-500/10 border-2 border-amber-400/50 hover:border-amber-400/70 shadow-[0_0_40px_rgba(251,191,36,0.15)] hover:shadow-[0_0_60px_rgba(251,191,36,0.25)] transition-all duration-300 text-center">
+                        {/* Badge */}
+                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-4 py-1.5 bg-amber-500 rounded-full text-xs font-bold text-black uppercase tracking-wider shadow-lg">
+                          <Star className="w-3.5 h-3.5 fill-current" />
+                          {stat.badge}
+                        </div>
+                        
+                        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-amber-500/30 backdrop-blur-sm flex items-center justify-center mx-auto mb-5 group-hover:scale-110 transition-transform duration-300">
+                          <StatIcon className="w-8 h-8 sm:w-10 sm:h-10 text-amber-300" strokeWidth={1.5} />
+                        </div>
+                        <div className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-2">
+                          {stat.title}
+                        </div>
+                        <div className="text-lg sm:text-xl text-amber-200 font-semibold mb-2">
+                          {stat.subtitle}
+                        </div>
+                        <div className="text-sm text-white/70">
+                          {stat.desc}
+                        </div>
+                      </div>
+                    </CarouselItem>
+                  );
+                })}
+              </CarouselContent>
+              <div className="flex items-center justify-center gap-4 mt-5">
+                <CarouselPrevious className="relative inset-0 translate-x-0 translate-y-0 bg-white/20 hover:bg-white/30 border-white/30 text-white" />
+                <CarouselNext className="relative inset-0 translate-x-0 translate-y-0 bg-white/20 hover:bg-white/30 border-white/30 text-white" />
+              </div>
+            </Carousel>
+            
+            {/* Dot Indicators */}
+            <div className="flex justify-center gap-2 mt-4">
+              {heroCarouselData.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => api?.scrollTo(index)}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    index === currentIndex 
+                      ? 'bg-amber-400 w-6' 
+                      : 'bg-white/40 w-2 hover:bg-white/60'
+                  }`}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
               ))}
             </div>
           </div>
@@ -220,33 +200,32 @@ export function Features() {
           {/* Subtle Divider */}
           <div className="w-24 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent mx-auto mb-8 sm:mb-10" />
 
-          {/* Grouped Secondary Advantages */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
-            {advantageCategories.map((category) => (
-              <div key={category.label} className="space-y-3">
-                {/* Category Header */}
-                <h4 className="text-xs uppercase tracking-[0.15em] text-white/50 font-medium text-center mb-3">
-                  {category.label}
-                </h4>
-                
-                {/* Category Items */}
-                <div className="space-y-2">
-                  {category.items.map((item) => (
-                    <div
-                      key={item.title}
-                      className="group flex items-center gap-3 p-3 rounded-xl bg-white/8 hover:bg-white/15 border border-white/10 hover:border-white/25 transition-all duration-300"
-                    >
-                      <div className="w-9 h-9 rounded-lg bg-white/15 backdrop-blur-sm flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300">
-                        <item.icon className="w-4 h-4 text-white/90" strokeWidth={1.5} />
-                      </div>
-                      <span className="text-white text-sm font-medium">
-                        {item.title}
-                      </span>
+          {/* Dynamic Sub-Cards - Changes based on carousel */}
+          <div key={currentIndex} className="animate-fade-in">
+            {/* Category Header */}
+            <h4 className="text-xs uppercase tracking-[0.15em] text-white/50 font-medium text-center mb-4">
+              {currentAdvantages.label}
+            </h4>
+            
+            {/* Sub-Cards Grid */}
+            <div className="grid grid-cols-3 gap-3 sm:gap-4 max-w-xl mx-auto">
+              {currentAdvantages.items.map((item) => {
+                const ItemIcon = item.icon;
+                return (
+                  <div
+                    key={item.title}
+                    className="group flex flex-col items-center gap-2 sm:gap-3 p-4 sm:p-5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 hover:border-white/30 transition-all duration-300 text-center"
+                  >
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/15 backdrop-blur-sm flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300">
+                      <ItemIcon className="w-5 h-5 sm:w-6 sm:h-6 text-white/90" strokeWidth={1.5} />
                     </div>
-                  ))}
-                </div>
-              </div>
-            ))}
+                    <span className="text-white text-xs sm:text-sm font-medium leading-tight">
+                      {item.title}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
 
