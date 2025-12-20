@@ -5,25 +5,25 @@ const collections = [
   {
     name: "Solar Panels",
     handle: "solar-panels",
-    image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&h=300&fit=crop",
+    image: "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=400&h=300&fit=crop",
     icon: "☀️",
   },
   {
     name: "Bundles",
     handle: "bundles",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",
+    image: "https://images.unsplash.com/photo-1592833159155-c62df1b65634?w=400&h=300&fit=crop",
     icon: "📦",
   },
   {
     name: "Solar Accessories",
     handle: "solar-accessories",
-    image: "https://images.unsplash.com/photo-1545208942-e1c9c916524b?w=400&h=300&fit=crop",
+    image: "https://images.unsplash.com/photo-1559302504-64aae6ca6b6d?w=400&h=300&fit=crop",
     icon: "🔧",
   },
   {
     name: "Charge Controllers",
     handle: "solar-charge-controllers",
-    image: "https://images.unsplash.com/photo-1620714223084-8fcacc6dfd8d?w=400&h=300&fit=crop",
+    image: "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=400&h=300&fit=crop",
     icon: "⚡",
   },
 ];
@@ -117,40 +117,6 @@ export function EnergyHub() {
               ))}
             </div>
 
-            {/* Collection Cards */}
-            <div className="grid grid-cols-2 gap-4 pt-4">
-              {collections.map((collection) => (
-                <Link
-                  key={collection.handle}
-                  to={`/collection/${collection.handle}`}
-                  className="group relative overflow-hidden rounded-2xl aspect-[4/3] bg-card border border-border/50 hover:border-primary/30 hover:shadow-xl transition-all duration-500"
-                >
-                  {/* Background Image */}
-                  <img
-                    src={collection.image}
-                    alt={collection.name}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-                  
-                  {/* Content */}
-                  <div className="absolute inset-0 p-4 flex flex-col justify-end">
-                    <div className="flex items-center gap-2">
-                      <span className="text-xl">{collection.icon}</span>
-                      <h4 className="text-white font-semibold text-sm md:text-base">
-                        {collection.name}
-                      </h4>
-                    </div>
-                    <div className="flex items-center gap-1 text-white/70 text-xs mt-1 group-hover:text-white transition-colors">
-                      <span>Shop Now</span>
-                      <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
           </div>
 
           {/* Right - Visual Card */}
@@ -208,6 +174,41 @@ export function EnergyHub() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Collection Cards - Full Width Below */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6 mt-16 lg:mt-20">
+          {collections.map((collection) => (
+            <Link
+              key={collection.handle}
+              to={`/collection/${collection.handle}`}
+              className="group relative overflow-hidden rounded-2xl aspect-[4/3] bg-card border border-border/50 hover:border-primary/30 hover:shadow-xl transition-all duration-500"
+            >
+              {/* Background Image */}
+              <img
+                src={collection.image}
+                alt={collection.name}
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+              
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+              
+              {/* Content */}
+              <div className="absolute inset-0 p-4 flex flex-col justify-end">
+                <div className="flex items-center gap-2">
+                  <span className="text-2xl">{collection.icon}</span>
+                  <h4 className="text-white font-semibold text-base md:text-lg">
+                    {collection.name}
+                  </h4>
+                </div>
+                <div className="flex items-center gap-1 text-white/70 text-sm mt-1 group-hover:text-white transition-colors">
+                  <span>Shop Now</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
     </section>
