@@ -100,19 +100,26 @@ export function Features() {
     return () => clearInterval(interval);
   }, [isPaused]);
 
-  // Get rotated cards so the active one is always in the center
-  const getRotatedCards = () => {
-    const prev = (currentIndex + 2) % 3; // Left position
-    const center = currentIndex;          // Center position (SUPERSTAR)
-    const next = (currentIndex + 1) % 3;  // Right position
-    return [
-      { ...heroCarouselData[prev], originalIndex: prev },
-      { ...heroCarouselData[center], originalIndex: center },
-      { ...heroCarouselData[next], originalIndex: next }
-    ];
+  // Calculate position for each card based on currentIndex
+  // Each card can be in position: left (-1), center (0), or right (1)
+  const getCardPosition = (cardIndex: number): number => {
+    const diff = cardIndex - currentIndex;
+    // Handle wrap-around for 3 cards
+    if (diff === 2 || diff === -1) return -1; // left
+    if (diff === 0) return 0; // center
+    if (diff === 1 || diff === -2) return 1; // right
+    return 0;
   };
 
-  const rotatedCards = getRotatedCards();
+  // Get rotated sub-card groups to match hero card positions
+  const getRotatedGroups = () => {
+    const prev = (currentIndex + 2) % 3;
+    const center = currentIndex;
+    const next = (currentIndex + 1) % 3;
+    return [heroCarouselData[prev], heroCarouselData[center], heroCarouselData[next]];
+  };
+
+  const rotatedGroups = getRotatedGroups();
 
   return (
     <section
@@ -145,23 +152,34 @@ export function Features() {
             Advantages
           </h3>
           
-          {/* Hero Stats - Rotating with Center Superstar */}
+          {/* Hero Stats - Fixed positions with animated content */}
           <div 
-            className="grid grid-cols-3 gap-3 sm:gap-4 lg:gap-6 max-w-4xl mx-auto mb-6 items-center"
+            className="relative flex justify-center items-center gap-3 sm:gap-4 lg:gap-6 max-w-4xl mx-auto mb-6 h-[180px] sm:h-[220px] lg:h-[280px]"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
-            {rotatedCards.map((stat, position) => {
+            {heroCarouselData.map((stat, cardIndex) => {
               const StatIcon = stat.icon;
-              const isCenter = stat.originalIndex === currentIndex; // Superstar follows the active card
+              const position = getCardPosition(cardIndex);
+              const isCenter = position === 0;
+              
+              // Calculate transform based on position
+              const translateX = position * 110; // Percentage-based movement
+              const scale = isCenter ? 1 : 0.85;
+              const zIndex = isCenter ? 10 : 1;
+              
               return (
                 <button
-                  key={stat.originalIndex}
-                  onClick={() => setCurrentIndex(stat.originalIndex)}
-                  className={`group relative rounded-2xl sm:rounded-3xl backdrop-blur-xl text-center transition-all duration-300 ${
+                  key={cardIndex}
+                  onClick={() => setCurrentIndex(cardIndex)}
+                  style={{
+                    transform: `translateX(${translateX}%) scale(${scale})`,
+                    zIndex,
+                  }}
+                  className={`absolute w-[30%] sm:w-[28%] group rounded-2xl sm:rounded-3xl backdrop-blur-xl text-center transition-all duration-500 ease-out ${
                     isCenter
-                      ? 'bg-gradient-to-br from-amber-500/20 to-orange-500/10 border-2 border-amber-400/50 shadow-[0_0_40px_rgba(251,191,36,0.15)] scale-100 p-4 sm:p-6 lg:p-8'
-                      : 'bg-white/5 border border-white/10 opacity-60 hover:opacity-80 hover:bg-white/10 scale-90 p-3 sm:p-4 lg:p-6 cursor-pointer'
+                      ? 'bg-gradient-to-br from-amber-500/20 to-orange-500/10 border-2 border-amber-400/50 shadow-[0_0_40px_rgba(251,191,36,0.15)] p-4 sm:p-6 lg:p-8'
+                      : 'bg-white/5 border border-white/10 opacity-60 hover:opacity-80 hover:bg-white/10 p-3 sm:p-4 lg:p-6 cursor-pointer'
                   }`}
                 >
                   {/* Badge - Only on center */}
@@ -230,14 +248,14 @@ export function Features() {
           {/* Subtle Divider */}
           <div className="w-24 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent mx-auto mb-8 sm:mb-10" />
 
-          {/* Sub-Cards - All 9 visible in 3 columns with dynamic highlighting */}
+          {/* Sub-Cards - Synced with hero card rotation */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 max-w-4xl mx-auto">
-            {heroCarouselData.map((group, groupIndex) => {
-              const isActiveGroup = groupIndex === currentIndex;
+            {rotatedGroups.map((group, positionIndex) => {
+              const isActiveGroup = positionIndex === 1; // Center position is always active
               return (
                 <div 
-                  key={groupIndex}
-                  className={`transition-all duration-300 ${
+                  key={group.advantages.label}
+                  className={`transition-all duration-500 ease-out ${
                     isActiveGroup ? 'opacity-100 scale-100' : 'opacity-50 scale-95'
                   }`}
                 >
