@@ -176,10 +176,10 @@ export function Features() {
                     transform: `translateX(${translateX}%) scale(${scale})`,
                     zIndex,
                   }}
-                  className={`absolute w-[30%] sm:w-[28%] group rounded-2xl sm:rounded-3xl backdrop-blur-xl text-center transition-all duration-500 ease-out ${
+                  className={`absolute w-[30%] sm:w-[28%] group rounded-2xl sm:rounded-3xl backdrop-blur-xl text-center transition-transform duration-500 ease-out p-4 sm:p-6 lg:p-8 ${
                     isCenter
-                      ? 'bg-gradient-to-br from-amber-500/20 to-orange-500/10 border-2 border-amber-400/50 shadow-[0_0_40px_rgba(251,191,36,0.15)] p-4 sm:p-6 lg:p-8'
-                      : 'bg-white/5 border border-white/10 opacity-60 hover:opacity-80 hover:bg-white/10 p-3 sm:p-4 lg:p-6 cursor-pointer'
+                      ? 'bg-gradient-to-br from-amber-500/20 to-orange-500/10 border-2 border-amber-400/50 shadow-[0_0_40px_rgba(251,191,36,0.15)]'
+                      : 'bg-white/5 border border-white/10 opacity-60 hover:opacity-80 cursor-pointer'
                   }`}
                 >
                   {/* Badge - Only on center */}
@@ -190,32 +190,32 @@ export function Features() {
                     </div>
                   )}
                   
-                  <div className={`rounded-xl sm:rounded-2xl backdrop-blur-sm flex items-center justify-center mx-auto mb-2 sm:mb-4 transition-all duration-300 ${
+                  <div className={`rounded-xl sm:rounded-2xl backdrop-blur-sm flex items-center justify-center mx-auto mb-2 sm:mb-4 ${
                     isCenter 
-                      ? 'w-10 h-10 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-amber-500/30 group-hover:scale-110' 
+                      ? 'w-10 h-10 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-amber-500/30' 
                       : 'w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-white/15'
                   }`}>
-                    <StatIcon className={`transition-all duration-300 ${
+                    <StatIcon className={`${
                       isCenter 
                         ? 'w-5 h-5 sm:w-8 sm:h-8 lg:w-10 lg:h-10 text-amber-300' 
                         : 'w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-white/70'
                     }`} strokeWidth={1.5} />
                   </div>
-                  <div className={`font-bold text-white mb-1 transition-all duration-300 ${
+                  <div className={`font-bold text-white mb-1 ${
                     isCenter 
                       ? 'text-2xl sm:text-4xl lg:text-5xl' 
                       : 'text-base sm:text-xl lg:text-2xl'
                   }`}>
                     {stat.title}
                   </div>
-                  <div className={`font-semibold mb-1 transition-all duration-300 ${
+                  <div className={`font-semibold mb-1 ${
                     isCenter 
                       ? 'text-xs sm:text-base lg:text-lg text-amber-200' 
                       : 'text-[10px] sm:text-xs lg:text-sm text-white/60'
                   }`}>
                     {stat.subtitle}
                   </div>
-                  <div className={`text-white/70 transition-all duration-300 ${
+                  <div className={`text-white/70 ${
                     isCenter ? 'text-[10px] sm:text-sm hidden sm:block' : 'hidden'
                   }`}>
                     {stat.desc}
