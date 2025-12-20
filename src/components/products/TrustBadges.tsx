@@ -20,7 +20,7 @@ export function TrustBadges() {
   ];
 
   return (
-    <div className="grid grid-cols-2 gap-3">
+    <div className="grid grid-cols-3 gap-3">
       {badges.map((badge, index) => (
         <div
           key={index}
