@@ -63,8 +63,8 @@ export default function Product() {
     return (
       <div className="min-h-screen bg-background">
         <Header />
-        <main className="pt-20">
-          <div className="container mx-auto px-4 py-8">
+        <main className="pt-24 md:pt-28">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
               <Skeleton className="aspect-square rounded-2xl" />
               <div className="space-y-4">
@@ -85,8 +85,8 @@ export default function Product() {
     return (
       <div className="min-h-screen bg-background">
         <Header />
-        <main className="pt-20">
-          <div className="container mx-auto px-4 py-16 text-center">
+        <main className="pt-24 md:pt-28">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 text-center">
             <Package className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
             <h1 className="text-2xl font-bold text-foreground mb-2">Product not found</h1>
             <p className="text-muted-foreground mb-6">The product you're looking for doesn't exist.</p>
@@ -109,8 +109,8 @@ export default function Product() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main className="pt-20">
-        <div className="container mx-auto px-4 py-8">
+      <main className="pt-24 md:pt-28">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
           {/* Breadcrumb */}
           <nav className="mb-6">
             <Link 
@@ -122,7 +122,7 @@ export default function Product() {
             </Link>
           </nav>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 xl:gap-16">
             {/* Product Images */}
             <div className="space-y-4">
               <div className="aspect-square bg-secondary/10 rounded-2xl overflow-hidden border border-border">
