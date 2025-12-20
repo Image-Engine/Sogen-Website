@@ -1,10 +1,11 @@
+import { Link } from "react-router-dom";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { FileText, Package, Truck, HelpCircle } from "lucide-react";
+import { FileText, Package, Truck, HelpCircle, ArrowRight } from "lucide-react";
 
 interface ProductAccordionProps {
   description: string;
@@ -66,12 +67,20 @@ export function ProductAccordion({ description, specifications }: ProductAccordi
           <div className="space-y-4 text-muted-foreground">
             <div>
               <h4 className="font-medium text-foreground mb-1">Shipping</h4>
-              <p>Free standard shipping on orders over $100. Most orders ship within 1-2 business days.</p>
+              <p>Shipping rates are calculated at checkout. Most orders ship within 1-2 business days. Pickup is available from our Nelson warehouse by appointment.</p>
+              <p className="mt-2 text-sm">Note: Rural and island deliveries may have restrictions for LiFePO4 batteries.</p>
             </div>
             <div>
               <h4 className="font-medium text-foreground mb-1">Returns</h4>
-              <p>We offer a 30-day return policy for unused items in original packaging. Return shipping is free for defective products.</p>
+              <p>Returns accepted within 14 days of receiving your order. Items must be unused, unopened, and in original packaging. A 20% restocking fee applies to change-of-mind returns.</p>
             </div>
+            <Link 
+              to="/shipping-returns"
+              className="inline-flex items-center gap-1.5 mt-2 text-primary hover:text-primary/80 font-medium transition-colors"
+            >
+              View full shipping & returns policy
+              <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
         </AccordionContent>
       </AccordionItem>
@@ -88,12 +97,19 @@ export function ProductAccordion({ description, specifications }: ProductAccordi
           <div className="space-y-4 text-muted-foreground">
             <div>
               <h4 className="font-medium text-foreground mb-1">What is the warranty?</h4>
-              <p>All products come with a 1-year manufacturer warranty covering defects in materials and workmanship.</p>
+              <p>Warranty periods vary by product and can be found on each product's page. Warranty covers defects in materials and workmanship.</p>
             </div>
             <div>
-              <h4 className="font-medium text-foreground mb-1">Do you offer bulk pricing?</h4>
-              <p>Yes! Contact us for orders of 10+ units to receive special pricing.</p>
+              <h4 className="font-medium text-foreground mb-1">Need help with installation?</h4>
+              <p>Check our comprehensive FAQ section for guides on charger settings, DC-DC chargers, battery balancing, and more.</p>
             </div>
+            <Link 
+              to="/faq"
+              className="inline-flex items-center gap-1.5 mt-2 text-primary hover:text-primary/80 font-medium transition-colors"
+            >
+              View all FAQs
+              <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
         </AccordionContent>
       </AccordionItem>
