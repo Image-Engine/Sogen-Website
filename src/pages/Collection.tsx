@@ -11,35 +11,60 @@ import { fetchCollectionByHandle, CollectionWithProducts } from "@/lib/shopify";
 const getCollectionBackground = (handle: string, title: string): string => {
   const text = `${handle} ${title}`.toLowerCase();
   
+  // 12V Batteries - blue SOK batteries
   if (text.includes('12v') || text.includes('12-v')) {
-    return 'https://images.unsplash.com/photo-1620714223084-8fcacc6dfd8d?w=1920&q=80';
+    return 'https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=1920&q=80'; // Blue lithium batteries
   }
+  // 24V Batteries
   if (text.includes('24v') || text.includes('24-v')) {
     return 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920&q=80';
   }
+  // 48V Batteries - solar/power systems
   if (text.includes('48v') || text.includes('48-v')) {
     return 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1920&q=80';
   }
-  if (text.includes('solar') || text.includes('panel')) {
-    return 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1920&q=80';
+  // Solar panels/systems
+  if (text.includes('solar') || text.includes('panel') || text.includes('mppt')) {
+    return 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1920&q=80'; // Solar panels
   }
-  if (text.includes('rv') || text.includes('camper') || text.includes('caravan')) {
-    return 'https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?w=1920&q=80';
+  // Victron products - blue professional equipment
+  if (text.includes('victron')) {
+    return 'https://images.unsplash.com/photo-1548614606-52b4451f994b?w=1920&q=80'; // Solar/power equipment
   }
-  if (text.includes('marine') || text.includes('boat')) {
-    return 'https://images.unsplash.com/photo-1500514966906-fe245eea9344?w=1920&q=80';
+  // Inverters & Chargers
+  if (text.includes('inverter') || text.includes('charger') || text.includes('dc-dc')) {
+    return 'https://images.unsplash.com/photo-1581092921461-eab62e97a780?w=1920&q=80'; // Power equipment
   }
-  if (text.includes('off-grid') || text.includes('offgrid')) {
-    return 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80';
+  // Circuit Protection - fuses, breakers
+  if (text.includes('circuit') || text.includes('fuse') || text.includes('breaker') || text.includes('protection')) {
+    return 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1920&q=80'; // Power lines/electrical
   }
-  if (text.includes('accessory') || text.includes('accessories') || text.includes('cable')) {
+  // Cables & Connectors
+  if (text.includes('cable') || text.includes('connector') || text.includes('wire') || text.includes('lug')) {
+    return 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920&q=80'; // Cable/wiring theme
+  }
+  // RV, Camper, Caravan
+  if (text.includes('rv') || text.includes('camper') || text.includes('caravan') || text.includes('motorhome')) {
+    return 'https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?w=1920&q=80'; // Camping/RV
+  }
+  // Marine & Boat
+  if (text.includes('marine') || text.includes('boat') || text.includes('yacht')) {
+    return 'https://images.unsplash.com/photo-1500514966906-fe245eea9344?w=1920&q=80'; // Ocean/marine
+  }
+  // Off-grid
+  if (text.includes('off-grid') || text.includes('offgrid') || text.includes('remote')) {
+    return 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80'; // Mountains/nature
+  }
+  // Accessories & General
+  if (text.includes('accessory') || text.includes('accessories') || text.includes('mount')) {
     return 'https://images.unsplash.com/photo-1597852074816-d933c7d2b988?w=1920&q=80';
   }
-  if (text.includes('lithium') || text.includes('lifepo4') || text.includes('battery')) {
-    return 'https://images.unsplash.com/photo-1620714223084-8fcacc6dfd8d?w=1920&q=80';
+  // Lithium/LiFePO4 batteries - default for battery collections
+  if (text.includes('lithium') || text.includes('lifepo4') || text.includes('battery') || text.includes('batteries')) {
+    return 'https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=1920&q=80';
   }
   
-  // Default battery/power themed background
+  // Default - power/energy themed background
   return 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1920&q=80';
 };
 
