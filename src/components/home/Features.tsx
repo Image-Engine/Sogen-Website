@@ -153,7 +153,7 @@ export function Features() {
           >
             {rotatedCards.map((stat, position) => {
               const StatIcon = stat.icon;
-              const isCenter = position === 1; // Center position is always the superstar
+              const isCenter = stat.originalIndex === currentIndex; // Superstar follows the active card
               return (
                 <button
                   key={stat.originalIndex}
