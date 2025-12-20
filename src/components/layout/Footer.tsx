@@ -116,7 +116,7 @@ export function Footer() {
           </div>
 
           {/* Contact */}
-          <div className="col-span-2 sm:col-span-1">
+          <div>
             <h4 className="font-semibold text-xs sm:text-sm uppercase tracking-wider mb-3 text-foreground">
               Contact
             </h4>
@@ -135,7 +135,7 @@ export function Footer() {
               </Link>
               <div className="flex items-center gap-2">
                 <MapPin className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
-                <span>Nelson, New Zealand</span>
+                <span>Nelson, NZ</span>
               </div>
             </div>
           </div>
