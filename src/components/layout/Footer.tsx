@@ -1,9 +1,5 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { useToast } from "@/hooks/use-toast";
 import sokLogo from "@/assets/sok-logo.webp";
 
 const footerLinks = {
@@ -42,36 +38,6 @@ const footerLinks = {
 };
 
 export function Footer() {
-  const [email, setEmail] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const { toast } = useToast();
-
-  const handleNewsletterSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      toast({
-        title: "Invalid email",
-        description: "Please enter a valid email address.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    setIsSubmitting(true);
-    
-    // Simulate submission - replace with actual API call when backend is ready
-    await new Promise(resolve => setTimeout(resolve, 500));
-    
-    toast({
-      title: "Subscribed!",
-      description: "Thanks for signing up. You'll receive our latest updates.",
-    });
-    
-    setEmail("");
-    setIsSubmitting(false);
-  };
-
   return (
     <footer className="bg-background text-foreground border-t border-border">
       {/* Main Footer */}
@@ -80,37 +46,9 @@ export function Footer() {
           {/* Brand Column */}
           <div className="col-span-2 sm:col-span-2 md:col-span-4 lg:col-span-1 mb-4 lg:mb-0">
             <img src={sokLogo} alt="SOK Battery" className="h-12 sm:h-14 lg:h-16 w-auto mb-3 sm:mb-4" />
-            <p className="text-muted-foreground text-xs sm:text-sm max-w-[280px] mb-4">
+            <p className="text-muted-foreground text-xs sm:text-sm max-w-[280px]">
               New Zealand's trusted source for premium LiFePO4 batteries and solar power solutions.
             </p>
-            
-            {/* Newsletter Signup */}
-            <div className="max-w-[320px]">
-              <h4 className="font-semibold text-xs sm:text-sm uppercase tracking-wider mb-2 text-foreground">
-                Stay Updated
-              </h4>
-              <p className="text-muted-foreground text-xs mb-3">
-                Get the latest news, offers, and energy tips.
-              </p>
-              <form onSubmit={handleNewsletterSubmit} className="flex gap-2">
-                <Input
-                  type="email"
-                  placeholder="Enter your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="h-9 text-sm flex-1"
-                  disabled={isSubmitting}
-                />
-                <Button 
-                  type="submit" 
-                  size="sm" 
-                  className="h-9 px-3"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? "..." : "Subscribe"}
-                </Button>
-              </form>
-            </div>
           </div>
 
           {/* Products */}
