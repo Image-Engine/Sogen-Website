@@ -12,14 +12,6 @@ import sokLogo from "@/assets/sok-logo.webp";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 import { fetchCollections, ShopifyCollection } from "@/lib/shopify";
 
-const navItems = [
-  { label: "Solar Systems", href: "#" },
-  { label: "Off-Grid", href: "#" },
-  { label: "RV & Marine", href: "#" },
-  { label: "Industrial", href: "#" },
-  { label: "Accessories", href: "#" },
-];
-
 const resourceItems = [
   { label: "Blog", href: "/blog" },
   { label: "FAQ", href: "/faq" },
@@ -88,20 +80,12 @@ export function Header() {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            {navItems.map((item) =>
-              item.href.startsWith("/") ? (
-                <Link key={item.label} to={item.href}>
-                  <Button variant="nav" size="default">
-                    {item.label}
-                  </Button>
-                </Link>
-              ) : (
-                <Button key={item.label} variant="nav" size="default">
-                  {item.label}
-                  <ChevronDown className="h-3 w-3 ml-0.5 opacity-50" />
-                </Button>
-              )
-            )}
+            {/* Contact Us */}
+            <Link to="/contact">
+              <Button variant="nav" size="default">
+                Contact Us
+              </Button>
+            </Link>
 
             {/* Resources Dropdown */}
             <DropdownMenu>
@@ -232,27 +216,14 @@ export function Header() {
                 )}
               </div>
 
-              {navItems.map((item) =>
-                item.href.startsWith("/") ? (
-                  <Link
-                    key={item.label}
-                    to={item.href}
-                    className="flex items-center justify-between px-4 py-3 text-foreground hover:bg-accent rounded-lg transition-colors"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    <span className="font-medium">{item.label}</span>
-                  </Link>
-                ) : (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    className="flex items-center justify-between px-4 py-3 text-foreground hover:bg-accent rounded-lg transition-colors"
-                  >
-                    <span className="font-medium">{item.label}</span>
-                    <ChevronDown className="h-4 w-4 opacity-50 -rotate-90" />
-                  </a>
-                )
-              )}
+              {/* Contact Us - Mobile */}
+              <Link
+                to="/contact"
+                className="flex items-center justify-between px-4 py-3 text-foreground hover:bg-accent rounded-lg transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <span className="font-medium">Contact Us</span>
+              </Link>
 
               {/* Resources - Mobile */}
               <div className="px-2 pt-2 border-t border-border mt-2">
