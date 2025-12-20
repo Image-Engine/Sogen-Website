@@ -87,6 +87,18 @@ const features = [
 
 export function Features() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  // Auto-play effect - cycles every 4 seconds unless paused
+  useEffect(() => {
+    if (isPaused) return;
+    
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % 3);
+    }, 4000);
+    
+    return () => clearInterval(interval);
+  }, [isPaused]);
 
   // Get rotated cards so the active one is always in the center
   const getRotatedCards = () => {
@@ -134,7 +146,11 @@ export function Features() {
           </h3>
           
           {/* Hero Stats - Rotating with Center Superstar */}
-          <div className="grid grid-cols-3 gap-3 sm:gap-4 lg:gap-6 max-w-4xl mx-auto mb-6 items-center">
+          <div 
+            className="grid grid-cols-3 gap-3 sm:gap-4 lg:gap-6 max-w-4xl mx-auto mb-6 items-center"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
             {rotatedCards.map((stat, position) => {
               const StatIcon = stat.icon;
               const isCenter = position === 1; // Center position is always the superstar
@@ -191,8 +207,12 @@ export function Features() {
             })}
           </div>
 
-          {/* Dot Indicators */}
-          <div className="flex justify-center gap-2 mb-8 sm:mb-10">
+          {/* Dot Indicators - also pauses on hover */}
+          <div 
+            className="flex justify-center gap-2 mb-8 sm:mb-10"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
             {heroCarouselData.map((_, index) => (
               <button
                 key={index}
