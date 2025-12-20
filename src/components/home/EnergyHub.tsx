@@ -6,25 +6,21 @@ const collections = [
     name: "Solar Panels",
     handle: "solar-panels",
     image: "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=400&h=300&fit=crop",
-    icon: "☀️",
   },
   {
     name: "Bundles",
     handle: "bundles",
     image: "https://images.unsplash.com/photo-1592833159155-c62df1b65634?w=400&h=300&fit=crop",
-    icon: "📦",
   },
   {
     name: "Solar Accessories",
     handle: "solar-accessories",
     image: "https://images.unsplash.com/photo-1559302504-64aae6ca6b6d?w=400&h=300&fit=crop",
-    icon: "🔧",
   },
   {
     name: "Charge Controllers",
     handle: "solar-charge-controllers",
     image: "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=400&h=300&fit=crop",
-    icon: "⚡",
   },
 ];
 
@@ -195,13 +191,10 @@ export function EnergyHub() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
               
               {/* Content */}
-              <div className="absolute inset-0 p-4 flex flex-col justify-end">
-                <div className="flex items-center gap-2">
-                  <span className="text-2xl">{collection.icon}</span>
-                  <h4 className="text-white font-semibold text-base md:text-lg">
-                    {collection.name}
-                  </h4>
-                </div>
+              <div className="absolute inset-0 p-4 flex flex-col justify-end items-center text-center">
+                <h4 className="text-white font-semibold text-base md:text-lg">
+                  {collection.name}
+                </h4>
                 <div className="flex items-center gap-1 text-white/70 text-sm mt-1 group-hover:text-white transition-colors">
                   <span>Shop Now</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
