@@ -241,8 +241,8 @@ export default function Product() {
               </div>
 
               {/* Delivery Time */}
-              <div className="flex items-center gap-3 p-4 rounded-xl bg-blue-500/10 border border-blue-500/20">
-                <Truck className="w-5 h-5 text-blue-600" />
+              <div className="flex items-center gap-3 p-4 rounded-xl bg-green-500/10 border border-green-500/20">
+                <Truck className="w-5 h-5 text-green-600" />
                 <div>
                   <p className="text-sm font-medium text-foreground">Fast Delivery</p>
                   <p className="text-xs text-muted-foreground">Ships within 1-2 business days</p>

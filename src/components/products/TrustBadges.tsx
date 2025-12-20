@@ -9,8 +9,8 @@ export function TrustBadges() {
     },
     {
       icon: Truck,
-      label: "Free Shipping",
-      sublabel: "Orders over $100",
+      label: "Fast Delivery",
+      sublabel: "1-2 business days",
     },
     {
       icon: RotateCcw,
