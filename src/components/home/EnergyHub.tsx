@@ -1,5 +1,6 @@
-import { ArrowRight, Zap, Sun, Shield, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Zap, Sun, Shield, CheckCircle2, Package, Battery } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const specs = [
   { value: "5 or 8", unit: "kVa", label: "Victron Inverter" },
@@ -90,21 +91,22 @@ export function EnergyHub() {
               ))}
             </div>
 
-            {/* CTA */}
+            {/* Collection Links */}
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <a
-                href="https://sokbattery.co.nz/energyhub2/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <Link to="/collection/bundles">
                 <Button size="lg" className="group w-full sm:w-auto">
-                  Learn More
+                  <Package className="w-4 h-4 mr-2" />
+                  Shop Bundles
                   <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
-              </a>
-              <Button variant="outline" size="lg" className="w-full sm:w-auto">
-                Request Quote
-              </Button>
+              </Link>
+              <Link to="/collection/solar">
+                <Button variant="outline" size="lg" className="group w-full sm:w-auto">
+                  <Battery className="w-4 h-4 mr-2" />
+                  Solar Products
+                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </Link>
             </div>
           </div>
 
