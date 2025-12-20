@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Clock, ShieldCheck, Thermometer, BatteryLow, Wrench, Zap, Timer, RefreshCw, Feather, Wind, Gauge, Award, Battery, Bluetooth, Shield, Settings, Gem, Star } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 import featuresBg from "@/assets/features-bg.webp";
 
 // Unified hero carousel data - each hero stat links to its advantages
@@ -262,6 +263,12 @@ export function Features() {
               align: "start",
               loop: true,
             }}
+            plugins={[
+              Autoplay({
+                delay: 3000,
+                stopOnInteraction: true,
+              })
+            ]}
             className="w-full"
           >
             <CarouselContent className="-ml-3 sm:-ml-4">
