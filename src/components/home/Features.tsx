@@ -88,6 +88,20 @@ const features = [
 export function Features() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  // Get rotated cards so the active one is always in the center
+  const getRotatedCards = () => {
+    const prev = (currentIndex + 2) % 3; // Left position
+    const center = currentIndex;          // Center position (SUPERSTAR)
+    const next = (currentIndex + 1) % 3;  // Right position
+    return [
+      { ...heroCarouselData[prev], originalIndex: prev },
+      { ...heroCarouselData[center], originalIndex: center },
+      { ...heroCarouselData[next], originalIndex: next }
+    ];
+  };
+
+  const rotatedCards = getRotatedCards();
+
   return (
     <section
       className="relative py-16 sm:py-20 lg:py-32 overflow-hidden"
@@ -119,23 +133,23 @@ export function Features() {
             Advantages
           </h3>
           
-          {/* Hero Stats - All 3 Visible */}
-          <div className="grid grid-cols-3 gap-3 sm:gap-4 lg:gap-6 max-w-4xl mx-auto mb-6">
-            {heroCarouselData.map((stat, index) => {
+          {/* Hero Stats - Rotating with Center Superstar */}
+          <div className="grid grid-cols-3 gap-3 sm:gap-4 lg:gap-6 max-w-4xl mx-auto mb-6 items-center">
+            {rotatedCards.map((stat, position) => {
               const StatIcon = stat.icon;
-              const isActive = index === currentIndex;
+              const isCenter = position === 1; // Center position is always the superstar
               return (
                 <button
-                  key={index}
-                  onClick={() => setCurrentIndex(index)}
-                  className={`group relative rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 backdrop-blur-xl text-center transition-all duration-300 ${
-                    isActive
-                      ? 'bg-gradient-to-br from-amber-500/20 to-orange-500/10 border-2 border-amber-400/50 shadow-[0_0_40px_rgba(251,191,36,0.15)] scale-100'
-                      : 'bg-white/5 border border-white/10 opacity-60 hover:opacity-80 hover:bg-white/10 scale-95'
+                  key={stat.originalIndex}
+                  onClick={() => setCurrentIndex(stat.originalIndex)}
+                  className={`group relative rounded-2xl sm:rounded-3xl backdrop-blur-xl text-center transition-all duration-300 ${
+                    isCenter
+                      ? 'bg-gradient-to-br from-amber-500/20 to-orange-500/10 border-2 border-amber-400/50 shadow-[0_0_40px_rgba(251,191,36,0.15)] scale-100 p-4 sm:p-6 lg:p-8'
+                      : 'bg-white/5 border border-white/10 opacity-60 hover:opacity-80 hover:bg-white/10 scale-90 p-3 sm:p-4 lg:p-6 cursor-pointer'
                   }`}
                 >
-                  {/* Badge - Only on active */}
-                  {isActive && (
+                  {/* Badge - Only on center */}
+                  {isCenter && (
                     <div className="absolute -top-2 sm:-top-3 left-1/2 -translate-x-1/2 flex items-center gap-1 sm:gap-1.5 px-2 sm:px-4 py-1 sm:py-1.5 bg-amber-500 rounded-full text-[10px] sm:text-xs font-bold text-black uppercase tracking-wider shadow-lg">
                       <Star className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 fill-current" />
                       <span className="hidden sm:inline">{stat.badge}</span>
@@ -143,32 +157,32 @@ export function Features() {
                   )}
                   
                   <div className={`rounded-xl sm:rounded-2xl backdrop-blur-sm flex items-center justify-center mx-auto mb-2 sm:mb-4 transition-all duration-300 ${
-                    isActive 
+                    isCenter 
                       ? 'w-10 h-10 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-amber-500/30 group-hover:scale-110' 
-                      : 'w-8 h-8 sm:w-12 sm:h-12 lg:w-14 lg:h-14 bg-white/15'
+                      : 'w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-white/15'
                   }`}>
                     <StatIcon className={`transition-all duration-300 ${
-                      isActive 
+                      isCenter 
                         ? 'w-5 h-5 sm:w-8 sm:h-8 lg:w-10 lg:h-10 text-amber-300' 
-                        : 'w-4 h-4 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-white/70'
+                        : 'w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-white/70'
                     }`} strokeWidth={1.5} />
                   </div>
                   <div className={`font-bold text-white mb-1 transition-all duration-300 ${
-                    isActive 
+                    isCenter 
                       ? 'text-2xl sm:text-4xl lg:text-5xl' 
-                      : 'text-lg sm:text-2xl lg:text-3xl'
+                      : 'text-base sm:text-xl lg:text-2xl'
                   }`}>
                     {stat.title}
                   </div>
                   <div className={`font-semibold mb-1 transition-all duration-300 ${
-                    isActive 
+                    isCenter 
                       ? 'text-xs sm:text-base lg:text-lg text-amber-200' 
-                      : 'text-[10px] sm:text-sm lg:text-base text-white/60'
+                      : 'text-[10px] sm:text-xs lg:text-sm text-white/60'
                   }`}>
                     {stat.subtitle}
                   </div>
                   <div className={`text-white/70 transition-all duration-300 ${
-                    isActive ? 'text-[10px] sm:text-sm hidden sm:block' : 'hidden'
+                    isCenter ? 'text-[10px] sm:text-sm hidden sm:block' : 'hidden'
                   }`}>
                     {stat.desc}
                   </div>
