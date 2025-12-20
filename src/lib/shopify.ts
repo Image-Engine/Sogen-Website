@@ -448,6 +448,61 @@ const GET_PRODUCT_BY_HANDLE = `
         name
         values
       }
+      collections(first: 1) {
+        edges {
+          node {
+            id
+            handle
+            title
+          }
+        }
+      }
+    }
+  }
+`;
+
+const GET_PRODUCT_RECOMMENDATIONS = `
+  query GetProductRecommendations($productId: ID!) {
+    productRecommendations(productId: $productId) {
+      id
+      title
+      description
+      handle
+      priceRange {
+        minVariantPrice {
+          amount
+          currencyCode
+        }
+      }
+      images(first: 1) {
+        edges {
+          node {
+            url
+            altText
+          }
+        }
+      }
+      variants(first: 10) {
+        edges {
+          node {
+            id
+            title
+            price {
+              amount
+              currencyCode
+            }
+            availableForSale
+            selectedOptions {
+              name
+              value
+            }
+          }
+        }
+      }
+      options {
+        name
+        values
+      }
     }
   }
 `;
@@ -587,6 +642,7 @@ export interface ProductDetails {
     selectedOptions: Array<{ name: string; value: string }>;
   }>;
   options: Array<{ name: string; values: string[] }>;
+  collectionHandle: string | null;
 }
 
 export async function fetchProductByHandle(handle: string): Promise<ProductDetails | null> {
@@ -604,9 +660,22 @@ export async function fetchProductByHandle(handle: string): Promise<ProductDetai
       images: product.images.edges.map((edge: { node: { url: string; altText: string | null } }) => edge.node),
       variants: product.variants.edges.map((edge: { node: ProductDetails['variants'][0] }) => edge.node),
       options: product.options,
+      collectionHandle: product.collections?.edges?.[0]?.node?.handle || null,
     };
   } catch (error) {
     console.error('Error fetching product:', error);
     return null;
+  }
+}
+
+// Fetch product recommendations
+export async function fetchProductRecommendations(productId: string): Promise<ShopifyProduct[]> {
+  try {
+    const data = await storefrontApiRequest(GET_PRODUCT_RECOMMENDATIONS, { productId });
+    if (!data || !data.data.productRecommendations) return [];
+    return data.data.productRecommendations.map((product: ShopifyProduct['node']) => ({ node: product }));
+  } catch (error) {
+    console.error('Error fetching product recommendations:', error);
+    return [];
   }
 }
