@@ -148,7 +148,9 @@ export function Features() {
                 <button
                   key={cardIndex}
                   onClick={() => setCurrentIndex(cardIndex)}
-                  className="relative flex-1 group rounded-2xl sm:rounded-3xl backdrop-blur-xl text-center p-4 sm:p-6 lg:p-8 bg-white/5 border border-white/10"
+                  className={`relative flex-1 group rounded-2xl sm:rounded-3xl backdrop-blur-xl text-center p-4 sm:p-6 lg:p-8 bg-white/5 border border-white/10 transition-transform duration-500 ease-out ${
+                    isCenter ? 'scale-105 sm:scale-110 z-10' : 'scale-90 sm:scale-95'
+                  }`}
                 >
                   {/* Animated highlight overlay - fades in/out smoothly */}
                   <div 
