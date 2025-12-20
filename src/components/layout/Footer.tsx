@@ -1,39 +1,39 @@
+import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import sokLogo from "@/assets/sok-logo.webp";
 
 const footerLinks = {
   products: [{
     label: "Solar Systems",
-    href: "#"
+    href: "/collections/solar-systems"
   }, {
     label: "Off-Grid Batteries",
-    href: "#"
+    href: "/collections/off-grid-batteries"
   }, {
     label: "RV & Marine",
-    href: "#"
+    href: "/collections/rv-marine"
   }, {
     label: "Industrial",
-    href: "#"
+    href: "/collections/industrial"
   }, {
     label: "Accessories",
-    href: "#"
+    href: "/collections/accessories"
   }],
   support: [{
     label: "Contact Us",
-    href: "#"
+    href: "/contact"
   }, {
     label: "Shipping Info",
-    href: "#"
+    href: "/faq"
   }, {
     label: "Returns",
-    href: "#"
+    href: "/faq"
   }, {
     label: "Warranty",
-    href: "#"
+    href: "/faq"
   }, {
     label: "FAQs",
-    href: "#"
+    href: "/faq"
   }],
   company: [{
     label: "About Us",
@@ -43,12 +43,13 @@ const footerLinks = {
     href: "#"
   }, {
     label: "Blog",
-    href: "#"
+    href: "/blog"
   }, {
     label: "Careers",
     href: "#"
   }]
 };
+
 export function Footer() {
   return (
     <footer className="bg-background text-foreground border-t border-border">
@@ -73,9 +74,9 @@ export function Footer() {
               <ul className="space-y-2">
                 {footerLinks.products.map(link => (
                   <li key={link.label}>
-                    <a href={link.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                    <Link to={link.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                       {link.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -89,9 +90,9 @@ export function Footer() {
               <ul className="space-y-2">
                 {footerLinks.support.map(link => (
                   <li key={link.label}>
-                    <a href={link.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                    <Link to={link.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                       {link.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -105,9 +106,15 @@ export function Footer() {
               <ul className="space-y-2">
                 {footerLinks.company.map(link => (
                   <li key={link.label}>
-                    <a href={link.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                      {link.label}
-                    </a>
+                    {link.href.startsWith('/') ? (
+                      <Link to={link.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                        {link.label}
+                      </Link>
+                    ) : (
+                      <a href={link.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                        {link.label}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -119,17 +126,21 @@ export function Footer() {
                 Contact
               </h4>
               <div className="flex flex-col gap-2 text-sm text-muted-foreground">
-                <a href="tel:+6409123456" className="flex items-center gap-2 hover:text-foreground transition-colors">
+                <a href="tel:098710505" className="flex items-center gap-2 hover:text-foreground transition-colors">
                   <Phone className="h-4 w-4" />
-                  0800 765 228
+                  09 871 0505
                 </a>
-                <a href="mailto:hello@sokbattery.co.nz" className="flex items-center gap-2 hover:text-foreground transition-colors">
+                <a href="tel:0225022377" className="flex items-center gap-2 hover:text-foreground transition-colors">
+                  <Phone className="h-4 w-4" />
+                  022 502 2377
+                </a>
+                <Link to="/contact" className="flex items-center gap-2 hover:text-foreground transition-colors">
                   <Mail className="h-4 w-4" />
-                  hello@sokbattery.co.nz
-                </a>
+                  Contact Form
+                </Link>
                 <div className="flex items-center gap-2">
                   <MapPin className="h-4 w-4" />
-                  <span>Auckland, New Zealand</span>
+                  <span>Nelson, New Zealand</span>
                 </div>
               </div>
             </div>
