@@ -8,6 +8,7 @@ import FAQ from "./pages/FAQ";
 import Blog from "./pages/Blog";
 import BlogArticle from "./pages/BlogArticle";
 import Products from "./pages/Products";
+import Product from "./pages/Product";
 import Collection from "./pages/Collection";
 import Contact from "./pages/Contact";
 import TermsConditions from "./pages/TermsConditions";
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:blogHandle/:articleHandle" element={<BlogArticle />} />
           <Route path="/products" element={<Products />} />
+          <Route path="/product/:handle" element={<Product />} />
           <Route path="/collections/:handle" element={<Collection />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/terms-conditions" element={<TermsConditions />} />
