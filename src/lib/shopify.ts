@@ -448,7 +448,7 @@ const GET_PRODUCT_BY_HANDLE = `
         name
         values
       }
-      collections(first: 10) {
+      collections(first: 25) {
         edges {
           node {
             id
