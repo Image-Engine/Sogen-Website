@@ -5,6 +5,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ProductCard } from "@/components/products/ProductCard";
 import { ProductGridSkeleton } from "@/components/products/ProductGridSkeleton";
+import { RelatedCollections } from "@/components/collections/RelatedCollections";
 import { fetchCollectionByHandle, CollectionWithProducts } from "@/lib/shopify";
 
 // Collection background images based on handle/keywords
@@ -211,6 +212,9 @@ export default function Collection() {
             )}
           </div>
         </section>
+
+        {/* Related Collections */}
+        {handle && <RelatedCollections currentHandle={handle} />}
       </main>
 
       <Footer />
