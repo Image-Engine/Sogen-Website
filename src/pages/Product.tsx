@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, ShoppingCart, Package, Minus, Plus } from "lucide-react";
+import { ArrowLeft, ShoppingCart, Package, Minus, Plus, FolderOpen } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
@@ -112,6 +112,27 @@ export default function Product() {
       <Header />
       <main className="pt-24 md:pt-28">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+          {/* Collections Navigation */}
+          {product.collections.length > 0 && (
+            <div className="mb-6 pb-6 border-b border-border">
+              <div className="flex items-center gap-2 mb-3">
+                <FolderOpen className="w-4 h-4 text-muted-foreground" />
+                <span className="text-sm font-medium text-muted-foreground">Browse Collections</span>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {product.collections.map((collection) => (
+                  <Link
+                    key={collection.id}
+                    to={`/collection/${collection.handle}`}
+                    className="inline-flex items-center px-4 py-2 rounded-full bg-secondary/50 hover:bg-primary hover:text-primary-foreground text-sm font-medium text-foreground transition-colors border border-border hover:border-primary"
+                  >
+                    {collection.title}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Breadcrumb */}
           <nav className="mb-6">
             <Link 

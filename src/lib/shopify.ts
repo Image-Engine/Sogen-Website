@@ -448,7 +448,7 @@ const GET_PRODUCT_BY_HANDLE = `
         name
         values
       }
-      collections(first: 1) {
+      collections(first: 10) {
         edges {
           node {
             id
@@ -623,6 +623,12 @@ export async function fetchCollectionByHandle(handle: string, first: number = 50
 }
 
 // Fetch product by handle
+export interface ProductCollection {
+  id: string;
+  handle: string;
+  title: string;
+}
+
 export interface ProductDetails {
   id: string;
   title: string;
@@ -642,7 +648,7 @@ export interface ProductDetails {
     selectedOptions: Array<{ name: string; value: string }>;
   }>;
   options: Array<{ name: string; values: string[] }>;
-  collectionHandle: string | null;
+  collections: ProductCollection[];
 }
 
 export async function fetchProductByHandle(handle: string): Promise<ProductDetails | null> {
@@ -660,7 +666,7 @@ export async function fetchProductByHandle(handle: string): Promise<ProductDetai
       images: product.images.edges.map((edge: { node: { url: string; altText: string | null } }) => edge.node),
       variants: product.variants.edges.map((edge: { node: ProductDetails['variants'][0] }) => edge.node),
       options: product.options,
-      collectionHandle: product.collections?.edges?.[0]?.node?.handle || null,
+      collections: product.collections?.edges?.map((edge: { node: ProductCollection }) => edge.node) || [],
     };
   } catch (error) {
     console.error('Error fetching product:', error);
