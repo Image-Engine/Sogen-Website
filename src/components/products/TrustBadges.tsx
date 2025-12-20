@@ -1,4 +1,4 @@
-import { Shield, Truck, RotateCcw, Award } from "lucide-react";
+import { Shield, RotateCcw, Award } from "lucide-react";
 
 export function TrustBadges() {
   const badges = [
@@ -6,11 +6,6 @@ export function TrustBadges() {
       icon: Shield,
       label: "Secure Checkout",
       sublabel: "SSL Encrypted",
-    },
-    {
-      icon: Truck,
-      label: "Fast Delivery",
-      sublabel: "1-2 business days",
     },
     {
       icon: RotateCcw,
