@@ -100,26 +100,8 @@ export function Features() {
     return () => clearInterval(interval);
   }, [isPaused]);
 
-  // Calculate position for each card based on currentIndex
-  // Each card can be in position: left (-1), center (0), or right (1)
-  const getCardPosition = (cardIndex: number): number => {
-    const diff = cardIndex - currentIndex;
-    // Handle wrap-around for 3 cards
-    if (diff === 2 || diff === -1) return -1; // left
-    if (diff === 0) return 0; // center
-    if (diff === 1 || diff === -2) return 1; // right
-    return 0;
-  };
-
-  // Get rotated sub-card groups to match hero card positions
-  const getRotatedGroups = () => {
-    const prev = (currentIndex + 2) % 3;
-    const center = currentIndex;
-    const next = (currentIndex + 1) % 3;
-    return [heroCarouselData[prev], heroCarouselData[center], heroCarouselData[next]];
-  };
-
-  const rotatedGroups = getRotatedGroups();
+  // Get the currently active advantages group
+  const activeGroup = heroCarouselData[currentIndex];
 
   return (
     <section
@@ -152,73 +134,63 @@ export function Features() {
             Advantages
           </h3>
           
-          {/* Hero Stats - Fixed positions with animated content */}
+          {/* Hero Stats - Static positions with crossfade highlight */}
           <div 
-            className="relative flex justify-center items-center gap-3 sm:gap-4 lg:gap-6 max-w-4xl mx-auto mb-6 h-[180px] sm:h-[220px] lg:h-[280px]"
+            className="flex justify-center items-stretch gap-4 sm:gap-6 lg:gap-8 max-w-4xl mx-auto mb-6"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
             {heroCarouselData.map((stat, cardIndex) => {
               const StatIcon = stat.icon;
-              const position = getCardPosition(cardIndex);
-              const isCenter = position === 0;
-              
-              // Calculate transform based on position
-              const translateX = position * 110; // Percentage-based movement
-              const scale = isCenter ? 1 : 0.85;
-              const zIndex = isCenter ? 10 : 1;
+              const isCenter = cardIndex === currentIndex;
               
               return (
                 <button
                   key={cardIndex}
                   onClick={() => setCurrentIndex(cardIndex)}
-                  style={{
-                    transform: `translateX(${translateX}%) scale(${scale})`,
-                    zIndex,
-                  }}
-                  className={`absolute w-[30%] sm:w-[28%] group rounded-2xl sm:rounded-3xl backdrop-blur-xl text-center transition-transform duration-500 ease-out p-4 sm:p-6 lg:p-8 ${
-                    isCenter
-                      ? 'bg-gradient-to-br from-amber-500/20 to-orange-500/10 border-2 border-amber-400/50 shadow-[0_0_40px_rgba(251,191,36,0.15)]'
-                      : 'bg-white/5 border border-white/10 opacity-60 hover:opacity-80 cursor-pointer'
-                  }`}
+                  className="relative flex-1 group rounded-2xl sm:rounded-3xl backdrop-blur-xl text-center p-4 sm:p-6 lg:p-8 bg-white/5 border border-white/10"
                 >
-                  {/* Badge - Only on center */}
-                  {isCenter && (
-                    <div className="absolute -top-2 sm:-top-3 left-1/2 -translate-x-1/2 flex items-center gap-1 sm:gap-1.5 px-2 sm:px-4 py-1 sm:py-1.5 bg-amber-500 rounded-full text-[10px] sm:text-xs font-bold text-black uppercase tracking-wider shadow-lg">
-                      <Star className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 fill-current" />
-                      <span className="hidden sm:inline">{stat.badge}</span>
-                    </div>
-                  )}
+                  {/* Animated highlight overlay - fades in/out smoothly */}
+                  <div 
+                    className={`absolute inset-0 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-amber-500/20 to-orange-500/10 border-2 border-amber-400/50 shadow-[0_0_40px_rgba(251,191,36,0.15)] transition-opacity duration-500 ease-out pointer-events-none ${
+                      isCenter ? 'opacity-100' : 'opacity-0'
+                    }`}
+                  />
                   
-                  <div className={`rounded-xl sm:rounded-2xl backdrop-blur-sm flex items-center justify-center mx-auto mb-2 sm:mb-4 ${
-                    isCenter 
-                      ? 'w-10 h-10 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-amber-500/30' 
-                      : 'w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-white/15'
-                  }`}>
-                    <StatIcon className={`${
-                      isCenter 
-                        ? 'w-5 h-5 sm:w-8 sm:h-8 lg:w-10 lg:h-10 text-amber-300' 
-                        : 'w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-white/70'
-                    }`} strokeWidth={1.5} />
+                  {/* Badge - fades with highlight */}
+                  <div 
+                    className={`absolute -top-2 sm:-top-3 left-1/2 -translate-x-1/2 flex items-center gap-1 sm:gap-1.5 px-2 sm:px-4 py-1 sm:py-1.5 bg-amber-500 rounded-full text-[10px] sm:text-xs font-bold text-black uppercase tracking-wider shadow-lg transition-opacity duration-500 ease-out ${
+                      isCenter ? 'opacity-100' : 'opacity-0'
+                    }`}
+                  >
+                    <Star className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 fill-current" />
+                    <span className="hidden sm:inline">{stat.badge}</span>
                   </div>
-                  <div className={`font-bold text-white mb-1 ${
-                    isCenter 
-                      ? 'text-2xl sm:text-4xl lg:text-5xl' 
-                      : 'text-base sm:text-xl lg:text-2xl'
-                  }`}>
-                    {stat.title}
-                  </div>
-                  <div className={`font-semibold mb-1 ${
-                    isCenter 
-                      ? 'text-xs sm:text-base lg:text-lg text-amber-200' 
-                      : 'text-[10px] sm:text-xs lg:text-sm text-white/60'
-                  }`}>
-                    {stat.subtitle}
-                  </div>
-                  <div className={`text-white/70 ${
-                    isCenter ? 'text-[10px] sm:text-sm hidden sm:block' : 'hidden'
-                  }`}>
-                    {stat.desc}
+                  
+                  {/* Content - consistent size, only colors change */}
+                  <div className="relative z-10">
+                    <div className={`w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-xl sm:rounded-2xl backdrop-blur-sm flex items-center justify-center mx-auto mb-2 sm:mb-4 transition-colors duration-500 ${
+                      isCenter ? 'bg-amber-500/30' : 'bg-white/15'
+                    }`}>
+                      <StatIcon className={`w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 transition-colors duration-500 ${
+                        isCenter ? 'text-amber-300' : 'text-white/70'
+                      }`} strokeWidth={1.5} />
+                    </div>
+                    <div className={`font-bold mb-1 text-xl sm:text-3xl lg:text-4xl transition-colors duration-500 ${
+                      isCenter ? 'text-white' : 'text-white/60'
+                    }`}>
+                      {stat.title}
+                    </div>
+                    <div className={`font-semibold mb-1 text-xs sm:text-sm lg:text-base transition-colors duration-500 ${
+                      isCenter ? 'text-amber-200' : 'text-white/50'
+                    }`}>
+                      {stat.subtitle}
+                    </div>
+                    <div className={`text-[10px] sm:text-sm transition-opacity duration-500 ${
+                      isCenter ? 'opacity-100 text-white/70' : 'opacity-0'
+                    }`}>
+                      {stat.desc}
+                    </div>
                   </div>
                 </button>
               );
@@ -248,58 +220,32 @@ export function Features() {
           {/* Subtle Divider */}
           <div className="w-24 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent mx-auto mb-8 sm:mb-10" />
 
-          {/* Sub-Cards - Synced with hero card rotation */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 max-w-4xl mx-auto">
-            {rotatedGroups.map((group, positionIndex) => {
-              const isActiveGroup = positionIndex === 1; // Center position is always active
-              return (
-                <div 
-                  key={group.advantages.label}
-                  className={`transition-all duration-500 ease-out ${
-                    isActiveGroup ? 'opacity-100 scale-100' : 'opacity-50 scale-95'
-                  }`}
-                >
-                  {/* Category Header */}
-                  <h4 className={`text-xs uppercase tracking-[0.15em] font-medium text-center mb-4 transition-all duration-300 ${
-                    isActiveGroup ? 'text-amber-400' : 'text-white/40'
-                  }`}>
-                    {group.advantages.label}
-                  </h4>
-                  
-                  {/* Sub-Cards */}
-                  <div className="space-y-3">
-                    {group.advantages.items.map((item) => {
-                      const ItemIcon = item.icon;
-                      return (
-                        <div
-                          key={item.title}
-                          className={`group flex items-center gap-3 p-3 sm:p-4 rounded-xl transition-all duration-300 ${
-                            isActiveGroup 
-                              ? 'bg-white/10 hover:bg-white/15 border border-white/15 hover:border-white/30' 
-                              : 'bg-white/5 border border-white/10'
-                          }`}
-                        >
-                          <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl backdrop-blur-sm flex items-center justify-center shrink-0 transition-all duration-300 ${
-                            isActiveGroup 
-                              ? 'bg-white/15 group-hover:scale-110' 
-                              : 'bg-white/10'
-                          }`}>
-                            <ItemIcon className={`w-5 h-5 sm:w-6 sm:h-6 transition-all duration-300 ${
-                              isActiveGroup ? 'text-white/90' : 'text-white/50'
-                            }`} strokeWidth={1.5} />
-                          </div>
-                          <span className={`text-xs sm:text-sm font-medium leading-tight transition-all duration-300 ${
-                            isActiveGroup ? 'text-white' : 'text-white/50'
-                          }`}>
-                            {item.title}
-                          </span>
-                        </div>
-                      );
-                    })}
+          {/* Sub-Cards - Shows only the active group with crossfade */}
+          <div className="max-w-md mx-auto">
+            {/* Category Header */}
+            <h4 className="text-xs uppercase tracking-[0.15em] font-medium text-center mb-4 text-amber-400">
+              {activeGroup.advantages.label}
+            </h4>
+            
+            {/* Sub-Cards */}
+            <div className="space-y-3">
+              {activeGroup.advantages.items.map((item) => {
+                const ItemIcon = item.icon;
+                return (
+                  <div
+                    key={item.title}
+                    className="group flex items-center gap-3 p-3 sm:p-4 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 hover:border-white/30 transition-colors duration-300"
+                  >
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl backdrop-blur-sm flex items-center justify-center shrink-0 bg-white/15 group-hover:scale-110 transition-transform duration-300">
+                      <ItemIcon className="w-5 h-5 sm:w-6 sm:h-6 text-white/90" strokeWidth={1.5} />
+                    </div>
+                    <span className="text-xs sm:text-sm font-medium leading-tight text-white">
+                      {item.title}
+                    </span>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         </div>
 
