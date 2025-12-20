@@ -86,23 +86,7 @@ const features = [
 ];
 
 export function Features() {
-  const [api, setApi] = useState<CarouselApi>();
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    if (!api) return;
-
-    const onSelect = () => {
-      setCurrentIndex(api.selectedScrollSnap());
-    };
-
-    api.on("select", onSelect);
-    return () => {
-      api.off("select", onSelect);
-    };
-  }, [api]);
-
-  const currentAdvantages = heroCarouselData[currentIndex].advantages;
 
   return (
     <section
@@ -129,103 +113,141 @@ export function Features() {
           </p>
         </div>
 
-        {/* Advantages Section - Carousel Layout */}
+        {/* Advantages Section */}
         <div className="mb-10 sm:mb-14 lg:mb-20">
           <h3 className="uppercase tracking-[0.15em] sm:tracking-[0.2em] text-white/70 mb-6 sm:mb-8 text-sm sm:text-base text-center font-semibold">
             Advantages
           </h3>
           
-          {/* Hero Stats Carousel */}
-          <div className="max-w-md mx-auto mb-6">
-            <Carousel
-              setApi={setApi}
-              opts={{
-                align: "center",
-                loop: true,
-              }}
-              className="w-full"
-            >
-              <CarouselContent>
-                {heroCarouselData.map((stat, index) => {
-                  const StatIcon = stat.icon;
-                  return (
-                    <CarouselItem key={index}>
-                      <div className="group relative rounded-3xl p-8 sm:p-10 backdrop-blur-xl bg-gradient-to-br from-amber-500/20 to-orange-500/10 border-2 border-amber-400/50 hover:border-amber-400/70 shadow-[0_0_40px_rgba(251,191,36,0.15)] hover:shadow-[0_0_60px_rgba(251,191,36,0.25)] transition-all duration-300 text-center">
-                        {/* Badge */}
-                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-4 py-1.5 bg-amber-500 rounded-full text-xs font-bold text-black uppercase tracking-wider shadow-lg">
-                          <Star className="w-3.5 h-3.5 fill-current" />
-                          {stat.badge}
-                        </div>
-                        
-                        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-amber-500/30 backdrop-blur-sm flex items-center justify-center mx-auto mb-5 group-hover:scale-110 transition-transform duration-300">
-                          <StatIcon className="w-8 h-8 sm:w-10 sm:h-10 text-amber-300" strokeWidth={1.5} />
-                        </div>
-                        <div className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-2">
-                          {stat.title}
-                        </div>
-                        <div className="text-lg sm:text-xl text-amber-200 font-semibold mb-2">
-                          {stat.subtitle}
-                        </div>
-                        <div className="text-sm text-white/70">
-                          {stat.desc}
-                        </div>
-                      </div>
-                    </CarouselItem>
-                  );
-                })}
-              </CarouselContent>
-              <div className="flex items-center justify-center gap-4 mt-5">
-                <CarouselPrevious className="relative inset-0 translate-x-0 translate-y-0 bg-white/20 hover:bg-white/30 border-white/30 text-white" />
-                <CarouselNext className="relative inset-0 translate-x-0 translate-y-0 bg-white/20 hover:bg-white/30 border-white/30 text-white" />
-              </div>
-            </Carousel>
-            
-            {/* Dot Indicators */}
-            <div className="flex justify-center gap-2 mt-4">
-              {heroCarouselData.map((_, index) => (
+          {/* Hero Stats - All 3 Visible */}
+          <div className="grid grid-cols-3 gap-3 sm:gap-4 lg:gap-6 max-w-4xl mx-auto mb-6">
+            {heroCarouselData.map((stat, index) => {
+              const StatIcon = stat.icon;
+              const isActive = index === currentIndex;
+              return (
                 <button
                   key={index}
-                  onClick={() => api?.scrollTo(index)}
-                  className={`h-2 rounded-full transition-all duration-300 ${
-                    index === currentIndex 
-                      ? 'bg-amber-400 w-6' 
-                      : 'bg-white/40 w-2 hover:bg-white/60'
+                  onClick={() => setCurrentIndex(index)}
+                  className={`group relative rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 backdrop-blur-xl text-center transition-all duration-300 ${
+                    isActive
+                      ? 'bg-gradient-to-br from-amber-500/20 to-orange-500/10 border-2 border-amber-400/50 shadow-[0_0_40px_rgba(251,191,36,0.15)] scale-100'
+                      : 'bg-white/5 border border-white/10 opacity-60 hover:opacity-80 hover:bg-white/10 scale-95'
                   }`}
-                  aria-label={`Go to slide ${index + 1}`}
-                />
-              ))}
-            </div>
+                >
+                  {/* Badge - Only on active */}
+                  {isActive && (
+                    <div className="absolute -top-2 sm:-top-3 left-1/2 -translate-x-1/2 flex items-center gap-1 sm:gap-1.5 px-2 sm:px-4 py-1 sm:py-1.5 bg-amber-500 rounded-full text-[10px] sm:text-xs font-bold text-black uppercase tracking-wider shadow-lg">
+                      <Star className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 fill-current" />
+                      <span className="hidden sm:inline">{stat.badge}</span>
+                    </div>
+                  )}
+                  
+                  <div className={`rounded-xl sm:rounded-2xl backdrop-blur-sm flex items-center justify-center mx-auto mb-2 sm:mb-4 transition-all duration-300 ${
+                    isActive 
+                      ? 'w-10 h-10 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-amber-500/30 group-hover:scale-110' 
+                      : 'w-8 h-8 sm:w-12 sm:h-12 lg:w-14 lg:h-14 bg-white/15'
+                  }`}>
+                    <StatIcon className={`transition-all duration-300 ${
+                      isActive 
+                        ? 'w-5 h-5 sm:w-8 sm:h-8 lg:w-10 lg:h-10 text-amber-300' 
+                        : 'w-4 h-4 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-white/70'
+                    }`} strokeWidth={1.5} />
+                  </div>
+                  <div className={`font-bold text-white mb-1 transition-all duration-300 ${
+                    isActive 
+                      ? 'text-2xl sm:text-4xl lg:text-5xl' 
+                      : 'text-lg sm:text-2xl lg:text-3xl'
+                  }`}>
+                    {stat.title}
+                  </div>
+                  <div className={`font-semibold mb-1 transition-all duration-300 ${
+                    isActive 
+                      ? 'text-xs sm:text-base lg:text-lg text-amber-200' 
+                      : 'text-[10px] sm:text-sm lg:text-base text-white/60'
+                  }`}>
+                    {stat.subtitle}
+                  </div>
+                  <div className={`text-white/70 transition-all duration-300 ${
+                    isActive ? 'text-[10px] sm:text-sm hidden sm:block' : 'hidden'
+                  }`}>
+                    {stat.desc}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Dot Indicators */}
+          <div className="flex justify-center gap-2 mb-8 sm:mb-10">
+            {heroCarouselData.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentIndex(index)}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  index === currentIndex 
+                    ? 'bg-amber-400 w-6' 
+                    : 'bg-white/40 w-2 hover:bg-white/60'
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
           </div>
 
           {/* Subtle Divider */}
           <div className="w-24 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent mx-auto mb-8 sm:mb-10" />
 
-          {/* Dynamic Sub-Cards - Changes based on carousel */}
-          <div key={currentIndex} className="animate-fade-in">
-            {/* Category Header */}
-            <h4 className="text-xs uppercase tracking-[0.15em] text-white/50 font-medium text-center mb-4">
-              {currentAdvantages.label}
-            </h4>
-            
-            {/* Sub-Cards Grid */}
-            <div className="grid grid-cols-3 gap-3 sm:gap-4 max-w-xl mx-auto">
-              {currentAdvantages.items.map((item) => {
-                const ItemIcon = item.icon;
-                return (
-                  <div
-                    key={item.title}
-                    className="group flex flex-col items-center gap-2 sm:gap-3 p-4 sm:p-5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 hover:border-white/30 transition-all duration-300 text-center"
-                  >
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/15 backdrop-blur-sm flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300">
-                      <ItemIcon className="w-5 h-5 sm:w-6 sm:h-6 text-white/90" strokeWidth={1.5} />
-                    </div>
-                    <span className="text-white text-xs sm:text-sm font-medium leading-tight">
-                      {item.title}
-                    </span>
+          {/* Sub-Cards - All 9 visible in 3 columns with dynamic highlighting */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 max-w-4xl mx-auto">
+            {heroCarouselData.map((group, groupIndex) => {
+              const isActiveGroup = groupIndex === currentIndex;
+              return (
+                <div 
+                  key={groupIndex}
+                  className={`transition-all duration-300 ${
+                    isActiveGroup ? 'opacity-100 scale-100' : 'opacity-50 scale-95'
+                  }`}
+                >
+                  {/* Category Header */}
+                  <h4 className={`text-xs uppercase tracking-[0.15em] font-medium text-center mb-4 transition-all duration-300 ${
+                    isActiveGroup ? 'text-amber-400' : 'text-white/40'
+                  }`}>
+                    {group.advantages.label}
+                  </h4>
+                  
+                  {/* Sub-Cards */}
+                  <div className="space-y-3">
+                    {group.advantages.items.map((item) => {
+                      const ItemIcon = item.icon;
+                      return (
+                        <div
+                          key={item.title}
+                          className={`group flex items-center gap-3 p-3 sm:p-4 rounded-xl transition-all duration-300 ${
+                            isActiveGroup 
+                              ? 'bg-white/10 hover:bg-white/15 border border-white/15 hover:border-white/30' 
+                              : 'bg-white/5 border border-white/10'
+                          }`}
+                        >
+                          <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl backdrop-blur-sm flex items-center justify-center shrink-0 transition-all duration-300 ${
+                            isActiveGroup 
+                              ? 'bg-white/15 group-hover:scale-110' 
+                              : 'bg-white/10'
+                          }`}>
+                            <ItemIcon className={`w-5 h-5 sm:w-6 sm:h-6 transition-all duration-300 ${
+                              isActiveGroup ? 'text-white/90' : 'text-white/50'
+                            }`} strokeWidth={1.5} />
+                          </div>
+                          <span className={`text-xs sm:text-sm font-medium leading-tight transition-all duration-300 ${
+                            isActiveGroup ? 'text-white' : 'text-white/50'
+                          }`}>
+                            {item.title}
+                          </span>
+                        </div>
+                      );
+                    })}
                   </div>
-                );
-              })}
-            </div>
+                </div>
+              );
+            })}
           </div>
         </div>
 
