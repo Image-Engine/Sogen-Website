@@ -8,6 +8,7 @@ import { fetchProductByHandle, ProductDetails } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 import { Skeleton } from "@/components/ui/skeleton";
+import { RelatedProducts } from "@/components/products/RelatedProducts";
 
 export default function Product() {
   const { handle } = useParams<{ handle: string }>();
@@ -264,6 +265,9 @@ export default function Product() {
             </div>
           </div>
         </div>
+
+        {/* Related Products Carousel */}
+        <RelatedProducts productId={product.id} currentHandle={product.handle} />
       </main>
       <Footer />
     </div>
