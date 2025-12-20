@@ -9,8 +9,8 @@ export function TrustBadges() {
     },
     {
       icon: RotateCcw,
-      label: "Easy Returns",
-      sublabel: "30-day policy",
+      label: "Returns",
+      sublabel: "14-day policy",
     },
     {
       icon: Award,
