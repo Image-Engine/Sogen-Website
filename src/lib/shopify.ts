@@ -409,6 +409,8 @@ const GET_PRODUCT_BY_HANDLE = `
       description
       descriptionHtml
       handle
+      productType
+      vendor
       priceRange {
         minVariantPrice {
           amount
@@ -432,6 +434,7 @@ const GET_PRODUCT_BY_HANDLE = `
           node {
             id
             title
+            sku
             price {
               amount
               currencyCode
@@ -635,6 +638,8 @@ export interface ProductDetails {
   description: string;
   descriptionHtml: string;
   handle: string;
+  productType: string;
+  vendor: string;
   priceRange: {
     minVariantPrice: { amount: string; currencyCode: string };
     maxVariantPrice: { amount: string; currencyCode: string };
@@ -643,6 +648,7 @@ export interface ProductDetails {
   variants: Array<{
     id: string;
     title: string;
+    sku: string | null;
     price: { amount: string; currencyCode: string };
     availableForSale: boolean;
     selectedOptions: Array<{ name: string; value: string }>;
@@ -662,6 +668,8 @@ export async function fetchProductByHandle(handle: string): Promise<ProductDetai
       description: product.description,
       descriptionHtml: product.descriptionHtml,
       handle: product.handle,
+      productType: product.productType || '',
+      vendor: product.vendor || '',
       priceRange: product.priceRange,
       images: product.images.edges.map((edge: { node: { url: string; altText: string | null } }) => edge.node),
       variants: product.variants.edges.map((edge: { node: ProductDetails['variants'][0] }) => edge.node),
