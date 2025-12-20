@@ -10,6 +10,10 @@ import BlogArticle from "./pages/BlogArticle";
 import Products from "./pages/Products";
 import Collection from "./pages/Collection";
 import Contact from "./pages/Contact";
+import TermsConditions from "./pages/TermsConditions";
+import ShippingReturns from "./pages/ShippingReturns";
+import Warranty from "./pages/Warranty";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +32,10 @@ const App = () => (
           <Route path="/products" element={<Products />} />
           <Route path="/collections/:handle" element={<Collection />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/terms-conditions" element={<TermsConditions />} />
+          <Route path="/shipping-returns" element={<ShippingReturns />} />
+          <Route path="/warranty" element={<Warranty />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
