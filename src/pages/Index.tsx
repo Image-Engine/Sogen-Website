@@ -6,7 +6,6 @@ import { ProductGrid } from "@/components/home/ProductGrid";
 import { Features } from "@/components/home/Features";
 import { EnergyHub } from "@/components/home/EnergyHub";
 import { TrustBadges } from "@/components/home/TrustBadges";
-import { PromoBanner } from "@/components/home/PromoBanner";
 import { Testimonials } from "@/components/home/Testimonials";
 
 const Index = () => {
@@ -20,7 +19,6 @@ const Index = () => {
         <ProductGrid />
         <Features />
         <EnergyHub />
-        <PromoBanner />
         <Testimonials />
       </main>
       <Footer />
