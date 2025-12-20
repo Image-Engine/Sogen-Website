@@ -31,19 +31,9 @@ const footerLinks = {
   }, {
     label: "FAQs",
     href: "/faq"
-  }],
-  company: [{
-    label: "About Us",
-    href: "#"
-  }, {
-    label: "Our Story",
-    href: "#"
   }, {
     label: "Blog",
     href: "/blog"
-  }, {
-    label: "Careers",
-    href: "#"
   }]
 };
 
@@ -52,7 +42,7 @@ export function Footer() {
     <footer className="bg-background text-foreground border-t border-border">
       {/* Main Footer */}
       <div className="container px-4 sm:px-6 py-8 sm:py-10 lg:py-12">
-        <div className="grid grid-cols-2 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 lg:gap-8">
+        <div className="grid grid-cols-2 gap-8 sm:grid-cols-2 md:grid-cols-4 lg:gap-8">
           {/* Brand Column */}
           <div className="col-span-2 sm:col-span-2 md:col-span-3 lg:col-span-1 mb-4 lg:mb-0">
             <img src={sokLogo} alt="SOK Battery" className="h-12 sm:h-14 lg:h-16 w-auto mb-3 sm:mb-4" />
@@ -93,27 +83,6 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Company */}
-          <div>
-            <h4 className="font-semibold text-xs sm:text-sm uppercase tracking-wider mb-3 text-foreground">
-              Company
-            </h4>
-            <ul className="space-y-2">
-              {footerLinks.company.map(link => (
-                <li key={link.label}>
-                  {link.href.startsWith('/') ? (
-                    <Link to={link.href} className="text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors">
-                      {link.label}
-                    </Link>
-                  ) : (
-                    <a href={link.href} className="text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors">
-                      {link.label}
-                    </a>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
 
           {/* Contact */}
           <div>
