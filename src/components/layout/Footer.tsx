@@ -23,14 +23,11 @@ const footerLinks = {
     label: "Contact Us",
     href: "/contact"
   }, {
-    label: "Shipping Info",
-    href: "/faq"
-  }, {
-    label: "Returns",
-    href: "/faq"
+    label: "Shipping & Returns",
+    href: "/shipping-returns"
   }, {
     label: "Warranty",
-    href: "/faq"
+    href: "/warranty"
   }, {
     label: "FAQs",
     href: "/faq"
@@ -156,12 +153,12 @@ export function Footer() {
               © 2024 SOK Battery NZ. All rights reserved.
             </p>
             <div className="flex items-center gap-6 text-sm text-muted-foreground">
-              <a href="#" className="hover:text-foreground transition-colors">
+              <Link to="/privacy-policy" className="hover:text-foreground transition-colors">
                 Privacy Policy
-              </a>
-              <a href="#" className="hover:text-foreground transition-colors">
+              </Link>
+              <Link to="/terms-conditions" className="hover:text-foreground transition-colors">
                 Terms of Service
-              </a>
+              </Link>
             </div>
           </div>
         </div>
