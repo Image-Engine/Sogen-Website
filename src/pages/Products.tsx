@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Search, Package, ArrowRight } from "lucide-react";
+import { Search, Package } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -95,37 +95,18 @@ export default function Products() {
           </div>
         </section>
 
-        {/* Collections Grid */}
+        {/* Collections */}
         {!loading && collections.length > 0 && (
-          <section className="py-8 sm:py-12 border-b border-border/50">
+          <section className="py-6 sm:py-8 border-b border-border/50">
             <div className="container">
-              <h2 className="text-lg font-semibold text-foreground mb-6">Shop by Collection</h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="flex flex-wrap gap-2 sm:gap-3">
                 {collections.map((collection) => (
                   <Link
                     key={collection.node.id}
                     to={`/collection/${collection.node.handle}`}
-                    className="group relative overflow-hidden rounded-2xl aspect-[4/3] bg-card border border-border/50 hover:border-primary/30 hover:shadow-xl transition-all duration-500"
+                    className="inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-secondary hover:bg-primary hover:text-primary-foreground border border-border hover:border-primary text-sm font-medium text-foreground transition-all duration-200"
                   >
-                    {collection.node.image ? (
-                      <img
-                        src={collection.node.image.url}
-                        alt={collection.node.image.altText || collection.node.title}
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      />
-                    ) : (
-                      <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary" />
-                    )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-                    <div className="absolute inset-0 p-4 flex flex-col justify-end">
-                      <h4 className="text-white font-semibold text-base md:text-lg">
-                        {collection.node.title}
-                      </h4>
-                      <div className="flex items-center gap-1 text-white/70 text-sm mt-1 group-hover:text-white transition-colors">
-                        <span>Shop Now</span>
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                      </div>
-                    </div>
+                    {collection.node.title}
                   </Link>
                 ))}
               </div>
