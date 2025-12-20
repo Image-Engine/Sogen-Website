@@ -1,4 +1,5 @@
 import { ArrowRight, Headset, Package, Award, ShieldCheck } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import heroBg from "@/assets/hero-bg.png";
 export function Hero() {
@@ -31,16 +32,15 @@ export function Hero() {
             Built to perform in New Zealand conditions.
           </p>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 animate-slide-up" style={{
+          {/* CTA Button */}
+          <div className="animate-slide-up" style={{
           animationDelay: "0.3s"
         }}>
-            <Button size="lg" className="bg-white text-black hover:bg-white/90 font-semibold px-8">
-              Shop All Batteries
-              <ArrowRight className="h-4 w-4 ml-2" />
-            </Button>
-            <Button size="lg" className="border-2 border-white/40 bg-transparent text-white hover:bg-white/10 font-semibold px-8">
-              Get Expert Advice
+            <Button asChild size="lg" className="bg-white text-black hover:bg-white/90 font-semibold px-8">
+              <Link to="/products">
+                Shop All Batteries
+                <ArrowRight className="h-4 w-4 ml-2" />
+              </Link>
             </Button>
           </div>
 
