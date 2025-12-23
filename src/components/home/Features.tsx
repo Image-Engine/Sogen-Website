@@ -185,7 +185,7 @@ export function Features() {
                     <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl backdrop-blur-sm flex items-center justify-center shrink-0 bg-white/15 group-hover:scale-110 transition-transform duration-300">
                       <ItemIcon className="w-5 h-5 sm:w-6 sm:h-6 text-white/90" strokeWidth={1.5} />
                     </div>
-                    <span className="sm:text-sm font-medium leading-tight text-white text-lg">
+                    <span className="font-medium leading-tight text-white text-lg sm:text-xl">
                       {item.title}
                     </span>
                   </div>;
