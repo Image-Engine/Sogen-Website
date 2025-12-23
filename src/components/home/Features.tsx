@@ -173,7 +173,7 @@ export function Features() {
           {/* Sub-Cards - Shows only the active group with crossfade */}
           <div className="max-w-md mx-auto">
             {/* Category Header */}
-            <h4 className="text-xs uppercase tracking-[0.15em] font-medium text-center mb-4 text-amber-400">
+            <h4 className="uppercase tracking-[0.15em] font-medium text-center mb-4 text-amber-400 text-2xl">
               {activeGroup.advantages.label}
             </h4>
             
