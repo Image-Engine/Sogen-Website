@@ -40,7 +40,7 @@ export function Testimonials() {
       <div className="container px-4 sm:px-6">
         {/* Trust Header */}
         <div className="flex flex-col gap-6 mb-8 sm:mb-12 lg:mb-16 p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl bg-surface-sunken border border-border">
-          <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-center">
             <div className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl bg-primary/10 shrink-0">
               <ShieldCheck className="h-6 w-6 sm:h-7 sm:w-7 text-primary" />
             </div>
