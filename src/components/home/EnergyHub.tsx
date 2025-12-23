@@ -142,7 +142,7 @@ export function EnergyHub() {
                 </p>
 
                 {/* Stats */}
-                <div className="grid grid-cols-3 gap-4 pt-6 border-t border-white/10">
+                <div className="grid grid-cols-3 gap-4 pt-6 border-t border-white/10 text-center lg:text-left">
                   <div>
                     <div className="text-2xl lg:text-3xl font-bold">20+</div>
                     <div className="text-xs text-white/60">Year Lifespan</div>
