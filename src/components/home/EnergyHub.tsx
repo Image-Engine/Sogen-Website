@@ -85,8 +85,8 @@ export function EnergyHub() {
         {/* Main Content Grid */}
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left - Content */}
-          <div className="space-y-8">
-            <div>
+          <div className="space-y-8 text-center lg:text-left">
+            <div className="text-center lg:text-left">
               <h3 className="text-2xl lg:text-3xl font-semibold text-foreground mb-4">
                 Professional Off-Grid Power Systems
               </h3>
