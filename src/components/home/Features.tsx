@@ -146,7 +146,7 @@ export function Features() {
           {/* Hero Stats - Scrollable on mobile, static on desktop */}
           <div 
             ref={scrollContainerRef}
-            className="flex sm:justify-center items-stretch gap-4 sm:gap-6 lg:gap-8 max-w-4xl mx-auto mb-6 overflow-x-auto sm:overflow-visible snap-x snap-mandatory scrollbar-hide pb-2 sm:pb-0"
+            className="flex sm:justify-center items-stretch gap-4 sm:gap-6 lg:gap-8 max-w-4xl mx-auto mb-6 overflow-x-auto sm:overflow-visible snap-x snap-mandatory scrollbar-hide pt-4 pb-2 sm:pt-6 sm:pb-0"
             onMouseEnter={() => setIsPaused(true)} 
             onMouseLeave={() => setIsPaused(false)}
             onTouchStart={() => setIsPaused(true)}
