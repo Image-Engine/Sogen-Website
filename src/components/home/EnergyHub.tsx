@@ -20,19 +20,23 @@ const collections = [{
 const specs = [{
   value: "5-8",
   unit: "kVa",
-  label: "Victron Inverter"
+  label: "Victron Inverter",
+  description: "Powers your entire home, even during peak demand"
 }, {
   value: "25",
   unit: "kWh",
-  label: "Max Capacity"
+  label: "Max Capacity",
+  description: "Store enough energy to run overnight and through cloudy days"
 }, {
   value: "IP55",
   unit: "",
-  label: "Weather Rated"
+  label: "Weather Rated",
+  description: "Built tough for New Zealand's outdoor conditions"
 }, {
   value: "NZ",
   unit: "",
-  label: "Certified"
+  label: "Certified",
+  description: "Ready to install with full electrical compliance"
 }];
 const features = ["Serviceable SOK LiFePO4 batteries with genuine Grade A cells", "Victron EasySolar-II inverter with integrated MPPT controller", "IP-rated aluminium cabinet for outdoor installations", "Pre-configured and tested for plug-and-play installation", "Scalable from 10kWh to 25kWh battery capacity", "NZ Electrical Code of Compliance Certificate included"];
 export function EnergyHub() {
@@ -65,6 +69,9 @@ export function EnergyHub() {
               </div>
               <div className="text-sm text-muted-foreground font-medium">
                 {spec.label}
+              </div>
+              <div className="text-xs text-muted-foreground/70 mt-2 leading-relaxed">
+                {spec.description}
               </div>
             </div>)}
         </div>
