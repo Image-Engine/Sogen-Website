@@ -1,48 +1,42 @@
 import { ArrowRight, Zap, Sun, Shield, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
-
-const collections = [
-  {
-    name: "Solar Panels",
-    handle: "solar-panels",
-    image: "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=400&h=300&fit=crop",
-  },
-  {
-    name: "Bundles",
-    handle: "bundles",
-    image: "https://images.unsplash.com/photo-1592833159155-c62df1b65634?w=400&h=300&fit=crop",
-  },
-  {
-    name: "Solar Accessories",
-    handle: "solar-accessories",
-    image: "https://images.unsplash.com/photo-1559302504-64aae6ca6b6d?w=400&h=300&fit=crop",
-  },
-  {
-    name: "Charge Controllers",
-    handle: "solar-charge-controllers",
-    image: "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=400&h=300&fit=crop",
-  },
-];
-
-const specs = [
-  { value: "5-8", unit: "kVa", label: "Victron Inverter" },
-  { value: "25", unit: "kWh", label: "Max Capacity" },
-  { value: "IP55", unit: "", label: "Weather Rated" },
-  { value: "NZ", unit: "", label: "Certified" },
-];
-
-const features = [
-  "Serviceable SOK LiFePO4 batteries with genuine Grade A cells",
-  "Victron EasySolar-II inverter with integrated MPPT controller",
-  "IP-rated aluminium cabinet for outdoor installations",
-  "Pre-configured and tested for plug-and-play installation",
-  "Scalable from 10kWh to 25kWh battery capacity",
-  "NZ Electrical Code of Compliance Certificate included",
-];
-
+const collections = [{
+  name: "Solar Panels",
+  handle: "solar-panels",
+  image: "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=400&h=300&fit=crop"
+}, {
+  name: "Bundles",
+  handle: "bundles",
+  image: "https://images.unsplash.com/photo-1592833159155-c62df1b65634?w=400&h=300&fit=crop"
+}, {
+  name: "Solar Accessories",
+  handle: "solar-accessories",
+  image: "https://images.unsplash.com/photo-1559302504-64aae6ca6b6d?w=400&h=300&fit=crop"
+}, {
+  name: "Charge Controllers",
+  handle: "solar-charge-controllers",
+  image: "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=400&h=300&fit=crop"
+}];
+const specs = [{
+  value: "5-8",
+  unit: "kVa",
+  label: "Victron Inverter"
+}, {
+  value: "25",
+  unit: "kWh",
+  label: "Max Capacity"
+}, {
+  value: "IP55",
+  unit: "",
+  label: "Weather Rated"
+}, {
+  value: "NZ",
+  unit: "",
+  label: "Certified"
+}];
+const features = ["Serviceable SOK LiFePO4 batteries with genuine Grade A cells", "Victron EasySolar-II inverter with integrated MPPT controller", "IP-rated aluminium cabinet for outdoor installations", "Pre-configured and tested for plug-and-play installation", "Scalable from 10kWh to 25kWh battery capacity", "NZ Electrical Code of Compliance Certificate included"];
 export function EnergyHub() {
-  return (
-    <section className="py-24 lg:py-32 bg-gradient-to-b from-secondary/50 to-background overflow-hidden">
+  return <section className="py-24 lg:py-32 bg-gradient-to-b from-secondary/50 to-background overflow-hidden">
       <div className="container max-w-6xl">
         {/* Header */}
         <div className="text-center mb-16 lg:mb-20">
@@ -62,24 +56,17 @@ export function EnergyHub() {
 
         {/* Specs Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6 mb-16 lg:mb-20">
-          {specs.map((spec, index) => (
-            <div
-              key={index}
-              className="group relative p-6 lg:p-8 rounded-2xl bg-card border border-border/50 hover:border-primary/20 hover:shadow-lg transition-all duration-300 text-center"
-            >
+          {specs.map((spec, index) => <div key={index} className="group relative p-6 lg:p-8 rounded-2xl bg-card border border-border/50 hover:border-primary/20 hover:shadow-lg transition-all duration-300 text-center">
               <div className="text-3xl lg:text-4xl font-bold text-foreground tracking-tight mb-1">
                 {spec.value}
-                {spec.unit && (
-                  <span className="text-xl lg:text-2xl text-primary ml-1">
+                {spec.unit && <span className="text-xl lg:text-2xl text-primary ml-1">
                     {spec.unit}
-                  </span>
-                )}
+                  </span>}
               </div>
               <div className="text-sm text-muted-foreground font-medium">
                 {spec.label}
               </div>
-            </div>
-          ))}
+            </div>)}
         </div>
 
         {/* Main Content Grid */}
@@ -90,7 +77,7 @@ export function EnergyHub() {
               <h3 className="text-2xl lg:text-3xl font-semibold text-foreground mb-4">
                 Professional Off-Grid Power Systems
               </h3>
-              <p className="text-muted-foreground leading-relaxed text-lg">
+              <p className="text-muted-foreground leading-relaxed text-base">
                 The Energy Hub 2 represents the latest generation of professional 
                 off-grid power systems, combining proven Victron technology with 
                 high-performance SOK lithium batteries in a weatherproof, 
@@ -100,17 +87,12 @@ export function EnergyHub() {
 
             {/* Features List */}
             <div className="space-y-3">
-              {features.map((feature, index) => (
-                <div
-                  key={index}
-                  className="flex items-start gap-3 group"
-                >
+              {features.map((feature, index) => <div key={index} className="flex items-start gap-3 group">
                   <CheckCircle2 className="w-5 h-5 text-success mt-0.5 shrink-0" />
-                  <span className="text-foreground/80 group-hover:text-foreground transition-colors">
+                  <span className="text-foreground/80 group-hover:text-foreground transition-colors text-sm">
                     {feature}
                   </span>
-                </div>
-              ))}
+                </div>)}
             </div>
 
           </div>
@@ -174,18 +156,9 @@ export function EnergyHub() {
 
         {/* Collection Cards - Full Width Below */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6 mt-16 lg:mt-20">
-          {collections.map((collection) => (
-            <Link
-              key={collection.handle}
-              to={`/collection/${collection.handle}`}
-              className="group relative overflow-hidden rounded-2xl aspect-[4/3] bg-card border border-border/50 hover:border-primary/30 hover:shadow-xl transition-all duration-500"
-            >
+          {collections.map(collection => <Link key={collection.handle} to={`/collection/${collection.handle}`} className="group relative overflow-hidden rounded-2xl aspect-[4/3] bg-card border border-border/50 hover:border-primary/30 hover:shadow-xl transition-all duration-500">
               {/* Background Image */}
-              <img
-                src={collection.image}
-                alt={collection.name}
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-              />
+              <img src={collection.image} alt={collection.name} className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
               
               {/* Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
@@ -200,10 +173,8 @@ export function EnergyHub() {
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
-            </Link>
-          ))}
+            </Link>)}
         </div>
       </div>
-    </section>
-  );
+    </section>;
 }
