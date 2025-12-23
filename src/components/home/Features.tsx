@@ -147,9 +147,7 @@ export function Features() {
                   
                   {/* Content - consistent size, only colors change */}
                   <div className="relative z-10">
-                    <div className={`w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-xl sm:rounded-2xl backdrop-blur-sm flex items-center justify-center mx-auto mb-2 sm:mb-4 transition-colors duration-500 ${isCenter ? 'bg-amber-500/30' : 'bg-white/15'}`}>
-                      <StatIcon className={`w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 transition-colors duration-500 ${isCenter ? 'text-amber-300' : 'text-white/70'}`} strokeWidth={1.5} />
-                    </div>
+                    
                     <div className={`font-bold mb-1 text-xl sm:text-3xl lg:text-4xl transition-colors duration-500 ${isCenter ? 'text-white' : 'text-white/60'}`}>
                       {stat.title}
                     </div>
