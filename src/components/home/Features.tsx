@@ -140,9 +140,8 @@ export function Features() {
                   <div className={`absolute inset-0 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-amber-500/20 to-orange-500/10 border-2 border-amber-400/50 shadow-[0_0_40px_rgba(251,191,36,0.15)] transition-opacity duration-500 ease-out pointer-events-none ${isCenter ? 'opacity-100' : 'opacity-0'}`} />
                   
                   {/* Badge - fades with highlight */}
-                  <div className={`absolute -top-2 sm:-top-3 left-1/2 -translate-x-1/2 flex items-center gap-1 sm:gap-1.5 px-2 sm:px-4 py-1 sm:py-1.5 bg-amber-500 rounded-full text-[10px] sm:text-xs font-bold text-black uppercase tracking-wider shadow-lg transition-opacity duration-500 ease-out ${isCenter ? 'opacity-100' : 'opacity-0'}`}>
-                    <Star className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 fill-current" />
-                    <span className="hidden sm:inline">{stat.badge}</span>
+                  <div className={`absolute -top-2 sm:-top-3 left-1/2 -translate-x-1/2 px-2 sm:px-4 py-1 sm:py-1.5 bg-amber-500 rounded-full text-[10px] sm:text-xs font-bold text-black uppercase tracking-wider shadow-lg whitespace-nowrap transition-opacity duration-500 ease-out ${isCenter ? 'opacity-100' : 'opacity-0'}`}>
+                    {stat.badge}
                   </div>
                   
                   {/* Content - consistent size, only colors change */}
