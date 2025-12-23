@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Clock, ShieldCheck, Thermometer, BatteryLow, Wrench, Zap, Timer, RefreshCw, Feather, Wind, Gauge, Award, Battery, Bluetooth, Shield, Settings, Gem, Star } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
@@ -91,6 +91,7 @@ const features = [{
 export function Features() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   // Auto-play effect - cycles every 4 seconds unless paused
   useEffect(() => {
@@ -100,6 +101,18 @@ export function Features() {
     }, 4000);
     return () => clearInterval(interval);
   }, [isPaused]);
+
+  // Scroll to current index on mobile
+  useEffect(() => {
+    if (scrollContainerRef.current && window.innerWidth < 640) {
+      const container = scrollContainerRef.current;
+      const cardWidth = container.scrollWidth / 3;
+      container.scrollTo({
+        left: cardWidth * currentIndex,
+        behavior: 'smooth'
+      });
+    }
+  }, [currentIndex]);
 
   // Get the currently active advantages group
   const activeGroup = heroCarouselData[currentIndex];
@@ -130,12 +143,18 @@ export function Features() {
             Advantages
           </h3>
           
-          {/* Hero Stats - Static positions with crossfade highlight */}
-          <div className="flex justify-center items-stretch gap-4 sm:gap-6 lg:gap-8 max-w-4xl mx-auto mb-6" onMouseEnter={() => setIsPaused(true)} onMouseLeave={() => setIsPaused(false)}>
+          {/* Hero Stats - Scrollable on mobile, static on desktop */}
+          <div 
+            ref={scrollContainerRef}
+            className="flex sm:justify-center items-stretch gap-4 sm:gap-6 lg:gap-8 max-w-4xl mx-auto mb-6 overflow-x-auto sm:overflow-visible snap-x snap-mandatory scrollbar-hide pb-2 sm:pb-0"
+            onMouseEnter={() => setIsPaused(true)} 
+            onMouseLeave={() => setIsPaused(false)}
+            onTouchStart={() => setIsPaused(true)}
+            onTouchEnd={() => setIsPaused(false)}
+          >
             {heroCarouselData.map((stat, cardIndex) => {
-            const StatIcon = stat.icon;
             const isCenter = cardIndex === currentIndex;
-            return <button key={cardIndex} onClick={() => setCurrentIndex(cardIndex)} className={`relative flex-1 group rounded-2xl sm:rounded-3xl backdrop-blur-xl text-center p-4 sm:p-6 lg:p-8 bg-white/5 border border-white/10 transition-transform duration-500 ease-out ${isCenter ? 'scale-105 sm:scale-110 z-10' : 'scale-90 sm:scale-95'}`}>
+            return <button key={cardIndex} onClick={() => setCurrentIndex(cardIndex)} className={`relative min-w-[85%] sm:min-w-0 sm:flex-1 group rounded-2xl sm:rounded-3xl backdrop-blur-xl text-center p-4 sm:p-6 lg:p-8 bg-white/5 border border-white/10 snap-center transition-transform duration-500 ease-out ${isCenter ? 'sm:scale-110 z-10' : 'sm:scale-95'}`}>
                   {/* Animated highlight overlay - fades in/out smoothly */}
                   <div className={`absolute inset-0 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-amber-500/20 to-orange-500/10 border-2 border-amber-400/50 shadow-[0_0_40px_rgba(251,191,36,0.15)] transition-opacity duration-500 ease-out pointer-events-none ${isCenter ? 'opacity-100' : 'opacity-0'}`} />
                   
