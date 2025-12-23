@@ -23,8 +23,12 @@ export function ProductGrid() {
   useEffect(() => {
     async function loadProducts() {
       setLoading(true);
-      const collection = await fetchCollectionByHandle("12v-lithium-batteries", 8);
-      setProducts(collection?.products || []);
+      const collection = await fetchCollectionByHandle("12v-lithium-batteries", 12);
+      // Filter to only products with images and limit to 4
+      const productsWithImages = (collection?.products || [])
+        .filter((product) => product.node.images?.edges?.length > 0)
+        .slice(0, 4);
+      setProducts(productsWithImages);
       setLoading(false);
     }
     loadProducts();
@@ -45,7 +49,7 @@ export function ProductGrid() {
         {/* Products Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {loading ? (
-            <ProductGridSkeleton count={8} />
+            <ProductGridSkeleton count={4} />
           ) : products.length === 0 ? (
             <EmptyProductState />
           ) : (
