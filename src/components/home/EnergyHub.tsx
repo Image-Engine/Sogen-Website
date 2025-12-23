@@ -25,7 +25,7 @@ const collections = [
 ];
 
 const specs = [
-  { value: "5 or 8", unit: "kVa", label: "Victron Inverter" },
+  { value: "5-8", unit: "kVa", label: "Victron Inverter" },
   { value: "25", unit: "kWh", label: "Max Capacity" },
   { value: "IP55", unit: "", label: "Weather Rated" },
   { value: "NZ", unit: "", label: "Certified" },
