@@ -154,7 +154,7 @@ export function Features() {
           >
             {heroCarouselData.map((stat, cardIndex) => {
             const isCenter = cardIndex === currentIndex;
-            return <button key={cardIndex} onClick={() => setCurrentIndex(cardIndex)} className={`relative min-w-[85%] sm:min-w-0 sm:flex-1 group rounded-2xl sm:rounded-3xl backdrop-blur-xl text-center p-4 sm:p-6 lg:p-8 bg-white/5 border border-white/10 snap-center transition-transform duration-500 ease-out ${isCenter ? 'sm:scale-110 z-10' : 'sm:scale-95'}`}>
+            return <button key={cardIndex} onClick={() => setCurrentIndex(cardIndex)} className={`relative min-w-[85%] sm:min-w-0 sm:flex-1 group rounded-2xl sm:rounded-3xl backdrop-blur-xl text-center py-8 px-4 sm:p-6 lg:p-8 bg-white/5 border border-white/10 snap-center transition-transform duration-500 ease-out ${isCenter ? 'sm:scale-110 z-10' : 'sm:scale-95'}`}>
                   {/* Animated highlight overlay - fades in/out smoothly */}
                   <div className={`absolute inset-0 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-amber-500/20 to-orange-500/10 border-2 border-amber-400/50 shadow-[0_0_40px_rgba(251,191,36,0.15)] transition-opacity duration-500 ease-out pointer-events-none ${isCenter ? 'opacity-100' : 'opacity-0'}`} />
                   
