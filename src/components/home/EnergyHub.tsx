@@ -119,7 +119,7 @@ export function EnergyHub() {
               </div>
 
               {/* Content */}
-              <div className="relative z-10">
+              <div className="relative z-10 text-center lg:text-left">
                 <div className="flex items-center justify-center lg:justify-start gap-3 mb-8">
                   <div className="w-12 h-12 rounded-2xl bg-white/10 backdrop-blur flex items-center justify-center">
                     <Sun className="w-6 h-6" />
