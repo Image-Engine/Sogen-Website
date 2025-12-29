@@ -1,0 +1,421 @@
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
+import { Link } from "react-router-dom";
+import { 
+  Zap, 
+  Shield, 
+  Battery, 
+  Sun, 
+  Thermometer, 
+  Wifi,
+  CheckCircle2,
+  Home,
+  TreePine,
+  Warehouse,
+  Leaf,
+  ArrowRight
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+const features = [
+  {
+    icon: Shield,
+    title: "Pre-Wired & Certified",
+    description: "Supplied with NZ Electrical Certificate of Compliance (COC). Just connect batteries and solar — plug-and-play simplicity."
+  },
+  {
+    icon: Zap,
+    title: "Victron Power Electronics",
+    description: "Choose the EasySolar 48/5000 or MultiPlus-II 48/8000 for proven reliability and performance."
+  },
+  {
+    icon: Battery,
+    title: "Scalable Storage",
+    description: "10 – 25 kWh capacity, compatible with 2 – 5 SOK rack batteries (Grade A LiFePO₄)."
+  },
+  {
+    icon: Thermometer,
+    title: "Built for NZ Conditions",
+    description: "3mm powder-coated aluminium cabinet, lockable, corrosion-resistant, and outdoor-ready."
+  },
+  {
+    icon: Sun,
+    title: "Generator Ready",
+    description: "16A input for automatic generator backup — seamless switching."
+  },
+  {
+    icon: Wifi,
+    title: "Smart Monitoring",
+    description: "Victron Cerbo GX with touchscreen and remote app access."
+  }
+];
+
+const included = [
+  "Powder-coated aluminium cabinet with forced cooling",
+  "Suntree 125A or 200A DC MCCB main breaker",
+  "PV isolator for safety during maintenance",
+  "Cellular/Wi-Fi modem for remote monitoring",
+  "Full internal wiring, fusing, bus bars, and terminations",
+  "Electrical COC issued by licensed professionals",
+  "Bench-tested and certified prior to shipping",
+  "Expandable & Flexible — Start small and grow as needed"
+];
+
+const useCases = [
+  { icon: Home, title: "Tiny Homes & Baches" },
+  { icon: TreePine, title: "Off Grid Cabins" },
+  { icon: Zap, title: "Backup Power for Homes" },
+  { icon: Warehouse, title: "Remote Farms & Sheds" },
+  { icon: Leaf, title: "Eco Builds" }
+];
+
+const specs = [
+  { label: "Inverter Models", value: "Victron EasySolar 48/5000 or MultiPlus-II 48/8000" },
+  { label: "Battery Storage", value: "10 – 25 kWh (SOK LiFePO₄)" },
+  { label: "Solar Input", value: "Up to 5.8kW, expandable with second MPPT controller" },
+  { label: "Generator Input", value: "16A or 32A PDL 56 Series input or hard wired" },
+  { label: "Enclosure", value: "3mm powder-coated lockable aluminium IP54+ cabinet" },
+  { label: "Monitoring", value: "Victron GX device with cellular/Wi-Fi modem" },
+  { label: "Certification", value: "NZ Electrical COC included" }
+];
+
+const EnergyHub2 = () => {
+  return (
+    <div className="min-h-screen flex flex-col bg-background">
+      <Header />
+      <main className="flex-1">
+        {/* Hero Section */}
+        <section className="relative py-20 lg:py-32 overflow-hidden bg-gradient-to-b from-secondary/30 to-background">
+          <div className="container">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div className="space-y-6">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium">
+                  <Zap className="h-4 w-4" />
+                  Complete Power Solution
+                </div>
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground">
+                  Energy Hub 2
+                </h1>
+                <p className="text-xl lg:text-2xl text-muted-foreground font-light">
+                  Everything you need for reliable, off-grid power — in one cabinet.
+                </p>
+                <p className="text-base text-muted-foreground max-w-lg">
+                  Turnkey, pre-wired solar power systems that combine Victron inverter technology and SOK LiFePO₄ batteries in a NZ-made, weatherproof cabinet — ready to power your home, bach, or tiny house, on-grid or off-grid.
+                </p>
+                <div className="flex flex-wrap gap-4 pt-4">
+                  <Link to="/contact">
+                    <Button size="lg" className="gap-2">
+                      Request a Custom Quote
+                      <ArrowRight className="h-4 w-4" />
+                    </Button>
+                  </Link>
+                  <a 
+                    href="http://solagen.co.nz/wp-content/uploads/EnergyHub2-Brochure.pdf" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                  >
+                    <Button variant="outline" size="lg">
+                      Download Brochure
+                    </Button>
+                  </a>
+                </div>
+              </div>
+              <div className="relative">
+                <div className="aspect-square rounded-3xl overflow-hidden bg-secondary/20 border border-border">
+                  <img 
+                    src="https://solagen.co.nz/wp-content/uploads/SGEH-cabinet-display800x800.jpg" 
+                    alt="Energy Hub 2 Cabinet" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Why Choose Section */}
+        <section className="py-20 lg:py-28 bg-background">
+          <div className="container">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                Why Choose the Energy Hub 2?
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Professional-grade power systems engineered for New Zealand conditions
+              </p>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {features.map((feature, index) => (
+                <div 
+                  key={index}
+                  className="group p-8 rounded-2xl border border-border bg-card hover:shadow-lg transition-all duration-300"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5">
+                    <feature.icon className="h-6 w-6 text-primary" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-foreground mb-3">
+                    {feature.title}
+                  </h3>
+                  <p className="text-muted-foreground">
+                    {feature.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* What's Included Section */}
+        <section className="py-20 lg:py-28 bg-secondary/30">
+          <div className="container">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                  What's Included
+                </h2>
+                <p className="text-lg text-muted-foreground mb-8">
+                  Every Energy Hub 2 system is professionally pre-wired, assembled, and tested in-house, saving you time, cost, and complexity.
+                </p>
+                <ul className="space-y-4">
+                  {included.map((item, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                      <span className="text-foreground">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="relative">
+                <div className="aspect-square rounded-3xl overflow-hidden bg-secondary/20 border border-border">
+                  <img 
+                    src="https://solagen.co.nz/wp-content/uploads/Cabinet-electronics-1-768x768.jpg" 
+                    alt="Energy Hub 2 Electronics" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Inverter Options Section */}
+        <section className="py-20 lg:py-28 bg-background">
+          <div className="container">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                Select Your Inverter Size
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Two powerful options to match your energy needs
+              </p>
+            </div>
+            <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+              {/* Option 1 */}
+              <div className="p-8 rounded-3xl border border-border bg-card hover:border-primary/50 transition-colors">
+                <div className="mb-6">
+                  <span className="text-sm font-medium text-primary">Option 1</span>
+                  <h3 className="text-2xl font-bold text-foreground mt-1">
+                    Victron EasySolar 48/5000
+                  </h3>
+                </div>
+                <ul className="space-y-3 mb-8">
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                    <span className="text-muted-foreground">5 kVA inverter/charger with built-in MPPT controller</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                    <span className="text-muted-foreground">Victron SmartSolar MPPT 250/100 VE.Can</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                    <span className="text-muted-foreground">Minimum 2 × SOK 48V rack batteries (10 kWh)</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                    <span className="text-muted-foreground">Scalable 2 to 5 batteries (10-25 kWh total)</span>
+                  </li>
+                </ul>
+                <div className="pt-6 border-t border-border">
+                  <p className="text-sm text-muted-foreground mb-1">From</p>
+                  <p className="text-3xl font-bold text-foreground">$17,890 <span className="text-base font-normal text-muted-foreground">inc GST</span></p>
+                </div>
+              </div>
+
+              {/* Option 2 */}
+              <div className="p-8 rounded-3xl border-2 border-primary bg-card relative">
+                <div className="absolute -top-3 left-8">
+                  <span className="px-3 py-1 text-xs font-semibold bg-primary text-primary-foreground rounded-full">
+                    Most Popular
+                  </span>
+                </div>
+                <div className="mb-6">
+                  <span className="text-sm font-medium text-primary">Option 2</span>
+                  <h3 className="text-2xl font-bold text-foreground mt-1">
+                    Victron MultiPlus-II 48/8000
+                  </h3>
+                </div>
+                <ul className="space-y-3 mb-8">
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                    <span className="text-muted-foreground">Victron 8 kVA inverter/charger</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                    <span className="text-muted-foreground">Victron SmartSolar MPPT 250/100 VE.Can</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                    <span className="text-muted-foreground">Minimum 3 × SOK 48V rack batteries (15 kWh)</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                    <span className="text-muted-foreground">Scalable 3 to 5 batteries (15-25 kWh total)</span>
+                  </li>
+                </ul>
+                <div className="pt-6 border-t border-border">
+                  <p className="text-sm text-muted-foreground mb-1">From</p>
+                  <p className="text-3xl font-bold text-foreground">$23,504 <span className="text-base font-normal text-muted-foreground">inc GST</span></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Solar Panel Options */}
+        <section className="py-20 lg:py-28 bg-secondary/30">
+          <div className="container">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                Solar Panel Options
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Choose from our optional solar panel bundles
+              </p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {/* Solar Option 1 */}
+              <div className="p-6 rounded-2xl border border-border bg-card">
+                <h3 className="text-xl font-semibold text-foreground mb-4">
+                  8 × 440W Longi Panels
+                </h3>
+                <ul className="space-y-2 mb-6 text-sm text-muted-foreground">
+                  <li>• Total 3520 watts solar</li>
+                  <li>• Tin roof mounting kit</li>
+                  <li>• 2-in-1 combiner/isolator + surge protection</li>
+                  <li>• 30m Twin 6mm² PV cable and connectors</li>
+                </ul>
+                <p className="text-2xl font-bold text-foreground">$3,881 <span className="text-sm font-normal text-muted-foreground">inc GST</span></p>
+              </div>
+
+              {/* Solar Option 2 */}
+              <div className="p-6 rounded-2xl border border-border bg-card">
+                <h3 className="text-xl font-semibold text-foreground mb-4">
+                  12 × 440W Longi Panels
+                </h3>
+                <ul className="space-y-2 mb-6 text-sm text-muted-foreground">
+                  <li>• Total 5280 watts solar</li>
+                  <li>• Tin roof mounting kit</li>
+                  <li>• 4-in-1 combiner/isolator + surge protection</li>
+                  <li>• 30m Twin 6mm² PV cable and connectors</li>
+                </ul>
+                <p className="text-2xl font-bold text-foreground">$5,050 <span className="text-sm font-normal text-muted-foreground">inc GST</span></p>
+              </div>
+
+              {/* Solar Option 3 */}
+              <div className="p-6 rounded-2xl border border-border bg-card flex flex-col">
+                <h3 className="text-xl font-semibold text-foreground mb-4">
+                  Custom Solar Array
+                </h3>
+                <p className="text-sm text-muted-foreground mb-6 flex-1">
+                  Need a specific array size, or a system without solar panels? We can customise to your exact requirements.
+                </p>
+                <Link to="/contact">
+                  <Button variant="outline" className="w-full">
+                    Contact Us
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Perfect For Section */}
+        <section className="py-20 lg:py-28 bg-background">
+          <div className="container">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                Perfect For
+              </h2>
+              <p className="text-lg text-muted-foreground">
+                One system. Endless applications.
+              </p>
+            </div>
+            <div className="flex flex-wrap justify-center gap-4">
+              {useCases.map((useCase, index) => (
+                <div 
+                  key={index}
+                  className="flex items-center gap-3 px-6 py-4 rounded-full border border-border bg-card hover:border-primary/50 transition-colors"
+                >
+                  <useCase.icon className="h-5 w-5 text-primary" />
+                  <span className="font-medium text-foreground">{useCase.title}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Specifications Section */}
+        <section className="py-20 lg:py-28 bg-secondary/30">
+          <div className="container">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                Features & Specifications
+              </h2>
+            </div>
+            <div className="max-w-3xl mx-auto">
+              <div className="rounded-2xl border border-border bg-card overflow-hidden">
+                {specs.map((spec, index) => (
+                  <div 
+                    key={index}
+                    className={`flex flex-col sm:flex-row sm:items-center p-6 gap-2 sm:gap-8 ${
+                      index !== specs.length - 1 ? 'border-b border-border' : ''
+                    }`}
+                  >
+                    <span className="text-sm font-medium text-muted-foreground sm:w-40 shrink-0">
+                      {spec.label}
+                    </span>
+                    <span className="text-foreground font-medium">
+                      {spec.value}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="py-20 lg:py-28 bg-primary text-primary-foreground">
+          <div className="container text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Ready to go off-grid the smart way?
+            </h2>
+            <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
+              Get in touch with our team to discuss your power requirements and receive a custom quote.
+            </p>
+            <Link to="/contact">
+              <Button size="lg" variant="secondary" className="gap-2">
+                Request a Custom Quote
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </div>
+  );
+};
+
+export default EnergyHub2;

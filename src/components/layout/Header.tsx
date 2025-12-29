@@ -80,6 +80,13 @@ export function Header() {
               </DropdownMenuContent>
             </DropdownMenu>
 
+            {/* Energy Hub 2 */}
+            <Link to="/energy-hub-2">
+              <Button variant="nav" size="default">
+                Energy Hub 2
+              </Button>
+            </Link>
+
             {/* Contact Us */}
             <Link to="/contact">
               <Button variant="nav" size="default">
@@ -215,6 +222,15 @@ export function Header() {
                   </div>
                 )}
               </div>
+
+              {/* Energy Hub 2 - Mobile */}
+              <Link
+                to="/energy-hub-2"
+                className="flex items-center justify-between px-4 py-3 text-foreground hover:bg-accent rounded-lg transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <span className="font-medium">Energy Hub 2</span>
+              </Link>
 
               {/* Contact Us - Mobile */}
               <Link
