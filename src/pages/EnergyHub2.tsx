@@ -420,21 +420,25 @@ const EnergyHub2 = () => {
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="py-20 lg:py-28 bg-primary text-primary-foreground">
-          <div className="container text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Ready to go off-grid the smart way?
-            </h2>
-            <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
-              Get in touch with our team to discuss your power requirements and receive a custom quote.
-            </p>
-            <Link to="/contact">
-              <Button size="lg" variant="secondary" className="gap-2">
-                Request a Custom Quote
-                <ArrowRight className="h-4 w-4" />
-              </Button>
-            </Link>
+        {/* Shopify Contact Form Section */}
+        <section className="py-20 lg:py-28 bg-secondary/30">
+          <div className="container">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                Get Your Custom Quote
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Fill out the form below and our team will get back to you with a tailored solution.
+              </p>
+            </div>
+            <div className="max-w-3xl mx-auto">
+              <iframe
+                src="https://sokbattery-frontline-shine-zq4jf.myshopify.com/pages/energy-hub-2-enquiry?id=807922"
+                title="Energy Hub 2 Enquiry Form"
+                className="w-full min-h-[600px] border-0 rounded-2xl bg-card"
+                loading="lazy"
+              />
+            </div>
           </div>
         </section>
       </main>
