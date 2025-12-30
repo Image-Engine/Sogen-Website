@@ -433,9 +433,9 @@ const EnergyHub2 = () => {
             </div>
             <div className="max-w-3xl mx-auto">
               <iframe
-                src="https://sokbattery-frontline-shine-zq4jf.myshopify.com/pages/energy-hub-2-enquiry?id=807922"
+                src="https://tally.so/embed/b59BY2?alignLeft=1&transparentBackground=1&dynamicHeight=1"
                 title="Energy Hub 2 Enquiry Form"
-                className="w-full min-h-[600px] border-0 rounded-2xl bg-card"
+                className="w-full min-h-[500px] border-0"
                 loading="lazy"
               />
             </div>
