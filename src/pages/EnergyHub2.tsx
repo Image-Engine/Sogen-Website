@@ -19,13 +19,6 @@ import { Button } from "@/components/ui/button";
 
 const features = [
   {
-    icon: Shield,
-    title: "Pre-Wired & Certified",
-    description: "Supplied with NZ Electrical Certificate of Compliance (COC). Just connect batteries and solar — plug-and-play simplicity.",
-    iconColor: "text-blue-500",
-    bgColor: "bg-blue-500/10"
-  },
-  {
     icon: Zap,
     title: "Victron Power Electronics",
     description: "Choose the EasySolar 48/5000 or MultiPlus-II 48/8000 for proven reliability and performance.",
@@ -38,6 +31,13 @@ const features = [
     description: "10 – 25 kWh capacity, compatible with 2 – 5 SOK rack batteries (Grade A LiFePO₄).",
     iconColor: "text-emerald-500",
     bgColor: "bg-emerald-500/10"
+  },
+  {
+    icon: Shield,
+    title: "Pre-Wired & Certified",
+    description: "Supplied with NZ Electrical Certificate of Compliance (COC). Just connect batteries and solar — plug-and-play simplicity.",
+    iconColor: "text-blue-500",
+    bgColor: "bg-blue-500/10"
   },
   {
     icon: Thermometer,
