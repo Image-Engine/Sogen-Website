@@ -21,32 +21,44 @@ const features = [
   {
     icon: Shield,
     title: "Pre-Wired & Certified",
-    description: "Supplied with NZ Electrical Certificate of Compliance (COC). Just connect batteries and solar — plug-and-play simplicity."
+    description: "Supplied with NZ Electrical Certificate of Compliance (COC). Just connect batteries and solar — plug-and-play simplicity.",
+    iconColor: "text-blue-500",
+    bgColor: "bg-blue-500/10"
   },
   {
     icon: Zap,
     title: "Victron Power Electronics",
-    description: "Choose the EasySolar 48/5000 or MultiPlus-II 48/8000 for proven reliability and performance."
+    description: "Choose the EasySolar 48/5000 or MultiPlus-II 48/8000 for proven reliability and performance.",
+    iconColor: "text-amber-500",
+    bgColor: "bg-amber-500/10"
   },
   {
     icon: Battery,
     title: "Scalable Storage",
-    description: "10 – 25 kWh capacity, compatible with 2 – 5 SOK rack batteries (Grade A LiFePO₄)."
+    description: "10 – 25 kWh capacity, compatible with 2 – 5 SOK rack batteries (Grade A LiFePO₄).",
+    iconColor: "text-emerald-500",
+    bgColor: "bg-emerald-500/10"
   },
   {
     icon: Thermometer,
     title: "Built for NZ Conditions",
-    description: "3mm powder-coated aluminium cabinet, lockable, corrosion-resistant, and outdoor-ready."
+    description: "3mm powder-coated aluminium cabinet, lockable, corrosion-resistant, and outdoor-ready.",
+    iconColor: "text-rose-500",
+    bgColor: "bg-rose-500/10"
   },
   {
     icon: Sun,
     title: "Generator Ready",
-    description: "16A input for automatic generator backup — seamless switching."
+    description: "16A input for automatic generator backup — seamless switching.",
+    iconColor: "text-orange-500",
+    bgColor: "bg-orange-500/10"
   },
   {
     icon: Wifi,
     title: "Smart Monitoring",
-    description: "Victron Cerbo GX with touchscreen and remote app access."
+    description: "Victron Cerbo GX with touchscreen and remote app access.",
+    iconColor: "text-violet-500",
+    bgColor: "bg-violet-500/10"
   }
 ];
 
@@ -150,8 +162,8 @@ const EnergyHub2 = () => {
                   key={index}
                   className="group p-8 rounded-2xl border border-border bg-card hover:shadow-lg transition-all duration-300"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5">
-                    <feature.icon className="h-6 w-6 text-primary" />
+                  <div className={`w-12 h-12 rounded-xl ${feature.bgColor} flex items-center justify-center mb-5`}>
+                    <feature.icon className={`h-6 w-6 ${feature.iconColor}`} />
                   </div>
                   <h3 className="text-xl font-semibold text-foreground mb-3">
                     {feature.title}
