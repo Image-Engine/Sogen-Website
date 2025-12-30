@@ -392,11 +392,15 @@ const EnergyHub2 = () => {
               </p>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
-              {specs.map((spec, index) => (
-                <div 
-                  key={index}
-                  className="group p-6 rounded-2xl border border-border bg-card hover:shadow-lg hover:border-primary/30 transition-all duration-300"
-                >
+              {specs.map((spec, index) => {
+                const isLast = index === specs.length - 1;
+                const isLonelyOnLg = specs.length % 3 === 1;
+                
+                return (
+                  <div 
+                    key={index}
+                    className={`group p-6 rounded-2xl border border-border bg-card hover:shadow-lg hover:border-primary/30 transition-all duration-300 ${isLast && isLonelyOnLg ? 'lg:col-start-2' : ''}`}
+                  >
                   <div className="flex items-start gap-4">
                     <div className={`w-10 h-10 rounded-xl bg-muted/50 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300`}>
                       <spec.icon className={`h-5 w-5 ${spec.iconColor}`} />
@@ -411,7 +415,8 @@ const EnergyHub2 = () => {
                     </div>
                   </div>
                 </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
