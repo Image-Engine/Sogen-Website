@@ -34,6 +34,10 @@ const footerLinks = {
   }, {
     label: "Blog",
     href: "/blog"
+  }],
+  b2b: [{
+    label: "Reseller Application",
+    href: "https://forms.gle/TuujWLemKf3UsSqRA"
   }]
 };
 
@@ -42,7 +46,7 @@ export function Footer() {
     <footer className="bg-background text-foreground border-t border-border">
       {/* Main Footer */}
       <div className="container px-4 sm:px-6 py-8 sm:py-10 lg:py-12">
-        <div className="grid grid-cols-2 gap-8 sm:grid-cols-2 md:grid-cols-4 lg:gap-8">
+        <div className="grid grid-cols-2 gap-8 sm:grid-cols-2 md:grid-cols-5 lg:gap-8">
           {/* Brand Column */}
           <div className="col-span-2 sm:col-span-2 md:col-span-4 lg:col-span-1 mb-4 lg:mb-0">
             <img src={sokLogo} alt="SOK Battery" className="h-12 sm:h-14 lg:h-16 w-auto mb-3 sm:mb-4" />
@@ -78,6 +82,27 @@ export function Footer() {
                   <Link to={link.href} className="text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors">
                     {link.label}
                   </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* B2B */}
+          <div>
+            <h4 className="font-semibold text-xs sm:text-sm uppercase tracking-wider mb-3 text-foreground">
+              B2B
+            </h4>
+            <ul className="space-y-2">
+              {footerLinks.b2b.map(link => (
+                <li key={link.label}>
+                  <a 
+                    href={link.href} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    {link.label}
+                  </a>
                 </li>
               ))}
             </ul>
