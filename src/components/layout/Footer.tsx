@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 import sokLogo from "@/assets/sok-logo.webp";
 
 const footerLinks = {
@@ -90,6 +90,7 @@ export function Footer() {
               Contact
             </h4>
             <div className="flex flex-col gap-2 text-xs sm:text-sm text-muted-foreground">
+              {/* HIDDEN - Phone numbers temporarily removed
               <a href="tel:098710505" className="flex items-center gap-2 hover:text-foreground transition-colors">
                 <Phone className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
                 09 871 0505
@@ -98,6 +99,7 @@ export function Footer() {
                 <Phone className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
                 022 502 2377
               </a>
+              */}
               <Link to="/contact" className="flex items-center gap-2 hover:text-foreground transition-colors">
                 <Mail className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
                 Contact Form

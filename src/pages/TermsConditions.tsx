@@ -110,9 +110,8 @@ export default function TermsConditions() {
               <div className="space-y-4 pt-6 border-t border-border">
                 <h2 className="text-xl font-semibold text-foreground">Questions?</h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  If you have any further questions regarding our return policy or our terms and conditions, please feel free to contact us at{" "}
-                  <a href="tel:098710505" className="text-primary hover:underline">09 871 0505</a>{" "}
-                  or email us at{" "}
+                  If you have any further questions regarding our return policy or our terms and conditions, please feel free to email us at{" "}
+                  {/* HIDDEN - Phone temporarily removed: <a href="tel:098710505" className="text-primary hover:underline">09 871 0505</a> or */}
                   <a href="mailto:admin@sokbattery.co.nz" className="text-primary hover:underline">admin@sokbattery.co.nz</a>
                 </p>
               </div>

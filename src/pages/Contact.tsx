@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { Phone, Mail, MapPin, Clock, Send } from "lucide-react";
+import { Mail, MapPin, Clock, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -75,7 +75,7 @@ export default function Contact() {
                 </div>
 
                 <div className="space-y-6">
-                  {/* Phone */}
+                  {/* HIDDEN - Phone section temporarily removed
                   <div className="flex items-start gap-4 p-4 bg-card rounded-xl border border-border">
                     <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
                       <Phone className="h-5 w-5 text-primary" />
@@ -96,6 +96,7 @@ export default function Contact() {
                       </a>
                     </div>
                   </div>
+                  */}
 
                   {/* Email */}
                   <div className="flex items-start gap-4 p-4 bg-card rounded-xl border border-border">
