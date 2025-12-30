@@ -74,21 +74,21 @@ const included = [
 ];
 
 const useCases = [
-  { icon: Home, title: "Tiny Homes & Baches" },
-  { icon: TreePine, title: "Off Grid Cabins" },
-  { icon: Zap, title: "Backup Power for Homes" },
-  { icon: Warehouse, title: "Remote Farms & Sheds" },
-  { icon: Leaf, title: "Eco Builds" }
+  { icon: Home, title: "Tiny Homes & Baches", description: "Compact, reliable power for small living", iconColor: "text-sky-500", bgColor: "bg-sky-500/10" },
+  { icon: TreePine, title: "Off Grid Cabins", description: "Complete energy independence", iconColor: "text-emerald-500", bgColor: "bg-emerald-500/10" },
+  { icon: Zap, title: "Backup Power", description: "Keep the lights on during outages", iconColor: "text-amber-500", bgColor: "bg-amber-500/10" },
+  { icon: Warehouse, title: "Remote Farms & Sheds", description: "Power where the grid can't reach", iconColor: "text-orange-500", bgColor: "bg-orange-500/10" },
+  { icon: Leaf, title: "Eco Builds", description: "Sustainable living made simple", iconColor: "text-green-500", bgColor: "bg-green-500/10" }
 ];
 
 const specs = [
-  { label: "Inverter Models", value: "Victron EasySolar 48/5000 or MultiPlus-II 48/8000" },
-  { label: "Battery Storage", value: "10 – 25 kWh (SOK LiFePO₄)" },
-  { label: "Solar Input", value: "Up to 5.8kW, expandable with second MPPT controller" },
-  { label: "Generator Input", value: "16A or 32A PDL 56 Series input or hard wired" },
-  { label: "Enclosure", value: "3mm powder-coated lockable aluminium IP54+ cabinet" },
-  { label: "Monitoring", value: "Victron GX device with cellular/Wi-Fi modem" },
-  { label: "Certification", value: "NZ Electrical COC included" }
+  { icon: Zap, label: "Inverter Models", value: "Victron EasySolar 48/5000 or MultiPlus-II 48/8000", iconColor: "text-amber-500" },
+  { icon: Battery, label: "Battery Storage", value: "10 – 25 kWh (SOK LiFePO₄)", iconColor: "text-emerald-500" },
+  { icon: Sun, label: "Solar Input", value: "Up to 5.8kW, expandable with second MPPT controller", iconColor: "text-orange-500" },
+  { icon: Zap, label: "Generator Input", value: "16A or 32A PDL 56 Series input or hard wired", iconColor: "text-rose-500" },
+  { icon: Shield, label: "Enclosure", value: "3mm powder-coated lockable aluminium IP54+ cabinet", iconColor: "text-blue-500" },
+  { icon: Wifi, label: "Monitoring", value: "Victron GX device with cellular/Wi-Fi modem", iconColor: "text-violet-500" },
+  { icon: CheckCircle2, label: "Certification", value: "NZ Electrical COC included", iconColor: "text-green-500" }
 ];
 
 const EnergyHub2 = () => {
@@ -363,14 +363,17 @@ const EnergyHub2 = () => {
                 One system. Endless applications.
               </p>
             </div>
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-6">
               {useCases.map((useCase, index) => (
                 <div 
                   key={index}
-                  className="flex items-center gap-3 px-6 py-4 rounded-full border border-border bg-card hover:border-primary/50 transition-colors"
+                  className="group p-6 rounded-2xl border border-border bg-card hover:shadow-lg hover:border-primary/30 transition-all duration-300 text-center"
                 >
-                  <useCase.icon className="h-5 w-5 text-primary" />
-                  <span className="font-medium text-foreground">{useCase.title}</span>
+                  <div className={`w-14 h-14 rounded-2xl ${useCase.bgColor} flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                    <useCase.icon className={`h-7 w-7 ${useCase.iconColor}`} />
+                  </div>
+                  <h3 className="font-semibold text-foreground mb-2">{useCase.title}</h3>
+                  <p className="text-sm text-muted-foreground">{useCase.description}</p>
                 </div>
               ))}
             </div>
@@ -384,25 +387,31 @@ const EnergyHub2 = () => {
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
                 Features & Specifications
               </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Built with premium components for lasting performance
+              </p>
             </div>
-            <div className="max-w-3xl mx-auto">
-              <div className="rounded-2xl border border-border bg-card overflow-hidden">
-                {specs.map((spec, index) => (
-                  <div 
-                    key={index}
-                    className={`flex flex-col sm:flex-row sm:items-center p-6 gap-2 sm:gap-8 ${
-                      index !== specs.length - 1 ? 'border-b border-border' : ''
-                    }`}
-                  >
-                    <span className="text-sm font-medium text-muted-foreground sm:w-40 shrink-0">
-                      {spec.label}
-                    </span>
-                    <span className="text-foreground font-medium">
-                      {spec.value}
-                    </span>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
+              {specs.map((spec, index) => (
+                <div 
+                  key={index}
+                  className="group p-6 rounded-2xl border border-border bg-card hover:shadow-lg hover:border-primary/30 transition-all duration-300"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className={`w-10 h-10 rounded-xl bg-muted/50 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300`}>
+                      <spec.icon className={`h-5 w-5 ${spec.iconColor}`} />
+                    </div>
+                    <div className="space-y-1">
+                      <span className="text-sm font-medium text-muted-foreground">
+                        {spec.label}
+                      </span>
+                      <p className="text-foreground font-medium text-sm leading-relaxed">
+                        {spec.value}
+                      </p>
+                    </div>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
