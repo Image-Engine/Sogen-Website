@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { fetchBlogArticles, ShopifyArticle } from "@/lib/shopify";
+import { getBlogFallbackImage } from "@/lib/blogFallbackImages";
 import { Calendar, ArrowRight, User } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -76,17 +77,11 @@ export default function Blog() {
                   <article className="h-full flex flex-col">
                     {/* Image */}
                     <div className="aspect-[16/10] rounded-xl overflow-hidden bg-secondary/50 mb-4">
-                      {article.node.image ? (
-                        <img
-                          src={article.node.image.url}
-                          alt={article.node.image.altText || article.node.title}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center">
-                          <span className="text-muted-foreground">No image</span>
-                        </div>
-                      )}
+                      <img
+                        src={article.node.image?.url || getBlogFallbackImage(article.node.handle)}
+                        alt={article.node.image?.altText || article.node.title}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
                     </div>
 
                     {/* Meta */}
