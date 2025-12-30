@@ -177,8 +177,36 @@ const EnergyHub2 = () => {
           </div>
         </section>
 
-        {/* What's Included Section */}
+        {/* Perfect For Section */}
         <section className="py-20 lg:py-28 bg-secondary/30">
+          <div className="container">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                Perfect For
+              </h2>
+              <p className="text-lg text-muted-foreground">
+                One system. Endless applications.
+              </p>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-6">
+              {useCases.map((useCase, index) => (
+                <div 
+                  key={index}
+                  className="group p-6 rounded-2xl border border-border bg-card hover:shadow-lg hover:border-primary/30 transition-all duration-300 text-center"
+                >
+                  <div className={`w-14 h-14 rounded-2xl ${useCase.bgColor} flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                    <useCase.icon className={`h-7 w-7 ${useCase.iconColor}`} />
+                  </div>
+                  <h3 className="font-semibold text-foreground mb-2">{useCase.title}</h3>
+                  <p className="text-sm text-muted-foreground">{useCase.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* What's Included Section */}
+        <section className="py-20 lg:py-28 bg-background">
           <div className="container">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
@@ -351,35 +379,6 @@ const EnergyHub2 = () => {
             </div>
           </div>
         </section>
-
-        {/* Perfect For Section */}
-        <section className="py-20 lg:py-28 bg-background">
-          <div className="container">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Perfect For
-              </h2>
-              <p className="text-lg text-muted-foreground">
-                One system. Endless applications.
-              </p>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-6">
-              {useCases.map((useCase, index) => (
-                <div 
-                  key={index}
-                  className="group p-6 rounded-2xl border border-border bg-card hover:shadow-lg hover:border-primary/30 transition-all duration-300 text-center"
-                >
-                  <div className={`w-14 h-14 rounded-2xl ${useCase.bgColor} flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                    <useCase.icon className={`h-7 w-7 ${useCase.iconColor}`} />
-                  </div>
-                  <h3 className="font-semibold text-foreground mb-2">{useCase.title}</h3>
-                  <p className="text-sm text-muted-foreground">{useCase.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Specifications Section */}
         <section className="py-20 lg:py-28 bg-secondary/30">
           <div className="container">
