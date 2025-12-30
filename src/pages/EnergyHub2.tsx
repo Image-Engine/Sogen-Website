@@ -122,9 +122,10 @@ const EnergyHub2 = () => {
                     </Button>
                   </Link>
                   <a 
-                    href="http://solagen.co.nz/wp-content/uploads/EnergyHub2-Brochure.pdf" 
+                    href="/EnergyHub2-Brochure.pdf" 
                     target="_blank" 
                     rel="noopener noreferrer"
+                    download="EnergyHub2-Brochure.pdf"
                   >
                     <Button variant="outline" size="lg">
                       Download Brochure
