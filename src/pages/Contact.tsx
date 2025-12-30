@@ -1,46 +1,9 @@
 import { Link } from "react-router-dom";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { Mail, MapPin, Clock, Send } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import { useState } from "react";
-import { useToast } from "@/hooks/use-toast";
+import { Mail, MapPin, Clock } from "lucide-react";
 
 export default function Contact() {
-  const { toast } = useToast();
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    toast({
-      title: "Message sent!",
-      description: "We'll get back to you as soon as possible.",
-    });
-    
-    setFormData({ name: "", email: "", message: "" });
-    setIsSubmitting(false);
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
-  };
-
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Header />
@@ -75,29 +38,6 @@ export default function Contact() {
                 </div>
 
                 <div className="space-y-6">
-                  {/* HIDDEN - Phone section temporarily removed
-                  <div className="flex items-start gap-4 p-4 bg-card rounded-xl border border-border">
-                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                      <Phone className="h-5 w-5 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-medium text-foreground mb-1">Phone</h3>
-                      <a 
-                        href="tel:098710505" 
-                        className="text-muted-foreground hover:text-primary transition-colors block"
-                      >
-                        09 871 0505
-                      </a>
-                      <a 
-                        href="tel:0225022377" 
-                        className="text-muted-foreground hover:text-primary transition-colors block"
-                      >
-                        022 502 2377
-                      </a>
-                    </div>
-                  </div>
-                  */}
-
                   {/* Email */}
                   <div className="flex items-start gap-4 p-4 bg-card rounded-xl border border-border">
                     <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
@@ -145,7 +85,7 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* Contact Form */}
+              {/* Tally Contact Form */}
               <div className="bg-card rounded-xl border border-border p-6 md:p-8">
                 <h2 className="text-2xl font-semibold text-foreground mb-2">
                   Email Us
@@ -154,64 +94,24 @@ export default function Contact() {
                   Fill out the form below and we'll get back to you as soon as possible.
                 </p>
 
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="name">Name</Label>
-                    <Input
-                      id="name"
-                      name="name"
-                      type="text"
-                      placeholder="Your name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      className="bg-background"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email Address</Label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      placeholder="your@email.com"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      className="bg-background"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="message">Message</Label>
-                    <Textarea
-                      id="message"
-                      name="message"
-                      placeholder="How can we help you?"
-                      rows={5}
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
-                      className="bg-background resize-none"
-                    />
-                  </div>
-
-                  <Button 
-                    type="submit" 
-                    className="w-full"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? (
-                      "Sending..."
-                    ) : (
-                      <>
-                        <Send className="h-4 w-4 mr-2" />
-                        Submit
-                      </>
-                    )}
-                  </Button>
-                </form>
+                <iframe
+                  data-tally-src="https://tally.so/embed/LZ7DM2?alignLeft=1&transparentBackground=1&dynamicHeight=1"
+                  loading="lazy"
+                  width="100%"
+                  height="400"
+                  frameBorder="0"
+                  marginHeight={0}
+                  marginWidth={0}
+                  title="Contact Form"
+                  style={{ minHeight: '400px' }}
+                ></iframe>
+                <script
+                  dangerouslySetInnerHTML={{
+                    __html: `
+                      var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w;s.onload=v;s.onerror=v;d.body.appendChild(s);}
+                    `
+                  }}
+                />
               </div>
             </div>
 
