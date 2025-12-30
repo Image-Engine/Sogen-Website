@@ -176,9 +176,11 @@ export default function PrivacyPolicy() {
                     </a>
                   </p>
                   <p>Nelson, New Zealand</p>
+                  {/* HIDDEN - Phone temporarily removed
                   <p>
                     <a href="tel:098710505" className="text-primary hover:underline">09 871 0505</a>
                   </p>
+                  */}
                   <p>
                     <a href="mailto:sales@sokbattery.co.nz" className="text-primary hover:underline">sales@sokbattery.co.nz</a>
                   </p>
