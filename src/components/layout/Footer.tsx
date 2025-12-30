@@ -38,6 +38,9 @@ const footerLinks = {
   b2b: [{
     label: "Reseller Application",
     href: "https://forms.gle/TuujWLemKf3UsSqRA"
+  }, {
+    label: "Reseller Login",
+    href: "https://solagen.qblue.biz/login"
   }]
 };
 
