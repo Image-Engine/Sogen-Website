@@ -85,10 +85,10 @@ const specs = [
   { icon: Zap, label: "Inverter Models", value: "Victron EasySolar 48/5000 or MultiPlus-II 48/8000", iconColor: "text-amber-500" },
   { icon: Battery, label: "Battery Storage", value: "10 – 25 kWh (SOK LiFePO₄)", iconColor: "text-emerald-500" },
   { icon: Sun, label: "Solar Input", value: "Up to 5.8kW, expandable with second MPPT controller", iconColor: "text-orange-500" },
+  { icon: CheckCircle2, label: "Certification", value: "NZ Electrical COC included", iconColor: "text-green-500" },
   { icon: Zap, label: "Generator Input", value: "16A or 32A PDL 56 Series input or hard wired", iconColor: "text-rose-500" },
   { icon: Shield, label: "Enclosure", value: "3mm powder-coated lockable aluminium IP54+ cabinet", iconColor: "text-blue-500" },
-  { icon: Wifi, label: "Monitoring", value: "Victron GX device with cellular/Wi-Fi modem", iconColor: "text-violet-500" },
-  { icon: CheckCircle2, label: "Certification", value: "NZ Electrical COC included", iconColor: "text-green-500" }
+  { icon: Wifi, label: "Monitoring", value: "Victron GX device with cellular/Wi-Fi modem", iconColor: "text-violet-500" }
 ];
 
 const EnergyHub2 = () => {
