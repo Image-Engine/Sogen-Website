@@ -12,7 +12,9 @@ import {
   ArrowRight,
   Package,
   Sun,
-  Gauge
+  Gauge,
+  ChevronLeft,
+  ChevronRight
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "@/components/products/ProductCard";
@@ -71,13 +73,24 @@ const voltageOptions = [
   { voltage: "48V", handle: "48v-lithium-batteries", description: "Maximum power for heavy-duty setups" }
 ];
 
+const PRODUCTS_PER_PAGE = 4;
+
 interface CollectionProducts {
   [key: string]: ShopifyProduct[];
+}
+
+interface PaginationState {
+  [key: string]: number;
 }
 
 const RVCampers = () => {
   const [collectionProducts, setCollectionProducts] = useState<CollectionProducts>({});
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState<PaginationState>({
+    "12V": 1,
+    "24V": 1,
+    "48V": 1
+  });
 
   useEffect(() => {
     async function loadAllCollections() {
@@ -85,10 +98,9 @@ const RVCampers = () => {
       const results: CollectionProducts = {};
       
       for (const option of voltageOptions) {
-        const collection = await fetchCollectionByHandle(option.handle, 8);
+        const collection = await fetchCollectionByHandle(option.handle, 50);
         // Show all products regardless of images (only homepage filters by images)
-        const products = (collection?.products || []).slice(0, 4);
-        results[option.voltage] = products;
+        results[option.voltage] = collection?.products || [];
       }
       
       setCollectionProducts(results);
@@ -96,6 +108,21 @@ const RVCampers = () => {
     }
     loadAllCollections();
   }, []);
+
+  const handlePageChange = (voltage: string, page: number) => {
+    setCurrentPage(prev => ({ ...prev, [voltage]: page }));
+  };
+
+  const getPaginatedProducts = (voltage: string) => {
+    const products = collectionProducts[voltage] || [];
+    const startIndex = (currentPage[voltage] - 1) * PRODUCTS_PER_PAGE;
+    return products.slice(startIndex, startIndex + PRODUCTS_PER_PAGE);
+  };
+
+  const getTotalPages = (voltage: string) => {
+    const products = collectionProducts[voltage] || [];
+    return Math.ceil(products.length / PRODUCTS_PER_PAGE);
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -159,7 +186,11 @@ const RVCampers = () => {
 
         {/* All Battery Collections - Stacked */}
         {voltageOptions.map((option, index) => {
-          const products = collectionProducts[option.voltage] || [];
+          const allProducts = collectionProducts[option.voltage] || [];
+          const paginatedProducts = getPaginatedProducts(option.voltage);
+          const totalPages = getTotalPages(option.voltage);
+          const page = currentPage[option.voltage];
+
           return (
             <section 
               key={option.voltage} 
@@ -179,7 +210,7 @@ const RVCampers = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
                   {loading ? (
                     <ProductGridSkeleton count={4} />
-                  ) : products.length === 0 ? (
+                  ) : allProducts.length === 0 ? (
                     <div className="col-span-full py-16 text-center">
                       <Package className="w-12 h-12 sm:w-16 sm:h-16 text-muted-foreground/30 mx-auto mb-4" />
                       <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2">No products yet</h3>
@@ -188,15 +219,52 @@ const RVCampers = () => {
                       </p>
                     </div>
                   ) : (
-                    products.map((product) => (
+                    paginatedProducts.map((product) => (
                       <ProductCard key={product.node.id} product={product} />
                     ))
                   )}
                 </div>
 
+                {/* Pagination */}
+                {!loading && totalPages > 1 && (
+                  <div className="flex items-center justify-center gap-2 mt-10">
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={() => handlePageChange(option.voltage, page - 1)}
+                      disabled={page === 1}
+                      className="h-10 w-10"
+                    >
+                      <ChevronLeft className="h-4 w-4" />
+                    </Button>
+                    
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
+                      <Button
+                        key={pageNum}
+                        variant={pageNum === page ? "default" : "outline"}
+                        size="icon"
+                        onClick={() => handlePageChange(option.voltage, pageNum)}
+                        className="h-10 w-10"
+                      >
+                        {pageNum}
+                      </Button>
+                    ))}
+                    
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={() => handlePageChange(option.voltage, page + 1)}
+                      disabled={page === totalPages}
+                      className="h-10 w-10"
+                    >
+                      <ChevronRight className="h-4 w-4" />
+                    </Button>
+                  </div>
+                )}
+
                 {/* View All Link */}
-                {products.length > 0 && (
-                  <div className="text-center mt-10">
+                {allProducts.length > 0 && (
+                  <div className="text-center mt-6">
                     <Link to={`/collections/${option.handle}`}>
                       <Button variant="outline" size="lg" className="gap-2">
                         View All {option.voltage} Batteries
