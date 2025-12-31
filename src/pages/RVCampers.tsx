@@ -148,19 +148,6 @@ const RVCampers = () => {
                 ))}
               </div>
 
-              <div className="flex flex-wrap gap-4 pt-2">
-                <Link to="/contact">
-                  <Button size="lg" className="gap-2">
-                    Get Expert Advice
-                    <ArrowRight className="h-4 w-4" />
-                  </Button>
-                </Link>
-                <Link to={`/collections/${activeOption?.handle}`}>
-                  <Button variant="outline" size="lg" className="bg-white/10 text-white border-white/30 hover:bg-white/20">
-                    View All {activeVoltage} Batteries
-                  </Button>
-                </Link>
-              </div>
             </div>
           </div>
         </section>
