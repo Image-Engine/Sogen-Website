@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { Play } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { VideoLightbox } from "@/components/VideoLightbox";
 
 const videos = [
   { id: "nY0BSsF-aSY" },
@@ -16,6 +18,8 @@ const videos = [
 ];
 
 const VideoReviews = () => {
+  const [selectedVideoId, setSelectedVideoId] = useState<string | null>(null);
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Header />
@@ -39,12 +43,10 @@ const VideoReviews = () => {
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {videos.map((video) => (
-                <a
+                <button
                   key={video.id}
-                  href={`https://www.youtube.com/watch?v=${video.id}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group relative block overflow-hidden rounded-xl bg-card shadow-md transition-all duration-300 hover:shadow-xl hover:scale-[1.02]"
+                  onClick={() => setSelectedVideoId(video.id)}
+                  className="group relative block overflow-hidden rounded-xl bg-card shadow-md transition-all duration-300 hover:shadow-xl hover:scale-[1.02] text-left"
                 >
                   {/* Thumbnail */}
                   <div className="relative aspect-video">
@@ -53,7 +55,6 @@ const VideoReviews = () => {
                       alt="Video thumbnail"
                       className="w-full h-full object-cover"
                       onError={(e) => {
-                        // Fallback to hqdefault if maxresdefault doesn't exist
                         (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${video.id}/hqdefault.jpg`;
                       }}
                     />
@@ -70,7 +71,7 @@ const VideoReviews = () => {
                       YouTube
                     </div>
                   </div>
-                </a>
+                </button>
               ))}
             </div>
           </div>
@@ -96,6 +97,13 @@ const VideoReviews = () => {
       </main>
 
       <Footer />
+
+      {/* Video Lightbox */}
+      <VideoLightbox
+        videoId={selectedVideoId}
+        isOpen={!!selectedVideoId}
+        onClose={() => setSelectedVideoId(null)}
+      />
     </div>
   );
 };
