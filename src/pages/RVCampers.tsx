@@ -78,7 +78,6 @@ interface CollectionProducts {
 const RVCampers = () => {
   const [collectionProducts, setCollectionProducts] = useState<CollectionProducts>({});
   const [loading, setLoading] = useState(true);
-  const [activeVoltage, setActiveVoltage] = useState("12V");
 
   useEffect(() => {
     async function loadAllCollections() {
@@ -97,9 +96,6 @@ const RVCampers = () => {
     }
     loadAllCollections();
   }, []);
-
-  const activeProducts = collectionProducts[activeVoltage] || [];
-  const activeOption = voltageOptions.find(v => v.voltage === activeVoltage);
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -129,24 +125,6 @@ const RVCampers = () => {
                 Power your adventures with reliable LiFePO₄ battery systems designed specifically for mobile living. 
                 From weekend getaways to full-time van life, we have the perfect battery solution for your setup.
               </p>
-              
-              {/* Voltage Selector Pills */}
-              <div className="flex gap-3 pt-4">
-                {voltageOptions.map((option) => (
-                  <button
-                    key={option.voltage}
-                    onClick={() => setActiveVoltage(option.voltage)}
-                    className={`px-6 py-3 rounded-full font-semibold text-lg transition-all duration-300 ${
-                      activeVoltage === option.voltage
-                        ? "bg-white text-foreground shadow-lg"
-                        : "bg-white/10 text-white hover:bg-white/20 backdrop-blur-sm border border-white/20"
-                    }`}
-                  >
-                    {option.voltage}
-                  </button>
-                ))}
-              </div>
-
             </div>
           </div>
         </section>
@@ -179,67 +157,58 @@ const RVCampers = () => {
           </div>
         </section>
 
-        {/* Products Section */}
-        <section className="py-16 lg:py-24 bg-background">
-          <div className="container">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                {activeVoltage} Lithium Batteries
-              </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                {activeOption?.description}
-              </p>
-              
-              {/* Voltage Tabs */}
-              <div className="flex justify-center gap-2 mt-8">
-                {voltageOptions.map((option) => (
-                  <button
-                    key={option.voltage}
-                    onClick={() => setActiveVoltage(option.voltage)}
-                    className={`px-6 py-2.5 rounded-full font-medium transition-all duration-300 ${
-                      activeVoltage === option.voltage
-                        ? "bg-foreground text-background"
-                        : "bg-secondary text-foreground hover:bg-secondary/80"
-                    }`}
-                  >
-                    {option.voltage}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Products Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-              {loading ? (
-                <ProductGridSkeleton count={4} />
-              ) : activeProducts.length === 0 ? (
-                <div className="col-span-full py-16 text-center">
-                  <Package className="w-12 h-12 sm:w-16 sm:h-16 text-muted-foreground/30 mx-auto mb-4" />
-                  <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2">No products yet</h3>
-                  <p className="text-sm sm:text-base text-muted-foreground max-w-md mx-auto px-4">
-                    Check back soon for our {activeVoltage} battery selection.
+        {/* All Battery Collections - Stacked */}
+        {voltageOptions.map((option, index) => {
+          const products = collectionProducts[option.voltage] || [];
+          return (
+            <section 
+              key={option.voltage} 
+              className={`py-16 lg:py-24 ${index % 2 === 0 ? 'bg-background' : 'bg-secondary/30'}`}
+            >
+              <div className="container">
+                <div className="text-center mb-12">
+                  <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                    {option.voltage} Lithium Batteries
+                  </h2>
+                  <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                    {option.description}
                   </p>
                 </div>
-              ) : (
-                activeProducts.map((product) => (
-                  <ProductCard key={product.node.id} product={product} />
-                ))
-              )}
-            </div>
 
-            {/* View All Link */}
-            {activeProducts.length > 0 && (
-              <div className="text-center mt-10">
-                <Link to={`/collections/${activeOption?.handle}`}>
-                  <Button variant="outline" size="lg" className="gap-2">
-                    View All {activeVoltage} Batteries
-                    <ArrowRight className="h-4 w-4" />
-                  </Button>
-                </Link>
+                {/* Products Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                  {loading ? (
+                    <ProductGridSkeleton count={4} />
+                  ) : products.length === 0 ? (
+                    <div className="col-span-full py-16 text-center">
+                      <Package className="w-12 h-12 sm:w-16 sm:h-16 text-muted-foreground/30 mx-auto mb-4" />
+                      <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2">No products yet</h3>
+                      <p className="text-sm sm:text-base text-muted-foreground max-w-md mx-auto px-4">
+                        Check back soon for our {option.voltage} battery selection.
+                      </p>
+                    </div>
+                  ) : (
+                    products.map((product) => (
+                      <ProductCard key={product.node.id} product={product} />
+                    ))
+                  )}
+                </div>
+
+                {/* View All Link */}
+                {products.length > 0 && (
+                  <div className="text-center mt-10">
+                    <Link to={`/collections/${option.handle}`}>
+                      <Button variant="outline" size="lg" className="gap-2">
+                        View All {option.voltage} Batteries
+                        <ArrowRight className="h-4 w-4" />
+                      </Button>
+                    </Link>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-        </section>
+            </section>
+          );
+        })}
 
         {/* Why Choose Section */}
         <section className="py-16 lg:py-24 bg-secondary/30">
