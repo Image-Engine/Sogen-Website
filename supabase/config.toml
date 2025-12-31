@@ -1,1 +1,4 @@
 project_id = "susilwhokudydljamsbe"
+
+[functions.fetch-google-reviews]
+verify_jwt = false
