@@ -87,10 +87,9 @@ const RVCampers = () => {
       
       for (const option of voltageOptions) {
         const collection = await fetchCollectionByHandle(option.handle, 8);
-        const productsWithImages = (collection?.products || [])
-          .filter((product) => product.node.images?.edges?.length > 0)
-          .slice(0, 4);
-        results[option.voltage] = productsWithImages;
+        // Show all products regardless of images (only homepage filters by images)
+        const products = (collection?.products || []).slice(0, 4);
+        results[option.voltage] = products;
       }
       
       setCollectionProducts(results);
