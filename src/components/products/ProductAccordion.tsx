@@ -6,6 +6,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { FileText, Package, Truck, HelpCircle, ArrowRight } from "lucide-react";
+import { RichTextDisplay } from "./RichTextDisplay";
 
 interface ProductAccordionProps {
   description: string;
@@ -24,9 +25,7 @@ export function ProductAccordion({ description, specifications }: ProductAccordi
           </div>
         </AccordionTrigger>
         <AccordionContent className="pb-6">
-          <p className="text-muted-foreground leading-relaxed whitespace-pre-wrap">
-            {description || "No description available for this product."}
-          </p>
+          <RichTextDisplay html={description} />
         </AccordionContent>
       </AccordionItem>
 
