@@ -12,10 +12,6 @@ const categories = [{
   description: "Mobile power freedom",
   image: "https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?w=800&q=80"
 }, {
-  title: "Marine",
-  description: "Boats & watercraft",
-  image: "https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=800&q=80"
-}, {
   title: "Industrial",
   description: "Heavy-duty applications",
   image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80"
