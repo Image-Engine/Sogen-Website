@@ -16,6 +16,7 @@ import ShippingReturns from "./pages/ShippingReturns";
 import Warranty from "./pages/Warranty";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import EnergyHub2 from "./pages/EnergyHub2";
+import RVCampers from "./pages/RVCampers";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -41,6 +42,7 @@ const App = () => (
           <Route path="/warranty" element={<Warranty />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/energy-hub-2" element={<EnergyHub2 />} />
+          <Route path="/rv-campers" element={<RVCampers />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
