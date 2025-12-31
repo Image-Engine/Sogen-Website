@@ -1,16 +1,10 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ShoppingCart, Package, ChevronLeft, ChevronRight } from "lucide-react";
+import { ShoppingCart, Package } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  type CarouselApi,
-} from "@/components/ui/carousel";
 
 interface ProductCardProps {
   product: ShopifyProduct;
@@ -23,18 +17,7 @@ export function ProductCard({ product }: ProductCardProps) {
   const variant = node.variants.edges[0]?.node;
   const price = node.priceRange.minVariantPrice;
   
-  const [api, setApi] = useState<CarouselApi>();
-  const [current, setCurrent] = useState(0);
-
-  const onSelect = useCallback(() => {
-    if (!api) return;
-    setCurrent(api.selectedScrollSnap());
-  }, [api]);
-
-  useState(() => {
-    if (!api) return;
-    api.on("select", onSelect);
-  });
+  const [isHovered, setIsHovered] = useState(false);
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -56,82 +39,39 @@ export function ProductCard({ product }: ProductCardProps) {
     });
   };
 
-  const handlePrev = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    api?.scrollPrev();
-  };
-
-  const handleNext = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    api?.scrollNext();
-  };
-
-  const handleDotClick = (e: React.MouseEvent, index: number) => {
-    e.preventDefault();
-    e.stopPropagation();
-    api?.scrollTo(index);
-  };
+  const primaryImage = images[0]?.node.url;
+  const hoverImage = images[1]?.node.url || primaryImage;
 
   return (
     <Link 
       to={`/product/${node.handle}`}
       className="group relative flex flex-col rounded-2xl bg-card border border-border overflow-hidden hover:shadow-product-hover transition-all duration-300"
     >
-      {/* Product Image Carousel */}
-      <div className="aspect-square bg-secondary/10 overflow-hidden relative">
+      {/* Product Image with Hover Switch */}
+      <div 
+        className="aspect-square bg-secondary/10 overflow-hidden relative"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
         {images.length > 0 ? (
-          <Carousel setApi={setApi} className="w-full h-full">
-            <CarouselContent className="h-full -ml-0">
-              {images.map((img, index) => (
-                <CarouselItem key={index} className="h-full pl-0">
-                  <img
-                    src={img.node.url}
-                    alt={img.node.altText || node.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            
-            {/* Navigation arrows - only show if multiple images */}
+          <>
+            <img
+              src={primaryImage}
+              alt={images[0]?.node.altText || node.title}
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
+                isHovered && images.length > 1 ? "opacity-0" : "opacity-100"
+              }`}
+            />
             {images.length > 1 && (
-              <>
-                <Button
-                  size="icon"
-                  variant="secondary"
-                  onClick={handlePrev}
-                  className="absolute left-2 top-1/2 -translate-y-1/2 h-8 w-8 rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-md"
-                >
-                  <ChevronLeft className="h-4 w-4" />
-                </Button>
-                <Button
-                  size="icon"
-                  variant="secondary"
-                  onClick={handleNext}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 h-8 w-8 rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-md"
-                >
-                  <ChevronRight className="h-4 w-4" />
-                </Button>
-                
-                {/* Dot indicators */}
-                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5">
-                  {images.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={(e) => handleDotClick(e, index)}
-                      className={`w-2 h-2 rounded-full transition-all ${
-                        current === index 
-                          ? "bg-primary w-4" 
-                          : "bg-background/70 hover:bg-background"
-                      }`}
-                    />
-                  ))}
-                </div>
-              </>
+              <img
+                src={hoverImage}
+                alt={images[1]?.node.altText || node.title}
+                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
+                  isHovered ? "opacity-100" : "opacity-0"
+                }`}
+              />
             )}
-          </Carousel>
+          </>
         ) : (
           <div className="w-full h-full flex items-center justify-center">
             <Package className="w-12 h-12 text-muted-foreground/30" />
