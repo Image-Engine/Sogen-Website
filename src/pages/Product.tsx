@@ -346,7 +346,7 @@ export default function Product() {
               {/* Accordion Content */}
               <div className="pt-6 border-t border-border">
                 <ProductAccordion 
-                  description={product.description}
+                  description={product.descriptionHtml}
                   specifications={{
                     "Product Type": product.productType || "N/A",
                     "Vendor": product.vendor || "N/A",
