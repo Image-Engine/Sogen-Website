@@ -13,6 +13,7 @@ import { CartDrawer } from "@/components/cart/CartDrawer";
 import { fetchCollections, ShopifyCollection } from "@/lib/shopify";
 
 const resourceItems = [
+  { label: "Video Reviews", href: "/video-reviews" },
   { label: "Blog", href: "/blog" },
   { label: "FAQ", href: "/faq" },
 ];
