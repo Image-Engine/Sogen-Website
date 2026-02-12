@@ -1,67 +1,101 @@
 
 
-## Link Categories to Pages and Create 4 New Application Pages
+## Shopify Customer Account OAuth 2.0 Login with PKCE
 
 ### Overview
-Connect the "Shop by Application" tiles on the homepage to their respective pages, and create 4 new pages (Solar Systems, Home Backup, Industrial, Accessories) using the RV & Campers page as a template.
+Implement a complete Shopify Customer Account authentication system using OAuth 2.0 with PKCE, including edge functions for token management, customer/order/address APIs, React context for auth state, and account management pages.
 
-### Changes Summary
+### Store Configuration
+The Shopify store domain is `sokbattery-frontline-shine-zq4jf.myshopify.com`. You will need to provide the numeric Shopify Store ID (found in Shopify Admin URL or via the Customer Account API settings). This ID is used in URLs like `https://shopify.com/{STORE_ID}/auth/oauth/authorize`.
 
-#### 1. Update Categories Component (`src/components/home/Categories.tsx`)
-- Add a `link` property to each category object
-- Replace `<a href="#">` with React Router `<Link to={...}>` for both mobile and desktop layouts
-- Links:
-  - Solar Systems -> `/solar-systems`
-  - Home Backup -> `/home-backup`
-  - RV & Campers -> `/rv-campers`
-  - Industrial -> `/industrial`
-  - Accessories -> `/accessories`
+### Required Secrets (3 new)
+- **SHOPIFY_CUSTOMER_API_CLIENT_ID** -- from Shopify Admin > Settings > Customer accounts > OAuth client
+- **SHOPIFY_CUSTOMER_API_CLIENT_SECRET** -- same location
+- **SHOPIFY_ACCESS_TOKEN** -- already exists in secrets (Admin API token)
 
-#### 2. Create 4 New Pages (using RV Campers template)
+### Files to Create
 
-Each page follows the same structure: Hero section, Feature Highlights Bar, Battery Collection Sections (with pagination), Why Choose Section, and CTA Section -- with content tailored to the application.
+#### 1. Types (`src/types/shopifyCustomer.ts`)
+TypeScript interfaces for: `ShopifyCustomer`, `ShopifyAddress`, `ShopifyOrder`, `ShopifyOrderLineItem`, `ShopifyFulfillment`, `ShopifyMoney`, `ShopifyAuthTokens`, `PKCEParams`
 
-**a. `src/pages/SolarSystems.tsx`**
-- Hero: Solar-themed imagery and copy about grid-tied and off-grid solar battery solutions
-- Highlights bar: Solar-specific benefits (e.g., MPPT Compatible, Max Solar Harvest, etc.)
-- Collections: 12V, 24V, 48V lithium batteries (same Shopify collections)
-- Features: Solar-specific features (Solar Optimized Charging, High Cycle Life, Parallel Expandable, etc.)
-- CTA: "Need Help Designing Your Solar System?"
+#### 2. OAuth Library (`src/lib/shopifyOAuth.ts`)
+- PKCE helpers: `generatePKCEParams()`, `storePKCEParams()`, `retrievePKCEParams()` using `crypto.subtle` for SHA-256 code challenge
+- `buildAuthorizationUrl()` targeting `https://shopify.com/{STORE_ID}/auth/oauth/authorize` with scopes `openid email customer-account-api:full`
+- Token storage in localStorage: `storeTokens()`, `getStoredToken()`, `getStoredRefreshToken()`, `clearTokens()`, `isTokenExpiringSoon()`
+- `getRedirectUri()` returning `{origin}/auth/callback`
+- Edge function caller helper using `VITE_SUPABASE_URL`
 
-**b. `src/pages/HomeBackup.tsx`**
-- Hero: Home/residential imagery with copy about reliable home power backup
-- Highlights bar: Home-specific benefits (e.g., Whole Home Backup, Silent Operation, etc.)
-- Collections: 12V, 24V, 48V lithium batteries
-- Features: Home backup features (Seamless Switchover, Quiet Operation, Scalable Storage, Grid Independence, etc.)
-- CTA: "Need Help Setting Up Home Backup?"
+#### 3. Edge Function: `shopify-oauth` (`supabase/functions/shopify-oauth/index.ts`)
+Single function with action-based routing via POST body `{ action, ... }`:
+- **getClientId** -- returns `SHOPIFY_CUSTOMER_API_CLIENT_ID`
+- **exchangeToken** -- exchanges authorization code + PKCE verifier for tokens via Shopify's token endpoint
+- **refreshToken** -- refreshes expired access tokens
+- **getCustomer** -- GraphQL query to Customer Account API for profile data
+- **getOrders** -- fetches order history via Customer Account API GraphQL
+- **getOrder** -- fetches single order by ID
+- **getAddresses** / **createAddress** / **updateAddress** / **deleteAddress** / **setDefaultAddress** -- full CRUD for customer addresses
+- **updateCustomer** -- updates first name, last name, phone
 
-**c. `src/pages/Industrial.tsx`**
-- Hero: Industrial/commercial imagery with copy about heavy-duty power solutions
-- Highlights bar: Industrial benefits (e.g., High Discharge Rate, Rack Mountable, etc.)
-- Collections: 12V, 24V, 48V lithium batteries
-- Features: Industrial features (High Power Output, Server Rack Compatible, Remote Monitoring, etc.)
-- CTA: "Need a Custom Industrial Solution?"
+#### 4. Edge Function: `shopify-customer` (`supabase/functions/shopify-customer/index.ts`)
+Admin API calls using existing `SHOPIFY_ACCESS_TOKEN` for data not available via Customer Account API (e.g., customer tags, marketing status).
 
-**d. `src/pages/Accessories.tsx`**
-- Hero: Accessories-themed imagery with copy about cables, chargers, and components
-- Highlights bar: Accessory benefits (e.g., OEM Quality, Plug & Play, etc.)
-- Collections: Instead of voltage-based sections, this page will show accessory-type collections (e.g., "cables-connectors", "circuit-protection", "chargers") if available, or a single products grid
-- Features: Accessory features (Perfect Fit, Quality Certified, Easy Installation, etc.)
-- CTA: "Need Help Finding the Right Accessories?"
+#### 5. Auth Context (`src/contexts/ShopifyCustomerContext.tsx`)
+React context providing:
+- State: `isAuthenticated`, `isLoading`, `customer`, `accessToken`
+- Methods: `initiateLogin()`, `exchangeCodeForToken()`, `refreshAccessToken()`, `logout()`, `fetchCustomer()`, `fetchOrders()`, `fetchOrder()`, `fetchAddresses()`, `createAddress()`, `updateAddress()`, `deleteAddress()`, `setDefaultAddress()`, `updateCustomer()`
+- Auto-fetches customer on token load
+- Auto-refreshes tokens before expiry (checks `isTokenExpiringSoon()`)
 
-#### 3. Add Routes (`src/App.tsx`)
-Add 4 new routes:
-- `/solar-systems` -> `SolarSystems`
-- `/home-backup` -> `HomeBackup`
-- `/industrial` -> `Industrial`
-- `/accessories` -> `Accessories`
+#### 6. Protected Route (`src/components/auth/ProtectedRoute.tsx`)
+Wrapper component that redirects unauthenticated users to `/account/login`.
+
+#### 7. Pages
+
+| Route | File | Description |
+|---|---|---|
+| `/account/login` | `src/pages/account/Login.tsx` | Immediately initiates OAuth redirect (no form) |
+| `/auth/callback` | `src/pages/auth/Callback.tsx` | Handles OAuth callback, verifies state, exchanges code, redirects to `/` |
+| `/account` | `src/pages/account/Dashboard.tsx` | Shows customer name + recent orders |
+| `/account/orders` | `src/pages/account/Orders.tsx` | Order history list |
+| `/account/orders/:id` | `src/pages/account/OrderDetail.tsx` | Single order detail |
+| `/account/addresses` | `src/pages/account/Addresses.tsx` | Address CRUD with default support |
+| `/account/profile` | `src/pages/account/Profile.tsx` | Edit name and phone |
+
+#### 8. Header Update (`src/components/layout/Header.tsx`)
+- Replace the static User icon button with conditional logic:
+  - **Guest**: clicking triggers `initiateLogin()`
+  - **Authenticated**: shows dropdown menu with My Account, Orders, Addresses, Profile, Sign Out
+
+#### 9. App.tsx Updates
+- Wrap app in `ShopifyCustomerProvider`
+- Add all new routes
+- `/auth/callback` route outside protected wrapper
+- `/account/*` routes wrapped in `ProtectedRoute`
+
+#### 10. Config Updates
+- `supabase/config.toml`: add `[functions.shopify-oauth]` and `[functions.shopify-customer]` with `verify_jwt = false`
 
 ### Technical Details
 
-- All new pages import the same shared components: `Header`, `Footer`, `ProductCard`, `ProductGridSkeleton`, `Button`, and Lucide icons
-- All pages use the same `fetchCollectionByHandle` function from `src/lib/shopify.ts` to fetch products
-- Each page uses the same pagination logic as RV Campers (4 products per page with chevron navigation)
-- Hero backgrounds will use high-quality Unsplash images (similar to the category tiles) since we don't have dedicated hero images for these pages yet
-- All pages are fully responsive following the existing mobile-first patterns
-- The Accessories page may use different Shopify collection handles if accessory-specific collections exist; otherwise it will show the same voltage-based collections with accessory-focused messaging
+**PKCE Flow:**
+1. User clicks login -> generate code_verifier + code_challenge (SHA-256)
+2. Store verifier + random state in sessionStorage
+3. Redirect to Shopify authorization URL with code_challenge
+4. Shopify redirects back to `/auth/callback` with code + state
+5. Verify state matches, send code + verifier to edge function
+6. Edge function exchanges for access_token + refresh_token
+7. Store tokens in localStorage, fetch customer profile
+
+**Customer Account API GraphQL endpoint:**
+`https://shopify.com/{STORE_ID}/account/customer/api/2025-01/graphql`
+
+**Token endpoint:**
+`https://shopify.com/{STORE_ID}/auth/oauth/token`
+
+**Authorization endpoint:**
+`https://shopify.com/{STORE_ID}/auth/oauth/authorize`
+
+**Edge function CORS headers** follow existing pattern from `fetch-google-reviews`.
+
+**Styling** follows existing patterns: Tailwind classes, shadcn/ui components (Card, Button, Badge, Sheet, DropdownMenu), consistent with current Header and page layouts.
 
