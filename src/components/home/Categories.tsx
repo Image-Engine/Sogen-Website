@@ -1,24 +1,30 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 const categories = [{
   title: "Solar Systems",
   description: "Grid-tied & off-grid solutions",
-  image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80"
+  image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80",
+  link: "/solar-systems"
 }, {
   title: "Home Backup",
   description: "Reliable power storage",
-  image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
+  image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+  link: "/home-backup"
 }, {
   title: "RV & Campers",
   description: "Mobile power freedom",
-  image: "https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?w=800&q=80"
+  image: "https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?w=800&q=80",
+  link: "/rv-campers"
 }, {
   title: "Industrial",
   description: "Heavy-duty applications",
-  image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80"
+  image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80",
+  link: "/industrial"
 }, {
   title: "Accessories",
   description: "Chargers, cables & more",
-  image: "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=800&q=80"
+  image: "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=800&q=80",
+  link: "/accessories"
 }];
 export function Categories() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(1);
@@ -40,9 +46,9 @@ export function Categories() {
         {/* Mobile Grid */}
         <div className="grid grid-cols-2 gap-3 sm:hidden">
           {categories.map((category) => (
-            <a
+            <Link
               key={category.title}
-              href="#"
+              to={category.link}
               className="relative overflow-hidden rounded-xl aspect-[4/5] cursor-pointer group"
             >
               <img
@@ -59,16 +65,16 @@ export function Categories() {
                   {category.description}
                 </p>
               </div>
-            </a>
+            </Link>
           ))}
         </div>
 
         {/* Tablet/Desktop: Expand on Hover */}
         <div className="hidden sm:flex gap-3 lg:gap-4 h-[350px] md:h-[400px] lg:h-[500px]">
           {categories.map((category, index) => (
-            <a
+            <Link
               key={category.title}
-              href="#"
+              to={category.link}
               className={`relative overflow-hidden rounded-2xl lg:rounded-3xl cursor-pointer transition-all duration-500 ease-out ${
                 hoveredIndex === index ? "flex-[3]" : "flex-1"
               }`}
@@ -115,7 +121,7 @@ export function Categories() {
                   hoveredIndex === index ? "opacity-100" : "opacity-0"
                 }`}
               />
-            </a>
+            </Link>
           ))}
         </div>
       </div>
