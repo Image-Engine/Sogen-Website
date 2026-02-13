@@ -115,12 +115,10 @@ const EnergyHub2 = () => {
                   Turnkey, pre-wired solar power systems that combine Victron inverter technology and SOK LiFePO₄ batteries in a NZ-made, weatherproof cabinet — ready to power your home, bach, or tiny house, on-grid or off-grid.
                 </p>
                 <div className="flex flex-wrap gap-4 pt-4">
-                  <Link to="/contact">
-                    <Button size="lg" className="gap-2">
+                  <Button size="lg" className="gap-2" onClick={() => document.getElementById('custom-quote')?.scrollIntoView({ behavior: 'smooth' })}>
                       Request a Custom Quote
                       <ArrowRight className="h-4 w-4" />
                     </Button>
-                  </Link>
                   <a 
                     href="/EnergyHub2-Brochure.pdf" 
                     target="_blank" 
@@ -421,7 +419,7 @@ const EnergyHub2 = () => {
         </section>
 
         {/* Shopify Contact Form Section */}
-        <section className="py-20 lg:py-28 bg-secondary/30">
+        <section id="custom-quote" className="py-20 lg:py-28 bg-secondary/30 scroll-mt-20">
           <div className="container">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
