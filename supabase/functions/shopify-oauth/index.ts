@@ -166,8 +166,8 @@ serve(async (req) => {
             id firstName lastName
             emailAddress { emailAddress }
             phoneNumber { phoneNumber }
-            defaultAddress { id firstName lastName company address1 address2 city province provinceCode country countryCode zip phone }
-            addresses(first: 20) { edges { node { id firstName lastName company address1 address2 city province provinceCode country countryCode zip phone } } }
+            defaultAddress { id firstName lastName company address1 address2 city province country zip }
+            addresses(first: 20) { edges { node { id firstName lastName company address1 address2 city province country zip } } }
           }
         }`);
         console.log("[getCustomer] success, customer id:", data.customer?.id);
@@ -225,7 +225,7 @@ serve(async (req) => {
       const data = await customerGql(storeId, body.accessToken, `{
         customer {
           defaultAddress { id }
-          addresses(first: 20) { edges { node { id firstName lastName company address1 address2 city province provinceCode country countryCode zip phone } } }
+          addresses(first: 20) { edges { node { id firstName lastName company address1 address2 city province country zip } } }
         }
       }`);
       const defaultId = data.customer.defaultAddress?.id;
@@ -241,7 +241,7 @@ serve(async (req) => {
       const { address } = body;
       const data = await customerGql(storeId, body.accessToken, `mutation($address: CustomerAddressInput!) {
         customerAddressCreate(address: $address) {
-          customerAddress { id firstName lastName company address1 address2 city province provinceCode country countryCode zip phone }
+          customerAddress { id firstName lastName company address1 address2 city province country zip }
           userErrors { field message }
         }
       }`, { address });
@@ -256,7 +256,7 @@ serve(async (req) => {
       const { addressId, address } = body;
       const data = await customerGql(storeId, body.accessToken, `mutation($addressId: ID!, $address: CustomerAddressInput!) {
         customerAddressUpdate(addressId: $addressId, address: $address) {
-          customerAddress { id firstName lastName company address1 address2 city province provinceCode country countryCode zip phone }
+          customerAddress { id firstName lastName company address1 address2 city province country zip }
           userErrors { field message }
         }
       }`, { addressId, address });
