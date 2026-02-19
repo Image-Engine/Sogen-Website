@@ -22,14 +22,6 @@ export default function Callback() {
         return;
       }
       await fetchCustomer();
-
-      // If opened as popup, notify opener and close
-      if (window.opener) {
-        window.opener.postMessage({ type: "shopify-oauth-complete" }, window.location.origin);
-        window.close();
-        return;
-      }
-
       navigate("/account", { replace: true });
     })();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
