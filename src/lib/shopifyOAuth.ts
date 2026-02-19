@@ -61,7 +61,11 @@ export function isTokenExpiringSoon(bufferMs = 60_000): boolean {
 }
 
 export function getRedirectUri(): string {
-  return `${window.location.origin}/auth/callback`;
+  // Use current origin for the redirect URI - must match exactly what's configured in Shopify Headless settings
+  const origin = window.location.origin;
+  const uri = `${origin}/auth/callback`;
+  console.log("[ShopifyOAuth] redirect_uri:", uri);
+  return uri;
 }
 
 export async function callEdgeFunction(functionName: string, body: Record<string, unknown>): Promise<any> {
