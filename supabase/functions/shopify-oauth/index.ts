@@ -36,14 +36,22 @@ function extractStoreId(issuer: string): string {
   return match[1];
 }
 
+// Format access token with required shcat_ prefix for Customer Account API
+function formatAccessToken(token: string): string {
+  if (token.startsWith("shcat_")) return token;
+  return `shcat_${token}`;
+}
+
 // GraphQL helper for Customer Account API
 async function customerGql(storeId: string, accessToken: string, query: string, variables: Record<string, unknown> = {}) {
   const url = `https://shopify.com/${storeId}/account/customer/api/2025-01/graphql`;
+  const formattedToken = formatAccessToken(accessToken);
+  console.log("[customerGql] token prefix:", formattedToken.substring(0, 10) + "...");
   const res = await fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${accessToken}`,
+      Authorization: formattedToken,
     },
     body: JSON.stringify({ query, variables }),
   });
