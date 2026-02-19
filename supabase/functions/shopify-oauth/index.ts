@@ -19,6 +19,23 @@ function getEnv(key: string): string {
   return v;
 }
 
+// Fetch and cache OpenID configuration to get correct OAuth endpoints
+let _oidcConfig: Record<string, string> | null = null;
+async function getOidcConfig(storeDomain: string): Promise<Record<string, string>> {
+  if (_oidcConfig) return _oidcConfig;
+  const res = await fetch(`https://${storeDomain}/.well-known/openid-configuration`);
+  if (!res.ok) throw new Error("Failed to fetch OpenID configuration from " + storeDomain);
+  _oidcConfig = await res.json();
+  return _oidcConfig!;
+}
+
+// Extract numeric store ID from OIDC issuer
+function extractStoreId(issuer: string): string {
+  const match = issuer.match(/\/(\d+)$/);
+  if (!match) throw new Error("Could not extract numeric store ID from issuer: " + issuer);
+  return match[1];
+}
+
 // GraphQL helper for Customer Account API
 async function customerGql(storeId: string, accessToken: string, query: string, variables: Record<string, unknown> = {}) {
   const url = `https://shopify.com/${storeId}/account/customer/api/2025-01/graphql`;
@@ -43,11 +60,21 @@ serve(async (req) => {
     const { action } = body;
     const clientId = getEnv("SHOPIFY_CUSTOMER_API_CLIENT_ID");
     const clientSecret = getEnv("SHOPIFY_CUSTOMER_API_CLIENT_SECRET");
-    const storeId = getEnv("SHOPIFY_STORE_ID");
+    const storeDomain = Deno.env.get("SHOPIFY_STORE_DOMAIN") || "sokbattery-frontline-shine-zq4jf.myshopify.com";
+
+    // Fetch OIDC config to get correct endpoints and numeric store ID
+    const oidc = await getOidcConfig(storeDomain);
+    const storeId = extractStoreId(oidc.issuer);
 
     // Public actions (needed for OAuth initiation from browser)
     if (action === "getClientId") return json({ clientId });
     if (action === "getStoreId") return json({ storeId });
+    if (action === "getAuthConfig") {
+      return json({
+        authorizationEndpoint: oidc.authorization_endpoint,
+        tokenEndpoint: oidc.token_endpoint,
+      });
+    }
 
     // Actions that require a Shopify customer accessToken
     const protectedActions = [
@@ -76,7 +103,7 @@ serve(async (req) => {
     // ── exchangeToken ──
     if (action === "exchangeToken") {
       const { code, codeVerifier, redirectUri } = body;
-      const tokenUrl = `https://shopify.com/${storeId}/auth/oauth/token`;
+      const tokenUrl = oidc.token_endpoint;
       const res = await fetch(tokenUrl, {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -97,7 +124,7 @@ serve(async (req) => {
     // ── refreshToken ──
     if (action === "refreshToken") {
       const { refreshToken } = body;
-      const tokenUrl = `https://shopify.com/${storeId}/auth/oauth/token`;
+      const tokenUrl = oidc.token_endpoint;
       const res = await fetch(tokenUrl, {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },

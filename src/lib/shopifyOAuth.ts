@@ -82,7 +82,7 @@ export async function buildAuthorizationUrl(): Promise<string> {
   const { clientId } = await callEdgeFunction("shopify-oauth", { action: "getClientId" });
   const pkce = await generatePKCEParams();
   storePKCEParams(pkce);
-  const { storeId } = await callEdgeFunction("shopify-oauth", { action: "getStoreId" });
+  const { authorizationEndpoint } = await callEdgeFunction("shopify-oauth", { action: "getAuthConfig" });
   const params = new URLSearchParams({
     client_id: clientId,
     response_type: "code",
@@ -92,5 +92,5 @@ export async function buildAuthorizationUrl(): Promise<string> {
     code_challenge: pkce.codeChallenge,
     code_challenge_method: "S256",
   });
-  return `https://shopify.com/${storeId}/auth/oauth/authorize?${params.toString()}`;
+  return `${authorizationEndpoint}?${params.toString()}`;
 }

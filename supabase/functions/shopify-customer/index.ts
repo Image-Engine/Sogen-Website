@@ -26,19 +26,26 @@ serve(async (req) => {
     }
 
     // Validate the caller's token by making a lightweight call to Shopify Customer Account API
-    const storeId = Deno.env.get("SHOPIFY_STORE_ID");
-    if (storeId) {
-      const verifyUrl = `https://shopify.com/${storeId}/account/customer/api/2025-01/graphql`;
-      const verifyRes = await fetch(verifyUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${body.accessToken}`,
-        },
-        body: JSON.stringify({ query: "{ customer { id } }" }),
-      });
-      if (!verifyRes.ok) {
-        return json({ error: "Unauthorized: invalid accessToken" }, 401);
+    const storeDomain = Deno.env.get("SHOPIFY_STORE_DOMAIN") || "sokbattery-frontline-shine-zq4jf.myshopify.com";
+    // Discover numeric store ID from OpenID config
+    const oidcRes = await fetch(`https://${storeDomain}/.well-known/openid-configuration`);
+    if (oidcRes.ok) {
+      const oidc = await oidcRes.json();
+      const idMatch = oidc.issuer?.match(/\/(\d+)$/);
+      const numericId = idMatch ? idMatch[1] : null;
+      if (numericId) {
+        const verifyUrl = `https://shopify.com/${numericId}/account/customer/api/2025-01/graphql`;
+        const verifyRes = await fetch(verifyUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${body.accessToken}`,
+          },
+          body: JSON.stringify({ query: "{ customer { id } }" }),
+        });
+        if (!verifyRes.ok) {
+          return json({ error: "Unauthorized: invalid accessToken" }, 401);
+        }
       }
     }
 
