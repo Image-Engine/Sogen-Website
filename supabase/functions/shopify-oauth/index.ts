@@ -45,11 +45,33 @@ serve(async (req) => {
     const clientSecret = getEnv("SHOPIFY_CUSTOMER_API_CLIENT_SECRET");
     const storeId = getEnv("SHOPIFY_STORE_ID");
 
-    // ── getClientId ──
+    // Public actions (needed for OAuth initiation from browser)
     if (action === "getClientId") return json({ clientId });
-
-    // ── getStoreId ──
     if (action === "getStoreId") return json({ storeId });
+
+    // Actions that require a Shopify customer accessToken
+    const protectedActions = [
+      "getCustomer", "getOrders", "getOrder", "getAddresses",
+      "createAddress", "updateAddress", "deleteAddress",
+      "setDefaultAddress", "updateCustomer",
+    ];
+    if (protectedActions.includes(action)) {
+      if (!body.accessToken || typeof body.accessToken !== "string") {
+        return json({ error: "Missing or invalid accessToken" }, 401);
+      }
+    }
+
+    // exchangeToken and refreshToken require their respective parameters
+    if (action === "exchangeToken") {
+      if (!body.code || !body.codeVerifier || !body.redirectUri) {
+        return json({ error: "Missing required parameters for token exchange" }, 400);
+      }
+    }
+    if (action === "refreshToken") {
+      if (!body.refreshToken) {
+        return json({ error: "Missing refreshToken" }, 400);
+      }
+    }
 
     // ── exchangeToken ──
     if (action === "exchangeToken") {

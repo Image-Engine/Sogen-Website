@@ -19,6 +19,29 @@ serve(async (req) => {
   try {
     const body = await req.json();
     const { action, customerId } = body;
+
+    // Require a Shopify customer accessToken to prove the caller is authenticated
+    if (!body.accessToken || typeof body.accessToken !== "string") {
+      return json({ error: "Unauthorized: missing accessToken" }, 401);
+    }
+
+    // Validate the caller's token by making a lightweight call to Shopify Customer Account API
+    const storeId = Deno.env.get("SHOPIFY_STORE_ID");
+    if (storeId) {
+      const verifyUrl = `https://shopify.com/${storeId}/account/customer/api/2025-01/graphql`;
+      const verifyRes = await fetch(verifyUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${body.accessToken}`,
+        },
+        body: JSON.stringify({ query: "{ customer { id } }" }),
+      });
+      if (!verifyRes.ok) {
+        return json({ error: "Unauthorized: invalid accessToken" }, 401);
+      }
+    }
+
     const shopDomain = Deno.env.get("SHOPIFY_STORE_DOMAIN") || "sokbattery-frontline-shine-zq4jf.myshopify.com";
     const adminToken = Deno.env.get("SHOPIFY_ACCESS_TOKEN");
     if (!adminToken) throw new Error("Missing SHOPIFY_ACCESS_TOKEN");
