@@ -1,16 +1,18 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Search, User, Menu, X, ChevronDown } from "lucide-react";
+import { Search, User, Menu, X, ChevronDown, LogOut, Package, MapPin, UserCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import sokLogo from "@/assets/sok-logo.webp";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 import { fetchCollections, ShopifyCollection } from "@/lib/shopify";
+import { useShopifyCustomer } from "@/contexts/ShopifyCustomerContext";
 
 const resourceItems = [
   { label: "Video Reviews", href: "/video-reviews" },
@@ -23,6 +25,7 @@ export function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [collections, setCollections] = useState<ShopifyCollection[]>([]);
   const [collectionsOpen, setCollectionsOpen] = useState(false);
+  const { isAuthenticated, customer, initiateLogin, logout } = useShopifyCustomer();
 
   useEffect(() => {
     const loadCollections = async () => {
@@ -149,9 +152,31 @@ export function Header() {
             </div>
 
             {/* Account */}
-            <Button variant="ghost" size="icon" className="hidden sm:flex">
-              <User className="h-5 w-5" />
-            </Button>
+            {isAuthenticated ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="icon" className="hidden sm:flex">
+                    <User className="h-5 w-5" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-48">
+                  {customer && (
+                    <div className="px-2 py-1.5 text-sm font-medium">{customer.firstName} {customer.lastName}</div>
+                  )}
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild><Link to="/account"><UserCircle className="h-4 w-4 mr-2" />My Account</Link></DropdownMenuItem>
+                  <DropdownMenuItem asChild><Link to="/account/orders"><Package className="h-4 w-4 mr-2" />Orders</Link></DropdownMenuItem>
+                  <DropdownMenuItem asChild><Link to="/account/addresses"><MapPin className="h-4 w-4 mr-2" />Addresses</Link></DropdownMenuItem>
+                  <DropdownMenuItem asChild><Link to="/account/profile"><User className="h-4 w-4 mr-2" />Profile</Link></DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={logout}><LogOut className="h-4 w-4 mr-2" />Sign Out</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Button variant="ghost" size="icon" className="hidden sm:flex" onClick={() => initiateLogin()}>
+                <User className="h-5 w-5" />
+              </Button>
+            )}
 
             {/* Cart */}
             <CartDrawer />

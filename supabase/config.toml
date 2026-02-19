@@ -2,3 +2,9 @@ project_id = "susilwhokudydljamsbe"
 
 [functions.fetch-google-reviews]
 verify_jwt = false
+
+[functions.shopify-oauth]
+verify_jwt = false
+
+[functions.shopify-customer]
+verify_jwt = false
