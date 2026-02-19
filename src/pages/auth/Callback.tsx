@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useShopifyCustomer } from "@/contexts/ShopifyCustomerContext";
 
@@ -7,11 +7,11 @@ export default function Callback() {
   const navigate = useNavigate();
   const { exchangeCodeForToken, fetchCustomer } = useShopifyCustomer();
   const [error, setError] = useState<string | null>(null);
-  const [processed, setProcessed] = useState(false);
+  const processedRef = useRef(false);
 
   useEffect(() => {
-    if (processed) return;
-    setProcessed(true);
+    if (processedRef.current) return;
+    processedRef.current = true;
 
     const code = searchParams.get("code");
     const state = searchParams.get("state");

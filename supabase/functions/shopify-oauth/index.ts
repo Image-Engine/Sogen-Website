@@ -104,6 +104,11 @@ serve(async (req) => {
     if (action === "exchangeToken") {
       const { code, codeVerifier, redirectUri } = body;
       const tokenUrl = oidc.token_endpoint;
+      console.log("[exchangeToken] tokenUrl:", tokenUrl);
+      console.log("[exchangeToken] redirectUri:", redirectUri);
+      console.log("[exchangeToken] clientId:", clientId);
+      console.log("[exchangeToken] code length:", code?.length);
+      console.log("[exchangeToken] codeVerifier length:", codeVerifier?.length);
       const res = await fetch(tokenUrl, {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -117,6 +122,9 @@ serve(async (req) => {
         }),
       });
       const tokens = await res.json();
+      console.log("[exchangeToken] response status:", res.status);
+      console.log("[exchangeToken] response keys:", Object.keys(tokens));
+      if (tokens.error) console.log("[exchangeToken] error:", tokens.error, tokens.error_description);
       if (!res.ok) return json({ error: tokens.error_description || tokens.error || "Token exchange failed" }, 400);
       return json(tokens);
     }
@@ -142,16 +150,24 @@ serve(async (req) => {
 
     // ── getCustomer ──
     if (action === "getCustomer") {
-      const data = await customerGql(storeId, body.accessToken, `{
-        customer {
-          id firstName lastName
-          emailAddress { emailAddress }
-          phoneNumber { phoneNumber }
-          defaultAddress { id firstName lastName company address1 address2 city province provinceCode country countryCode zip phone }
-          addresses(first: 20) { edges { node { id firstName lastName company address1 address2 city province provinceCode country countryCode zip phone } } }
-        }
-      }`);
-      return json(data.customer);
+      console.log("[getCustomer] storeId:", storeId);
+      console.log("[getCustomer] accessToken length:", body.accessToken?.length);
+      try {
+        const data = await customerGql(storeId, body.accessToken, `{
+          customer {
+            id firstName lastName
+            emailAddress { emailAddress }
+            phoneNumber { phoneNumber }
+            defaultAddress { id firstName lastName company address1 address2 city province provinceCode country countryCode zip phone }
+            addresses(first: 20) { edges { node { id firstName lastName company address1 address2 city province provinceCode country countryCode zip phone } } }
+          }
+        }`);
+        console.log("[getCustomer] success, customer id:", data.customer?.id);
+        return json(data.customer);
+      } catch (err) {
+        console.log("[getCustomer] error:", err.message);
+        throw err;
+      }
     }
 
     // ── getOrders ──
