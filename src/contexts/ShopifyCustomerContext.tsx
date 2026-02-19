@@ -91,6 +91,26 @@ export function ShopifyCustomerProvider({ children }: { children: React.ReactNod
     })();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // Listen for popup OAuth completion
+  useEffect(() => {
+    const handler = (event: MessageEvent) => {
+      if (event.origin === window.location.origin && event.data?.type === "shopify-oauth-complete") {
+        // Token was stored by popup's Callback page, reload state
+        const token = getStoredToken();
+        if (token) {
+          setAccessToken(token);
+          setIsLoading(true);
+          (async () => {
+            await fetchCustomer();
+            setIsLoading(false);
+          })();
+        }
+      }
+    };
+    window.addEventListener("message", handler);
+    return () => window.removeEventListener("message", handler);
+  }, [fetchCustomer]);
+
   // Token refresh interval
   useEffect(() => {
     if (!accessToken) return;
@@ -102,7 +122,12 @@ export function ShopifyCustomerProvider({ children }: { children: React.ReactNod
 
   const initiateLogin = useCallback(async () => {
     const url = await buildAuthorizationUrl();
-    window.location.href = url;
+    // Use popup to bypass iframe third-party cookie restrictions
+    const popup = window.open(url, "shopify-oauth", "width=500,height=700");
+    if (!popup) {
+      // Fallback to redirect if popup blocked
+      window.location.href = url;
+    }
   }, []);
 
   const exchangeCodeForToken = useCallback(async (code: string, state: string) => {
