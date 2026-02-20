@@ -21,6 +21,11 @@ const categories = [{
   image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80",
   link: "/industrial"
 }, {
+  title: "Victron",
+  description: "Professional power electronics",
+  image: "https://images.unsplash.com/photo-1548614606-52b4451f994b?w=800&q=80",
+  link: "/victron"
+}, {
   title: "Accessories",
   description: "Chargers, cables & more",
   image: "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=800&q=80",
