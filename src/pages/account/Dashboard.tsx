@@ -15,7 +15,10 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchOrders().then((o) => { setOrders(o.slice(0, 5)); setLoading(false); });
+    fetchOrders()
+      .then((o) => { setOrders((o || []).slice(0, 5)); })
+      .catch(() => { setOrders([]); })
+      .finally(() => setLoading(false));
   }, [fetchOrders]);
 
   return (
