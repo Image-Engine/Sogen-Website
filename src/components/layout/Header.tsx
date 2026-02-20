@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Loader2 } from "lucide-react";
 import { Search, User, Menu, X, ChevronDown, LogOut, Package, MapPin, UserCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -25,6 +26,7 @@ export function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [collections, setCollections] = useState<ShopifyCollection[]>([]);
   const [collectionsOpen, setCollectionsOpen] = useState(false);
+  const [signingIn, setSigningIn] = useState(false);
   const { isAuthenticated, customer, initiateLogin, logout } = useShopifyCustomer();
 
   useEffect(() => {
@@ -173,8 +175,17 @@ export function Header() {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <Button variant="ghost" size="icon" className="hidden sm:flex" onClick={() => initiateLogin()}>
-                <User className="h-5 w-5" />
+              <Button
+                variant="ghost"
+                size="icon"
+                className="hidden sm:flex"
+                disabled={signingIn}
+                onClick={() => {
+                  setSigningIn(true);
+                  initiateLogin();
+                }}
+              >
+                {signingIn ? <Loader2 className="h-5 w-5 animate-spin" /> : <User className="h-5 w-5" />}
               </Button>
             )}
 
