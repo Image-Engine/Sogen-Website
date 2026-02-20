@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import victronBattery from "@/assets/victron-battery.webp";
 const categories = [{
   title: "Solar Systems",
   description: "Grid-tied & off-grid solutions",
@@ -23,7 +24,7 @@ const categories = [{
 }, {
   title: "Victron",
   description: "Professional power electronics",
-  image: "https://images.unsplash.com/photo-1548614606-52b4451f994b?w=800&q=80",
+  image: victronBattery,
   link: "/victron"
 }, {
   title: "Accessories",
