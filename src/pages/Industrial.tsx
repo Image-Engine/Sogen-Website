@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Link } from "react-router-dom";
 import { 
   Zap, Shield, Battery, Factory, Wifi, CheckCircle2, ArrowRight, Package, 
-  Server, Gauge, ChevronLeft, ChevronRight 
+  Server, Gauge, Filter
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "@/components/products/ProductCard";
 import { ProductGridSkeleton } from "@/components/products/ProductGridSkeleton";
 import { fetchCollectionByHandle, ShopifyProduct } from "@/lib/shopify";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 const features = [
   {
@@ -62,15 +63,13 @@ const voltageOptions = [
   { voltage: "48V", handle: "48v-lithium-batteries", description: "High-voltage systems for heavy-duty industrial applications" }
 ];
 
-const PRODUCTS_PER_PAGE = 4;
-
 interface CollectionProducts { [key: string]: ShopifyProduct[] }
-interface PaginationState { [key: string]: number }
 
 const Industrial = () => {
   const [collectionProducts, setCollectionProducts] = useState<CollectionProducts>({});
   const [loading, setLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState<PaginationState>({ "12V": 1, "24V": 1, "48V": 1 });
+  const [activeVoltage, setActiveVoltage] = useState<string>("all");
+  const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   useEffect(() => {
     async function loadAllCollections() {
@@ -86,83 +85,177 @@ const Industrial = () => {
     loadAllCollections();
   }, []);
 
-  const handlePageChange = (voltage: string, page: number) => {
-    setCurrentPage(prev => ({ ...prev, [voltage]: page }));
+  const handleCategoryClick = (voltage: string) => {
+    setActiveVoltage(voltage);
+    if (voltage === "all") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      const el = sectionRefs.current[voltage];
+      if (el) {
+        const headerOffset = 80;
+        const elementPosition = el.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({ top: elementPosition - headerOffset, behavior: "smooth" });
+      }
+    }
   };
 
-  const getPaginatedProducts = (voltage: string) => {
-    const products = collectionProducts[voltage] || [];
-    const startIndex = (currentPage[voltage] - 1) * PRODUCTS_PER_PAGE;
-    return products.slice(startIndex, startIndex + PRODUCTS_PER_PAGE);
+  const getAllProducts = () => {
+    return voltageOptions.flatMap(opt => collectionProducts[opt.voltage] || []);
   };
 
-  const getTotalPages = (voltage: string) => {
-    const products = collectionProducts[voltage] || [];
-    return Math.ceil(products.length / PRODUCTS_PER_PAGE);
+  const getProductsToShow = () => {
+    if (activeVoltage === "all") return getAllProducts();
+    return collectionProducts[activeVoltage] || [];
   };
+
+  const productsToShow = getProductsToShow();
+
+  const sidebarContent = (
+    <nav className="space-y-1">
+      <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3 px-3">
+        Battery Voltage
+      </h3>
+      <button
+        onClick={() => handleCategoryClick("all")}
+        className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+          activeVoltage === "all"
+            ? "bg-primary text-primary-foreground"
+            : "text-foreground hover:bg-accent"
+        }`}
+      >
+        All Batteries
+        <span className="ml-auto float-right text-xs opacity-70">
+          {loading ? "—" : getAllProducts().length}
+        </span>
+      </button>
+      {voltageOptions.map((option) => {
+        const count = (collectionProducts[option.voltage] || []).length;
+        return (
+          <button
+            key={option.voltage}
+            onClick={() => handleCategoryClick(option.voltage)}
+            className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+              activeVoltage === option.voltage
+                ? "bg-primary text-primary-foreground"
+                : "text-foreground hover:bg-accent"
+            }`}
+          >
+            {option.voltage} Batteries
+            <span className="ml-auto float-right text-xs opacity-70">
+              {loading ? "—" : count}
+            </span>
+          </button>
+        );
+      })}
+    </nav>
+  );
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Header />
       <main className="flex-1">
-        <section className="relative min-h-[70vh] lg:min-h-[80vh] flex items-center overflow-hidden">
+        {/* Hero Section */}
+        <section className="relative min-h-[50vh] lg:min-h-[60vh] flex items-center overflow-hidden">
           <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1920&q=80)` }} />
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
-          <div className="container relative z-10 py-20 lg:py-32">
-            <div className="max-w-2xl space-y-6">
+          <div className="container relative z-10 py-16 lg:py-24">
+            <div className="max-w-2xl space-y-5">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm text-white text-sm font-medium border border-white/20">
                 <Factory className="h-4 w-4" />
                 Industrial Power Solutions
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white">Industrial & Commercial</h1>
-              <p className="text-xl lg:text-2xl text-white/90 font-light">Heavy-Duty Power You Can Rely On</p>
-              <p className="text-base text-white/70 max-w-lg">Enterprise-grade LiFePO₄ battery systems built for demanding industrial, commercial, and telecommunications applications. Rack-mountable, scalable, and built to last.</p>
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white">Industrial & Commercial</h1>
+              <p className="text-lg lg:text-xl text-white/90 font-light">Heavy-Duty Power You Can Rely On</p>
+              <p className="text-sm text-white/70 max-w-lg">Enterprise-grade LiFePO₄ battery systems built for demanding industrial, commercial, and telecommunications applications. Rack-mountable, scalable, and built to last.</p>
             </div>
           </div>
         </section>
 
-        <section className="bg-secondary/50 border-y border-border">
-          <div className="container py-6">
-            <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm">
-              <div className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary" /><span className="text-foreground">High Discharge Rate</span></div>
-              <div className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary" /><span className="text-foreground">Rack Mountable</span></div>
-              <div className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary" /><span className="text-foreground">CAN Bus Communication</span></div>
-              <div className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary" /><span className="text-foreground">Parallel Scalable</span></div>
-              <div className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary" /><span className="text-foreground">Industrial Grade BMS</span></div>
+        {/* Main Content: Sidebar + Products */}
+        <section className="py-10 lg:py-16">
+          <div className="container">
+            {/* Mobile Filter Button */}
+            <div className="lg:hidden mb-6">
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button variant="outline" className="gap-2 w-full sm:w-auto">
+                    <Filter className="h-4 w-4" />
+                    Filter by Voltage
+                    {activeVoltage !== "all" && (
+                      <span className="ml-1 px-2 py-0.5 text-xs rounded-full bg-primary text-primary-foreground">
+                        {activeVoltage}
+                      </span>
+                    )}
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="left" className="w-72 pt-12">
+                  <div className="flex items-center justify-between mb-6">
+                    <h2 className="text-lg font-semibold">Filter Products</h2>
+                  </div>
+                  {sidebarContent}
+                </SheetContent>
+              </Sheet>
             </div>
-          </div>
-        </section>
 
-        {voltageOptions.map((option, index) => {
-          const allProducts = collectionProducts[option.voltage] || [];
-          const paginatedProducts = getPaginatedProducts(option.voltage);
-          const totalPages = getTotalPages(option.voltage);
-          const page = currentPage[option.voltage];
-          return (
-            <section key={option.voltage} className={`py-16 lg:py-24 ${index % 2 === 0 ? 'bg-background' : 'bg-secondary/30'}`}>
-              <div className="container">
-                <div className="text-center mb-12">
-                  <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">{option.voltage} Lithium Batteries</h2>
-                  <p className="text-lg text-muted-foreground max-w-2xl mx-auto">{option.description}</p>
+            <div className="flex gap-8">
+              {/* Desktop Sidebar */}
+              <aside className="hidden lg:block w-[240px] shrink-0">
+                <div className="sticky top-24 space-y-2">
+                  <h2 className="text-lg font-semibold mb-4">Shop by Voltage</h2>
+                  {sidebarContent}
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-                  {loading ? <ProductGridSkeleton count={4} /> : allProducts.length === 0 ? (
-                    <div className="col-span-full py-16 text-center"><Package className="w-12 h-12 sm:w-16 sm:h-16 text-muted-foreground/30 mx-auto mb-4" /><h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2">No products yet</h3><p className="text-sm sm:text-base text-muted-foreground max-w-md mx-auto px-4">Check back soon for our {option.voltage} battery selection.</p></div>
-                  ) : paginatedProducts.map((product) => <ProductCard key={product.node.id} product={product} />)}
+              </aside>
+
+              {/* Product Grid Area */}
+              <div className="flex-1 min-w-0">
+                <div className="mb-6">
+                  <h2 className="text-2xl md:text-3xl font-bold text-foreground">
+                    {activeVoltage === "all" ? "All Industrial Batteries" : `${activeVoltage} Lithium Batteries`}
+                  </h2>
+                  <p className="text-muted-foreground mt-1">
+                    {activeVoltage === "all" 
+                      ? `Showing all ${productsToShow.length} products`
+                      : voltageOptions.find(o => o.voltage === activeVoltage)?.description
+                    }
+                  </p>
                 </div>
-                {!loading && totalPages > 1 && (
-                  <div className="flex items-center justify-center gap-2 mt-10">
-                    <Button variant="outline" size="icon" onClick={() => handlePageChange(option.voltage, page - 1)} disabled={page === 1} className="h-10 w-10"><ChevronLeft className="h-4 w-4" /></Button>
-                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (<Button key={pageNum} variant={pageNum === page ? "default" : "outline"} size="icon" onClick={() => handlePageChange(option.voltage, pageNum)} className="h-10 w-10">{pageNum}</Button>))}
-                    <Button variant="outline" size="icon" onClick={() => handlePageChange(option.voltage, page + 1)} disabled={page === totalPages} className="h-10 w-10"><ChevronRight className="h-4 w-4" /></Button>
+
+                {loading ? (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+                    <ProductGridSkeleton count={8} />
+                  </div>
+                ) : productsToShow.length === 0 ? (
+                  <div className="py-16 text-center">
+                    <Package className="w-12 h-12 sm:w-16 sm:h-16 text-muted-foreground/30 mx-auto mb-4" />
+                    <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2">No products yet</h3>
+                    <p className="text-sm sm:text-base text-muted-foreground max-w-md mx-auto">
+                      Check back soon for our {activeVoltage === "all" ? "" : `${activeVoltage} `}battery selection.
+                    </p>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+                    {productsToShow.map((product) => (
+                      <ProductCard key={product.node.id} product={product} />
+                    ))}
                   </div>
                 )}
-                {allProducts.length > 0 && (<div className="text-center mt-6"><Link to={`/collections/${option.handle}`}><Button variant="outline" size="lg" className="gap-2">View All {option.voltage} Batteries<ArrowRight className="h-4 w-4" /></Button></Link></div>)}
-              </div>
-            </section>
-          );
-        })}
 
+                {activeVoltage !== "all" && productsToShow.length > 0 && (
+                  <div className="text-center mt-8">
+                    <Link to={`/collections/${voltageOptions.find(o => o.voltage === activeVoltage)?.handle}`}>
+                      <Button variant="outline" size="lg" className="gap-2">
+                        View Full {activeVoltage} Collection
+                        <ArrowRight className="h-4 w-4" />
+                      </Button>
+                    </Link>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Why Choose Section */}
         <section className="py-16 lg:py-24 bg-secondary/30">
           <div className="container">
             <div className="text-center mb-16">
@@ -181,6 +274,7 @@ const Industrial = () => {
           </div>
         </section>
 
+        {/* CTA Section */}
         <section className="py-16 lg:py-24 bg-foreground">
           <div className="container">
             <div className="max-w-3xl mx-auto text-center">
