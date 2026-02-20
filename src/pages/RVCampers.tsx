@@ -166,40 +166,6 @@ const RVCampers = () => {
         );
       })}
 
-      {/* Sidebar info */}
-      <div className="mt-6 pt-6 border-t border-border">
-        <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3 px-3">
-          Quick Info
-        </h3>
-        <div className="space-y-3 px-3">
-          <div className="flex items-start gap-2">
-            <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-            <span className="text-xs text-muted-foreground">5.12kWh & 400Ah per 12V Battery</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-            <span className="text-xs text-muted-foreground">Built-In Self-Heating</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-            <span className="text-xs text-muted-foreground">IP65 Protection</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-            <span className="text-xs text-muted-foreground">Vibration Resistant</span>
-          </div>
-        </div>
-      </div>
-
-      {/* CTA in sidebar */}
-      <div className="mt-6 pt-6 border-t border-border px-3">
-        <Link to="/contact">
-          <Button variant="outline" size="sm" className="w-full gap-2">
-            Need Help?
-            <ArrowRight className="h-3 w-3" />
-          </Button>
-        </Link>
-      </div>
     </nav>
   );
 
@@ -286,8 +252,8 @@ const RVCampers = () => {
 
                 {/* Products */}
                 {loading ? (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
-                    <ProductGridSkeleton count={6} />
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+                    <ProductGridSkeleton count={8} />
                   </div>
                 ) : productsToShow.length === 0 ? (
                   <div className="py-16 text-center">
@@ -298,7 +264,7 @@ const RVCampers = () => {
                     </p>
                   </div>
                 ) : (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
                     {productsToShow.map((product) => (
                       <ProductCard key={product.node.id} product={product} />
                     ))}
