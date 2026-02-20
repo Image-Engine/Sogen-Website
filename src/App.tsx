@@ -23,6 +23,7 @@ import SolarSystems from "./pages/SolarSystems";
 import HomeBackup from "./pages/HomeBackup";
 import Industrial from "./pages/Industrial";
 import Accessories from "./pages/Accessories";
+import Victron from "./pages/Victron";
 import VideoReviews from "./pages/VideoReviews";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/account/Login";
@@ -62,6 +63,7 @@ const App = () => (
             <Route path="/home-backup" element={<HomeBackup />} />
             <Route path="/industrial" element={<Industrial />} />
             <Route path="/accessories" element={<Accessories />} />
+            <Route path="/victron" element={<Victron />} />
             <Route path="/video-reviews" element={<VideoReviews />} />
             {/* Auth */}
             <Route path="/account/login" element={<Login />} />
