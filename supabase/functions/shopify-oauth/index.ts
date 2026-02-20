@@ -297,20 +297,46 @@ serve(async (req) => {
     // ── updateCustomer ──
     if (action === "updateCustomer") {
       const { firstName, lastName, phone } = body;
-      const input: Record<string, unknown> = {};
-      if (firstName !== undefined) input.firstName = firstName;
-      if (lastName !== undefined) input.lastName = lastName;
-      if (phone !== undefined) input.phoneNumber = phone;
-      const data = await customerGql(storeId, body.accessToken, `mutation($input: CustomerUpdateInput!) {
-        customerUpdate(input: $input) {
-          customer { id firstName lastName phoneNumber { phoneNumber } }
-          userErrors { field message }
-        }
-      }`, { input });
-      if (data.customerUpdate.userErrors?.length) {
-        return json({ error: data.customerUpdate.userErrors[0].message }, 400);
+      console.log("[updateCustomer] firstName:", firstName, "lastName:", lastName, "phone:", phone);
+
+      // First, get the customer ID from Customer Account API
+      const customerData = await customerGql(storeId, body.accessToken, `{ customer { id } }`);
+      const customerGid = customerData.customer?.id;
+      console.log("[updateCustomer] customerGid:", customerGid);
+      if (!customerGid) return json({ error: "Could not resolve customer" }, 400);
+
+      // Extract numeric ID from GID for Admin API
+      const numericId = customerGid.replace("gid://shopify/Customer/", "");
+
+      // Use Admin API to update customer profile
+      const adminToken = Deno.env.get("SHOPIFY_ACCESS_TOKEN");
+      if (!adminToken) return json({ error: "Missing admin token" }, 500);
+
+      const storeDomain = Deno.env.get("SHOPIFY_STORE_DOMAIN") || "sokbattery-frontline-shine-zq4jf.myshopify.com";
+      const updatePayload: Record<string, unknown> = {};
+      if (firstName !== undefined) updatePayload.first_name = firstName;
+      if (lastName !== undefined) updatePayload.last_name = lastName;
+      if (phone !== undefined) updatePayload.phone = phone;
+
+      console.log("[updateCustomer] Admin API payload:", JSON.stringify(updatePayload));
+      const adminRes = await fetch(`https://${storeDomain}/admin/api/2025-01/customers/${numericId}.json`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Shopify-Access-Token": adminToken,
+        },
+        body: JSON.stringify({ customer: updatePayload }),
+      });
+
+      if (!adminRes.ok) {
+        const errBody = await adminRes.text();
+        console.error("[updateCustomer] Admin API error:", adminRes.status, errBody);
+        return json({ error: `Admin API error: ${adminRes.status}` }, adminRes.status);
       }
-      return json(data.customerUpdate.customer);
+
+      const result = await adminRes.json();
+      console.log("[updateCustomer] success, customer id:", result.customer?.id);
+      return json({ id: result.customer?.id, firstName: result.customer?.first_name, lastName: result.customer?.last_name });
     }
 
     return json({ error: "Unknown action" }, 400);
