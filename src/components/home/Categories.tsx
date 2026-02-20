@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import victronBattery from "@/assets/victron-battery.webp";
+import victronTile from "@/assets/victron-tile.jpg";
 const categories = [{
   title: "Solar Systems",
   description: "Grid-tied & off-grid solutions",
@@ -24,8 +24,9 @@ const categories = [{
 }, {
   title: "Victron",
   description: "Professional power electronics",
-  image: victronBattery,
-  link: "/victron"
+  image: victronTile,
+  link: "/victron",
+  objectPosition: "left"
 }, {
   title: "Accessories",
   description: "Chargers, cables & more",
@@ -61,6 +62,7 @@ export function Categories() {
                 src={category.image}
                 alt={category.title}
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                style={category.objectPosition ? { objectPosition: category.objectPosition } : undefined}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-3">
@@ -92,6 +94,7 @@ export function Categories() {
                 src={category.image}
                 alt={category.title}
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                style={category.objectPosition ? { objectPosition: category.objectPosition } : undefined}
               />
               
               {/* Gradient Overlay */}
