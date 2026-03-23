@@ -89,7 +89,7 @@ export default function Collection() {
 
   const sidebarContent = (
     <div>
-      <CollectionsSidebar />
+      <CollectionsSidebar standalone />
     </div>
   );
 
