@@ -11,6 +11,7 @@ import { ProductCard } from "@/components/products/ProductCard";
 import { ProductGridSkeleton } from "@/components/products/ProductGridSkeleton";
 import { fetchCollectionByHandle, ShopifyProduct } from "@/lib/shopify";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { CollectionsSidebar } from "@/components/products/CollectionsSidebar";
 
 const features = [
   {
@@ -111,43 +112,46 @@ const Industrial = () => {
   const productsToShow = getProductsToShow();
 
   const sidebarContent = (
-    <nav className="space-y-1">
-      <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3 px-3">
-        Battery Voltage
-      </h3>
-      <button
-        onClick={() => handleCategoryClick("all")}
-        className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-          activeVoltage === "all"
-            ? "bg-primary text-primary-foreground"
-            : "text-foreground hover:bg-accent"
-        }`}
-      >
-        All Batteries
-        <span className="ml-auto float-right text-xs opacity-70">
-          {loading ? "—" : getAllProducts().length}
-        </span>
-      </button>
-      {voltageOptions.map((option) => {
-        const count = (collectionProducts[option.voltage] || []).length;
-        return (
-          <button
-            key={option.voltage}
-            onClick={() => handleCategoryClick(option.voltage)}
-            className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-              activeVoltage === option.voltage
-                ? "bg-primary text-primary-foreground"
-                : "text-foreground hover:bg-accent"
-            }`}
-          >
-            {option.voltage} Batteries
-            <span className="ml-auto float-right text-xs opacity-70">
-              {loading ? "—" : count}
-            </span>
-          </button>
-        );
-      })}
-    </nav>
+    <div>
+      <nav className="space-y-1">
+        <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3 px-3">
+          Battery Voltage
+        </h3>
+        <button
+          onClick={() => handleCategoryClick("all")}
+          className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+            activeVoltage === "all"
+              ? "bg-primary text-primary-foreground"
+              : "text-foreground hover:bg-accent"
+          }`}
+        >
+          All Batteries
+          <span className="ml-auto float-right text-xs opacity-70">
+            {loading ? "—" : getAllProducts().length}
+          </span>
+        </button>
+        {voltageOptions.map((option) => {
+          const count = (collectionProducts[option.voltage] || []).length;
+          return (
+            <button
+              key={option.voltage}
+              onClick={() => handleCategoryClick(option.voltage)}
+              className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                activeVoltage === option.voltage
+                  ? "bg-primary text-primary-foreground"
+                  : "text-foreground hover:bg-accent"
+              }`}
+            >
+              {option.voltage} Batteries
+              <span className="ml-auto float-right text-xs opacity-70">
+                {loading ? "—" : count}
+              </span>
+            </button>
+          );
+        })}
+      </nav>
+      <CollectionsSidebar />
+    </div>
   );
 
   return (

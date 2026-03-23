@@ -11,6 +11,7 @@ import { ProductCard } from "@/components/products/ProductCard";
 import { ProductGridSkeleton } from "@/components/products/ProductGridSkeleton";
 import { fetchCollectionByHandle, ShopifyProduct } from "@/lib/shopify";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { CollectionsSidebar } from "@/components/products/CollectionsSidebar";
 
 const features = [
   {
@@ -112,43 +113,46 @@ const Victron = () => {
   const productsToShow = getProductsToShow();
 
   const sidebarContent = (
-    <nav className="space-y-1">
-      <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3 px-3">
-        Category
-      </h3>
-      <button
-        onClick={() => handleCategoryClick("all")}
-        className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-          activeCategory === "all"
-            ? "bg-primary text-primary-foreground"
-            : "text-foreground hover:bg-accent"
-        }`}
-      >
-        All Victron
-        <span className="ml-auto float-right text-xs opacity-70">
-          {loading ? "—" : getAllProducts().length}
-        </span>
-      </button>
-      {collectionOptions.map((option) => {
-        const count = (collectionProducts[option.label] || []).length;
-        return (
-          <button
-            key={option.label}
-            onClick={() => handleCategoryClick(option.label)}
-            className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-              activeCategory === option.label
-                ? "bg-primary text-primary-foreground"
-                : "text-foreground hover:bg-accent"
-            }`}
-          >
-            {option.label}
-            <span className="ml-auto float-right text-xs opacity-70">
-              {loading ? "—" : count}
-            </span>
-          </button>
-        );
-      })}
-    </nav>
+    <div>
+      <nav className="space-y-1">
+        <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3 px-3">
+          Category
+        </h3>
+        <button
+          onClick={() => handleCategoryClick("all")}
+          className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+            activeCategory === "all"
+              ? "bg-primary text-primary-foreground"
+              : "text-foreground hover:bg-accent"
+          }`}
+        >
+          All Victron
+          <span className="ml-auto float-right text-xs opacity-70">
+            {loading ? "—" : getAllProducts().length}
+          </span>
+        </button>
+        {collectionOptions.map((option) => {
+          const count = (collectionProducts[option.label] || []).length;
+          return (
+            <button
+              key={option.label}
+              onClick={() => handleCategoryClick(option.label)}
+              className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                activeCategory === option.label
+                  ? "bg-primary text-primary-foreground"
+                  : "text-foreground hover:bg-accent"
+              }`}
+            >
+              {option.label}
+              <span className="ml-auto float-right text-xs opacity-70">
+                {loading ? "—" : count}
+              </span>
+            </button>
+          );
+        })}
+      </nav>
+      <CollectionsSidebar />
+    </div>
   );
 
   return (
