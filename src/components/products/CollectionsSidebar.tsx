@@ -3,7 +3,11 @@ import { Link, useLocation } from "react-router-dom";
 import { fetchCollections, ShopifyCollection } from "@/lib/shopify";
 import { Skeleton } from "@/components/ui/skeleton";
 
-export const CollectionsSidebar = () => {
+interface CollectionsSidebarProps {
+  standalone?: boolean;
+}
+
+export const CollectionsSidebar = ({ standalone = false }: CollectionsSidebarProps) => {
   const [collections, setCollections] = useState<ShopifyCollection[]>([]);
   const [loading, setLoading] = useState(true);
   const location = useLocation();
@@ -19,7 +23,7 @@ export const CollectionsSidebar = () => {
 
   if (loading) {
     return (
-      <nav className="space-y-1 mt-6 pt-6 border-t border-border">
+      <nav className={`space-y-1 ${standalone ? '' : 'mt-6 pt-6 border-t border-border'}`}>
         <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3 px-3">
           All Collections
         </h3>
@@ -32,8 +36,8 @@ export const CollectionsSidebar = () => {
 
   if (collections.length === 0) return null;
 
-  return (
-    <nav className="space-y-1 mt-6 pt-6 border-t border-border">
+    return (
+    <nav className={`space-y-1 ${standalone ? '' : 'mt-6 pt-6 border-t border-border'}`}>
       <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3 px-3">
         All Collections
       </h3>
