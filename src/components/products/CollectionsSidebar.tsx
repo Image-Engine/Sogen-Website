@@ -3,7 +3,11 @@ import { Link, useLocation } from "react-router-dom";
 import { fetchCollections, ShopifyCollection } from "@/lib/shopify";
 import { Skeleton } from "@/components/ui/skeleton";
 
-export const CollectionsSidebar = () => {
+interface CollectionsSidebarProps {
+  standalone?: boolean;
+}
+
+export const CollectionsSidebar = ({ standalone = false }: CollectionsSidebarProps) => {
   const [collections, setCollections] = useState<ShopifyCollection[]>([]);
   const [loading, setLoading] = useState(true);
   const location = useLocation();
