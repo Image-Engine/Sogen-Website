@@ -23,6 +23,7 @@ import { ProductCard } from "@/components/products/ProductCard";
 import { ProductGridSkeleton } from "@/components/products/ProductGridSkeleton";
 import { fetchCollectionByHandle, ShopifyProduct } from "@/lib/shopify";
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
+import { CollectionsSidebar } from "@/components/products/CollectionsSidebar";
 import rvHeroBg from "@/assets/rv-hero-bg.jpg";
 
 const features = [
