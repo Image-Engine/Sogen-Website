@@ -23,7 +23,7 @@ export const CollectionsSidebar = ({ standalone = false }: CollectionsSidebarPro
 
   if (loading) {
     return (
-      <nav className="space-y-1 mt-6 pt-6 border-t border-border">
+      <nav className={`space-y-1 ${standalone ? '' : 'mt-6 pt-6 border-t border-border'}`}>
         <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3 px-3">
           All Collections
         </h3>
