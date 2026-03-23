@@ -11,6 +11,7 @@ import { ProductCard } from "@/components/products/ProductCard";
 import { ProductGridSkeleton } from "@/components/products/ProductGridSkeleton";
 import { fetchCollectionByHandle, ShopifyProduct } from "@/lib/shopify";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { CollectionsSidebar } from "@/components/products/CollectionsSidebar";
 
 const features = [
   {
