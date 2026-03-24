@@ -477,6 +477,8 @@ const GET_PRODUCT_RECOMMENDATIONS = `
       title
       description
       handle
+      vendor
+      productType
       priceRange {
         minVariantPrice {
           amount
