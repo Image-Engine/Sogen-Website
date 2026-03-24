@@ -128,7 +128,6 @@ const Victron = () => {
           </button>
         ))}
       </nav>
-      <CollectionsSidebar />
     </div>
   );
 
