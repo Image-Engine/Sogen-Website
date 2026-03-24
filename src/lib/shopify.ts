@@ -18,6 +18,8 @@ export interface ShopifyProduct {
     title: string;
     description: string;
     handle: string;
+    vendor: string;
+    productType: string;
     priceRange: {
       minVariantPrice: {
         amount: string;
@@ -183,6 +185,8 @@ const STOREFRONT_QUERY = `
           title
           description
           handle
+          vendor
+          productType
           priceRange {
             minVariantPrice {
               amount
@@ -359,6 +363,8 @@ const GET_COLLECTION_BY_HANDLE = `
             title
             description
             handle
+            vendor
+            productType
             priceRange {
               minVariantPrice {
                 amount
@@ -471,6 +477,8 @@ const GET_PRODUCT_RECOMMENDATIONS = `
       title
       description
       handle
+      vendor
+      productType
       priceRange {
         minVariantPrice {
           amount
@@ -690,6 +698,18 @@ export async function fetchProductRecommendations(productId: string): Promise<Sh
     return data.data.productRecommendations.map((product: ShopifyProduct['node']) => ({ node: product }));
   } catch (error) {
     console.error('Error fetching product recommendations:', error);
+    return [];
+  }
+}
+
+// Fetch products by vendor
+export async function fetchProductsByVendor(vendor: string, first: number = 250): Promise<ShopifyProduct[]> {
+  try {
+    const data = await storefrontApiRequest(STOREFRONT_QUERY, { first, query: `vendor:${vendor}` });
+    if (!data || !data.data.products) return [];
+    return data.data.products.edges;
+  } catch (error) {
+    console.error('Error fetching products by vendor:', error);
     return [];
   }
 }

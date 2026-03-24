@@ -1,15 +1,15 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Link } from "react-router-dom";
 import { 
-  Zap, Shield, Wifi, CheckCircle2, ArrowRight, Package, 
+  Zap, Shield, Wifi, ArrowRight, Package, 
   Sun, Battery, Filter
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "@/components/products/ProductCard";
 import { ProductGridSkeleton } from "@/components/products/ProductGridSkeleton";
-import { fetchCollectionByHandle, ShopifyProduct } from "@/lib/shopify";
+import { fetchProductsByVendor, ShopifyProduct } from "@/lib/shopify";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { CollectionsSidebar } from "@/components/products/CollectionsSidebar";
 
@@ -58,68 +58,48 @@ const features = [
   }
 ];
 
-const collectionOptions = [
-  { label: "Inverters & Chargers", handle: "victron-inverters", description: "MultiPlus, EasySolar, and Phoenix inverter-chargers" },
-  { label: "Solar Controllers", handle: "victron-solar", description: "MPPT and BlueSolar charge controllers" },
-  { label: "Monitoring", handle: "victron-monitoring", description: "Cerbo GX, SmartShunt, and monitoring accessories" },
-  { label: "Accessories", handle: "victron-accessories", description: "Cables, connectors, and system components" }
-];
-
-interface CollectionProducts { [key: string]: ShopifyProduct[] }
-
 const Victron = () => {
-  const [collectionProducts, setCollectionProducts] = useState<CollectionProducts>({});
+  const [allProducts, setAllProducts] = useState<ShopifyProduct[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState<string>("all");
-  const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   useEffect(() => {
-    async function loadAllCollections() {
+    async function loadProducts() {
       setLoading(true);
-      const results: CollectionProducts = {};
-      for (const option of collectionOptions) {
-        const collection = await fetchCollectionByHandle(option.handle, 50);
-        results[option.label] = collection?.products || [];
-      }
-      setCollectionProducts(results);
+      const products = await fetchProductsByVendor("Victron");
+      setAllProducts(products);
       setLoading(false);
     }
-    loadAllCollections();
+    loadProducts();
   }, []);
 
-  const handleCategoryClick = (label: string) => {
-    setActiveCategory(label);
-    if (label === "all") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    } else {
-      const el = sectionRefs.current[label];
-      if (el) {
-        const headerOffset = 80;
-        const elementPosition = el.getBoundingClientRect().top + window.scrollY;
-        window.scrollTo({ top: elementPosition - headerOffset, behavior: "smooth" });
-      }
-    }
-  };
-
-  const getAllProducts = () => {
-    return collectionOptions.flatMap(opt => collectionProducts[opt.label] || []);
-  };
+  // Dynamically extract product types from fetched products
+  const productTypes = Array.from(
+    new Set(
+      allProducts
+        .map((p) => p.node.productType)
+        .filter((t) => t && t.trim() !== "")
+    )
+  ).sort();
 
   const getProductsToShow = () => {
-    if (activeCategory === "all") return getAllProducts();
-    return collectionProducts[activeCategory] || [];
+    if (activeCategory === "all") return allProducts;
+    return allProducts.filter((p) => p.node.productType === activeCategory);
   };
 
   const productsToShow = getProductsToShow();
+
+  const getCountForType = (type: string) =>
+    allProducts.filter((p) => p.node.productType === type).length;
 
   const sidebarContent = (
     <div>
       <nav className="space-y-1">
         <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3 px-3">
-          Category
+          Product Type
         </h3>
         <button
-          onClick={() => handleCategoryClick("all")}
+          onClick={() => setActiveCategory("all")}
           className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
             activeCategory === "all"
               ? "bg-primary text-primary-foreground"
@@ -128,28 +108,25 @@ const Victron = () => {
         >
           All Victron
           <span className="ml-auto float-right text-xs opacity-70">
-            {loading ? "—" : getAllProducts().length}
+            {loading ? "—" : allProducts.length}
           </span>
         </button>
-        {collectionOptions.map((option) => {
-          const count = (collectionProducts[option.label] || []).length;
-          return (
-            <button
-              key={option.label}
-              onClick={() => handleCategoryClick(option.label)}
-              className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                activeCategory === option.label
-                  ? "bg-primary text-primary-foreground"
-                  : "text-foreground hover:bg-accent"
-              }`}
-            >
-              {option.label}
-              <span className="ml-auto float-right text-xs opacity-70">
-                {loading ? "—" : count}
-              </span>
-            </button>
-          );
-        })}
+        {productTypes.map((type) => (
+          <button
+            key={type}
+            onClick={() => setActiveCategory(type)}
+            className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+              activeCategory === type
+                ? "bg-primary text-primary-foreground"
+                : "text-foreground hover:bg-accent"
+            }`}
+          >
+            {type}
+            <span className="ml-auto float-right text-xs opacity-70">
+              {loading ? "—" : getCountForType(type)}
+            </span>
+          </button>
+        ))}
       </nav>
       <CollectionsSidebar />
     </div>
@@ -187,7 +164,7 @@ const Victron = () => {
                 <SheetTrigger asChild>
                   <Button variant="outline" className="gap-2 w-full sm:w-auto">
                     <Filter className="h-4 w-4" />
-                    Filter by Category
+                    Filter by Type
                     {activeCategory !== "all" && (
                       <span className="ml-1 px-2 py-0.5 text-xs rounded-full bg-primary text-primary-foreground">
                         {activeCategory}
@@ -208,7 +185,7 @@ const Victron = () => {
               {/* Desktop Sidebar */}
               <aside className="hidden lg:block w-[240px] shrink-0">
                 <div className="sticky top-24 space-y-2">
-                  <h2 className="text-lg font-semibold mb-4">Shop by Category</h2>
+                  <h2 className="text-lg font-semibold mb-4">Shop by Type</h2>
                   {sidebarContent}
                 </div>
               </aside>
@@ -220,10 +197,7 @@ const Victron = () => {
                     {activeCategory === "all" ? "All Victron Products" : activeCategory}
                   </h2>
                   <p className="text-muted-foreground mt-1">
-                    {activeCategory === "all" 
-                      ? `Showing all ${productsToShow.length} products`
-                      : collectionOptions.find(o => o.label === activeCategory)?.description
-                    }
+                    Showing {productsToShow.length} product{productsToShow.length !== 1 ? "s" : ""}
                   </p>
                 </div>
 
@@ -244,17 +218,6 @@ const Victron = () => {
                     {productsToShow.map((product) => (
                       <ProductCard key={product.node.id} product={product} />
                     ))}
-                  </div>
-                )}
-
-                {activeCategory !== "all" && productsToShow.length > 0 && (
-                  <div className="text-center mt-8">
-                    <Link to={`/collections/${collectionOptions.find(o => o.label === activeCategory)?.handle}`}>
-                      <Button variant="outline" size="lg" className="gap-2">
-                        View Full Collection
-                        <ArrowRight className="h-4 w-4" />
-                      </Button>
-                    </Link>
                   </div>
                 )}
               </div>
