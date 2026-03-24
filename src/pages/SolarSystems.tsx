@@ -90,6 +90,16 @@ const SolarSystems = () => {
     ...otherTypes,
   ];
 
+  const getProductsToShow = () => {
+    if (activeCategory === "all") return allProducts;
+    return allProducts.filter((p) => p.node.productType === activeCategory);
+  };
+
+  const productsToShow = getProductsToShow();
+
+  const getCountForType = (type: string) =>
+    allProducts.filter((p) => p.node.productType === type).length;
+
   const sidebarContent = (
     <div>
       <nav className="space-y-1">
@@ -109,7 +119,7 @@ const SolarSystems = () => {
             {loading ? "—" : allProducts.length}
           </span>
         </button>
-        {productTypes.map((type) => (
+        {allTypes.map((type) => (
           <button
             key={type}
             onClick={() => setActiveCategory(type)}
@@ -126,7 +136,6 @@ const SolarSystems = () => {
           </button>
         ))}
       </nav>
-      <CollectionsSidebar />
     </div>
   );
 
