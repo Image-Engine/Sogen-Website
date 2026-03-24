@@ -1,15 +1,15 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Link } from "react-router-dom";
 import { 
-  Sun, Shield, Battery, Wifi, CheckCircle2, ArrowRight, Package, 
+  Sun, Shield, Battery, Wifi, ArrowRight, Package, 
   RefreshCw, Gauge, Filter
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "@/components/products/ProductCard";
 import { ProductGridSkeleton } from "@/components/products/ProductGridSkeleton";
-import { fetchCollectionByHandle, ShopifyProduct } from "@/lib/shopify";
+import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { CollectionsSidebar } from "@/components/products/CollectionsSidebar";
 
@@ -58,97 +58,75 @@ const features = [
   }
 ];
 
-const voltageOptions = [
-  { voltage: "12V", handle: "12v-lithium-batteries", description: "Ideal for residential and small off-grid solar systems" },
-  { voltage: "24V", handle: "24v-lithium-batteries", description: "Efficient storage for medium-scale solar installations" },
-  { voltage: "48V", handle: "48v-lithium-batteries", description: "Maximum capacity for large solar arrays and whole-home systems" }
-];
-
-interface CollectionProducts { [key: string]: ShopifyProduct[] }
-
 const SolarSystems = () => {
-  const [collectionProducts, setCollectionProducts] = useState<CollectionProducts>({});
+  const [allProducts, setAllProducts] = useState<ShopifyProduct[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeVoltage, setActiveVoltage] = useState<string>("all");
-  const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const [activeCategory, setActiveCategory] = useState<string>("all");
 
   useEffect(() => {
-    async function loadAllCollections() {
+    async function loadProducts() {
       setLoading(true);
-      const results: CollectionProducts = {};
-      for (const option of voltageOptions) {
-        const collection = await fetchCollectionByHandle(option.handle, 50);
-        results[option.voltage] = collection?.products || [];
-      }
-      setCollectionProducts(results);
+      const products = await fetchProducts(250, "solar");
+      setAllProducts(products);
       setLoading(false);
     }
-    loadAllCollections();
+    loadProducts();
   }, []);
 
-  const handleCategoryClick = (voltage: string) => {
-    setActiveVoltage(voltage);
-    if (voltage === "all") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    } else {
-      const el = sectionRefs.current[voltage];
-      if (el) {
-        const headerOffset = 80;
-        const elementPosition = el.getBoundingClientRect().top + window.scrollY;
-        window.scrollTo({ top: elementPosition - headerOffset, behavior: "smooth" });
-      }
-    }
-  };
-
-  const getAllProducts = () => {
-    return voltageOptions.flatMap(opt => collectionProducts[opt.voltage] || []);
-  };
+  // Dynamically extract product types
+  const productTypes = Array.from(
+    new Set(
+      allProducts
+        .map((p) => p.node.productType)
+        .filter((t) => t && t.trim() !== "")
+    )
+  ).sort();
 
   const getProductsToShow = () => {
-    if (activeVoltage === "all") return getAllProducts();
-    return collectionProducts[activeVoltage] || [];
+    if (activeCategory === "all") return allProducts;
+    return allProducts.filter((p) => p.node.productType === activeCategory);
   };
 
   const productsToShow = getProductsToShow();
+
+  const getCountForType = (type: string) =>
+    allProducts.filter((p) => p.node.productType === type).length;
 
   const sidebarContent = (
     <div>
       <nav className="space-y-1">
         <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3 px-3">
-          Battery Voltage
+          Product Type
         </h3>
         <button
-          onClick={() => handleCategoryClick("all")}
+          onClick={() => setActiveCategory("all")}
           className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-            activeVoltage === "all"
+            activeCategory === "all"
               ? "bg-primary text-primary-foreground"
               : "text-foreground hover:bg-accent"
           }`}
         >
-          All Batteries
+          All Solar Products
           <span className="ml-auto float-right text-xs opacity-70">
-            {loading ? "—" : getAllProducts().length}
+            {loading ? "—" : allProducts.length}
           </span>
         </button>
-        {voltageOptions.map((option) => {
-          const count = (collectionProducts[option.voltage] || []).length;
-          return (
-            <button
-              key={option.voltage}
-              onClick={() => handleCategoryClick(option.voltage)}
-              className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                activeVoltage === option.voltage
-                  ? "bg-primary text-primary-foreground"
-                  : "text-foreground hover:bg-accent"
-              }`}
-            >
-              {option.voltage} Batteries
-              <span className="ml-auto float-right text-xs opacity-70">
-                {loading ? "—" : count}
-              </span>
-            </button>
-          );
-        })}
+        {productTypes.map((type) => (
+          <button
+            key={type}
+            onClick={() => setActiveCategory(type)}
+            className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+              activeCategory === type
+                ? "bg-primary text-primary-foreground"
+                : "text-foreground hover:bg-accent"
+            }`}
+          >
+            {type}
+            <span className="ml-auto float-right text-xs opacity-70">
+              {loading ? "—" : getCountForType(type)}
+            </span>
+          </button>
+        ))}
       </nav>
       <CollectionsSidebar />
     </div>
@@ -193,10 +171,10 @@ const SolarSystems = () => {
                 <SheetTrigger asChild>
                   <Button variant="outline" className="gap-2 w-full sm:w-auto">
                     <Filter className="h-4 w-4" />
-                    Filter by Voltage
-                    {activeVoltage !== "all" && (
+                    Filter by Type
+                    {activeCategory !== "all" && (
                       <span className="ml-1 px-2 py-0.5 text-xs rounded-full bg-primary text-primary-foreground">
-                        {activeVoltage}
+                        {activeCategory}
                       </span>
                     )}
                   </Button>
@@ -214,7 +192,7 @@ const SolarSystems = () => {
               {/* Desktop Sidebar */}
               <aside className="hidden lg:block w-[240px] shrink-0">
                 <div className="sticky top-24 space-y-2">
-                  <h2 className="text-lg font-semibold mb-4">Shop by Voltage</h2>
+                  <h2 className="text-lg font-semibold mb-4">Shop by Type</h2>
                   {sidebarContent}
                 </div>
               </aside>
@@ -223,13 +201,10 @@ const SolarSystems = () => {
               <div className="flex-1 min-w-0">
                 <div className="mb-6">
                   <h2 className="text-2xl md:text-3xl font-bold text-foreground">
-                    {activeVoltage === "all" ? "All Solar Batteries" : `${activeVoltage} Lithium Batteries`}
+                    {activeCategory === "all" ? "All Solar Products" : activeCategory}
                   </h2>
                   <p className="text-muted-foreground mt-1">
-                    {activeVoltage === "all" 
-                      ? `Showing all ${productsToShow.length} products`
-                      : voltageOptions.find(o => o.voltage === activeVoltage)?.description
-                    }
+                    Showing {productsToShow.length} product{productsToShow.length !== 1 ? "s" : ""}
                   </p>
                 </div>
 
@@ -242,7 +217,7 @@ const SolarSystems = () => {
                     <Package className="w-12 h-12 sm:w-16 sm:h-16 text-muted-foreground/30 mx-auto mb-4" />
                     <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2">No products yet</h3>
                     <p className="text-sm sm:text-base text-muted-foreground max-w-md mx-auto">
-                      Check back soon for our {activeVoltage === "all" ? "" : `${activeVoltage} `}battery selection.
+                      Check back soon for our solar product selection.
                     </p>
                   </div>
                 ) : (
@@ -250,17 +225,6 @@ const SolarSystems = () => {
                     {productsToShow.map((product) => (
                       <ProductCard key={product.node.id} product={product} />
                     ))}
-                  </div>
-                )}
-
-                {activeVoltage !== "all" && productsToShow.length > 0 && (
-                  <div className="text-center mt-8">
-                    <Link to={`/collections/${voltageOptions.find(o => o.voltage === activeVoltage)?.handle}`}>
-                      <Button variant="outline" size="lg" className="gap-2">
-                        View Full {activeVoltage} Collection
-                        <ArrowRight className="h-4 w-4" />
-                      </Button>
-                    </Link>
                   </div>
                 )}
               </div>
