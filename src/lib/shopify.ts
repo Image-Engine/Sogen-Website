@@ -363,6 +363,8 @@ const GET_COLLECTION_BY_HANDLE = `
             title
             description
             handle
+            vendor
+            productType
             priceRange {
               minVariantPrice {
                 amount
