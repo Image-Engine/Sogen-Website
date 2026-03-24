@@ -701,3 +701,15 @@ export async function fetchProductRecommendations(productId: string): Promise<Sh
     return [];
   }
 }
+
+// Fetch products by vendor
+export async function fetchProductsByVendor(vendor: string, first: number = 250): Promise<ShopifyProduct[]> {
+  try {
+    const data = await storefrontApiRequest(STOREFRONT_QUERY, { first, query: `vendor:${vendor}` });
+    if (!data || !data.data.products) return [];
+    return data.data.products.edges;
+  } catch (error) {
+    console.error('Error fetching products by vendor:', error);
+    return [];
+  }
+}
