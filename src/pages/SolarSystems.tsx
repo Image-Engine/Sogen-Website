@@ -61,7 +61,7 @@ const features = [
 const SolarSystems = () => {
   const [allProducts, setAllProducts] = useState<ShopifyProduct[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeCategory, setActiveCategory] = useState<string>("all");
+  const [activeCategory, setActiveCategory] = useState<string>("Solar Panels");
 
   useEffect(() => {
     async function loadProducts() {
