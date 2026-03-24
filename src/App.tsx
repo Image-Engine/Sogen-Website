@@ -43,6 +43,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToTop />
         <ShopifyCustomerProvider>
           <Routes>
             <Route path="/" element={<Index />} />
