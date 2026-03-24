@@ -185,6 +185,8 @@ const STOREFRONT_QUERY = `
           title
           description
           handle
+          vendor
+          productType
           priceRange {
             minVariantPrice {
               amount
