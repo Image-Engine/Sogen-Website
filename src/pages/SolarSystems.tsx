@@ -73,14 +73,22 @@ const SolarSystems = () => {
     loadProducts();
   }, []);
 
+  // Priority categories shown first in sidebar
+  const priorityTypes = ["Solar Panels", "Solar Charge Controllers", "Solar Accessories"];
+
   // Dynamically extract product types
-  const productTypes = Array.from(
+  const otherTypes = Array.from(
     new Set(
       allProducts
         .map((p) => p.node.productType)
-        .filter((t) => t && t.trim() !== "")
+        .filter((t) => t && t.trim() !== "" && !priorityTypes.includes(t))
     )
   ).sort();
+
+  const allTypes = [
+    ...priorityTypes.filter((t) => allProducts.some((p) => p.node.productType === t)),
+    ...otherTypes,
+  ];
 
   const getProductsToShow = () => {
     if (activeCategory === "all") return allProducts;
@@ -111,7 +119,7 @@ const SolarSystems = () => {
             {loading ? "—" : allProducts.length}
           </span>
         </button>
-        {productTypes.map((type) => (
+        {allTypes.map((type) => (
           <button
             key={type}
             onClick={() => setActiveCategory(type)}
@@ -128,7 +136,6 @@ const SolarSystems = () => {
           </button>
         ))}
       </nav>
-      <CollectionsSidebar />
     </div>
   );
 
