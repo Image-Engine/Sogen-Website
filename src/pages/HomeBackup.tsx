@@ -18,6 +18,16 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
+const rackBatterySpecs = [
+  "Compact 3U Size — The smallest 3U server rack mounted battery on the market.",
+  "Bluetooth OTA Upgrade — Supports over-the-air firmware updates via Bluetooth.",
+  "Bluetooth Inverter Protocol Selection — Switch inverter protocols via Bluetooth on the phone.",
+  "Custom Terminals, M8 size — Proprietary self-designed terminals enable flexible wiring in multiple directions.",
+  "Self-Heater Pad Built-in for working in cold locations.",
+  "Battery to Battery Communication Cable included.",
+  "Pre-Charge Circuit to Prevent BMS Damage: 100000μF.",
+];
+
 const energyHubFeatures = [
   "Pre-Wired & Certified",
   "Victron Power Electronics",
@@ -110,18 +120,84 @@ const HomeBackup = () => {
           </div>
         </section>
 
-        {/* SOK 48V Rack Batteries */}
+        {/* SOK 48V Rack Batteries — Intro */}
         <section className="py-16 lg:py-24">
-          <div className="container">
-            <div className="text-center mb-10">
-              <h2 className="text-3xl md:text-4xl font-semibold text-foreground tracking-tight mb-3">
-                SOK 48V Rack Batteries
-              </h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                High-performance LiFePO₄ storage for home, solar, and off-grid systems. Modular, serviceable, and built to last.
-              </p>
-            </div>
+          <div className="container max-w-6xl">
+            <div className="grid lg:grid-cols-5 gap-12 lg:gap-16 items-start">
+              {/* Left: Description */}
+              <div className="lg:col-span-3 space-y-6">
+                <h2 className="text-3xl md:text-4xl font-semibold text-foreground tracking-tight">
+                  SOK Rack Batteries
+                </h2>
+                <p className="text-sm text-muted-foreground">
+                  High-performance LiFePO₄ storage for home, solar, and off-grid systems
+                </p>
+                <div className="space-y-4 text-sm text-foreground/80 leading-relaxed">
+                  <p>
+                    SOK rack batteries are one of New Zealand's most trusted lithium energy storage options, combining premium LiFePO₄ technology with a durable, fully serviceable design. Engineered for both off-grid and on-grid applications, these modular rack batteries deliver reliable power, high usable capacity, and excellent long-term value.
+                  </p>
+                  <p>
+                    Paired with Solagen's Energy Hub 2 cabinet, SOK batteries create a complete, scalable energy system built for homes, tiny houses, workshops, remote sites, and commercial installations.
+                  </p>
+                </div>
 
+                {/* Spec Card */}
+                <div className="rounded-xl border border-border bg-card p-6 space-y-3">
+                  <h3 className="text-sm font-semibold text-foreground">
+                    SOK 48V100Ah Server Rack Battery
+                  </h3>
+                  <ul className="space-y-2">
+                    {rackBatterySpecs.map((spec, i) => (
+                      <li key={i} className="flex items-start gap-2 text-xs text-muted-foreground leading-relaxed">
+                        <span className="mt-1.5 h-1 w-1 rounded-full bg-foreground/40 shrink-0" />
+                        {spec}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <p className="text-sm text-foreground/70 leading-relaxed">
+                  These features make SOK rack batteries one of the most cost-effective and dependable lithium storage options in the country.
+                </p>
+              </div>
+
+              {/* Right: Summary Card */}
+              <div className="lg:col-span-2">
+                <div className="rounded-2xl border border-border bg-card overflow-hidden sticky top-24">
+                  <div className="aspect-square bg-secondary/10 flex items-center justify-center p-8">
+                    {rackProducts[0]?.node.images.edges[0]?.node.url ? (
+                      <img
+                        src={rackProducts[0].node.images.edges[0].node.url}
+                        alt="SOK 48V Rack Battery"
+                        className="w-full h-full object-contain"
+                      />
+                    ) : (
+                      <Battery className="w-16 h-16 text-muted-foreground/20" />
+                    )}
+                  </div>
+                  <div className="p-6 space-y-3">
+                    <h3 className="text-lg font-semibold text-foreground">
+                      48V Rack Batteries
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      Secure your energy needs with the SOK 48v 5kWh Lithium Server Rack Battery. Scalable | Reliable & Safe LiFePO4 Technology | Ideal for Off-Grid, Emergency & Back Up Power Systems. IEC 62619:2022 Certified.
+                    </p>
+                    <Link to="/collection/48v-lithium-batteries">
+                      <Button className="w-full gap-2 mt-2">
+                        Shop Now
+                        <ArrowRight className="h-4 w-4" />
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* SOK 48V Rack Batteries — Product Carousel */}
+        <section className="pb-16 lg:pb-24">
+          <div className="container">
             {rackLoading ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <ProductGridSkeleton count={4} />
@@ -157,16 +233,77 @@ const HomeBackup = () => {
           </div>
         </section>
 
-        {/* 48V Battery Bundles */}
+        {/* Off-Grid Context Section */}
         <section className="py-16 lg:py-24 bg-secondary/30">
+          <div className="container max-w-6xl">
+            <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+              {/* Left: Image */}
+              <div className="rounded-2xl overflow-hidden border border-border bg-card">
+                {rackProducts[0]?.node.images.edges[1]?.node.url ? (
+                  <img
+                    src={rackProducts[0].node.images.edges[1].node.url}
+                    alt="SOK Battery rack system"
+                    className="w-full aspect-[4/3] object-cover"
+                  />
+                ) : (
+                  <div className="w-full aspect-[4/3] bg-secondary/20 flex items-center justify-center">
+                    <Layers className="w-16 h-16 text-muted-foreground/20" />
+                  </div>
+                )}
+              </div>
+
+              {/* Right: Text */}
+              <div className="space-y-6">
+                <div className="space-y-4">
+                  <h3 className="text-2xl md:text-3xl font-semibold text-foreground tracking-tight">
+                    Designed for Off-Grid Living
+                  </h3>
+                  <p className="text-sm text-foreground/80 leading-relaxed">
+                    SOK rack batteries handle deep daily cycling, winter load spikes, and seasonal temperature variations common in New Zealand installations. The lithium battery management system ensures clean, stable power delivery, while the serviceable aluminium casing provides added durability for long-term off-grid use.
+                  </p>
+                  <p className="text-sm text-foreground/80 leading-relaxed">
+                    When combined with Solagen's Energy Hub 2 cabinet, you gain an integrated power solution with neat cable management, AC/DC protection, and intelligent battery-to-inverter communications for precise voltage control.
+                  </p>
+                </div>
+
+                <div className="space-y-4">
+                  <h3 className="text-2xl md:text-3xl font-semibold text-foreground tracking-tight">
+                    Modular 5 kWh Storage You Can Grow Over Time
+                  </h3>
+                  <p className="text-sm text-foreground/80 leading-relaxed">
+                    Start with a single 5 kWh SOK battery or build a larger rack system exceeding 30 kWh. Expansion is simple — just add additional modules as your home, workshop, or off-grid setup grows. This makes SOK batteries ideal for solar upgrades, EV charging, and long-term energy independence.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 48V Battery Bundles — Intro + Carousel */}
+        <section className="py-16 lg:py-24">
           <div className="container">
-            <div className="text-center mb-10">
-              <h2 className="text-3xl md:text-4xl font-semibold text-foreground tracking-tight mb-3">
-                48V Battery Bundles
-              </h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                Complete kits with rack, cables, and communication included — everything you need to get started.
-              </p>
+            <div className="max-w-6xl mx-auto mb-12">
+              <div className="grid lg:grid-cols-5 gap-12 lg:gap-16 items-start">
+                <div className="lg:col-span-3 space-y-4">
+                  <h2 className="text-3xl md:text-4xl font-semibold text-foreground tracking-tight">
+                    SOK 48V Battery Bundles
+                  </h2>
+                  <p className="text-sm text-foreground/80 leading-relaxed">
+                    Choose from our range of battery bundles. Our bundles include a heavy duty rack, battery link cables, and communication cables — everything you need to get started with a complete energy storage system.
+                  </p>
+                  <p className="text-sm text-foreground/80 leading-relaxed">
+                    Complete kits designed for quick installation, whether you're setting up a home backup system, powering a workshop, or building out an off-grid property.
+                  </p>
+                </div>
+                <div className="lg:col-span-2 flex lg:justify-end lg:items-end">
+                  <Link to="/collection/48v-bundles">
+                    <Button className="gap-2" size="lg">
+                      Shop 48V Bundles
+                      <ArrowRight className="h-4 w-4" />
+                    </Button>
+                  </Link>
+                </div>
+              </div>
             </div>
 
             {bundleLoading ? (
@@ -205,18 +342,19 @@ const HomeBackup = () => {
         </section>
 
         {/* Energy Hub 2 */}
-        <section className="py-16 lg:py-24">
+        <section className="py-16 lg:py-24 bg-secondary/30">
           <div className="container max-w-6xl">
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
               <div className="space-y-8">
                 <div>
                   <h2 className="text-3xl md:text-4xl font-semibold text-foreground tracking-tight mb-4">
-                    Solagen Energy Hub 2
+                    The Perfect Match: Solagen Energy Hub 2
                   </h2>
                   <p className="text-sm text-foreground/80 leading-relaxed">
                     Our Energy Hub 2 cabinet is designed specifically to pair with SOK rack batteries.
-                    Pre-wired, pre-tested, and ready to install with generator input options,
-                    Victron monitoring, and weather-resistant construction.
+                    It arrives pre-wired, pre-tested, and ready to install, with generator input options,
+                    Victron monitoring, and weather-resistant construction. Together, they create a turnkey
+                    energy system that offers outstanding value and performance.
                   </p>
                 </div>
 
@@ -259,7 +397,7 @@ const HomeBackup = () => {
         </section>
 
         {/* Why Choose */}
-        <section className="py-16 lg:py-24 bg-secondary/30">
+        <section className="py-16 lg:py-24">
           <div className="container max-w-6xl">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-semibold text-foreground tracking-tight mb-4">
