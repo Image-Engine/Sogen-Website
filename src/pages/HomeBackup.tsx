@@ -173,32 +173,49 @@ const HomeBackup = () => {
                 </p>
               </div>
 
-              {/* Right Card — 48V Rack Batteries */}
-              <div className="lg:sticky lg:top-28">
-                <div className="rounded-3xl border border-border bg-card overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                  <div className="aspect-[4/3] bg-secondary/30 flex items-center justify-center p-8">
-                    <img
-                      src="https://images.unsplash.com/photo-1620714223084-8fcacc6dfd8d?w=600&q=80"
-                      alt="SOK 48V Rack Battery"
-                      className="max-h-full object-contain"
-                    />
+              {/* Right — 48V Product Carousel */}
+              <div className="space-y-6">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-xl font-semibold text-foreground">48V Rack Batteries</h3>
+                  <Link to="/collection/48v-lithium-batteries" className="hidden sm:flex">
+                    <Button variant="outline" size="sm" className="gap-2">
+                      View All
+                      <ArrowRight className="h-3 w-3" />
+                    </Button>
+                  </Link>
+                </div>
+
+                {rackLoading ? (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <ProductGridSkeleton count={2} />
                   </div>
-                  <div className="p-8 space-y-4">
-                    <h3 className="text-2xl font-semibold text-foreground">
-                      48V Rack Batteries
-                    </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      Secure your energy needs with the SOK 48v 5kWh Lithium Server Rack Battery. 
-                      Scalable, reliable &amp; safe LiFePO4 technology. Ideal for off-grid, emergency 
-                      &amp; back up power systems. IEC 62619:2022 Certified.
-                    </p>
-                    <Link to="/collection/48v-lithium-batteries">
-                      <Button className="w-full gap-2 mt-2" size="lg">
-                        Shop Now
-                        <ArrowRight className="h-4 w-4" />
-                      </Button>
-                    </Link>
-                  </div>
+                ) : rackProducts.length > 0 ? (
+                  <Carousel opts={{ align: "start", loop: rackProducts.length > 2 }} className="w-full">
+                    <CarouselContent className="-ml-4">
+                      {rackProducts.map((product) => (
+                        <CarouselItem key={product.node.id} className="pl-4 basis-full sm:basis-1/2">
+                          <ProductCard product={product} />
+                        </CarouselItem>
+                      ))}
+                    </CarouselContent>
+                    {rackProducts.length > 2 && (
+                      <>
+                        <CarouselPrevious className="-left-4 hidden md:flex" />
+                        <CarouselNext className="-right-4 hidden md:flex" />
+                      </>
+                    )}
+                  </Carousel>
+                ) : (
+                  <p className="text-muted-foreground text-sm py-8 text-center">No products available.</p>
+                )}
+
+                <div className="sm:hidden text-center">
+                  <Link to="/collection/48v-lithium-batteries">
+                    <Button variant="outline" className="gap-2 w-full">
+                      View All 48V Batteries
+                      <ArrowRight className="h-4 w-4" />
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>
