@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Link } from "react-router-dom";
@@ -6,6 +7,16 @@ import {
   Volume2, Layers, Sun
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ProductCard } from "@/components/products/ProductCard";
+import { ProductGridSkeleton } from "@/components/products/ProductGridSkeleton";
+import { fetchCollectionByHandle, ShopifyProduct } from "@/lib/shopify";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const rackBatteryFeatures = [
   "Compact 3U Size — The smallest 3U size server rack mounted battery on the market.",
