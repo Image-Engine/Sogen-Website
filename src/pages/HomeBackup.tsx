@@ -237,9 +237,9 @@ const HomeBackup = () => {
         </section>
 
         {/* 48V Battery Bundles */}
-        <section className="py-20 lg:py-32">
+        <section className="py-16 lg:py-24">
           <div className="container max-w-6xl">
-            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
               <div className="space-y-3">
                 <h2 className="text-2xl md:text-3xl font-semibold text-foreground tracking-tight leading-[1.2]">
                   SOK 48V Battery Bundles
