@@ -285,7 +285,7 @@ const HomeBackup = () => {
               )}
 
               <div className="sm:hidden mt-6 text-center">
-                <Link to="/collection/48v-lithium-battery-bundles">
+                <Link to="/collection/48v-bundles">
                   <Button variant="outline" className="gap-2 w-full">
                     View 48V Bundles
                     <ArrowRight className="h-4 w-4" />
