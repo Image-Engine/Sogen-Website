@@ -106,33 +106,36 @@ const HomeBackup = () => {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
           <div className="container relative z-10 py-16 lg:py-24">
-            <div className="max-w-2xl space-y-5">
+            <div className="max-w-2xl space-y-4">
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white">
                 Home Backup
               </h1>
               <p className="text-lg lg:text-xl text-white/90 font-light">
                 Harness the Power of the Sun
               </p>
-              <p className="text-sm text-white/70 max-w-lg">
+              <p className="text-sm text-white/70 max-w-lg leading-relaxed">
                 Store every watt your solar panels produce with reliable LiFePO₄ battery systems. From grid-tied backup to fully off-grid living, our batteries maximize your solar investment.
               </p>
             </div>
           </div>
         </section>
 
-        {/* SOK 48V Rack Batteries — Intro */}
+        {/* SOK 48V Rack Batteries — Info + Product Card */}
         <section className="py-16 lg:py-24">
           <div className="container max-w-6xl">
-            <div className="grid lg:grid-cols-5 gap-12 lg:gap-16 items-start">
+            <div className="grid lg:grid-cols-5 gap-10 lg:gap-16 items-start">
               {/* Left: Description */}
               <div className="lg:col-span-3 space-y-6">
-                <h2 className="text-3xl md:text-4xl font-semibold text-foreground tracking-tight">
-                  SOK Rack Batteries
-                </h2>
-                <p className="text-sm text-muted-foreground">
-                  High-performance LiFePO₄ storage for home, solar, and off-grid systems
-                </p>
-                <div className="space-y-4 text-sm text-foreground/80 leading-relaxed">
+                <div className="space-y-2">
+                  <h2 className="text-2xl md:text-3xl font-semibold text-foreground tracking-tight">
+                    SOK Rack Batteries
+                  </h2>
+                  <p className="text-sm text-muted-foreground">
+                    High-performance LiFePO₄ storage for home, solar, and off-grid systems
+                  </p>
+                </div>
+
+                <div className="space-y-3 text-sm text-foreground/80 leading-relaxed">
                   <p>
                     SOK rack batteries are one of New Zealand's most trusted lithium energy storage options, combining premium LiFePO₄ technology with a durable, fully serviceable design. Engineered for both off-grid and on-grid applications, these modular rack batteries deliver reliable power, high usable capacity, and excellent long-term value.
                   </p>
@@ -142,11 +145,11 @@ const HomeBackup = () => {
                 </div>
 
                 {/* Spec Card */}
-                <div className="rounded-xl border border-border bg-card p-6 space-y-3">
+                <div className="rounded-xl border border-border bg-card p-5 space-y-3">
                   <h3 className="text-sm font-semibold text-foreground">
                     SOK 48V100Ah Server Rack Battery
                   </h3>
-                  <ul className="space-y-2">
+                  <ul className="space-y-1.5">
                     {rackBatterySpecs.map((spec, i) => (
                       <li key={i} className="flex items-start gap-2 text-xs text-muted-foreground leading-relaxed">
                         <span className="mt-1.5 h-1 w-1 rounded-full bg-foreground/40 shrink-0" />
@@ -175,15 +178,15 @@ const HomeBackup = () => {
                       <Battery className="w-16 h-16 text-muted-foreground/20" />
                     )}
                   </div>
-                  <div className="p-6 space-y-3">
-                    <h3 className="text-lg font-semibold text-foreground">
+                  <div className="p-5 space-y-3">
+                    <h3 className="text-base font-semibold text-foreground">
                       48V Rack Batteries
                     </h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">
                       Secure your energy needs with the SOK 48v 5kWh Lithium Server Rack Battery. Scalable | Reliable & Safe LiFePO4 Technology | Ideal for Off-Grid, Emergency & Back Up Power Systems. IEC 62619:2022 Certified.
                     </p>
                     <Link to="/collection/48v-lithium-batteries">
-                      <Button className="w-full gap-2 mt-2">
+                      <Button className="w-full gap-2 mt-1">
                         Shop Now
                         <ArrowRight className="h-4 w-4" />
                       </Button>
@@ -195,49 +198,10 @@ const HomeBackup = () => {
           </div>
         </section>
 
-        {/* SOK 48V Rack Batteries — Product Carousel */}
-        <section className="pb-16 lg:pb-24">
-          <div className="container">
-            {rackLoading ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <ProductGridSkeleton count={4} />
-              </div>
-            ) : rackProducts.length > 0 ? (
-              <Carousel opts={{ align: "start", loop: rackProducts.length > 4 }} className="w-full">
-                <CarouselContent className="-ml-4">
-                  {rackProducts.map((product) => (
-                    <CarouselItem key={product.node.id} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/4">
-                      <ProductCard product={product} />
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                {rackProducts.length > 4 && (
-                  <>
-                    <CarouselPrevious className="-left-4 hidden md:flex" />
-                    <CarouselNext className="-right-4 hidden md:flex" />
-                  </>
-                )}
-              </Carousel>
-            ) : (
-              <p className="text-muted-foreground text-sm py-8 text-center">No products available.</p>
-            )}
-
-            <div className="mt-6 flex justify-end">
-              <Link to="/collection/48v-lithium-batteries">
-                <Button variant="outline" size="sm" className="gap-2">
-                  View All
-                  <ArrowRight className="h-3 w-3" />
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </section>
-
         {/* Off-Grid Context Section */}
         <section className="py-16 lg:py-24 bg-secondary/30">
           <div className="container max-w-6xl">
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-              {/* Left: Image */}
+            <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
               <div className="rounded-2xl overflow-hidden border border-border bg-card">
                 {rackProducts[0]?.node.images.edges[1]?.node.url ? (
                   <img
@@ -252,9 +216,8 @@ const HomeBackup = () => {
                 )}
               </div>
 
-              {/* Right: Text */}
-              <div className="space-y-6">
-                <div className="space-y-4">
+              <div className="space-y-8">
+                <div className="space-y-3">
                   <h3 className="text-2xl md:text-3xl font-semibold text-foreground tracking-tight">
                     Designed for Off-Grid Living
                   </h3>
@@ -266,7 +229,7 @@ const HomeBackup = () => {
                   </p>
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <h3 className="text-2xl md:text-3xl font-semibold text-foreground tracking-tight">
                     Modular 5 kWh Storage You Can Grow Over Time
                   </h3>
@@ -279,31 +242,24 @@ const HomeBackup = () => {
           </div>
         </section>
 
-        {/* 48V Battery Bundles — Intro + Carousel */}
+        {/* 48V Battery Bundles */}
         <section className="py-16 lg:py-24">
-          <div className="container">
-            <div className="max-w-6xl mx-auto mb-12">
-              <div className="grid lg:grid-cols-5 gap-12 lg:gap-16 items-start">
-                <div className="lg:col-span-3 space-y-4">
-                  <h2 className="text-3xl md:text-4xl font-semibold text-foreground tracking-tight">
-                    SOK 48V Battery Bundles
-                  </h2>
-                  <p className="text-sm text-foreground/80 leading-relaxed">
-                    Choose from our range of battery bundles. Our bundles include a heavy duty rack, battery link cables, and communication cables — everything you need to get started with a complete energy storage system.
-                  </p>
-                  <p className="text-sm text-foreground/80 leading-relaxed">
-                    Complete kits designed for quick installation, whether you're setting up a home backup system, powering a workshop, or building out an off-grid property.
-                  </p>
-                </div>
-                <div className="lg:col-span-2 flex lg:justify-end lg:items-end">
-                  <Link to="/collection/48v-bundles">
-                    <Button className="gap-2" size="lg">
-                      Shop 48V Bundles
-                      <ArrowRight className="h-4 w-4" />
-                    </Button>
-                  </Link>
-                </div>
+          <div className="container max-w-6xl">
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
+              <div className="space-y-2">
+                <h2 className="text-2xl md:text-3xl font-semibold text-foreground tracking-tight">
+                  SOK 48V Battery Bundles
+                </h2>
+                <p className="text-sm text-muted-foreground max-w-xl leading-relaxed">
+                  Complete kits with heavy duty rack, battery link cables, and communication cables — everything you need for a full energy storage system.
+                </p>
               </div>
+              <Link to="/collection/48v-bundles" className="shrink-0">
+                <Button className="gap-2">
+                  Shop 48V Bundles
+                  <ArrowRight className="h-4 w-4" />
+                </Button>
+              </Link>
             </div>
 
             {bundleLoading ? (
@@ -344,23 +300,22 @@ const HomeBackup = () => {
         {/* Energy Hub 2 */}
         <section className="py-16 lg:py-24 bg-secondary/30">
           <div className="container max-w-6xl">
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-              <div className="space-y-8">
-                <div>
-                  <h2 className="text-3xl md:text-4xl font-semibold text-foreground tracking-tight mb-4">
+            <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+              <div className="space-y-6">
+                <div className="space-y-3">
+                  <h2 className="text-2xl md:text-3xl font-semibold text-foreground tracking-tight">
                     The Perfect Match: Solagen Energy Hub 2
                   </h2>
                   <p className="text-sm text-foreground/80 leading-relaxed">
                     Our Energy Hub 2 cabinet is designed specifically to pair with SOK rack batteries.
                     It arrives pre-wired, pre-tested, and ready to install, with generator input options,
-                    Victron monitoring, and weather-resistant construction. Together, they create a turnkey
-                    energy system that offers outstanding value and performance.
+                    Victron monitoring, and weather-resistant construction.
                   </p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
                   {energyHubFeatures.map((feature, i) => (
-                    <div key={i} className="flex items-center gap-2.5">
+                    <div key={i} className="flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
                       <span className="text-sm text-foreground/80">{feature}</span>
                     </div>
@@ -375,7 +330,7 @@ const HomeBackup = () => {
                 </Link>
               </div>
 
-              <div className="rounded-3xl border border-border bg-card overflow-hidden">
+              <div className="rounded-2xl border border-border bg-card overflow-hidden">
                 <div className="aspect-[4/3] bg-secondary/30 flex items-center justify-center p-4">
                   <img
                     src="https://images.unsplash.com/photo-1559302504-64aae6ca6b6d?w=600&q=80"
@@ -383,8 +338,8 @@ const HomeBackup = () => {
                     className="w-full h-full object-cover rounded-xl"
                   />
                 </div>
-                <div className="p-8">
-                  <h3 className="text-2xl font-semibold text-foreground mb-2">
+                <div className="p-6">
+                  <h3 className="text-lg font-semibold text-foreground mb-1">
                     Solagen Energy Hub
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
@@ -399,22 +354,22 @@ const HomeBackup = () => {
         {/* Why Choose */}
         <section className="py-16 lg:py-24">
           <div className="container max-w-6xl">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-semibold text-foreground tracking-tight mb-4">
+            <div className="text-center mb-12">
+              <h2 className="text-2xl md:text-3xl font-semibold text-foreground tracking-tight mb-3">
                 Reliable Home Energy Storage
               </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-sm text-muted-foreground max-w-2xl mx-auto leading-relaxed">
                 Our LiFePO₄ batteries provide safe, silent, and long-lasting backup power for your home
               </p>
             </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
               {whyChooseFeatures.map((feature, index) => (
                 <div
                   key={index}
-                  className="group p-8 rounded-2xl border border-border bg-card hover:shadow-lg transition-all duration-300"
+                  className="group p-6 rounded-xl border border-border bg-card hover:shadow-md transition-all duration-300"
                 >
-                  <feature.icon className="h-6 w-6 text-primary mb-5" />
-                  <h3 className="text-lg font-semibold text-foreground mb-2">
+                  <feature.icon className="h-5 w-5 text-primary mb-4" />
+                  <h3 className="text-base font-semibold text-foreground mb-1.5">
                     {feature.title}
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
@@ -429,14 +384,14 @@ const HomeBackup = () => {
         {/* CTA */}
         <section className="py-16 lg:py-24 bg-foreground">
           <div className="container max-w-3xl text-center">
-            <h2 className="text-3xl md:text-4xl font-semibold text-background mb-4">
+            <h2 className="text-2xl md:text-3xl font-semibold text-background mb-3">
               Need Help Setting Up Home Backup?
             </h2>
-            <p className="text-lg text-background/60 mb-8 leading-relaxed">
+            <p className="text-sm text-background/60 mb-8 leading-relaxed max-w-xl mx-auto">
               Our experts can help you design the perfect home backup system. Get personalized
               recommendations based on your home's energy needs and budget.
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className="flex flex-wrap justify-center gap-3">
               <Link to="/contact">
                 <Button size="lg" variant="secondary" className="gap-2">
                   Contact Our Experts
