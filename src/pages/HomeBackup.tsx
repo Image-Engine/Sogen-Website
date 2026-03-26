@@ -125,25 +125,27 @@ const HomeBackup = () => {
         {/* SOK 48V Rack Batteries — Info + Product Card */}
         <section className="py-20 lg:py-32">
           <div className="container max-w-6xl">
-            <div className="grid lg:grid-cols-5 gap-12 lg:gap-20 items-start">
+            <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-stretch">
               {/* Left: Description */}
-              <div className="lg:col-span-3 space-y-8">
-                <div className="space-y-3">
-                  <h2 className="text-2xl md:text-3xl font-semibold text-foreground tracking-tight leading-[1.2]">
-                    SOK Rack Batteries
-                  </h2>
-                  <p className="text-[15px] text-muted-foreground leading-[1.7]">
-                    High-performance LiFePO₄ storage for home, solar, and off-grid systems
-                  </p>
-                </div>
+              <div className="flex flex-col justify-between space-y-0">
+                <div>
+                  <div className="space-y-3 mb-8">
+                    <h2 className="text-2xl md:text-3xl font-semibold text-foreground tracking-tight leading-[1.2]">
+                      SOK Rack Batteries
+                    </h2>
+                    <p className="text-[15px] text-muted-foreground leading-[1.7]">
+                      High-performance LiFePO₄ storage for home, solar, and off-grid systems
+                    </p>
+                  </div>
 
-                <div className="space-y-4 text-[15px] text-foreground/75 leading-[1.85]">
-                  <p>
-                    SOK rack batteries are one of New Zealand's most trusted lithium energy storage options, combining premium LiFePO₄ technology with a durable, fully serviceable design. Engineered for both off-grid and on-grid applications, these modular rack batteries deliver reliable power, high usable capacity, and excellent long-term value.
-                  </p>
-                  <p>
-                    Paired with Solagen's Energy Hub 2 cabinet, SOK batteries create a complete, scalable energy system built for homes, tiny houses, workshops, remote sites, and commercial installations.
-                  </p>
+                  <div className="space-y-4 text-[15px] text-foreground/75 leading-[1.85] mb-10">
+                    <p>
+                      SOK rack batteries are one of New Zealand's most trusted lithium energy storage options, combining premium LiFePO₄ technology with a durable, fully serviceable design. Engineered for both off-grid and on-grid applications, these modular rack batteries deliver reliable power, high usable capacity, and excellent long-term value.
+                    </p>
+                    <p>
+                      Paired with Solagen's Energy Hub 2 cabinet, SOK batteries create a complete, scalable energy system built for homes, tiny houses, workshops, remote sites, and commercial installations.
+                    </p>
+                  </div>
                 </div>
 
                 {/* Spec Card */}
@@ -160,32 +162,28 @@ const HomeBackup = () => {
                     ))}
                   </ul>
                 </div>
-
-                <p className="text-[15px] text-foreground/65 leading-[1.8]">
-                  These features make SOK rack batteries one of the most cost-effective and dependable lithium storage options in the country.
-                </p>
               </div>
 
-              {/* Right: Summary Card */}
-              <div className="lg:col-span-2">
-                <div className="rounded-2xl border border-border bg-card overflow-hidden sticky top-24">
-                  <div className="aspect-square bg-secondary/10 flex items-center justify-center p-8">
+              {/* Right: Product Card */}
+              <div className="flex flex-col">
+                <div className="rounded-2xl border border-border bg-card overflow-hidden flex flex-col h-full">
+                  <div className="flex-1 bg-secondary/10 flex items-center justify-center p-10">
                     {rackProducts[0]?.node.images.edges[0]?.node.url ? (
                       <img
                         src={rackProducts[0].node.images.edges[0].node.url}
                         alt="SOK 48V Rack Battery"
-                        className="w-full h-full object-contain"
+                        className="w-full h-full object-contain max-h-[400px]"
                       />
                     ) : (
                       <Battery className="w-16 h-16 text-muted-foreground/20" />
                     )}
                   </div>
-                  <div className="p-6 space-y-4">
-                    <h3 className="text-base font-semibold text-foreground leading-snug">
+                  <div className="p-7 space-y-4">
+                    <h3 className="text-lg font-semibold text-foreground leading-snug">
                       48V Rack Batteries
                     </h3>
                     <p className="text-[14px] text-muted-foreground leading-[1.75]">
-                      Secure your energy needs with the SOK 48v 5kWh Lithium Server Rack Battery. Scalable | Reliable & Safe LiFePO4 Technology | Ideal for Off-Grid, Emergency & Back Up Power Systems. IEC 62619:2022 Certified.
+                      Secure your energy needs with the SOK 48v 5kWh Lithium Server Rack Battery. Scalable | Reliable & Safe LiFePO4 Technology | Ideal for Off-Grid, Emergency & Back Up Power Systems.
                     </p>
                     <Link to="/collection/48v-lithium-batteries">
                       <Button className="w-full gap-2 mt-1">
