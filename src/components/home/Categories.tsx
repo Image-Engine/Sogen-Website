@@ -122,6 +122,13 @@ export function Categories() {
                 >
                   {category.description}
                 </p>
+                <span
+                  className={`inline-flex items-center gap-1.5 mt-3 text-sm font-medium text-white bg-primary/80 backdrop-blur-sm px-4 py-2 rounded-lg transition-all duration-500 ${
+                    hoveredIndex === index ? "opacity-100 max-h-12 translate-y-0" : "opacity-0 max-h-0 overflow-hidden translate-y-2"
+                  }`}
+                >
+                  Shop Now →
+                </span>
               </div>
 
               {/* Hover Glow Effect */}
