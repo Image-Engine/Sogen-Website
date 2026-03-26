@@ -335,14 +335,14 @@ const HomeBackup = () => {
               <div className="rounded-2xl border border-border bg-card overflow-hidden">
                 <div className="aspect-[4/3] bg-secondary/30 flex items-center justify-center p-4">
                   <img
-                    src="https://images.unsplash.com/photo-1559302504-64aae6ca6b6d?w=600&q=80"
-                    alt="Solagen Energy Hub 2"
-                    className="w-full h-full object-cover rounded-xl"
+                    src="https://solagen.co.nz/wp-content/uploads/SGEH-cabinet-display800x800.jpg"
+                    alt="Solagen Energy Hub 2 Cabinet"
+                    className="w-full h-full object-contain rounded-xl"
                   />
                 </div>
                 <div className="p-6">
                   <h3 className="text-lg font-semibold text-foreground mb-1">
-                    Solagen Energy Hub
+                    Solagen Energy Hub 2
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     A powerful and expandable outdoor cabinet for urban, rural, and commercial situations — on-grid or off-grid.
