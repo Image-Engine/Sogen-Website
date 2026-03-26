@@ -187,67 +187,97 @@ const HomeBackup = () => {
         {/* Off-Grid Living + 48V Bundles Section */}
         <section className="py-20 lg:py-28 bg-secondary/30">
           <div className="container max-w-6xl">
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-              {/* Left Card — 48V Bundles */}
-              <div className="order-2 lg:order-1">
-                <div className="rounded-3xl border border-border bg-card overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                  <div className="aspect-[4/3] bg-background flex items-center justify-center p-8">
-                    <img
-                      src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=600&q=80"
-                      alt="SOK 48V Battery Bundles"
-                      className="max-h-full object-contain"
-                    />
-                  </div>
-                  <div className="p-8 space-y-4">
-                    <h3 className="text-2xl font-semibold text-foreground">
-                      SOK 48V Battery Bundles
-                    </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      Choose from our range of battery bundles. Our bundles include a heavy duty rack, 
-                      battery link cables, and communication cables.
-                    </p>
-                    <Link to="/collection/bundles">
-                      <Button className="w-full gap-2 mt-2" size="lg">
-                        Shop 48V Bundles
-                        <ArrowRight className="h-4 w-4" />
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right Content */}
-              <div className="order-1 lg:order-2 space-y-10">
-                <div>
-                  <h2 className="text-3xl md:text-4xl font-semibold text-foreground tracking-tight mb-4">
-                    Designed for Off-Grid Living
-                  </h2>
-                  <div className="text-foreground/80 space-y-4 leading-relaxed text-sm">
-                    <p>
-                      SOK rack batteries handle deep daily cycling, winter load spikes, and seasonal 
-                      temperature variations common in New Zealand installations. The lithium battery 
-                      management system ensures clean, stable power delivery, while the serviceable 
-                      aluminium casing provides added durability for long-term off-grid use.
-                    </p>
-                    <p>
-                      When combined with Solagen's Energy Hub 2 cabinet, you gain an integrated power 
-                      solution with neat cable management, AC/DC protection, and intelligent 
-                      battery-to-inverter communications for precise voltage control.
-                    </p>
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-semibold text-foreground mb-3">
-                    Modular 5 kWh Storage You Can Grow Over Time
-                  </h3>
-                  <p className="text-sm text-foreground/80 leading-relaxed">
-                    Start with a single 5 kWh SOK battery or build a larger rack system exceeding 
-                    30 kWh. Expansion is simple — just add additional modules as your home, workshop, 
-                    or off-grid setup grows. This makes SOK batteries ideal for solar upgrades, EV 
-                    charging, and long-term energy independence.
+            {/* Text Content */}
+            <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-16">
+              <div className="space-y-6">
+                <h2 className="text-3xl md:text-4xl font-semibold text-foreground tracking-tight">
+                  Designed for Off-Grid Living
+                </h2>
+                <div className="text-foreground/80 space-y-4 leading-relaxed text-sm">
+                  <p>
+                    SOK rack batteries handle deep daily cycling, winter load spikes, and seasonal 
+                    temperature variations common in New Zealand installations. The lithium battery 
+                    management system ensures clean, stable power delivery, while the serviceable 
+                    aluminium casing provides added durability for long-term off-grid use.
+                  </p>
+                  <p>
+                    When combined with Solagen's Energy Hub 2 cabinet, you gain an integrated power 
+                    solution with neat cable management, AC/DC protection, and intelligent 
+                    battery-to-inverter communications for precise voltage control.
                   </p>
                 </div>
+              </div>
+              <div className="space-y-6">
+                <h3 className="text-xl font-semibold text-foreground">
+                  Modular 5 kWh Storage You Can Grow Over Time
+                </h3>
+                <p className="text-sm text-foreground/80 leading-relaxed">
+                  Start with a single 5 kWh SOK battery or build a larger rack system exceeding 
+                  30 kWh. Expansion is simple — just add additional modules as your home, workshop, 
+                  or off-grid setup grows. This makes SOK batteries ideal for solar upgrades, EV 
+                  charging, and long-term energy independence.
+                </p>
+              </div>
+            </div>
+
+            {/* Bundle Products Carousel */}
+            <div>
+              <div className="flex items-center justify-between mb-8">
+                <div>
+                  <h3 className="text-2xl font-semibold text-foreground">
+                    SOK 48V Battery Bundles
+                  </h3>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    Choose from our range of battery bundles — rack, cables, and communication included.
+                  </p>
+                </div>
+                <Link to="/collection/bundles" className="hidden sm:flex">
+                  <Button variant="outline" className="gap-2">
+                    View All Bundles
+                    <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </Link>
+              </div>
+
+              {bundleLoading ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  <ProductGridSkeleton count={4} />
+                </div>
+              ) : bundleProducts.length > 0 ? (
+                <Carousel
+                  opts={{ align: "start", loop: bundleProducts.length > 4 }}
+                  className="w-full"
+                >
+                  <CarouselContent className="-ml-4">
+                    {bundleProducts.map((product) => (
+                      <CarouselItem
+                        key={product.node.id}
+                        className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
+                      >
+                        <ProductCard product={product} />
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  {bundleProducts.length > 4 && (
+                    <>
+                      <CarouselPrevious className="-left-4 hidden md:flex" />
+                      <CarouselNext className="-right-4 hidden md:flex" />
+                    </>
+                  )}
+                </Carousel>
+              ) : (
+                <p className="text-muted-foreground text-sm py-8 text-center">
+                  No bundle products available at the moment.
+                </p>
+              )}
+
+              <div className="sm:hidden mt-6 text-center">
+                <Link to="/collection/bundles">
+                  <Button variant="outline" className="gap-2 w-full">
+                    View All Bundles
+                    <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
