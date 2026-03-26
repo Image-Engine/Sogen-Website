@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, ShoppingCart, Package, Minus, Plus, FolderOpen, Zap, Truck } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
 import { Button } from "@/components/ui/button";
 import { fetchProductByHandle, ProductDetails, createStorefrontCheckout } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
@@ -178,7 +179,11 @@ export default function Product() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main className="pt-20 md:pt-24">
+      <PageBreadcrumb items={[
+        { label: "Products", href: "/products" },
+        { label: product.title }
+      ]} />
+      <main className="pt-4 md:pt-6">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-6">
           {/* Collections Navigation */}
           {product.collections.length > 0 && (

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
 import { useShopifyCustomer } from "@/contexts/ShopifyCustomerContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -19,6 +20,7 @@ export default function Orders() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
+      <PageBreadcrumb />
       <main className="container py-12 max-w-4xl">
         <h1 className="text-3xl font-bold mb-8">Order History</h1>
         <Card>

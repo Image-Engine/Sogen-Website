@@ -1,5 +1,6 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
 import { Link } from "react-router-dom";
 import { 
   Zap, 
@@ -95,6 +96,7 @@ const EnergyHub2 = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Header />
+      <PageBreadcrumb />
       <main className="flex-1">
         {/* Hero Section */}
         <section className="relative py-20 lg:py-32 overflow-hidden bg-gradient-to-b from-secondary/30 to-background">

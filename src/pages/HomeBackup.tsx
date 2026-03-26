@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
 import { Link } from "react-router-dom";
 import { 
   Zap, Shield, Battery, Wifi, CheckCircle2, ArrowRight, 
@@ -95,6 +96,7 @@ const HomeBackup = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Header />
+      <PageBreadcrumb />
       <main className="flex-1">
         {/* Hero */}
         <section className="relative min-h-[50vh] lg:min-h-[60vh] flex items-center overflow-hidden">

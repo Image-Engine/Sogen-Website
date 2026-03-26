@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
 import { fetchArticleByHandle, ShopifyArticle } from "@/lib/shopify";
 import { Calendar, ArrowLeft, User } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -77,7 +78,10 @@ export default function BlogArticle() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
+      <PageBreadcrumb items={[
+        { label: "Blog", href: "/blog" },
+        { label: article.title }
+      ]} />
       <article className="py-16 md:py-24">
         <div className="container max-w-3xl">
           {/* Back link */}

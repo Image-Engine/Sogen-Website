@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Play } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
 import { VideoLightbox } from "@/components/VideoLightbox";
 
 const videos = [
@@ -23,6 +24,7 @@ const VideoReviews = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Header />
+      <PageBreadcrumb />
       
       <main className="flex-1">
         {/* Hero Section */}

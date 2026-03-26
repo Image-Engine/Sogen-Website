@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
 import { fetchBlogArticles, ShopifyArticle } from "@/lib/shopify";
 import { getBlogFallbackImage } from "@/lib/blogFallbackImages";
 import { Calendar, ArrowRight, User } from "lucide-react";
@@ -32,7 +33,7 @@ export default function Blog() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
+      <PageBreadcrumb />
       {/* Hero Section */}
       <section className="py-16 md:py-24 border-b border-border">
         <div className="container">
