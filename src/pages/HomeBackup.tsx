@@ -71,6 +71,19 @@ const whyChooseFeatures = [
 ];
 
 const HomeBackup = () => {
+  const [bundleProducts, setBundleProducts] = useState<ShopifyProduct[]>([]);
+  const [bundleLoading, setBundleLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadBundles() {
+      setBundleLoading(true);
+      const collection = await fetchCollectionByHandle("bundles", 20);
+      setBundleProducts(collection?.products || []);
+      setBundleLoading(false);
+    }
+    loadBundles();
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Header />
