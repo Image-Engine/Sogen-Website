@@ -378,7 +378,7 @@ const HomeBackup = () => {
         </section>
 
         {/* CTA */}
-        <section className="py-20 lg:py-32 bg-primary">
+        <section className="py-16 lg:py-24 bg-primary">
           <div className="container max-w-3xl text-center space-y-8">
             <h2 className="text-2xl md:text-3xl font-semibold text-primary-foreground tracking-tight leading-[1.2]">
               Need Help Setting Up Home Backup?
