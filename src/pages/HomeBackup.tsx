@@ -292,7 +292,7 @@ const HomeBackup = () => {
         </section>
 
         {/* Energy Hub 2 */}
-        <section className="py-20 lg:py-32 bg-secondary/20">
+        <section className="py-16 lg:py-24 bg-secondary/20">
           <div className="container max-w-6xl">
             <div className="grid lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] gap-10 lg:gap-16 items-start">
               <div className="space-y-10 lg:pr-4">
