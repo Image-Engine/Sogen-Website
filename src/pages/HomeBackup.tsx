@@ -348,9 +348,9 @@ const HomeBackup = () => {
         </section>
 
         {/* Why Choose */}
-        <section className="py-20 lg:py-32">
+        <section className="py-16 lg:py-24">
           <div className="container max-w-6xl">
-            <div className="text-center mb-14">
+            <div className="text-center mb-12">
               <h2 className="text-2xl md:text-3xl font-semibold text-foreground tracking-tight leading-[1.2] mb-4">
                 Reliable Home Energy Storage
               </h2>
