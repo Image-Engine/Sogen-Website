@@ -77,7 +77,7 @@ const HomeBackup = () => {
   useEffect(() => {
     async function loadBundles() {
       setBundleLoading(true);
-      const collection = await fetchCollectionByHandle("48v-lithium-battery-bundles", 20);
+      const collection = await fetchCollectionByHandle("48v-bundles", 20);
       setBundleProducts(collection?.products || []);
       setBundleLoading(false);
     }
@@ -244,7 +244,7 @@ const HomeBackup = () => {
                     Choose from our range of battery bundles — rack, cables, and communication included.
                   </p>
                 </div>
-                <Link to="/collection/48v-lithium-battery-bundles" className="hidden sm:flex">
+                <Link to="/collection/48v-bundles" className="hidden sm:flex">
                   <Button variant="outline" className="gap-2">
                     View 48V Bundles
                     <ArrowRight className="h-4 w-4" />
@@ -285,7 +285,7 @@ const HomeBackup = () => {
               )}
 
               <div className="sm:hidden mt-6 text-center">
-                <Link to="/collection/48v-lithium-battery-bundles">
+                <Link to="/collection/48v-bundles">
                   <Button variant="outline" className="gap-2 w-full">
                     View 48V Bundles
                     <ArrowRight className="h-4 w-4" />
