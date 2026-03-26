@@ -77,7 +77,7 @@ const HomeBackup = () => {
   useEffect(() => {
     async function loadBundles() {
       setBundleLoading(true);
-      const collection = await fetchCollectionByHandle("48v-lithium-battery-bundles", 20);
+      const collection = await fetchCollectionByHandle("48v-bundles", 20);
       setBundleProducts(collection?.products || []);
       setBundleLoading(false);
     }
