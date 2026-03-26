@@ -5,7 +5,7 @@ const categories = [{
   title: "Solar Systems",
   description: "Grid-tied & off-grid solutions",
   image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80",
-  link: "/solar-systems"
+  link: "/home-backup"
 }, {
   title: "Home Backup",
   description: "Reliable power storage",
@@ -20,7 +20,7 @@ const categories = [{
   title: "Industrial",
   description: "Heavy-duty applications",
   image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80",
-  link: "/industrial"
+  link: "/home-backup"
 }, {
   title: "Victron",
   description: "Professional power electronics",
