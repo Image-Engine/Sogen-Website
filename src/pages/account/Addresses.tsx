@@ -59,6 +59,7 @@ export default function Addresses() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
+      <PageBreadcrumb />
       <main className="container py-12 max-w-4xl">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-3xl font-bold">Addresses</h1>

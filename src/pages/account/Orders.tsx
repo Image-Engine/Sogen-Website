@@ -20,6 +20,7 @@ export default function Orders() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
+      <PageBreadcrumb />
       <main className="container py-12 max-w-4xl">
         <h1 className="text-3xl font-bold mb-8">Order History</h1>
         <Card>

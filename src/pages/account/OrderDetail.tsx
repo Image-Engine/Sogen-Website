@@ -45,6 +45,11 @@ export default function OrderDetail() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
+      <PageBreadcrumb items={[
+        { label: "My Account", href: "/account" },
+        { label: "Orders", href: "/account/orders" },
+        { label: order.name }
+      ]} />
       <main className="container py-12 max-w-4xl">
         <Link to="/account/orders" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground mb-6">
           <ArrowLeft className="h-4 w-4" /> Back to orders

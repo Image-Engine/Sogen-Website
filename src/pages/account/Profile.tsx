@@ -27,6 +27,7 @@ export default function Profile() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
+      <PageBreadcrumb />
       <main className="container py-12 max-w-lg">
         <h1 className="text-3xl font-bold mb-8">Profile</h1>
         <Card>
