@@ -199,7 +199,7 @@ const HomeBackup = () => {
         </section>
 
         {/* Off-Grid Context Section */}
-        <section className="py-20 lg:py-32 bg-secondary/20">
+        <section className="py-16 lg:py-24 bg-secondary/20">
           <div className="container max-w-6xl">
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
               <div className="rounded-2xl overflow-hidden border border-border">
