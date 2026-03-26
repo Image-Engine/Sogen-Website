@@ -204,18 +204,12 @@ const HomeBackup = () => {
         <section className="py-16 lg:py-24 bg-secondary/30">
           <div className="container max-w-6xl">
             <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-              <div className="rounded-2xl overflow-hidden border border-border bg-card">
-                {rackProducts[0]?.node.images.edges[1]?.node.url ? (
-                  <img
-                    src={rackProducts[0].node.images.edges[1].node.url}
-                    alt="SOK Battery rack system"
-                    className="w-full aspect-[4/3] object-cover"
-                  />
-                ) : (
-                  <div className="w-full aspect-[4/3] bg-secondary/20 flex items-center justify-center">
-                    <Layers className="w-16 h-16 text-muted-foreground/20" />
-                  </div>
-                )}
+              <div className="rounded-2xl overflow-hidden border border-border">
+                <img
+                  src="https://images.unsplash.com/photo-1510798831971-661eb04b3739?w=800&q=80"
+                  alt="Off-grid cabin powered by solar and battery storage"
+                  className="w-full aspect-[4/3] object-cover"
+                />
               </div>
 
               <div className="space-y-8">
