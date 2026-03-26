@@ -1,5 +1,6 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
 import { Shield, User, Cookie, Lock, Share2, FileText, Mail } from "lucide-react";
 
 export default function PrivacyPolicy() {

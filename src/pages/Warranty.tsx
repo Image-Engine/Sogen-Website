@@ -1,5 +1,6 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
 import { Shield, Clock, Battery, Wrench, AlertTriangle, FileDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
