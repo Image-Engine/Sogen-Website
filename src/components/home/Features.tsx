@@ -61,7 +61,10 @@ export function Features() {
               key={stat.label}
               className="text-center rounded-2xl border bg-background p-5 sm:p-8"
             >
-              <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-1">
+              <div className={`w-10 h-10 rounded-xl ${stat.bg} flex items-center justify-center mx-auto mb-3`}>
+                <stat.icon className={`w-5 h-5 ${stat.accent}`} strokeWidth={1.5} />
+              </div>
+              <div className={`text-2xl sm:text-3xl lg:text-4xl font-bold ${stat.accent} mb-1`}>
                 {stat.value}
               </div>
               <div className="text-xs sm:text-sm text-muted-foreground font-medium">
