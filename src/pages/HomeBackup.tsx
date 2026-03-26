@@ -384,18 +384,18 @@ const HomeBackup = () => {
         </section>
 
         {/* CTA */}
-        <section className="py-16 lg:py-24 bg-foreground">
-          <div className="container max-w-3xl text-center">
-            <h2 className="text-2xl md:text-3xl font-semibold text-background mb-3">
+        <section className="py-16 lg:py-24 bg-primary">
+          <div className="container max-w-4xl text-center space-y-6">
+            <h2 className="text-2xl md:text-3xl font-semibold text-primary-foreground tracking-tight">
               Need Help Setting Up Home Backup?
             </h2>
-            <p className="text-sm text-background/60 mb-8 leading-relaxed max-w-xl mx-auto">
+            <p className="text-sm text-primary-foreground/70 max-w-xl mx-auto leading-relaxed">
               Our experts can help you design the perfect home backup system. Get personalized
               recommendations based on your home's energy needs and budget.
             </p>
-            <div className="flex flex-wrap justify-center gap-3">
+            <div className="flex flex-col sm:flex-row justify-center gap-3 pt-2">
               <Link to="/contact">
-                <Button size="lg" variant="secondary" className="gap-2">
+                <Button size="lg" variant="secondary" className="gap-2 w-full sm:w-auto">
                   Contact Our Experts
                   <ArrowRight className="h-4 w-4" />
                 </Button>
@@ -404,7 +404,7 @@ const HomeBackup = () => {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="bg-transparent text-background border-background/30 hover:bg-background/10"
+                  className="w-full sm:w-auto bg-transparent text-primary-foreground border-primary-foreground/30 hover:bg-primary-foreground/10"
                 >
                   Browse All Products
                 </Button>
