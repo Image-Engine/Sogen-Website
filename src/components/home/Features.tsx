@@ -1,9 +1,9 @@
 import { Clock, ShieldCheck, Battery, Bluetooth, Shield, Settings, Zap, RefreshCw } from "lucide-react";
 
 const heroStats = [
-  { icon: RefreshCw, value: "8000+", label: "Charge Cycles" },
-  { icon: Clock, value: "20 Year", label: "Lifespan" },
-  { icon: Zap, value: "99%", label: "Efficiency" },
+  { icon: RefreshCw, value: "8000+", label: "Charge Cycles", accent: "text-emerald-600", bg: "bg-emerald-50" },
+  { icon: Clock, value: "20 Year", label: "Lifespan", accent: "text-blue-600", bg: "bg-blue-50" },
+  { icon: Zap, value: "99%", label: "Efficiency", accent: "text-amber-600", bg: "bg-amber-50" },
 ];
 
 const features = [
