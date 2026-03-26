@@ -78,7 +78,10 @@ export default function BlogArticle() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
+      <PageBreadcrumb items={[
+        { label: "Blog", href: "/blog" },
+        { label: article.title }
+      ]} />
       <article className="py-16 md:py-24">
         <div className="container max-w-3xl">
           {/* Back link */}

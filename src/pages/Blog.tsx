@@ -33,7 +33,7 @@ export default function Blog() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
+      <PageBreadcrumb />
       {/* Hero Section */}
       <section className="py-16 md:py-24 border-b border-border">
         <div className="container">

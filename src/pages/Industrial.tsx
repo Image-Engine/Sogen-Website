@@ -158,6 +158,7 @@ const Industrial = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Header />
+      <PageBreadcrumb />
       <main className="flex-1">
         {/* Hero Section */}
         <section className="relative min-h-[50vh] lg:min-h-[60vh] flex items-center overflow-hidden">

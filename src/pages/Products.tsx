@@ -103,6 +103,7 @@ export default function Products() {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Header />
+      <PageBreadcrumb />
       
       <main className="flex-1">
         {/* Hero Section */}
