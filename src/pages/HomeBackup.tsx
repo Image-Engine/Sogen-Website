@@ -204,18 +204,12 @@ const HomeBackup = () => {
         <section className="py-16 lg:py-24 bg-secondary/30">
           <div className="container max-w-6xl">
             <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-              <div className="rounded-2xl overflow-hidden border border-border bg-card">
-                {rackProducts[0]?.node.images.edges[1]?.node.url ? (
-                  <img
-                    src={rackProducts[0].node.images.edges[1].node.url}
-                    alt="SOK Battery rack system"
-                    className="w-full aspect-[4/3] object-cover"
-                  />
-                ) : (
-                  <div className="w-full aspect-[4/3] bg-secondary/20 flex items-center justify-center">
-                    <Layers className="w-16 h-16 text-muted-foreground/20" />
-                  </div>
-                )}
+              <div className="rounded-2xl overflow-hidden border border-border">
+                <img
+                  src="https://images.unsplash.com/photo-1510798831971-661eb04b3739?w=800&q=80"
+                  alt="Off-grid cabin powered by solar and battery storage"
+                  className="w-full aspect-[4/3] object-cover"
+                />
               </div>
 
               <div className="space-y-8">
@@ -335,14 +329,14 @@ const HomeBackup = () => {
               <div className="rounded-2xl border border-border bg-card overflow-hidden">
                 <div className="aspect-[4/3] bg-secondary/30 flex items-center justify-center p-4">
                   <img
-                    src="https://images.unsplash.com/photo-1559302504-64aae6ca6b6d?w=600&q=80"
-                    alt="Solagen Energy Hub 2"
-                    className="w-full h-full object-cover rounded-xl"
+                    src="https://solagen.co.nz/wp-content/uploads/SGEH-cabinet-display800x800.jpg"
+                    alt="Solagen Energy Hub 2 Cabinet"
+                    className="w-full h-full object-contain rounded-xl"
                   />
                 </div>
                 <div className="p-6">
                   <h3 className="text-lg font-semibold text-foreground mb-1">
-                    Solagen Energy Hub
+                    Solagen Energy Hub 2
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     A powerful and expandable outdoor cabinet for urban, rural, and commercial situations — on-grid or off-grid.
@@ -384,18 +378,18 @@ const HomeBackup = () => {
         </section>
 
         {/* CTA */}
-        <section className="py-16 lg:py-24 bg-foreground">
-          <div className="container max-w-3xl text-center">
-            <h2 className="text-2xl md:text-3xl font-semibold text-background mb-3">
+        <section className="py-16 lg:py-24 bg-primary">
+          <div className="container max-w-4xl text-center space-y-6">
+            <h2 className="text-2xl md:text-3xl font-semibold text-primary-foreground tracking-tight">
               Need Help Setting Up Home Backup?
             </h2>
-            <p className="text-sm text-background/60 mb-8 leading-relaxed max-w-xl mx-auto">
+            <p className="text-sm text-primary-foreground/70 max-w-xl mx-auto leading-relaxed">
               Our experts can help you design the perfect home backup system. Get personalized
               recommendations based on your home's energy needs and budget.
             </p>
-            <div className="flex flex-wrap justify-center gap-3">
+            <div className="flex flex-col sm:flex-row justify-center gap-3 pt-2">
               <Link to="/contact">
-                <Button size="lg" variant="secondary" className="gap-2">
+                <Button size="lg" variant="secondary" className="gap-2 w-full sm:w-auto">
                   Contact Our Experts
                   <ArrowRight className="h-4 w-4" />
                 </Button>
@@ -404,7 +398,7 @@ const HomeBackup = () => {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="bg-transparent text-background border-background/30 hover:bg-background/10"
+                  className="w-full sm:w-auto bg-transparent text-primary-foreground border-primary-foreground/30 hover:bg-primary-foreground/10"
                 >
                   Browse All Products
                 </Button>
