@@ -71,17 +71,25 @@ const whyChooseFeatures = [
 ];
 
 const HomeBackup = () => {
+  const [rackProducts, setRackProducts] = useState<ShopifyProduct[]>([]);
+  const [rackLoading, setRackLoading] = useState(true);
   const [bundleProducts, setBundleProducts] = useState<ShopifyProduct[]>([]);
   const [bundleLoading, setBundleLoading] = useState(true);
 
   useEffect(() => {
-    async function loadBundles() {
+    async function loadProducts() {
+      setRackLoading(true);
       setBundleLoading(true);
-      const collection = await fetchCollectionByHandle("48v-bundles", 20);
-      setBundleProducts(collection?.products || []);
+      const [rackCollection, bundleCollection] = await Promise.all([
+        fetchCollectionByHandle("48v-lithium-batteries", 20),
+        fetchCollectionByHandle("48v-bundles", 20),
+      ]);
+      setRackProducts(rackCollection?.products || []);
+      setRackLoading(false);
+      setBundleProducts(bundleCollection?.products || []);
       setBundleLoading(false);
     }
-    loadBundles();
+    loadProducts();
   }, []);
 
   return (
