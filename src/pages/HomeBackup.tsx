@@ -296,37 +296,39 @@ const HomeBackup = () => {
         {/* Energy Hub 2 */}
         <section className="py-16 lg:py-24 bg-secondary/30">
           <div className="container max-w-6xl">
-            <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-              <div className="space-y-6">
+            <div className="grid lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] gap-8 lg:gap-12 items-start">
+              <div className="space-y-8 lg:pr-4">
                 <div className="space-y-3">
                   <h2 className="text-2xl md:text-3xl font-semibold text-foreground tracking-tight">
                     The Perfect Match: Solagen Energy Hub 2
                   </h2>
-                  <p className="text-sm text-foreground/80 leading-relaxed">
+                  <p className="text-sm text-foreground/80 leading-relaxed max-w-xl">
                     Our Energy Hub 2 cabinet is designed specifically to pair with SOK rack batteries.
                     It arrives pre-wired, pre-tested, and ready to install, with generator input options,
                     Victron monitoring, and weather-resistant construction.
                   </p>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid sm:grid-cols-2 gap-x-4 gap-y-3">
                   {energyHubFeatures.map((feature, i) => (
-                    <div key={i} className="flex items-center gap-2">
+                    <div key={i} className="flex items-center gap-2 rounded-lg border border-border/60 bg-background/70 px-3 py-2.5">
                       <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
                       <span className="text-sm text-foreground/80">{feature}</span>
                     </div>
                   ))}
                 </div>
 
-                <Link to="/energy-hub-2">
-                  <Button className="gap-2" size="lg">
-                    Learn More
-                    <ArrowRight className="h-4 w-4" />
-                  </Button>
-                </Link>
+                <div className="pt-1">
+                  <Link to="/energy-hub-2" className="inline-flex w-full sm:w-auto">
+                    <Button className="gap-2 w-full sm:w-auto" size="lg">
+                      Learn More
+                      <ArrowRight className="h-4 w-4" />
+                    </Button>
+                  </Link>
+                </div>
               </div>
 
-              <div className="rounded-2xl border border-border bg-card overflow-hidden">
+              <div className="rounded-2xl border border-border bg-card overflow-hidden h-full flex flex-col">
                 <div className="aspect-[4/3] bg-secondary/30 flex items-center justify-center p-4">
                   <img
                     src="https://solagen.co.nz/wp-content/uploads/SGEH-cabinet-display800x800.jpg"
@@ -334,8 +336,8 @@ const HomeBackup = () => {
                     className="w-full h-full object-contain rounded-xl"
                   />
                 </div>
-                <div className="p-6">
-                  <h3 className="text-lg font-semibold text-foreground mb-1">
+                <div className="p-6 sm:p-7 space-y-2">
+                  <h3 className="text-lg font-semibold text-foreground">
                     Solagen Energy Hub 2
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
