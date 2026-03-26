@@ -244,7 +244,7 @@ const HomeBackup = () => {
                     Choose from our range of battery bundles — rack, cables, and communication included.
                   </p>
                 </div>
-                <Link to="/collection/48v-lithium-battery-bundles" className="hidden sm:flex">
+                <Link to="/collection/48v-bundles" className="hidden sm:flex">
                   <Button variant="outline" className="gap-2">
                     View 48V Bundles
                     <ArrowRight className="h-4 w-4" />
