@@ -123,7 +123,7 @@ const HomeBackup = () => {
         </section>
 
         {/* SOK 48V Rack Batteries — Info + Product Card */}
-        <section className="py-20 lg:py-32">
+        <section className="py-16 lg:py-24">
           <div className="container max-w-6xl">
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-stretch">
               {/* Left: Description */}
