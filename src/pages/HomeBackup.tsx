@@ -123,7 +123,7 @@ const HomeBackup = () => {
         </section>
 
         {/* SOK 48V Rack Batteries — Info + Product Card */}
-        <section className="py-20 lg:py-32">
+        <section className="py-16 lg:py-24">
           <div className="container max-w-6xl">
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-stretch">
               {/* Left: Description */}
@@ -199,7 +199,7 @@ const HomeBackup = () => {
         </section>
 
         {/* Off-Grid Context Section */}
-        <section className="py-20 lg:py-32 bg-secondary/20">
+        <section className="py-16 lg:py-24 bg-secondary/20">
           <div className="container max-w-6xl">
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
               <div className="rounded-2xl overflow-hidden border border-border">
@@ -237,9 +237,9 @@ const HomeBackup = () => {
         </section>
 
         {/* 48V Battery Bundles */}
-        <section className="py-20 lg:py-32">
+        <section className="py-16 lg:py-24">
           <div className="container max-w-6xl">
-            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
               <div className="space-y-3">
                 <h2 className="text-2xl md:text-3xl font-semibold text-foreground tracking-tight leading-[1.2]">
                   SOK 48V Battery Bundles
@@ -292,7 +292,7 @@ const HomeBackup = () => {
         </section>
 
         {/* Energy Hub 2 */}
-        <section className="py-20 lg:py-32 bg-secondary/20">
+        <section className="py-16 lg:py-24 bg-secondary/20">
           <div className="container max-w-6xl">
             <div className="grid lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] gap-10 lg:gap-16 items-start">
               <div className="space-y-10 lg:pr-4">
@@ -348,9 +348,9 @@ const HomeBackup = () => {
         </section>
 
         {/* Why Choose */}
-        <section className="py-20 lg:py-32">
+        <section className="py-16 lg:py-24">
           <div className="container max-w-6xl">
-            <div className="text-center mb-14">
+            <div className="text-center mb-12">
               <h2 className="text-2xl md:text-3xl font-semibold text-foreground tracking-tight leading-[1.2] mb-4">
                 Reliable Home Energy Storage
               </h2>
@@ -378,7 +378,7 @@ const HomeBackup = () => {
         </section>
 
         {/* CTA */}
-        <section className="py-20 lg:py-32 bg-primary">
+        <section className="py-16 lg:py-24 bg-primary">
           <div className="container max-w-3xl text-center space-y-8">
             <h2 className="text-2xl md:text-3xl font-semibold text-primary-foreground tracking-tight leading-[1.2]">
               Need Help Setting Up Home Backup?
