@@ -115,7 +115,7 @@ const Victron = () => {
         >
           All Victron
           <span className="ml-auto float-right text-xs opacity-70">
-            {loading ? "—" : allProducts.length}
+            {loading ? "—" : filteredProducts.length}
           </span>
         </button>
         {productTypes.map((type) => (
