@@ -61,6 +61,7 @@ export function Categories() {
               <img
                 src={category.image}
                 alt={category.title}
+                loading="lazy"
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 style={category.objectPosition ? { objectPosition: category.objectPosition } : undefined}
               />
@@ -93,6 +94,7 @@ export function Categories() {
               <img
                 src={category.image}
                 alt={category.title}
+                loading="lazy"
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                 style={category.objectPosition ? { objectPosition: category.objectPosition } : undefined}
               />

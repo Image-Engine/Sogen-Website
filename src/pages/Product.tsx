@@ -304,7 +304,7 @@ export default function Product() {
                 <div className="inline-flex items-center border border-border rounded-xl overflow-hidden">
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="p-3 hover:bg-secondary/50 transition-colors"
+                    className="p-3 min-w-[44px] min-h-[44px] flex items-center justify-center hover:bg-secondary/50 transition-colors"
                   >
                     <Minus className="w-4 h-4" />
                   </button>
@@ -313,7 +313,7 @@ export default function Product() {
                   </span>
                   <button
                     onClick={() => setQuantity(quantity + 1)}
-                    className="p-3 hover:bg-secondary/50 transition-colors"
+                    className="p-3 min-w-[44px] min-h-[44px] flex items-center justify-center hover:bg-secondary/50 transition-colors"
                   >
                     <Plus className="w-4 h-4" />
                   </button>

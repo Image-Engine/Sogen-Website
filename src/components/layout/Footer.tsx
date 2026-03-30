@@ -146,7 +146,7 @@ export function Footer() {
         <div className="container px-4 sm:px-6 py-4">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
             <p className="text-xs sm:text-sm text-muted-foreground">
-              © 2024 SOK Battery NZ. All rights reserved.
+              © {new Date().getFullYear()} SOK Battery NZ. All rights reserved.
             </p>
             <div className="flex items-center gap-4 sm:gap-6 text-xs sm:text-sm text-muted-foreground">
               <Link to="/privacy-policy" className="hover:text-foreground transition-colors">

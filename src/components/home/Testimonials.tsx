@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import { Star, ShieldCheck } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -40,7 +41,7 @@ const fallbackReviews = [
   },
 ];
 
-function ReviewCard({ review, index }: { review: GoogleReview; index: number }) {
+const ReviewCard = forwardRef<HTMLDivElement, { review: GoogleReview; index: number }>(function ReviewCard({ review, index }, ref) {
   const initials = review.author_name
     .split(" ")
     .map((n) => n[0])
@@ -49,6 +50,7 @@ function ReviewCard({ review, index }: { review: GoogleReview; index: number }) 
 
   return (
     <div
+      ref={ref}
       className="group relative p-4 sm:p-5 lg:p-6 rounded-xl sm:rounded-2xl bg-card border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300 animate-fade-in"
       style={{ animationDelay: `${index * 0.1}s` }}
     >
@@ -124,7 +126,7 @@ function ReviewCard({ review, index }: { review: GoogleReview; index: number }) 
       </div>
     </div>
   );
-}
+});
 
 function ReviewCardSkeleton() {
   return (

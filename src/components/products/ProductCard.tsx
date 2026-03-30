@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, forwardRef } from "react";
 import { Link } from "react-router-dom";
 import { ShoppingCart, Package } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -10,7 +10,7 @@ interface ProductCardProps {
   product: ShopifyProduct;
 }
 
-export function ProductCard({ product }: ProductCardProps) {
+export const ProductCard = forwardRef<HTMLAnchorElement, ProductCardProps>(function ProductCard({ product }, ref) {
   const addItem = useCartStore((state) => state.addItem);
   const node = product.node;
   const images = node.images.edges;
@@ -44,8 +44,9 @@ export function ProductCard({ product }: ProductCardProps) {
 
   return (
     <Link 
+      ref={ref}
       to={`/product/${node.handle}`}
-      className="group relative flex flex-col rounded-2xl bg-card border border-border overflow-hidden hover:shadow-product-hover transition-all duration-300"
+      className="group relative flex flex-col rounded-2xl bg-card border border-border overflow-hidden hover:shadow-product-hover active:scale-[0.98] transition-all duration-300"
     >
       {/* Product Image with Hover Switch */}
       <div 
@@ -58,6 +59,7 @@ export function ProductCard({ product }: ProductCardProps) {
             <img
               src={primaryImage}
               alt={images[0]?.node.altText || node.title}
+              loading="lazy"
               className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
                 isHovered && images.length > 1 ? "opacity-0" : "opacity-100"
               }`}
@@ -66,6 +68,7 @@ export function ProductCard({ product }: ProductCardProps) {
               <img
                 src={hoverImage}
                 alt={images[1]?.node.altText || node.title}
+                loading="lazy"
                 className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
                   isHovered ? "opacity-100" : "opacity-0"
                 }`}
@@ -111,4 +114,4 @@ export function ProductCard({ product }: ProductCardProps) {
       </div>
     </Link>
   );
-}
+});
