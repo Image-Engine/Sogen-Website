@@ -74,12 +74,14 @@ const Victron = () => {
     loadProducts();
   }, []);
 
+  const hiddenTypes = ["DC- DC Converters / Chargers", "DC-DC Chargers", "DC-DC Converters"];
+
   // Dynamically extract product types from fetched products
   const productTypes = Array.from(
     new Set(
       allProducts
         .map((p) => p.node.productType)
-        .filter((t) => t && t.trim() !== "")
+        .filter((t) => t && t.trim() !== "" && !hiddenTypes.includes(t))
     )
   ).sort();
 
