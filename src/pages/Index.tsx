@@ -19,7 +19,7 @@ const Index = () => {
         <ProductGrid />
         <Features />
         <EnergyHub />
-        <Testimonials />
+        
       </main>
       <Footer />
     </div>
