@@ -74,18 +74,21 @@ const Victron = () => {
     loadProducts();
   }, []);
 
+  const hiddenTypes = ["DC- DC Converters / Chargers", "DC-DC Chargers", "DC-DC Converters"];
+
   // Dynamically extract product types from fetched products
   const productTypes = Array.from(
     new Set(
       allProducts
         .map((p) => p.node.productType)
-        .filter((t) => t && t.trim() !== "")
+        .filter((t) => t && t.trim() !== "" && !hiddenTypes.includes(t))
     )
   ).sort();
 
   const getProductsToShow = () => {
-    if (activeCategory === "all") return allProducts;
-    return allProducts.filter((p) => p.node.productType === activeCategory);
+    const filtered = allProducts.filter((p) => !hiddenTypes.includes(p.node.productType));
+    if (activeCategory === "all") return filtered;
+    return filtered.filter((p) => p.node.productType === activeCategory);
   };
 
   const productsToShow = getProductsToShow();
