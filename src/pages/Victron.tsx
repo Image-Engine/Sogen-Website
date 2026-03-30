@@ -74,24 +74,30 @@ const Victron = () => {
     loadProducts();
   }, []);
 
+  const hiddenTypes = ["DC- DC Converters / Chargers", "DC-DC Chargers", "DC-DC Converters"];
+
+  const filteredProducts = allProducts.filter(
+    (p) => !hiddenTypes.includes(p.node.productType)
+  );
+
   // Dynamically extract product types from fetched products
   const productTypes = Array.from(
     new Set(
-      allProducts
+      filteredProducts
         .map((p) => p.node.productType)
         .filter((t) => t && t.trim() !== "")
     )
   ).sort();
 
   const getProductsToShow = () => {
-    if (activeCategory === "all") return allProducts;
-    return allProducts.filter((p) => p.node.productType === activeCategory);
+    if (activeCategory === "all") return filteredProducts;
+    return filteredProducts.filter((p) => p.node.productType === activeCategory);
   };
 
   const productsToShow = getProductsToShow();
 
   const getCountForType = (type: string) =>
-    allProducts.filter((p) => p.node.productType === type).length;
+    filteredProducts.filter((p) => p.node.productType === type).length;
 
   const sidebarContent = (
     <div>
@@ -109,7 +115,7 @@ const Victron = () => {
         >
           All Victron
           <span className="ml-auto float-right text-xs opacity-70">
-            {loading ? "—" : allProducts.length}
+            {loading ? "—" : filteredProducts.length}
           </span>
         </button>
         {productTypes.map((type) => (
