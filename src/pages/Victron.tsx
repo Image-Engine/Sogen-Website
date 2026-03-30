@@ -74,7 +74,7 @@ const Victron = () => {
     loadProducts();
   }, []);
 
-  const hiddenTypes = ["DC- DC Converters / Chargers", "DC-DC Chargers", "DC-DC Converters"];
+  const hiddenTypes = ["DC- DC Converters / Chargers"];
 
   const filteredProducts = allProducts.filter(
     (p) => !hiddenTypes.includes(p.node.productType)
