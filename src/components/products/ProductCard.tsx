@@ -112,4 +112,4 @@ export const ProductCard = forwardRef<HTMLAnchorElement, ProductCardProps>(funct
       </div>
     </Link>
   );
-}
+});
