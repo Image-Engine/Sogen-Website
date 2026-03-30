@@ -111,11 +111,11 @@ export function EnergyHub() {
             <div className="absolute -bottom-8 -left-8 w-40 h-40 bg-success/5 rounded-full blur-3xl" />
             
             {/* Main Card */}
-            <div className="relative rounded-3xl bg-gradient-to-br from-foreground to-foreground/90 p-8 lg:p-10 text-primary-foreground overflow-hidden">
+            <div className="relative rounded-3xl bg-gradient-to-br from-foreground via-foreground/95 to-red-900 p-8 lg:p-10 text-primary-foreground overflow-hidden">
               {/* Background Pattern */}
-              <div className="absolute inset-0 opacity-10">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-white rounded-full blur-3xl translate-x-1/2 -translate-y-1/2" />
-                <div className="absolute bottom-0 left-0 w-48 h-48 bg-white rounded-full blur-3xl -translate-x-1/2 translate-y-1/2" />
+              <div className="absolute inset-0 opacity-15">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-red-500 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2" />
+                <div className="absolute bottom-0 left-0 w-48 h-48 bg-red-700 rounded-full blur-3xl -translate-x-1/2 translate-y-1/2" />
               </div>
 
               {/* Content */}
