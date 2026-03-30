@@ -50,6 +50,7 @@ const ReviewCard = forwardRef<HTMLDivElement, { review: GoogleReview; index: num
 
   return (
     <div
+      ref={ref}
       className="group relative p-4 sm:p-5 lg:p-6 rounded-xl sm:rounded-2xl bg-card border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300 animate-fade-in"
       style={{ animationDelay: `${index * 0.1}s` }}
     >
