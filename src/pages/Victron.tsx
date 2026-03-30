@@ -90,14 +90,14 @@ const Victron = () => {
   ).sort();
 
   const getProductsToShow = () => {
-    if (activeCategory === "all") return allProducts;
-    return allProducts.filter((p) => p.node.productType === activeCategory);
+    if (activeCategory === "all") return filteredProducts;
+    return filteredProducts.filter((p) => p.node.productType === activeCategory);
   };
 
   const productsToShow = getProductsToShow();
 
   const getCountForType = (type: string) =>
-    allProducts.filter((p) => p.node.productType === type).length;
+    filteredProducts.filter((p) => p.node.productType === type).length;
 
   const sidebarContent = (
     <div>
