@@ -41,7 +41,7 @@ const fallbackReviews = [
   },
 ];
 
-function ReviewCard({ review, index }: { review: GoogleReview; index: number }) {
+const ReviewCard = forwardRef<HTMLDivElement, { review: GoogleReview; index: number }>(function ReviewCard({ review, index }, ref) {
   const initials = review.author_name
     .split(" ")
     .map((n) => n[0])
