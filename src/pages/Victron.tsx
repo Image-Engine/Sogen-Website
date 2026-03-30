@@ -86,8 +86,9 @@ const Victron = () => {
   ).sort();
 
   const getProductsToShow = () => {
-    if (activeCategory === "all") return allProducts;
-    return allProducts.filter((p) => p.node.productType === activeCategory);
+    const filtered = allProducts.filter((p) => !hiddenTypes.includes(p.node.productType));
+    if (activeCategory === "all") return filtered;
+    return filtered.filter((p) => p.node.productType === activeCategory);
   };
 
   const productsToShow = getProductsToShow();
