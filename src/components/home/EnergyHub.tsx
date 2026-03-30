@@ -163,7 +163,7 @@ export function EnergyHub() {
 
         {/* Collection Cards - Full Width Below */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6 mt-16 lg:mt-20">
-          {collections.map(collection => <Link key={collection.handle} to={`/collection/${collection.handle}`} className="group relative overflow-hidden rounded-2xl aspect-[4/3] bg-card border border-border/50 hover:border-primary/30 hover:shadow-xl transition-all duration-500">
+          {collections.map(collection => <Link key={collection.handle} to={`/collections/${collection.handle}`} className="group relative overflow-hidden rounded-2xl aspect-[4/3] bg-card border border-border/50 hover:border-primary/30 hover:shadow-xl active:scale-[0.98] transition-all duration-500">
               {/* Background Image */}
               <img src={collection.image} alt={collection.name} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
               

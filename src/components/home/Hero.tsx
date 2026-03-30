@@ -6,7 +6,7 @@ export function Hero() {
   return <section className="relative min-h-[90vh] flex items-center overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
-        <img src={heroBg} alt="SOK Battery Professional Installation" className="w-full h-full object-cover" />
+        <img src={heroBg} alt="SOK Battery Professional Installation" className="w-full h-full object-cover" loading="eager" fetchPriority="high" />
         {/* Dark Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/40" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30" />

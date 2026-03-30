@@ -126,7 +126,7 @@ const ReviewCard = forwardRef<HTMLDivElement, { review: GoogleReview; index: num
       </div>
     </div>
   );
-}
+});
 
 function ReviewCardSkeleton() {
   return (
