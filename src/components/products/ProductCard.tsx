@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, forwardRef } from "react";
 import { Link } from "react-router-dom";
 import { ShoppingCart, Package } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -10,7 +10,7 @@ interface ProductCardProps {
   product: ShopifyProduct;
 }
 
-export function ProductCard({ product }: ProductCardProps) {
+export const ProductCard = forwardRef<HTMLAnchorElement, ProductCardProps>(function ProductCard({ product }, ref) {
   const addItem = useCartStore((state) => state.addItem);
   const node = product.node;
   const images = node.images.edges;
