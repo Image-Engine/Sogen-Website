@@ -59,6 +59,7 @@ export const ProductCard = forwardRef<HTMLAnchorElement, ProductCardProps>(funct
             <img
               src={primaryImage}
               alt={images[0]?.node.altText || node.title}
+              loading="lazy"
               className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
                 isHovered && images.length > 1 ? "opacity-0" : "opacity-100"
               }`}
@@ -67,6 +68,7 @@ export const ProductCard = forwardRef<HTMLAnchorElement, ProductCardProps>(funct
               <img
                 src={hoverImage}
                 alt={images[1]?.node.altText || node.title}
+                loading="lazy"
                 className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
                   isHovered ? "opacity-100" : "opacity-0"
                 }`}
