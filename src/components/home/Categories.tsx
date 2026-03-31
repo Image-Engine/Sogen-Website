@@ -37,7 +37,7 @@ export function Categories() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(1);
   
   return (
-    <section className="py-12 sm:py-16 lg:py-24 bg-secondary/30">
+    <section className="py-12 sm:py-16 lg:py-24 bg-gradient-to-b from-background to-secondary/30">
       <div className="container px-4 sm:px-6">
         {/* Section Header */}
         <div className="text-center mb-8 sm:mb-12 lg:mb-16">

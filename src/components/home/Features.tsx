@@ -41,7 +41,7 @@ const features = [
 
 export function Features() {
   return (
-    <section className="py-16 lg:py-24 bg-secondary/30">
+    <section className="py-16 lg:py-24 bg-gradient-to-b from-secondary/40 to-secondary/10">
       <div className="container max-w-6xl px-4 sm:px-6">
         {/* Section Header */}
         <div className="text-center mb-12 lg:mb-16">
@@ -59,7 +59,7 @@ export function Features() {
           {heroStats.map((stat) => (
             <div
               key={stat.label}
-              className="text-center rounded-2xl border bg-background p-5 sm:p-8"
+              className="text-center rounded-2xl border bg-background p-5 sm:p-8 hover:-translate-y-1 hover:shadow-lg hover:border-primary/20 transition-all duration-300"
             >
               <div className={`w-10 h-10 rounded-xl ${stat.bg} flex items-center justify-center mx-auto mb-3`}>
                 <stat.icon className={`w-5 h-5 ${stat.accent}`} strokeWidth={1.5} />
@@ -79,7 +79,7 @@ export function Features() {
           {features.map((item) => (
             <div
               key={item.title}
-              className="rounded-2xl border bg-background p-5 sm:p-6"
+              className="rounded-2xl border bg-background p-5 sm:p-6 hover:-translate-y-1 hover:shadow-lg hover:border-primary/20 transition-all duration-300"
             >
               <div className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center mb-4">
                 <item.icon className="w-6 h-6 text-foreground" strokeWidth={1.5} />

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Package } from "lucide-react";
+import { Package, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { fetchCollectionByHandle, ShopifyProduct } from "@/lib/shopify";
 import { ProductCard } from "@/components/products/ProductCard";
 import { ProductGridSkeleton } from "@/components/products/ProductGridSkeleton";
@@ -24,7 +25,6 @@ export function ProductGrid() {
     async function loadProducts() {
       setLoading(true);
       const collection = await fetchCollectionByHandle("12v-lithium-batteries", 12);
-      // Filter to only products with images and limit to 4
       const productsWithImages = (collection?.products || [])
         .filter((product) => product.node.images?.edges?.length > 0)
         .slice(0, 4);
@@ -35,15 +35,24 @@ export function ProductGrid() {
   }, []);
 
   return (
-    <section className="py-12 sm:py-16 lg:py-24 bg-surface-sunken">
+    <section className="py-12 sm:py-16 lg:py-24 bg-background">
       <div className="container">
-        <div className="mb-8 sm:mb-12">
-          <p className="text-caption uppercase tracking-widest text-muted-foreground mb-2 sm:mb-3">
-            Featured Products
-          </p>
-          <h2 className="text-display-sm sm:text-display-md text-foreground">
-            Best Selling Batteries
-          </h2>
+        <div className="mb-8 sm:mb-12 flex items-end justify-between">
+          <div>
+            <p className="text-caption uppercase tracking-widest text-muted-foreground mb-2 sm:mb-3 border-l-2 border-primary pl-3">
+              Featured Products
+            </p>
+            <h2 className="text-display-sm sm:text-display-md text-foreground">
+              Best Selling Batteries
+            </h2>
+          </div>
+          <Link
+            to="/products"
+            className="hidden sm:inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+          >
+            View All Batteries
+            <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
 
         {/* Products Grid */}
