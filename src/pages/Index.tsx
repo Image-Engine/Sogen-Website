@@ -16,14 +16,6 @@ const batteryReviewVideos = [
   { id: "kisLSdFVF6I" },
 ];
 
-const solarVideos = [
-  { id: "bsooDvbwD5g" },
-  { id: "dpV3rLJAQO4" },
-  { id: "RjpkI8quyzQ" },
-  { id: "PkvdIrAQjsI" },
-  { id: "POf424nczxg" },
-  { id: "zJmIS5tmzPU" },
-];
 
 const Index = () => {
   return (
@@ -40,11 +32,6 @@ const Index = () => {
           videos={batteryReviewVideos}
         />
         <EnergyHub />
-        <VideoStrip
-          title="Solar & Off-Grid Videos"
-          subtitle="See SOK batteries powering solar setups, RVs, and off-grid systems."
-          videos={solarVideos}
-        />
       </main>
       <Footer />
     </div>
