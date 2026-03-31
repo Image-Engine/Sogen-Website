@@ -15,15 +15,15 @@ export function VideoStrip({ title, subtitle, videos, viewAllLink = "/video-revi
   const [selectedVideoId, setSelectedVideoId] = useState<string | null>(null);
 
   return (
-    <section className="py-16 lg:py-20 bg-gradient-to-b from-foreground via-foreground/95 to-foreground overflow-hidden">
+    <section className="py-16 lg:py-20 bg-gradient-to-b from-secondary/40 to-secondary/10 overflow-hidden">
       <div className="container max-w-6xl">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
           <div>
-            <h2 className="text-3xl md:text-4xl font-semibold text-white tracking-tight mb-2">
+            <h2 className="text-3xl md:text-4xl font-semibold text-foreground tracking-tight mb-2">
               {title}
             </h2>
-            <p className="text-white/60 text-base max-w-xl">
+            <p className="text-muted-foreground text-base max-w-xl">
               {subtitle}
             </p>
           </div>
