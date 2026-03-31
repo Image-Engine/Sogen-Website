@@ -59,7 +59,7 @@ export function Features() {
           {heroStats.map((stat) => (
             <div
               key={stat.label}
-              className="text-center rounded-2xl border bg-background p-5 sm:p-8"
+              className="text-center rounded-2xl border bg-background p-5 sm:p-8 hover:-translate-y-1 hover:shadow-lg hover:border-primary/20 transition-all duration-300"
             >
               <div className={`w-10 h-10 rounded-xl ${stat.bg} flex items-center justify-center mx-auto mb-3`}>
                 <stat.icon className={`w-5 h-5 ${stat.accent}`} strokeWidth={1.5} />
