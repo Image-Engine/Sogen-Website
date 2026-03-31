@@ -32,11 +32,6 @@ const Index = () => {
           videos={batteryReviewVideos}
         />
         <EnergyHub />
-        <VideoStrip
-          title="Solar & Off-Grid Videos"
-          subtitle="See SOK batteries powering solar setups, RVs, and off-grid systems."
-          videos={solarVideos}
-        />
       </main>
       <Footer />
     </div>
