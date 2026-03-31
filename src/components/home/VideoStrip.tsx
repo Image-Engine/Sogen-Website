@@ -15,7 +15,7 @@ export function VideoStrip({ title, subtitle, videos, viewAllLink = "/video-revi
   const [selectedVideoId, setSelectedVideoId] = useState<string | null>(null);
 
   return (
-    <section className="py-16 lg:py-20 bg-gradient-to-b from-foreground via-foreground/95 to-foreground overflow-hidden">
+    <section className="py-16 lg:py-20 bg-gradient-to-b from-secondary/40 to-secondary/10 overflow-hidden">
       <div className="container max-w-6xl">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
