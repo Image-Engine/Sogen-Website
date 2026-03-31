@@ -5,6 +5,25 @@ import { Categories } from "@/components/home/Categories";
 import { ProductGrid } from "@/components/home/ProductGrid";
 import { Features } from "@/components/home/Features";
 import { EnergyHub } from "@/components/home/EnergyHub";
+import { VideoStrip } from "@/components/home/VideoStrip";
+
+const batteryReviewVideos = [
+  { id: "nY0BSsF-aSY" },
+  { id: "SU86EJXcTMM" },
+  { id: "POf424nczxg" },
+  { id: "zJmIS5tmzPU" },
+  { id: "QrPED4uPsFw" },
+  { id: "kisLSdFVF6I" },
+];
+
+const solarVideos = [
+  { id: "bsooDvbwD5g" },
+  { id: "dpV3rLJAQO4" },
+  { id: "RjpkI8quyzQ" },
+  { id: "PkvdIrAQjsI" },
+  { id: "POf424nczxg" },
+  { id: "zJmIS5tmzPU" },
+];
 
 const Index = () => {
   return (
@@ -15,7 +34,17 @@ const Index = () => {
         <Categories />
         <ProductGrid />
         <Features />
+        <VideoStrip
+          title="Battery Video Reviews"
+          subtitle="Watch real-world tests and reviews from trusted YouTube creators."
+          videos={batteryReviewVideos}
+        />
         <EnergyHub />
+        <VideoStrip
+          title="Solar & Off-Grid Videos"
+          subtitle="See SOK batteries powering solar setups, RVs, and off-grid systems."
+          videos={solarVideos}
+        />
       </main>
       <Footer />
     </div>
