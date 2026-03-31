@@ -16,14 +16,6 @@ const batteryReviewVideos = [
   { id: "kisLSdFVF6I" },
 ];
 
-const solarVideos = [
-  { id: "bsooDvbwD5g" },
-  { id: "dpV3rLJAQO4" },
-  { id: "RjpkI8quyzQ" },
-  { id: "PkvdIrAQjsI" },
-  { id: "POf424nczxg" },
-  { id: "zJmIS5tmzPU" },
-];
 
 const Index = () => {
   return (
