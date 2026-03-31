@@ -20,10 +20,10 @@ export function VideoStrip({ title, subtitle, videos, viewAllLink = "/video-revi
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
           <div>
-            <h2 className="text-3xl md:text-4xl font-semibold text-white tracking-tight mb-2">
+            <h2 className="text-3xl md:text-4xl font-semibold text-foreground tracking-tight mb-2">
               {title}
             </h2>
-            <p className="text-white/60 text-base max-w-xl">
+            <p className="text-muted-foreground text-base max-w-xl">
               {subtitle}
             </p>
           </div>
