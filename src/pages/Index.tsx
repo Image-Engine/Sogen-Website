@@ -5,8 +5,6 @@ import { Categories } from "@/components/home/Categories";
 import { ProductGrid } from "@/components/home/ProductGrid";
 import { Features } from "@/components/home/Features";
 import { EnergyHub } from "@/components/home/EnergyHub";
-import { TrustBadges } from "@/components/home/TrustBadges";
-
 
 const Index = () => {
   return (
@@ -14,12 +12,10 @@ const Index = () => {
       <Header />
       <main className="flex-1">
         <Hero />
-        <TrustBadges />
         <Categories />
         <ProductGrid />
         <Features />
         <EnergyHub />
-        
       </main>
       <Footer />
     </div>

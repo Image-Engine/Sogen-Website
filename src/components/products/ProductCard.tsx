@@ -46,7 +46,7 @@ export const ProductCard = forwardRef<HTMLAnchorElement, ProductCardProps>(funct
     <Link 
       ref={ref}
       to={`/product/${node.handle}`}
-      className="group relative flex flex-col rounded-2xl bg-card border border-border overflow-hidden hover:shadow-product-hover active:scale-[0.98] transition-all duration-300"
+      className="group relative flex flex-col rounded-2xl bg-card border border-border overflow-hidden hover:shadow-xl hover:-translate-y-1 hover:border-primary/20 active:scale-[0.98] transition-all duration-300"
     >
       {/* Product Image with Hover Switch */}
       <div 
