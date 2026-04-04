@@ -63,7 +63,16 @@ export function CartDrawer() {
             <div className="flex-1 flex items-center justify-center px-4">
               <div className="text-center">
                 <ShoppingCart className="h-10 w-10 sm:h-12 sm:w-12 text-muted-foreground mx-auto mb-3 sm:mb-4" />
-                <p className="text-sm sm:text-base text-muted-foreground">Your cart is empty</p>
+                <p className="text-sm sm:text-base text-muted-foreground mb-4">Your cart is currently empty</p>
+                <Button
+                  variant="default"
+                  onClick={() => {
+                    setIsOpen(false);
+                    window.location.href = '/products';
+                  }}
+                >
+                  Browse Products
+                </Button>
               </div>
             </div>
           ) : (

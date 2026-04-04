@@ -3,6 +3,7 @@ import { Search, Package, Filter } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
+import { SEOHead } from "@/components/SEOHead";
 import { ProductCard } from "@/components/products/ProductCard";
 import { ProductGridSkeleton } from "@/components/products/ProductGridSkeleton";
 import { fetchProducts, fetchCollections, fetchCollectionByHandle, ShopifyProduct, ShopifyCollection } from "@/lib/shopify";
@@ -102,6 +103,7 @@ export default function Products() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEOHead title="All Products" description="Browse our full range of LiFePO4 lithium batteries, solar panels, inverters, and accessories. Premium energy solutions for RV, marine, off-grid, and industrial use in New Zealand." />
       <Header />
       <PageBreadcrumb />
       

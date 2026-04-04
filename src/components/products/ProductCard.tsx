@@ -1,6 +1,6 @@
 import { useState, forwardRef } from "react";
 import { Link } from "react-router-dom";
-import { ShoppingCart, Package } from "lucide-react";
+import { ShoppingCart, Package, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
@@ -18,25 +18,31 @@ export const ProductCard = forwardRef<HTMLAnchorElement, ProductCardProps>(funct
   const price = node.priceRange.minVariantPrice;
   
   const [isHovered, setIsHovered] = useState(false);
+  const [isAdding, setIsAdding] = useState(false);
 
-  const handleAddToCart = (e: React.MouseEvent) => {
+  const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     
-    if (!variant) return;
+    if (!variant || isAdding) return;
     
-    addItem({
-      product,
-      variantId: variant.id,
-      variantTitle: variant.title,
-      price: variant.price,
-      quantity: 1,
-      selectedOptions: variant.selectedOptions || [],
-    });
-    
-    toast.success("Added to cart", {
-      description: node.title,
-    });
+    setIsAdding(true);
+    try {
+      addItem({
+        product,
+        variantId: variant.id,
+        variantTitle: variant.title,
+        price: variant.price,
+        quantity: 1,
+        selectedOptions: variant.selectedOptions || [],
+      });
+      
+      toast.success("Added to cart", {
+        description: node.title,
+      });
+    } finally {
+      setIsAdding(false);
+    }
   };
 
   const primaryImage = images[0]?.node.url;
@@ -106,9 +112,14 @@ export const ProductCard = forwardRef<HTMLAnchorElement, ProductCardProps>(funct
             size="icon"
             variant="outline"
             onClick={handleAddToCart}
+            disabled={isAdding}
             className="h-8 w-8 sm:h-9 sm:w-9 shrink-0"
           >
-            <ShoppingCart className="h-4 w-4" />
+            {isAdding ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              <ShoppingCart className="h-4 w-4" />
+            )}
           </Button>
         </div>
       </div>

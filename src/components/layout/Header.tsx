@@ -46,13 +46,13 @@ export function Header() {
       <div className="container">
         <div className="flex h-16 items-center justify-between gap-4 lg:h-18">
           {/* Logo */}
-          <a href="/" className="flex items-center shrink-0">
+          <Link to="/" className="flex items-center shrink-0">
             <img
               src={sokLogo}
               alt="SOK Battery - New Zealand"
               className="h-12 lg:h-14 w-auto"
             />
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-1">

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
+import { SEOHead } from "@/components/SEOHead";
 import { fetchBlogArticles, ShopifyArticle } from "@/lib/shopify";
 import { getBlogFallbackImage } from "@/lib/blogFallbackImages";
 import { Calendar, ArrowRight, User } from "lucide-react";
@@ -32,6 +33,7 @@ export default function Blog() {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead title="Blog" description="News, guides, and tips on LiFePO4 batteries, solar energy, and off-grid power solutions from SOK Battery NZ." />
       <Header />
       <PageBreadcrumb />
       {/* Hero Section */}

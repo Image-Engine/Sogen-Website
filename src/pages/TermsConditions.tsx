@@ -1,10 +1,12 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
+import { SEOHead } from "@/components/SEOHead";
 
 export default function TermsConditions() {
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEOHead title="Terms & Conditions" description="Terms and conditions for purchases from SOK Battery NZ. Read our policies on orders, payments, and product usage." />
       <Header />
       <PageBreadcrumb />
       

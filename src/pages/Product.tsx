@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, ShoppingCart, Package, Minus, Plus, FolderOpen, Zap, Truck } from "lucide-react";
+import { ArrowLeft, ShoppingCart, Package, Minus, Plus, FolderOpen, Zap, Truck, Loader2 } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
+import { SEOHead } from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
 import { fetchProductByHandle, ProductDetails, createStorefrontCheckout } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
@@ -26,6 +27,7 @@ export default function Product() {
   const [selectedVariant, setSelectedVariant] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [buyNowLoading, setBuyNowLoading] = useState(false);
+  const [addToCartLoading, setAddToCartLoading] = useState(false);
   const addItem = useCartStore((state) => state.addItem);
   const { recentlyViewed, addProduct } = useRecentlyViewed();
 
@@ -54,36 +56,41 @@ export default function Product() {
     }
   }, [product]);
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     if (!product || !product.variants[selectedVariant]) return;
     
+    setAddToCartLoading(true);
     const variant = product.variants[selectedVariant];
     
-    addItem({
-      product: {
-        node: {
-          id: product.id,
-          title: product.title,
-          description: product.description,
-          handle: product.handle,
-          vendor: product.vendor || '',
-          productType: product.productType || '',
-          priceRange: product.priceRange,
-          images: { edges: product.images.map(img => ({ node: img })) },
-          variants: { edges: product.variants.map(v => ({ node: v })) },
-          options: product.options,
-        }
-      },
-      variantId: variant.id,
-      variantTitle: variant.title,
-      price: variant.price,
-      quantity,
-      selectedOptions: variant.selectedOptions,
-    });
-    
-    toast.success("Added to cart", {
-      description: `${product.title} x ${quantity}`,
-    });
+    try {
+      addItem({
+        product: {
+          node: {
+            id: product.id,
+            title: product.title,
+            description: product.description,
+            handle: product.handle,
+            vendor: product.vendor || '',
+            productType: product.productType || '',
+            priceRange: product.priceRange,
+            images: { edges: product.images.map(img => ({ node: img })) },
+            variants: { edges: product.variants.map(v => ({ node: v })) },
+            options: product.options,
+          }
+        },
+        variantId: variant.id,
+        variantTitle: variant.title,
+        price: variant.price,
+        quantity,
+        selectedOptions: variant.selectedOptions,
+      });
+      
+      toast.success("Added to cart", {
+        description: `${product.title} x ${quantity}`,
+      });
+    } finally {
+      setAddToCartLoading(false);
+    }
   };
 
   const handleBuyNow = async () => {
@@ -178,6 +185,12 @@ export default function Product() {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title={product.title}
+        description={product.description?.slice(0, 160) || `${product.title} — premium LiFePO4 battery from SOK Battery NZ.`}
+        ogImage={product.images[0]?.url}
+        ogType="product"
+      />
       <Header />
       <PageBreadcrumb items={[
         { label: "Products", href: "/products" },
@@ -326,11 +339,20 @@ export default function Product() {
                   <Button
                     size="lg"
                     onClick={handleAddToCart}
-                    disabled={!currentVariant?.availableForSale}
+                    disabled={!currentVariant?.availableForSale || addToCartLoading}
                     className="flex-1 h-14 text-base"
                   >
-                    <ShoppingCart className="w-5 h-5 mr-2" />
-                    {currentVariant?.availableForSale ? "Add to Cart" : "Out of Stock"}
+                    {addToCartLoading ? (
+                      <>
+                        <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                        Adding...
+                      </>
+                    ) : (
+                      <>
+                        <ShoppingCart className="w-5 h-5 mr-2" />
+                        {currentVariant?.availableForSale ? "Add to Cart" : "Out of Stock"}
+                      </>
+                    )}
                   </Button>
                   <WishlistButton productId={product.id} productTitle={product.title} />
                   <ShareButtons productTitle={product.title} productUrl={productUrl} />

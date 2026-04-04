@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Search, Package, Filter } from "lucide-react";
+import { useParams, Link } from "react-router-dom";
+import { Search, Package, Filter, ArrowLeft } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
+import { SEOHead } from "@/components/SEOHead";
 import { ProductCard } from "@/components/products/ProductCard";
 import { ProductGridSkeleton } from "@/components/products/ProductGridSkeleton";
 import { CollectionsSidebar } from "@/components/products/CollectionsSidebar";
@@ -96,6 +97,10 @@ export default function Collection() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEOHead
+        title={collection?.title || "Collection"}
+        description={collection?.description || `Browse our ${handle} collection of premium batteries and solar products.`}
+      />
       <Header />
       <PageBreadcrumb />
       
