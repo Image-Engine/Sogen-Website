@@ -254,10 +254,15 @@ export default function Product() {
                 <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-3">
                   {product.title}
                 </h1>
-                <div className="flex items-baseline gap-3">
+                <div className="flex items-baseline gap-3 flex-wrap">
                   <span className="text-3xl sm:text-4xl font-bold text-primary">
                     ${parseFloat(currentVariant.price.amount).toFixed(2)}
                   </span>
+                  {currentVariant.compareAtPrice && parseFloat(currentVariant.compareAtPrice.amount) > parseFloat(currentVariant.price.amount) && (
+                    <span className="text-xl text-muted-foreground line-through">
+                      ${parseFloat(currentVariant.compareAtPrice.amount).toFixed(2)}
+                    </span>
+                  )}
                   <span className="text-muted-foreground text-lg">
                     {currentVariant.price.currencyCode}
                   </span>

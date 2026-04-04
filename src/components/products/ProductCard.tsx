@@ -106,6 +106,11 @@ export const ProductCard = forwardRef<HTMLAnchorElement, ProductCardProps>(funct
             <span className="text-base sm:text-lg font-bold text-foreground">
               ${parseFloat(price.amount).toFixed(2)}
             </span>
+            {hasDiscount && (
+              <span className="text-xs sm:text-sm text-muted-foreground line-through ml-1.5">
+                ${parseFloat(compareAtPrice.amount).toFixed(2)}
+              </span>
+            )}
             <span className="text-xs sm:text-sm text-muted-foreground ml-1">
               {price.currencyCode}
             </span>
