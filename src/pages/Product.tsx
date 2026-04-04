@@ -27,6 +27,7 @@ export default function Product() {
   const [selectedVariant, setSelectedVariant] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [buyNowLoading, setBuyNowLoading] = useState(false);
+  const [addToCartLoading, setAddToCartLoading] = useState(false);
   const addItem = useCartStore((state) => state.addItem);
   const { recentlyViewed, addProduct } = useRecentlyViewed();
 
