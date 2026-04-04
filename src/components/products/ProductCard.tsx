@@ -16,6 +16,8 @@ export const ProductCard = forwardRef<HTMLAnchorElement, ProductCardProps>(funct
   const images = node.images.edges;
   const variant = node.variants.edges[0]?.node;
   const price = node.priceRange.minVariantPrice;
+  const compareAtPrice = node.compareAtPriceRange?.minVariantPrice;
+  const hasDiscount = compareAtPrice && parseFloat(compareAtPrice.amount) > parseFloat(price.amount);
   
   const [isHovered, setIsHovered] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
