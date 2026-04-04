@@ -346,7 +346,7 @@ const GET_COLLECTIONS = `
 `;
 
 const GET_COLLECTION_BY_HANDLE = `
-  query GetCollectionByHandle($handle: String!, $first: Int!) {
+  query GetCollectionByHandle($handle: String!, $first: Int!) @inContext(country: NZ) {
     collection(handle: $handle) {
       id
       title
