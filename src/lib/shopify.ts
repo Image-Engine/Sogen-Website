@@ -733,6 +733,7 @@ export async function fetchProductByHandle(handle: string): Promise<ProductDetai
       productType: product.productType || '',
       vendor: product.vendor || '',
       priceRange: product.priceRange,
+      compareAtPriceRange: product.compareAtPriceRange || null,
       images: product.images.edges.map((edge: { node: { url: string; altText: string | null } }) => edge.node),
       variants: product.variants.edges.map((edge: { node: ProductDetails['variants'][0] }) => edge.node),
       options: product.options,
