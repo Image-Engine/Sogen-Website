@@ -408,7 +408,7 @@ const GET_COLLECTION_BY_HANDLE = `
 `;
 
 const GET_PRODUCT_BY_HANDLE = `
-  query GetProductByHandle($handle: String!) {
+  query GetProductByHandle($handle: String!) @inContext(country: NZ) {
     product(handle: $handle) {
       id
       title
