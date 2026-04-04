@@ -34,6 +34,12 @@ export interface ShopifyProduct {
         };
       }>;
     };
+    compareAtPriceRange: {
+      minVariantPrice: {
+        amount: string;
+        currencyCode: string;
+      };
+    } | null;
     variants: {
       edges: Array<{
         node: {
@@ -43,6 +49,10 @@ export interface ShopifyProduct {
             amount: string;
             currencyCode: string;
           };
+          compareAtPrice: {
+            amount: string;
+            currencyCode: string;
+          } | null;
           availableForSale: boolean;
           selectedOptions: Array<{
             name: string;
@@ -193,6 +203,12 @@ const STOREFRONT_QUERY = `
               currencyCode
             }
           }
+          compareAtPriceRange {
+            minVariantPrice {
+              amount
+              currencyCode
+            }
+          }
           images(first: 5) {
             edges {
               node {
@@ -207,6 +223,10 @@ const STOREFRONT_QUERY = `
                 id
                 title
                 price {
+                  amount
+                  currencyCode
+                }
+                compareAtPrice {
                   amount
                   currencyCode
                 }
@@ -371,6 +391,12 @@ const GET_COLLECTION_BY_HANDLE = `
                 currencyCode
               }
             }
+            compareAtPriceRange {
+              minVariantPrice {
+                amount
+                currencyCode
+              }
+            }
             images(first: 5) {
               edges {
                 node {
@@ -385,6 +411,10 @@ const GET_COLLECTION_BY_HANDLE = `
                   id
                   title
                   price {
+                    amount
+                    currencyCode
+                  }
+                  compareAtPrice {
                     amount
                     currencyCode
                   }
@@ -427,6 +457,12 @@ const GET_PRODUCT_BY_HANDLE = `
           currencyCode
         }
       }
+      compareAtPriceRange {
+        minVariantPrice {
+          amount
+          currencyCode
+        }
+      }
       images(first: 10) {
         edges {
           node {
@@ -442,6 +478,10 @@ const GET_PRODUCT_BY_HANDLE = `
             title
             sku
             price {
+              amount
+              currencyCode
+            }
+            compareAtPrice {
               amount
               currencyCode
             }
@@ -485,6 +525,12 @@ const GET_PRODUCT_RECOMMENDATIONS = `
           currencyCode
         }
       }
+      compareAtPriceRange {
+        minVariantPrice {
+          amount
+          currencyCode
+        }
+      }
       images(first: 1) {
         edges {
           node {
@@ -499,6 +545,10 @@ const GET_PRODUCT_RECOMMENDATIONS = `
             id
             title
             price {
+              amount
+              currencyCode
+            }
+            compareAtPrice {
               amount
               currencyCode
             }
@@ -652,12 +702,16 @@ export interface ProductDetails {
     minVariantPrice: { amount: string; currencyCode: string };
     maxVariantPrice: { amount: string; currencyCode: string };
   };
+  compareAtPriceRange: {
+    minVariantPrice: { amount: string; currencyCode: string };
+  } | null;
   images: Array<{ url: string; altText: string | null }>;
   variants: Array<{
     id: string;
     title: string;
     sku: string | null;
     price: { amount: string; currencyCode: string };
+    compareAtPrice: { amount: string; currencyCode: string } | null;
     availableForSale: boolean;
     selectedOptions: Array<{ name: string; value: string }>;
   }>;
@@ -679,6 +733,7 @@ export async function fetchProductByHandle(handle: string): Promise<ProductDetai
       productType: product.productType || '',
       vendor: product.vendor || '',
       priceRange: product.priceRange,
+      compareAtPriceRange: product.compareAtPriceRange || null,
       images: product.images.edges.map((edge: { node: { url: string; altText: string | null } }) => edge.node),
       variants: product.variants.edges.map((edge: { node: ProductDetails['variants'][0] }) => edge.node),
       options: product.options,

@@ -16,6 +16,8 @@ export const ProductCard = forwardRef<HTMLAnchorElement, ProductCardProps>(funct
   const images = node.images.edges;
   const variant = node.variants.edges[0]?.node;
   const price = node.priceRange.minVariantPrice;
+  const compareAtPrice = node.compareAtPriceRange?.minVariantPrice;
+  const hasDiscount = compareAtPrice && parseFloat(compareAtPrice.amount) > parseFloat(price.amount);
   
   const [isHovered, setIsHovered] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
@@ -60,6 +62,11 @@ export const ProductCard = forwardRef<HTMLAnchorElement, ProductCardProps>(funct
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
+        {hasDiscount && (
+          <span className="absolute top-2 left-2 z-10 bg-destructive text-destructive-foreground text-xs font-bold px-2 py-1 rounded-lg">
+            Sale
+          </span>
+        )}
         {images.length > 0 ? (
           <>
             <img
@@ -104,6 +111,11 @@ export const ProductCard = forwardRef<HTMLAnchorElement, ProductCardProps>(funct
             <span className="text-base sm:text-lg font-bold text-foreground">
               ${parseFloat(price.amount).toFixed(2)}
             </span>
+            {hasDiscount && (
+              <span className="text-xs sm:text-sm text-muted-foreground line-through ml-1.5">
+                ${parseFloat(compareAtPrice.amount).toFixed(2)}
+              </span>
+            )}
             <span className="text-xs sm:text-sm text-muted-foreground ml-1">
               {price.currencyCode}
             </span>
