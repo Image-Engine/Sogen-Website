@@ -548,6 +548,10 @@ const GET_PRODUCT_RECOMMENDATIONS = `
               amount
               currencyCode
             }
+            compareAtPrice {
+              amount
+              currencyCode
+            }
             availableForSale
             selectedOptions {
               name
