@@ -56,36 +56,41 @@ export default function Product() {
     }
   }, [product]);
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     if (!product || !product.variants[selectedVariant]) return;
     
+    setAddToCartLoading(true);
     const variant = product.variants[selectedVariant];
     
-    addItem({
-      product: {
-        node: {
-          id: product.id,
-          title: product.title,
-          description: product.description,
-          handle: product.handle,
-          vendor: product.vendor || '',
-          productType: product.productType || '',
-          priceRange: product.priceRange,
-          images: { edges: product.images.map(img => ({ node: img })) },
-          variants: { edges: product.variants.map(v => ({ node: v })) },
-          options: product.options,
-        }
-      },
-      variantId: variant.id,
-      variantTitle: variant.title,
-      price: variant.price,
-      quantity,
-      selectedOptions: variant.selectedOptions,
-    });
-    
-    toast.success("Added to cart", {
-      description: `${product.title} x ${quantity}`,
-    });
+    try {
+      addItem({
+        product: {
+          node: {
+            id: product.id,
+            title: product.title,
+            description: product.description,
+            handle: product.handle,
+            vendor: product.vendor || '',
+            productType: product.productType || '',
+            priceRange: product.priceRange,
+            images: { edges: product.images.map(img => ({ node: img })) },
+            variants: { edges: product.variants.map(v => ({ node: v })) },
+            options: product.options,
+          }
+        },
+        variantId: variant.id,
+        variantTitle: variant.title,
+        price: variant.price,
+        quantity,
+        selectedOptions: variant.selectedOptions,
+      });
+      
+      toast.success("Added to cart", {
+        description: `${product.title} x ${quantity}`,
+      });
+    } finally {
+      setAddToCartLoading(false);
+    }
   };
 
   const handleBuyNow = async () => {
