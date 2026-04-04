@@ -471,7 +471,7 @@ const GET_PRODUCT_BY_HANDLE = `
 `;
 
 const GET_PRODUCT_RECOMMENDATIONS = `
-  query GetProductRecommendations($productId: ID!) {
+  query GetProductRecommendations($productId: ID!) @inContext(country: NZ) {
     productRecommendations(productId: $productId) {
       id
       title
