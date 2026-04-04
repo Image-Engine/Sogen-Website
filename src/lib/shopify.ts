@@ -177,7 +177,7 @@ async function blogApiRequest(query: string, variables: Record<string, unknown> 
 
 // GraphQL Queries
 const STOREFRONT_QUERY = `
-  query GetProducts($first: Int!, $query: String) {
+  query GetProducts($first: Int!, $query: String) @inContext(country: NZ) {
     products(first: $first, query: $query) {
       edges {
         node {
