@@ -1,12 +1,14 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
+import { SEOHead } from "@/components/SEOHead";
 import { Shield, Clock, Battery, Wrench, AlertTriangle, FileDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function Warranty() {
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEOHead title="Warranty" description="SOK Battery NZ warranty information. Learn about coverage, claims process, and support for your LiFePO4 battery products." />
       <Header />
       <PageBreadcrumb />
       

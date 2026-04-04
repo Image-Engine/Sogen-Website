@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
+import { SEOHead } from "@/components/SEOHead";
 import { Link } from "react-router-dom";
 import { 
   Cable, Shield, Wrench, CheckCircle2, ArrowRight, Package, 
@@ -135,6 +136,7 @@ const Accessories = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEOHead title="Accessories" description="Battery accessories, cables, connectors, chargers, and inverters. Complete your solar and battery setup with SOK Battery NZ." />
       <Header />
       <PageBreadcrumb />
       <main className="flex-1">

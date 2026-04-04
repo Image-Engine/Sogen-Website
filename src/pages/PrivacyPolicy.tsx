@@ -1,11 +1,13 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
+import { SEOHead } from "@/components/SEOHead";
 import { Shield, User, Cookie, Lock, Share2, FileText, Mail } from "lucide-react";
 
 export default function PrivacyPolicy() {
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEOHead title="Privacy Policy" description="Privacy policy for SOK Battery NZ. How we collect, use, and protect your personal information." />
       <Header />
       <PageBreadcrumb />
       

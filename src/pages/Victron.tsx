@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
+import { SEOHead } from "@/components/SEOHead";
 import { Link } from "react-router-dom";
 import { 
   Zap, Shield, Wifi, ArrowRight, Package, 
@@ -140,6 +141,7 @@ const Victron = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEOHead title="Victron Energy" description="Shop Victron Energy products in New Zealand. Inverters, chargers, MPPT controllers, and monitoring systems from SOK Battery NZ." />
       <Header />
       <PageBreadcrumb />
       <main className="flex-1">

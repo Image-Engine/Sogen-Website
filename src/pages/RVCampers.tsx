@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
+import { SEOHead } from "@/components/SEOHead";
 import { Link } from "react-router-dom";
 import { 
   Zap, 
@@ -175,6 +176,7 @@ const RVCampers = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEOHead title="RV & Camper Batteries" description="Premium LiFePO4 batteries for RVs, campers, and motorhomes. Lightweight, long-lasting lithium batteries from SOK Battery NZ." />
       <Header />
       <PageBreadcrumb />
       <main className="flex-1">
