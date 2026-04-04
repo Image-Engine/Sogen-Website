@@ -90,14 +90,7 @@ export default function Contact() {
               </div>
 
               {/* Tally Contact Form */}
-              <div className="bg-card rounded-xl border border-border p-6 md:p-8">
-                <h2 className="text-2xl font-semibold text-foreground mb-2">
-                  Email Us
-                </h2>
-                <p className="text-muted-foreground mb-6">
-                  Fill out the form below and we'll get back to you as soon as possible.
-                </p>
-
+              <div>
                 <iframe
                   src="https://us13.list-manage.com/contact-form?u=504cd5e073b29c3e918479b94&form_id=79344e42f279d5170ce82b9b8d5b6c36"
                   loading="lazy"
