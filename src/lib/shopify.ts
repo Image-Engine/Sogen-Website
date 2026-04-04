@@ -391,6 +391,12 @@ const GET_COLLECTION_BY_HANDLE = `
                 currencyCode
               }
             }
+            compareAtPriceRange {
+              minVariantPrice {
+                amount
+                currencyCode
+              }
+            }
             images(first: 5) {
               edges {
                 node {
