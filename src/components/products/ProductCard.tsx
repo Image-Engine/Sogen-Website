@@ -62,6 +62,11 @@ export const ProductCard = forwardRef<HTMLAnchorElement, ProductCardProps>(funct
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
+        {hasDiscount && (
+          <span className="absolute top-2 left-2 z-10 bg-destructive text-destructive-foreground text-xs font-bold px-2 py-1 rounded-lg">
+            Sale
+          </span>
+        )}
         {images.length > 0 ? (
           <>
             <img
