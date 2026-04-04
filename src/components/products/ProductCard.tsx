@@ -18,25 +18,31 @@ export const ProductCard = forwardRef<HTMLAnchorElement, ProductCardProps>(funct
   const price = node.priceRange.minVariantPrice;
   
   const [isHovered, setIsHovered] = useState(false);
+  const [isAdding, setIsAdding] = useState(false);
 
-  const handleAddToCart = (e: React.MouseEvent) => {
+  const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     
-    if (!variant) return;
+    if (!variant || isAdding) return;
     
-    addItem({
-      product,
-      variantId: variant.id,
-      variantTitle: variant.title,
-      price: variant.price,
-      quantity: 1,
-      selectedOptions: variant.selectedOptions || [],
-    });
-    
-    toast.success("Added to cart", {
-      description: node.title,
-    });
+    setIsAdding(true);
+    try {
+      addItem({
+        product,
+        variantId: variant.id,
+        variantTitle: variant.title,
+        price: variant.price,
+        quantity: 1,
+        selectedOptions: variant.selectedOptions || [],
+      });
+      
+      toast.success("Added to cart", {
+        description: node.title,
+      });
+    } finally {
+      setIsAdding(false);
+    }
   };
 
   const primaryImage = images[0]?.node.url;
