@@ -28,7 +28,7 @@ export default function Contact() {
         {/* Contact Content */}
         <section className="py-12 md:py-16">
           <div className="container mx-auto px-4 max-w-7xl">
-            <div className="grid lg:grid-cols-[1fr_1.5fr] gap-12">
+            <div className="grid lg:grid-cols-[1fr_2fr] gap-12">
               
               {/* Contact Information */}
               <div className="space-y-8">
