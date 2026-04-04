@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
@@ -10,116 +10,97 @@ import {
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "@/components/products/ProductCard";
 import { ProductGridSkeleton } from "@/components/products/ProductGridSkeleton";
-import { fetchCollectionByHandle, ShopifyProduct } from "@/lib/shopify";
+import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { CollectionsSidebar } from "@/components/products/CollectionsSidebar";
 
 const features = [
   {
-    icon: Plug,
-    title: "Plug & Play",
-    description: "Pre-terminated connectors and cables for quick, hassle-free installation with any SOK battery system.",
-    iconColor: "text-emerald-500",
-    bgColor: "bg-emerald-500/10"
-  },
-  {
-    icon: Award,
-    title: "OEM Quality",
-    description: "Every accessory is manufactured to the same exacting standards as our batteries — no compromises.",
-    iconColor: "text-amber-500",
-    bgColor: "bg-amber-500/10"
+    icon: Cable,
+    title: "Premium Cables & Connectors",
+    description: "Heavy-duty battery cables and connectors rated for high-current applications with corrosion-resistant terminals.",
+    iconColor: "text-orange-500",
+    bgColor: "bg-orange-500/10"
   },
   {
     icon: Shield,
-    title: "Safety Certified",
-    description: "All components are UL-listed and meet international safety standards for complete peace of mind.",
+    title: "Circuit Protection",
+    description: "Fuses, breakers, and disconnect switches to safeguard your battery system from overcurrent and short circuits.",
     iconColor: "text-rose-500",
     bgColor: "bg-rose-500/10"
   },
   {
-    icon: Cable,
-    title: "Perfect Fit",
-    description: "Designed specifically for SOK batteries, ensuring optimal connectivity and performance.",
+    icon: Plug,
+    title: "Chargers & Converters",
+    description: "Smart chargers and DC-DC converters optimized for LiFePO₄ chemistry with proper charge profiles.",
     iconColor: "text-blue-500",
     bgColor: "bg-blue-500/10"
   },
   {
     icon: Wrench,
-    title: "Easy Installation",
-    description: "Clear documentation and intuitive design means anyone can install with basic tools.",
+    title: "Mounting & Hardware",
+    description: "Battery trays, hold-downs, and mounting hardware engineered for secure installation in any application.",
+    iconColor: "text-emerald-500",
+    bgColor: "bg-emerald-500/10"
+  },
+  {
+    icon: CheckCircle2,
+    title: "Guaranteed Compatibility",
+    description: "Every accessory is tested and verified to work perfectly with SOK Battery systems.",
     iconColor: "text-violet-500",
     bgColor: "bg-violet-500/10"
   },
   {
-    icon: Shield,
+    icon: Award,
     title: "Built to Last",
-    description: "Heavy-duty construction and premium materials ensure long-lasting reliability in any environment.",
+    description: "Commercial-grade materials and construction ensure your accessories match the longevity of your batteries.",
     iconColor: "text-sky-500",
     bgColor: "bg-sky-500/10"
   }
 ];
 
-const collectionOptions = [
-  { label: "12V Accessories", handle: "12v-lithium-batteries", description: "Cables, connectors, and components for 12V systems" },
-  { label: "24V Accessories", handle: "24v-lithium-batteries", description: "Components and cables for 24V battery setups" },
-  { label: "48V Accessories", handle: "48v-lithium-batteries", description: "Heavy-duty accessories for 48V installations" }
-];
-
-interface CollectionProducts { [key: string]: ShopifyProduct[] }
-
 const Accessories = () => {
-  const [collectionProducts, setCollectionProducts] = useState<CollectionProducts>({});
+  const [allProducts, setAllProducts] = useState<ShopifyProduct[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState<string>("all");
-  const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   useEffect(() => {
-    async function loadAllCollections() {
+    async function loadProducts() {
       setLoading(true);
-      const results: CollectionProducts = {};
-      for (const option of collectionOptions) {
-        const collection = await fetchCollectionByHandle(option.handle, 50);
-        results[option.label] = collection?.products || [];
-      }
-      setCollectionProducts(results);
+      const products = await fetchProducts(250, "accessory OR accessories OR charger OR cable OR connector OR inverter");
+      setAllProducts(products);
       setLoading(false);
     }
-    loadAllCollections();
+    loadProducts();
   }, []);
 
-  const handleCategoryClick = (label: string) => {
-    setActiveCategory(label);
-    if (label === "all") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    } else {
-      const el = sectionRefs.current[label];
-      if (el) {
-        const headerOffset = 80;
-        const elementPosition = el.getBoundingClientRect().top + window.scrollY;
-        window.scrollTo({ top: elementPosition - headerOffset, behavior: "smooth" });
-      }
-    }
-  };
-
-  const getAllProducts = () => {
-    return collectionOptions.flatMap(opt => collectionProducts[opt.label] || []);
-  };
+  // Dynamically extract product types from fetched products
+  const allTypes = Array.from(
+    new Set(
+      allProducts
+        .map((p) => p.node.productType)
+        .filter((t) => t && t.trim() !== "")
+    )
+  ).sort();
 
   const getProductsToShow = () => {
-    if (activeCategory === "all") return getAllProducts();
-    return collectionProducts[activeCategory] || [];
+    if (activeCategory === "all") return allProducts;
+    return allProducts.filter((p) => p.node.productType === activeCategory);
   };
 
   const productsToShow = getProductsToShow();
+
+  const getCountForType = (type: string) =>
+    allProducts.filter((p) => p.node.productType === type).length;
 
   const sidebarContent = (
     <div>
       <nav className="space-y-1">
         <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3 px-3">
-          Category
+          Product Type
         </h3>
         <button
-          onClick={() => handleCategoryClick("all")}
+          onClick={() => setActiveCategory("all")}
           className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
             activeCategory === "all"
               ? "bg-primary text-primary-foreground"
@@ -128,28 +109,25 @@ const Accessories = () => {
         >
           All Accessories
           <span className="ml-auto float-right text-xs opacity-70">
-            {loading ? "—" : getAllProducts().length}
+            {loading ? "—" : allProducts.length}
           </span>
         </button>
-        {collectionOptions.map((option) => {
-          const count = (collectionProducts[option.label] || []).length;
-          return (
-            <button
-              key={option.label}
-              onClick={() => handleCategoryClick(option.label)}
-              className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                activeCategory === option.label
-                  ? "bg-primary text-primary-foreground"
-                  : "text-foreground hover:bg-accent"
-              }`}
-            >
-              {option.label}
-              <span className="ml-auto float-right text-xs opacity-70">
-                {loading ? "—" : count}
-              </span>
-            </button>
-          );
-        })}
+        {allTypes.map((type) => (
+          <button
+            key={type}
+            onClick={() => setActiveCategory(type)}
+            className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+              activeCategory === type
+                ? "bg-primary text-primary-foreground"
+                : "text-foreground hover:bg-accent"
+            }`}
+          >
+            {type}
+            <span className="ml-auto float-right text-xs opacity-70">
+              {loading ? "—" : getCountForType(type)}
+            </span>
+          </button>
+        ))}
       </nav>
       <CollectionsSidebar />
     </div>
@@ -186,7 +164,7 @@ const Accessories = () => {
                 <SheetTrigger asChild>
                   <Button variant="outline" className="gap-2 w-full sm:w-auto">
                     <Filter className="h-4 w-4" />
-                    Filter by Category
+                    Filter by Type
                     {activeCategory !== "all" && (
                       <span className="ml-1 px-2 py-0.5 text-xs rounded-full bg-primary text-primary-foreground">
                         {activeCategory}
@@ -207,7 +185,7 @@ const Accessories = () => {
               {/* Desktop Sidebar */}
               <aside className="hidden lg:block w-[240px] shrink-0">
                 <div className="sticky top-24 space-y-2">
-                  <h2 className="text-lg font-semibold mb-4">Shop by Category</h2>
+                  <h2 className="text-lg font-semibold mb-4">Shop by Type</h2>
                   {sidebarContent}
                 </div>
               </aside>
@@ -219,10 +197,7 @@ const Accessories = () => {
                     {activeCategory === "all" ? "All Accessories" : activeCategory}
                   </h2>
                   <p className="text-muted-foreground mt-1">
-                    {activeCategory === "all" 
-                      ? `Showing all ${productsToShow.length} products`
-                      : collectionOptions.find(o => o.label === activeCategory)?.description
-                    }
+                    Showing {productsToShow.length} product{productsToShow.length !== 1 ? "s" : ""}
                   </p>
                 </div>
 
@@ -243,17 +218,6 @@ const Accessories = () => {
                     {productsToShow.map((product) => (
                       <ProductCard key={product.node.id} product={product} />
                     ))}
-                  </div>
-                )}
-
-                {activeCategory !== "all" && productsToShow.length > 0 && (
-                  <div className="text-center mt-8">
-                    <Link to={`/collections/${collectionOptions.find(o => o.label === activeCategory)?.handle}`}>
-                      <Button variant="outline" size="lg" className="gap-2">
-                        View Full Collection
-                        <ArrowRight className="h-4 w-4" />
-                      </Button>
-                    </Link>
                   </div>
                 )}
               </div>
