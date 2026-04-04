@@ -339,11 +339,20 @@ export default function Product() {
                   <Button
                     size="lg"
                     onClick={handleAddToCart}
-                    disabled={!currentVariant?.availableForSale}
+                    disabled={!currentVariant?.availableForSale || addToCartLoading}
                     className="flex-1 h-14 text-base"
                   >
-                    <ShoppingCart className="w-5 h-5 mr-2" />
-                    {currentVariant?.availableForSale ? "Add to Cart" : "Out of Stock"}
+                    {addToCartLoading ? (
+                      <>
+                        <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                        Adding...
+                      </>
+                    ) : (
+                      <>
+                        <ShoppingCart className="w-5 h-5 mr-2" />
+                        {currentVariant?.availableForSale ? "Add to Cart" : "Out of Stock"}
+                      </>
+                    )}
                   </Button>
                   <WishlistButton productId={product.id} productTitle={product.title} />
                   <ShareButtons productTitle={product.title} productUrl={productUrl} />
