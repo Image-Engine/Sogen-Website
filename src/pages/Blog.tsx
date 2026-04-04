@@ -33,6 +33,7 @@ export default function Blog() {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead title="Blog" description="News, guides, and tips on LiFePO4 batteries, solar energy, and off-grid power solutions from SOK Battery NZ." />
       <Header />
       <PageBreadcrumb />
       {/* Hero Section */}
