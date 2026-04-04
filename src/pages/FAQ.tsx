@@ -212,6 +212,7 @@ const faqCategories = [
 export default function FAQ() {
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEOHead title="FAQ" description="Frequently asked questions about SOK Battery LiFePO4 lithium batteries, solar solutions, shipping, warranty, and more." />
       <Header />
       <PageBreadcrumb />
       

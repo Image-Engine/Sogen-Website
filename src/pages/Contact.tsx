@@ -7,6 +7,7 @@ import { Mail, MapPin, Clock } from "lucide-react";
 export default function Contact() {
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEOHead title="Contact Us" description="Get in touch with SOK Battery NZ. Contact us for battery and solar product enquiries, wholesale orders, or technical support." />
       <Header />
       <PageBreadcrumb />
       

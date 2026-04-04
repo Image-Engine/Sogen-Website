@@ -103,6 +103,7 @@ export default function Products() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEOHead title="All Products" description="Browse our full range of LiFePO4 lithium batteries, solar panels, inverters, and accessories. Premium energy solutions for RV, marine, off-grid, and industrial use in New Zealand." />
       <Header />
       <PageBreadcrumb />
       
