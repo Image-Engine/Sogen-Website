@@ -229,7 +229,7 @@ const STOREFRONT_QUERY = `
 `;
 
 const CART_CREATE_MUTATION = `
-  mutation cartCreate($input: CartInput!) {
+  mutation cartCreate($input: CartInput!) @inContext(country: NZ) {
     cartCreate(input: $input) {
       cart {
         id
