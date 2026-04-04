@@ -20,6 +20,7 @@ const batteryReviewVideos = [
 const Index = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <SEOHead />
       <Header />
       <main className="flex-1">
         <Hero />
