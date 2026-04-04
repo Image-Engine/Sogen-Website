@@ -414,6 +414,10 @@ const GET_COLLECTION_BY_HANDLE = `
                     amount
                     currencyCode
                   }
+                  compareAtPrice {
+                    amount
+                    currencyCode
+                  }
                   availableForSale
                   selectedOptions {
                     name
