@@ -1,6 +1,6 @@
-import { useState, forwardRef } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ShoppingCart, Package } from "lucide-react";
+import { ShoppingCart, Package, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
