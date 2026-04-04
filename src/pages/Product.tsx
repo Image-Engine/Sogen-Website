@@ -185,6 +185,12 @@ export default function Product() {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title={product.title}
+        description={product.description?.slice(0, 160) || `${product.title} — premium LiFePO4 battery from SOK Battery NZ.`}
+        ogImage={product.images[0]?.url}
+        ogType="product"
+      />
       <Header />
       <PageBreadcrumb items={[
         { label: "Products", href: "/products" },
