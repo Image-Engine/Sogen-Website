@@ -73,6 +73,7 @@ export default function Product() {
             vendor: product.vendor || '',
             productType: product.productType || '',
             priceRange: product.priceRange,
+            compareAtPriceRange: product.compareAtPriceRange || null,
             images: { edges: product.images.map(img => ({ node: img })) },
             variants: { edges: product.variants.map(v => ({ node: v })) },
             options: product.options,
