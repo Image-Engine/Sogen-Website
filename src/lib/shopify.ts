@@ -525,6 +525,12 @@ const GET_PRODUCT_RECOMMENDATIONS = `
           currencyCode
         }
       }
+      compareAtPriceRange {
+        minVariantPrice {
+          amount
+          currencyCode
+        }
+      }
       images(first: 1) {
         edges {
           node {
