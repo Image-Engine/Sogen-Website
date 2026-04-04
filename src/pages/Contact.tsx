@@ -99,23 +99,14 @@ export default function Contact() {
                 </p>
 
                 <iframe
-                  data-tally-src="https://tally.so/embed/LZ7DM2?alignLeft=1&transparentBackground=1&dynamicHeight=1"
+                  src="https://us13.list-manage.com/contact-form?u=504cd5e073b29c3e918479b94&form_id=79344e42f279d5170ce82b9b8d5b6c36"
                   loading="lazy"
                   width="100%"
-                  height="400"
+                  height="600"
                   frameBorder="0"
-                  marginHeight={0}
-                  marginWidth={0}
                   title="Contact Form"
-                  style={{ minHeight: '400px' }}
+                  style={{ minHeight: '600px', border: 'none' }}
                 ></iframe>
-                <script
-                  dangerouslySetInnerHTML={{
-                    __html: `
-                      var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w;s.onload=v;s.onerror=v;d.body.appendChild(s);}
-                    `
-                  }}
-                />
               </div>
             </div>
 
