@@ -1,5 +1,6 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { SEOHead } from "@/components/SEOHead";
 import { Hero } from "@/components/home/Hero";
 import { Categories } from "@/components/home/Categories";
 import { ProductGrid } from "@/components/home/ProductGrid";
