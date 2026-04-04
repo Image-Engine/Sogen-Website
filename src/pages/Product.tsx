@@ -103,20 +103,21 @@ export default function Product() {
     try {
       const checkoutUrl = await createStorefrontCheckout([
         {
-          product: {
-            node: {
-              id: product.id,
-              title: product.title,
-              description: product.description,
-              handle: product.handle,
-              vendor: product.vendor || '',
-              productType: product.productType || '',
-              priceRange: product.priceRange,
-              images: { edges: product.images.map(img => ({ node: img })) },
-              variants: { edges: product.variants.map(v => ({ node: v })) },
-              options: product.options,
-            }
-          },
+        product: {
+          node: {
+            id: product.id,
+            title: product.title,
+            description: product.description,
+            handle: product.handle,
+            vendor: product.vendor || '',
+            productType: product.productType || '',
+            priceRange: product.priceRange,
+            compareAtPriceRange: product.compareAtPriceRange || null,
+            images: { edges: product.images.map(img => ({ node: img })) },
+            variants: { edges: product.variants.map(v => ({ node: v })) },
+            options: product.options,
+          }
+        },
           variantId: variant.id,
           variantTitle: variant.title,
           price: variant.price,

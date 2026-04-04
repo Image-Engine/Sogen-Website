@@ -702,6 +702,9 @@ export interface ProductDetails {
     minVariantPrice: { amount: string; currencyCode: string };
     maxVariantPrice: { amount: string; currencyCode: string };
   };
+  compareAtPriceRange: {
+    minVariantPrice: { amount: string; currencyCode: string };
+  } | null;
   images: Array<{ url: string; altText: string | null }>;
   variants: Array<{
     id: string;
