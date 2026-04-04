@@ -34,6 +34,12 @@ export interface ShopifyProduct {
         };
       }>;
     };
+    compareAtPriceRange: {
+      minVariantPrice: {
+        amount: string;
+        currencyCode: string;
+      };
+    } | null;
     variants: {
       edges: Array<{
         node: {
@@ -43,6 +49,10 @@ export interface ShopifyProduct {
             amount: string;
             currencyCode: string;
           };
+          compareAtPrice: {
+            amount: string;
+            currencyCode: string;
+          } | null;
           availableForSale: boolean;
           selectedOptions: Array<{
             name: string;
