@@ -112,9 +112,14 @@ export const ProductCard = forwardRef<HTMLAnchorElement, ProductCardProps>(funct
             size="icon"
             variant="outline"
             onClick={handleAddToCart}
+            disabled={isAdding}
             className="h-8 w-8 sm:h-9 sm:w-9 shrink-0"
           >
-            <ShoppingCart className="h-4 w-4" />
+            {isAdding ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              <ShoppingCart className="h-4 w-4" />
+            )}
           </Button>
         </div>
       </div>

@@ -97,6 +97,10 @@ export default function Collection() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEOHead
+        title={collection?.title || "Collection"}
+        description={collection?.description || `Browse our ${handle} collection of premium batteries and solar products.`}
+      />
       <Header />
       <PageBreadcrumb />
       
