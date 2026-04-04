@@ -177,7 +177,7 @@ async function blogApiRequest(query: string, variables: Record<string, unknown> 
 
 // GraphQL Queries
 const STOREFRONT_QUERY = `
-  query GetProducts($first: Int!, $query: String) {
+  query GetProducts($first: Int!, $query: String) @inContext(country: NZ) {
     products(first: $first, query: $query) {
       edges {
         node {
@@ -229,7 +229,7 @@ const STOREFRONT_QUERY = `
 `;
 
 const CART_CREATE_MUTATION = `
-  mutation cartCreate($input: CartInput!) {
+  mutation cartCreate($input: CartInput!) @inContext(country: NZ) {
     cartCreate(input: $input) {
       cart {
         id
@@ -346,7 +346,7 @@ const GET_COLLECTIONS = `
 `;
 
 const GET_COLLECTION_BY_HANDLE = `
-  query GetCollectionByHandle($handle: String!, $first: Int!) {
+  query GetCollectionByHandle($handle: String!, $first: Int!) @inContext(country: NZ) {
     collection(handle: $handle) {
       id
       title
@@ -408,7 +408,7 @@ const GET_COLLECTION_BY_HANDLE = `
 `;
 
 const GET_PRODUCT_BY_HANDLE = `
-  query GetProductByHandle($handle: String!) {
+  query GetProductByHandle($handle: String!) @inContext(country: NZ) {
     product(handle: $handle) {
       id
       title
@@ -471,7 +471,7 @@ const GET_PRODUCT_BY_HANDLE = `
 `;
 
 const GET_PRODUCT_RECOMMENDATIONS = `
-  query GetProductRecommendations($productId: ID!) {
+  query GetProductRecommendations($productId: ID!) @inContext(country: NZ) {
     productRecommendations(productId: $productId) {
       id
       title
