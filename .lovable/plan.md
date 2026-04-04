@@ -1,49 +1,39 @@
 
 
-# Revitalize Homepage Design — Visual Polish Without New Sections
+# Fix SEO, Meta Tags & Accessories Products Issue
 
-## Problem
-Every section between Hero and EnergyHub uses nearly identical light-grey/white backgrounds with flat cards. There's no visual rhythm, depth, or interactivity — it reads like a static catalog.
+## Issues Identified
 
-## Changes (existing sections only)
+1. **Page title says "Lovable App"** — `index.html` has default boilerplate title, description, and OG tags
+2. **Solar/Accessories shows no products** — The Accessories page fetches from battery collection handles (`12v-lithium-batteries`, `24v-lithium-batteries`, `48v-lithium-batteries`) instead of actual accessory collections. The Solar Systems page filters by `productType === "Solar Accessories"` which may not match any products in Shopify.
+3. **SSR / crawlability** — This is a platform limitation of Lovable (client-side SPA). Lovable does not support Next.js or SSR. The client's suggestion to export to GitHub and convert to Next.js is valid for serious SEO needs. We can connect to GitHub via project settings.
 
-### 1. Add hover animations to Features cards
-**File:** `src/components/home/Features.tsx`
-- Feature cards: add `hover:-translate-y-1 hover:shadow-lg hover:border-primary/20 transition-all duration-300`
-- Hero stat cards: add same hover lift effect
-- Makes the section feel alive and interactive
+## Plan
 
-### 2. Add a "View All Batteries →" link to ProductGrid header
-**File:** `src/components/home/ProductGrid.tsx`
-- Add a `Link` to `/products` alongside the section heading
-- Gives the section a clear CTA and breaks the static header
+### 1. Fix `index.html` — SEO meta tags
+Update title, description, OG tags, and Twitter cards with proper Sogen Energy / SOK Battery branding:
+- Title: `"SOK Battery | LiFePO4 Lithium Batteries & Solar Solutions"`
+- Description: proper business description
+- OG image: keep or replace with a brand image URL
+- Remove all "Lovable" references from meta tags
 
-### 3. Improve section background rhythm
-**File:** `src/components/home/Categories.tsx`
-- Change from flat `bg-secondary/30` to a subtle gradient: `bg-gradient-to-b from-background to-secondary/30`
+### 2. Fix Accessories page — wrong collection handles
+**File:** `src/pages/Accessories.tsx`
+- The `collectionOptions` array uses battery collection handles, not accessory handles
+- Need to investigate which Shopify collections actually contain accessories — I'll use the Shopify tools to search for accessory products/collections and update the handles accordingly
+- Alternative: switch to `fetchProducts()` with a query filter for accessories (like the Solar page does with `fetchProducts(250, "solar")`)
 
-**File:** `src/components/home/ProductGrid.tsx`
-- Use clean white `bg-background` instead of `bg-surface-sunken` for contrast against the Categories gradient above
+### 3. Fix Solar Systems page — "Solar Accessories" empty filter
+**File:** `src/pages/SolarSystems.tsx`  
+- The priority type `"Solar Accessories"` may not match any product's `productType` field in Shopify
+- Will verify actual product types returned by the solar query and adjust the priority list to match real data
 
-**File:** `src/components/home/Features.tsx`
-- Use `bg-gradient-to-b from-secondary/40 to-secondary/10` instead of flat `bg-secondary/30`
+### 4. SSR limitation — communicate clearly
+- Lovable is a client-side SPA platform and cannot do SSR or Next.js
+- The site can be exported to GitHub for conversion to Next.js if the client wants crawler visibility
+- We can connect the project to GitHub via project settings so the client's developer can convert it
 
-### 4. Add depth to ProductCard hover states
-**File:** `src/components/products/ProductCard.tsx`
-- Enhance hover: `hover:shadow-xl hover:-translate-y-1` for a premium lift effect
-- Add subtle border color change on hover: `hover:border-primary/20`
-
-### 5. Improve ProductGrid section header typography
-**File:** `src/components/home/ProductGrid.tsx`
-- Add a thin decorative line or accent color to the "Featured Products" label
-- Style the overline with a small colored bar: `before:` pseudo or a `border-l-2 border-primary pl-3`
-
-### 6. Remove empty TrustBadges from page flow
-**File:** `src/pages/Index.tsx`
-- Remove `<TrustBadges />` which currently renders `null` — dead weight in the component tree
-
-## Technical Details
-- 5 files modified: `Features.tsx`, `ProductGrid.tsx`, `Categories.tsx`, `ProductCard.tsx`, `Index.tsx`
-- All changes are CSS/Tailwind classes — no data, API, or structural changes
-- Maintains Apple-style minimalism while adding subtle depth and interactivity
+## What this does NOT fix
+- SSR/prerendering (platform limitation — requires exporting to Next.js)
+- Google indexing (depends on SSR fix above)
 
