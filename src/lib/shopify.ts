@@ -481,6 +481,10 @@ const GET_PRODUCT_BY_HANDLE = `
               amount
               currencyCode
             }
+            compareAtPrice {
+              amount
+              currencyCode
+            }
             availableForSale
             selectedOptions {
               name
