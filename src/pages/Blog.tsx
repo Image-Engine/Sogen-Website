@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
+import { SEOHead } from "@/components/SEOHead";
 import { fetchBlogArticles, ShopifyArticle } from "@/lib/shopify";
 import { getBlogFallbackImage } from "@/lib/blogFallbackImages";
 import { Calendar, ArrowRight, User } from "lucide-react";
