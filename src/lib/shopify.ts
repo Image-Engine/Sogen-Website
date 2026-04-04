@@ -457,6 +457,12 @@ const GET_PRODUCT_BY_HANDLE = `
           currencyCode
         }
       }
+      compareAtPriceRange {
+        minVariantPrice {
+          amount
+          currencyCode
+        }
+      }
       images(first: 10) {
         edges {
           node {
