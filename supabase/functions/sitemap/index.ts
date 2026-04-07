@@ -1,6 +1,6 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 
-const SITE_URL = "https://sokbattery.lovable.app";
+const SITE_URL = "https://sogenenergy.co.nz";
 const SHOPIFY_STORE = "sokbattery-frontline-shine-zq4jf.myshopify.com";
 const SHOPIFY_API_VERSION = "2025-07";
 const SHOPIFY_STOREFRONT_TOKEN = "256f91dfddaeb67d0754c2f244378c30";
