@@ -10,7 +10,7 @@ const collections = [{
   image: "https://images.unsplash.com/photo-1592833159155-c62df1b65634?w=400&h=300&fit=crop"
 }, {
   name: "Solar Accessories",
-  handle: "solar-accessories",
+  handle: "solar-accessories-copy",
   image: "https://images.unsplash.com/photo-1559302504-64aae6ca6b6d?w=400&h=300&fit=crop"
 }, {
   name: "Charge Controllers",
