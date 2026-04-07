@@ -62,7 +62,7 @@ export function PageBreadcrumb({ items }: PageBreadcrumbProps) {
     breadcrumbs.push(...items);
   } else {
     // Routes that only exist with a child param — never link to them directly
-    const nonLinkableSegments = new Set(["product", "auth"]);
+    const nonLinkableSegments = new Set(["product", "auth", "collections", "collection"]);
 
     const segments = location.pathname.split("/").filter(Boolean);
     segments.forEach((segment, index) => {
