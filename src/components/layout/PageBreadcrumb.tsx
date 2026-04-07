@@ -61,13 +61,28 @@ export function PageBreadcrumb({ items }: PageBreadcrumbProps) {
   if (items) {
     breadcrumbs.push(...items);
   } else {
+    // Routes that only exist with a child param — never link to them directly
+    const nonLinkableSegments = new Set(["product", "auth"]);
+
     const segments = location.pathname.split("/").filter(Boolean);
     segments.forEach((segment, index) => {
       const href = "/" + segments.slice(0, index + 1).join("/");
       const isLast = index === segments.length - 1;
+      const isNonLinkable = nonLinkableSegments.has(segment);
+
+      // Skip segments that are just dynamic IDs (e.g. Shopify GIDs, blog handles mid-path)
+      // For blog paths like /blog/blogHandle/articleHandle, skip the middle blogHandle segment
+      if (
+        segments[0] === "blog" &&
+        segments.length === 3 &&
+        index === 1
+      ) {
+        return; // skip the blogHandle segment — it has no route
+      }
+
       breadcrumbs.push({
         label: formatSegment(segment),
-        href: isLast ? undefined : href,
+        href: isLast || isNonLinkable ? undefined : href,
       });
     });
   }
