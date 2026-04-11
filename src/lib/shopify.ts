@@ -572,12 +572,28 @@ const GET_PRODUCT_RECOMMENDATIONS = `
   }
 `;
 
-// Fetch products
-export async function fetchProducts(first: number = 20, query?: string): Promise<ShopifyProduct[]> {
+// Fetch products with cursor-based pagination to get ALL products
+export async function fetchProducts(first: number = 250, query?: string): Promise<ShopifyProduct[]> {
   try {
-    const data = await storefrontApiRequest(STOREFRONT_QUERY, { first, query });
-    if (!data) return [];
-    return data.data.products.edges;
+    let allProducts: ShopifyProduct[] = [];
+    let cursor: string | null = null;
+    let hasNextPage = true;
+
+    while (hasNextPage) {
+      const data = await storefrontApiRequest(STOREFRONT_QUERY, { first: Math.min(first, 250), query, after: cursor });
+      if (!data) break;
+      const edges = data.data.products.edges;
+      allProducts = [...allProducts, ...edges];
+      hasNextPage = data.data.products.pageInfo.hasNextPage;
+      cursor = data.data.products.pageInfo.endCursor;
+      
+      // If caller requested a specific limit and we've hit it, stop
+      if (first <= 250 && allProducts.length >= first) {
+        allProducts = allProducts.slice(0, first);
+        break;
+      }
+    }
+    return allProducts;
   } catch (error) {
     console.error('Error fetching products:', error);
     return [];
