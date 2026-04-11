@@ -93,16 +93,25 @@ const RVCampers = () => {
     async function loadAllCollections() {
       setLoading(true);
       const results: CollectionProducts = {};
-      
       for (const option of voltageOptions) {
-        const collection = await fetchCollectionByHandle(option.handle, 50);
+        const collection = await fetchCollectionByHandle(option.handle, 250);
         results[option.voltage] = collection?.products || [];
       }
-      
       setCollectionProducts(results);
       setLoading(false);
     }
     loadAllCollections();
+
+    const interval = setInterval(async () => {
+      const results: CollectionProducts = {};
+      for (const option of voltageOptions) {
+        const collection = await fetchCollectionByHandle(option.handle, 250);
+        results[option.voltage] = collection?.products || [];
+      }
+      setCollectionProducts(results);
+    }, 60_000);
+
+    return () => clearInterval(interval);
   }, []);
 
   const handleCategoryClick = (voltage: string) => {
