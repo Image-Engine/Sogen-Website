@@ -4,6 +4,10 @@ const corsHeaders = {
 };
 
 const json = (data: unknown, status = 200) =>
+  new Response(JSON.stringify(data), {
+    status,
+    headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+  });
 
 const getEnv = (key: string) => {
   const value = Deno.env.get(key);
@@ -17,15 +21,17 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const SHOPIFY_ACCESS_TOKEN = getEnv('SHOPIFY_ACCESS_TOKEN');
-    const SHOPIFY_STOREFRONT_ACCESS_TOKEN = getEnv('SHOPIFY_STOREFRONT_ACCESS_TOKEN');
-    const SHOPIFY_STORE_ID = getEnv('SHOPIFY_STORE_ID');
-    const storeDomain = `sokbattery-frontline-shine-zq4jf.myshopify.com`;
+    const shopifyAccessToken = getEnv('SHOPIFY_ACCESS_TOKEN');
+    const storefrontAccessToken = getEnv('SHOPIFY_STOREFRONT_ACCESS_TOKEN');
+    const storeId = getEnv('SHOPIFY_STORE_ID');
+    const storeDomain = 'sokbattery-frontline-shine-zq4jf.myshopify.com';
 
     const body = await req.json().catch(() => ({}));
     const title = typeof body?.title === 'string' && body.title.trim()
       ? body.title.trim()
       : 'SOK 48V 100Ah 5kwh battery x4';
+
+    const escapedTitle = title.replace(/'/g, "\\'");
 
     const adminQuery = `
       query ProductVisibility($query: String!) {
@@ -93,15 +99,15 @@ Deno.serve(async (req) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'X-Shopify-Access-Token': SHOPIFY_ACCESS_TOKEN,
+        'X-Shopify-Access-Token': shopifyAccessToken,
       },
       body: JSON.stringify({
         query: adminQuery,
-        variables: { query: `title:'${title.replace(/'/g, "\\'")}'` },
+        variables: { query: `title:'${escapedTitle}'` },
       }),
     });
 
-    const adminData = await adminRes.json();
+    const admin = await adminRes.json();
 
     const storefrontQuery = `
       query StorefrontCheck($query: String!) @inContext(country: NZ) {
@@ -121,22 +127,17 @@ Deno.serve(async (req) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'X-Shopify-Storefront-Access-Token': SHOPIFY_STOREFRONT_ACCESS_TOKEN,
+        'X-Shopify-Storefront-Access-Token': storefrontAccessToken,
       },
       body: JSON.stringify({
         query: storefrontQuery,
-        variables: { query: `title:'${title.replace(/'/g, "\\'")}'` },
+        variables: { query: `title:'${escapedTitle}'` },
       }),
     });
 
-    const storefrontData = await storefrontRes.json();
+    const storefront = await storefrontRes.json();
 
-    return json({
-      title,
-      storeId: SHOPIFY_STORE_ID,
-      admin: adminData,
-      storefront: storefrontData,
-    });
+    return json({ title, storeId, admin, storefront });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown error';
     return json({ error: message }, 500);
