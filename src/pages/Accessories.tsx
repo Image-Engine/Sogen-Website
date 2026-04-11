@@ -68,11 +68,18 @@ const Accessories = () => {
   useEffect(() => {
     async function loadProducts() {
       setLoading(true);
-      const products = await fetchProducts(250, "accessory OR accessories OR charger OR cable OR connector OR inverter");
+      const products = await fetchProducts(999, "accessory OR accessories OR charger OR cable OR connector OR inverter");
       setAllProducts(products);
       setLoading(false);
     }
     loadProducts();
+
+    const interval = setInterval(async () => {
+      const products = await fetchProducts(999, "accessory OR accessories OR charger OR cable OR connector OR inverter");
+      setAllProducts(products);
+    }, 60_000);
+
+    return () => clearInterval(interval);
   }, []);
 
   // Dynamically extract product types from fetched products

@@ -24,7 +24,7 @@ export default function Products() {
     async function loadData() {
       setLoading(true);
       const [productsData, collectionsData] = await Promise.all([
-        fetchProducts(250),
+        fetchProducts(999),
         fetchCollections()
       ]);
       setAllProducts(productsData);
@@ -33,6 +33,17 @@ export default function Products() {
       setLoading(false);
     }
     loadData();
+
+    // Poll for new products every 60 seconds
+    const interval = setInterval(async () => {
+      const productsData = await fetchProducts(999);
+      setAllProducts(productsData);
+      if (!activeCollection) {
+        setDisplayedProducts(productsData);
+      }
+    }, 60_000);
+
+    return () => clearInterval(interval);
   }, []);
 
   const handleCollectionClick = async (handle: string | null) => {

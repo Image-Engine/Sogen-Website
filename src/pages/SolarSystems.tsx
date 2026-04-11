@@ -68,11 +68,18 @@ const SolarSystems = () => {
   useEffect(() => {
     async function loadProducts() {
       setLoading(true);
-      const products = await fetchProducts(250, "solar");
+      const products = await fetchProducts(999, "solar");
       setAllProducts(products);
       setLoading(false);
     }
     loadProducts();
+
+    const interval = setInterval(async () => {
+      const products = await fetchProducts(999, "solar");
+      setAllProducts(products);
+    }, 60_000);
+
+    return () => clearInterval(interval);
   }, []);
 
   // Priority categories shown first in sidebar

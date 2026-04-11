@@ -187,8 +187,12 @@ async function blogApiRequest(query: string, variables: Record<string, unknown> 
 
 // GraphQL Queries
 const STOREFRONT_QUERY = `
-  query GetProducts($first: Int!, $query: String) @inContext(country: NZ) {
-    products(first: $first, query: $query) {
+  query GetProducts($first: Int!, $query: String, $after: String) @inContext(country: NZ) {
+    products(first: $first, query: $query, after: $after) {
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
       edges {
         node {
           id
@@ -568,12 +572,28 @@ const GET_PRODUCT_RECOMMENDATIONS = `
   }
 `;
 
-// Fetch products
-export async function fetchProducts(first: number = 20, query?: string): Promise<ShopifyProduct[]> {
+// Fetch products with cursor-based pagination to get ALL products
+export async function fetchProducts(first: number = 250, query?: string): Promise<ShopifyProduct[]> {
   try {
-    const data = await storefrontApiRequest(STOREFRONT_QUERY, { first, query });
-    if (!data) return [];
-    return data.data.products.edges;
+    let allProducts: ShopifyProduct[] = [];
+    let cursor: string | null = null;
+    let hasNextPage = true;
+
+    while (hasNextPage) {
+      const data = await storefrontApiRequest(STOREFRONT_QUERY, { first: Math.min(first, 250), query, after: cursor });
+      if (!data) break;
+      const edges = data.data.products.edges;
+      allProducts = [...allProducts, ...edges];
+      hasNextPage = data.data.products.pageInfo.hasNextPage;
+      cursor = data.data.products.pageInfo.endCursor;
+      
+      // If caller requested a specific limit and we've hit it, stop
+      if (first <= 250 && allProducts.length >= first) {
+        allProducts = allProducts.slice(0, first);
+        break;
+      }
+    }
+    return allProducts;
   } catch (error) {
     console.error('Error fetching products:', error);
     return [];
@@ -757,14 +777,7 @@ export async function fetchProductRecommendations(productId: string): Promise<Sh
   }
 }
 
-// Fetch products by vendor
+// Fetch products by vendor (paginated)
 export async function fetchProductsByVendor(vendor: string, first: number = 250): Promise<ShopifyProduct[]> {
-  try {
-    const data = await storefrontApiRequest(STOREFRONT_QUERY, { first, query: `vendor:${vendor}` });
-    if (!data || !data.data.products) return [];
-    return data.data.products.edges;
-  } catch (error) {
-    console.error('Error fetching products by vendor:', error);
-    return [];
-  }
+  return fetchProducts(first, `vendor:${vendor}`);
 }
