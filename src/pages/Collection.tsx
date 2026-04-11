@@ -74,6 +74,15 @@ export default function Collection() {
       setLoading(false);
     }
     loadCollection();
+
+    // Poll for updates every 60 seconds
+    const interval = setInterval(async () => {
+      if (!handle) return;
+      const data = await fetchCollectionByHandle(handle, 250);
+      if (data) setCollection(data);
+    }, 60_000);
+
+    return () => clearInterval(interval);
   }, [handle]);
 
   const filteredProducts = collection?.products.filter((product) => {

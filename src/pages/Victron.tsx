@@ -73,6 +73,13 @@ const Victron = () => {
       setLoading(false);
     }
     loadProducts();
+
+    const interval = setInterval(async () => {
+      const products = await fetchProductsByVendor("Victron");
+      setAllProducts(products);
+    }, 60_000);
+
+    return () => clearInterval(interval);
   }, []);
 
   const hiddenTypes = ["DC- DC Converters / Chargers"];
