@@ -69,7 +69,7 @@ export default function Collection() {
     async function loadCollection() {
       if (!handle) return;
       setLoading(true);
-      const data = await fetchCollectionByHandle(handle);
+      const data = await fetchCollectionByHandle(handle, 250);
       setCollection(data);
       setLoading(false);
     }

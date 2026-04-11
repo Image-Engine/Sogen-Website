@@ -24,7 +24,7 @@ export default function Products() {
     async function loadData() {
       setLoading(true);
       const [productsData, collectionsData] = await Promise.all([
-        fetchProducts(50),
+        fetchProducts(250),
         fetchCollections()
       ]);
       setAllProducts(productsData);
@@ -45,7 +45,7 @@ export default function Products() {
     }
 
     setFilterLoading(true);
-    const collection = await fetchCollectionByHandle(handle);
+    const collection = await fetchCollectionByHandle(handle, 250);
     if (collection) {
       setDisplayedProducts(collection.products);
     }
