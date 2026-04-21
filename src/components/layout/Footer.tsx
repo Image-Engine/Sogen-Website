@@ -52,7 +52,7 @@ export function Footer() {
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-2 md:grid-cols-5 lg:gap-8">
           {/* Brand Column */}
           <div className="col-span-2 sm:col-span-2 md:col-span-4 lg:col-span-1 mb-4 lg:mb-0">
-            <img src={sokLogo} alt="Sogen Energy" className="h-8 sm:h-10 lg:h-12 w-auto mb-3 sm:mb-4" />
+            <img src={sokLogo} alt="Sogen Energy" className="h-8 sm:h-10 w-auto max-w-[200px] object-contain mb-3 sm:mb-4" />
             <p className="text-muted-foreground text-xs sm:text-sm max-w-[280px]">
               New Zealand's trusted source for premium LiFePO4 batteries and solar power solutions.
             </p>
