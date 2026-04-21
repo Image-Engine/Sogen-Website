@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Mail, MapPin } from "lucide-react";
-import sokLogo from "@/assets/sogen-energy-logo.svg";
+import sokLogo from "@/assets/sogen-energy-logo.png";
 
 const footerLinks = {
   products: [{
