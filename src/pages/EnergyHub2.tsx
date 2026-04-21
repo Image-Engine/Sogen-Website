@@ -324,63 +324,6 @@ const EnergyHub2 = () => {
           </div>
         </section>
 
-        {/* Solar Panel Options */}
-        <section className="py-20 lg:py-28 bg-secondary/30">
-          <div className="container">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Solar Panel Options
-              </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Choose from our optional solar panel bundles
-              </p>
-            </div>
-            <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-              {/* Solar Option 1 */}
-              <div className="p-6 rounded-2xl border border-border bg-card">
-                <h3 className="text-xl font-semibold text-foreground mb-4">
-                  8 × 440W Longi Panels
-                </h3>
-                <ul className="space-y-2 mb-6 text-sm text-muted-foreground">
-                  <li>• Total 3520 watts solar</li>
-                  <li>• Tin roof mounting kit</li>
-                  <li>• 2-in-1 combiner/isolator + surge protection</li>
-                  <li>• 30m Twin 6mm² PV cable and connectors</li>
-                </ul>
-                <p className="text-2xl font-bold text-foreground">$3,881 <span className="text-sm font-normal text-muted-foreground">inc GST</span></p>
-              </div>
-
-              {/* Solar Option 2 */}
-              <div className="p-6 rounded-2xl border border-border bg-card">
-                <h3 className="text-xl font-semibold text-foreground mb-4">
-                  12 × 440W Longi Panels
-                </h3>
-                <ul className="space-y-2 mb-6 text-sm text-muted-foreground">
-                  <li>• Total 5280 watts solar</li>
-                  <li>• Tin roof mounting kit</li>
-                  <li>• 4-in-1 combiner/isolator + surge protection</li>
-                  <li>• 30m Twin 6mm² PV cable and connectors</li>
-                </ul>
-                <p className="text-2xl font-bold text-foreground">$5,050 <span className="text-sm font-normal text-muted-foreground">inc GST</span></p>
-              </div>
-
-              {/* Solar Option 3 */}
-              <div className="p-6 rounded-2xl border border-border bg-card flex flex-col">
-                <h3 className="text-xl font-semibold text-foreground mb-4">
-                  Custom Solar Array
-                </h3>
-                <p className="text-sm text-muted-foreground mb-6 flex-1">
-                  Need a specific array size, or a system without solar panels? We can customise to your exact requirements.
-                </p>
-                <Link to="/contact">
-                  <Button variant="outline" className="w-full">
-                    Contact Us
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
         {/* Specifications Section */}
         <section className="py-20 lg:py-28 bg-secondary/30">
           <div className="container">
