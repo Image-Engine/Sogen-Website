@@ -101,7 +101,7 @@ const EnergyHub2 = () => {
       <PageBreadcrumb />
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative py-16 lg:py-24 overflow-hidden bg-gradient-to-b from-secondary/30 to-background">
+        <section className="relative py-10 lg:py-16 overflow-hidden bg-gradient-to-b from-secondary/30 to-background">
           <div className="container">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="space-y-6">
