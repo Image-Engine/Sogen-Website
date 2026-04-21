@@ -427,7 +427,7 @@ const EnergyHub2 = () => {
           <div className="container">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Get Your Custom Quote
+                Ready to go Off-Grid the smart way?
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 Fill out the form below and our team will get back to you with a tailored solution.
