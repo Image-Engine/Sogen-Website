@@ -435,10 +435,13 @@ const EnergyHub2 = () => {
             </div>
             <div className="max-w-3xl mx-auto">
               <iframe
-                src="https://tally.so/embed/b59BY2?alignLeft=1&transparentBackground=1&dynamicHeight=1"
-                title="Energy Hub Enquiry Form"
-                className="w-full min-h-[500px] border-0"
+                src="https://us13.list-manage.com/contact-form?u=504cd5e073b29c3e918479b94&form_id=79344e42f279d5170ce82b9b8d5b6c36"
                 loading="lazy"
+                width="100%"
+                height="600"
+                frameBorder="0"
+                title="Energy Hub Enquiry Form"
+                style={{ minHeight: '600px', border: 'none' }}
               />
             </div>
           </div>
