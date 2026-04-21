@@ -10,7 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import sokLogo from "@/assets/sogen-energy-logo.svg";
+import sokLogo from "@/assets/sogen-energy-logo.png";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 import { fetchCollections, ShopifyCollection } from "@/lib/shopify";
 import { useShopifyCustomer } from "@/contexts/ShopifyCustomerContext";

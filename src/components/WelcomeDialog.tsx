@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import sogenLogo from "@/assets/sogen-energy-logo.svg";
+import sogenLogo from "@/assets/sogen-energy-logo.png";
 
 const STORAGE_KEY = "sogen-welcome-dismissed";
 
