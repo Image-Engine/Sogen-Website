@@ -257,13 +257,13 @@ const EnergyHub2 = () => {
                 <div className="mb-6">
                   <span className="text-sm font-medium text-primary">Option 1</span>
                   <h3 className="text-2xl font-bold text-foreground mt-1">
-                    Victron EasySolar 48/5000
+                    Victron Multiplus 48/5000
                   </h3>
                 </div>
                 <ul className="space-y-3 mb-8">
                   <li className="flex items-start gap-3">
                     <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                    <span className="text-muted-foreground">5 kVA inverter/charger with built-in MPPT controller</span>
+                    <span className="text-muted-foreground">5 kVA inverter/charger</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
@@ -275,12 +275,12 @@ const EnergyHub2 = () => {
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                    <span className="text-muted-foreground">Scalable 2 to 5 batteries (10-25 kWh total)</span>
+                    <span className="text-muted-foreground">Scalable 2 to 6 batteries (10-30 kWh total)</span>
                   </li>
                 </ul>
                 <div className="pt-6 border-t border-border">
                   <p className="text-sm text-muted-foreground mb-1">From</p>
-                  <p className="text-3xl font-bold text-foreground">$17,890 <span className="text-base font-normal text-muted-foreground">inc GST</span></p>
+                  <p className="text-3xl font-bold text-foreground">$19,550 <span className="text-base font-normal text-muted-foreground">inc GST</span></p>
                 </div>
               </div>
 
@@ -312,12 +312,12 @@ const EnergyHub2 = () => {
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                    <span className="text-muted-foreground">Scalable 3 to 5 batteries (15-25 kWh total)</span>
+                    <span className="text-muted-foreground">Scalable 3 to 6 batteries (15-30 kWh total)</span>
                   </li>
                 </ul>
                 <div className="pt-6 border-t border-border">
                   <p className="text-sm text-muted-foreground mb-1">From</p>
-                  <p className="text-3xl font-bold text-foreground">$23,504 <span className="text-base font-normal text-muted-foreground">inc GST</span></p>
+                  <p className="text-3xl font-bold text-foreground">$23,990 <span className="text-base font-normal text-muted-foreground">inc GST</span></p>
                 </div>
               </div>
             </div>
