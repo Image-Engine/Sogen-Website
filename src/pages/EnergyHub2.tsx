@@ -96,7 +96,7 @@ const specs = [
 const EnergyHub2 = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <SEOHead title="Energy Hub 2" description="SOK Energy Hub 2 — all-in-one solar power system for homes, RVs, and off-grid living. Features built-in inverter, MPPT, and LiFePO4 battery." />
+      <SEOHead title="Energy Hub" description="SOK Energy Hub — all-in-one solar power system for homes, RVs, and off-grid living. Features built-in inverter, MPPT, and LiFePO4 battery." />
       <Header />
       <PageBreadcrumb />
       <main className="flex-1">
@@ -110,7 +110,7 @@ const EnergyHub2 = () => {
                   Complete Power Solution
                 </div>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground">
-                  Energy Hub 2
+                  Energy Hub
                 </h1>
                 <p className="text-xl lg:text-2xl text-muted-foreground font-light">
                   Everything you need for reliable, off-grid power — in one cabinet.
@@ -138,7 +138,7 @@ const EnergyHub2 = () => {
                 <div className="aspect-square rounded-3xl overflow-hidden bg-secondary/20 border border-border">
                   <img 
                     src="https://solagen.co.nz/wp-content/uploads/SGEH-cabinet-display800x800.jpg" 
-                    alt="Energy Hub 2 Cabinet" 
+                    alt="Energy Hub Cabinet" 
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -152,7 +152,7 @@ const EnergyHub2 = () => {
           <div className="container">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Why Choose the Energy Hub 2?
+                Why Choose the Energy Hub?
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 Professional-grade power systems engineered for New Zealand conditions
@@ -216,7 +216,7 @@ const EnergyHub2 = () => {
                   What's Included
                 </h2>
                 <p className="text-lg text-muted-foreground mb-8">
-                  Every Energy Hub 2 system is professionally pre-wired, assembled, and tested in-house, saving you time, cost, and complexity.
+                  Every Energy Hub system is professionally pre-wired, assembled, and tested in-house, saving you time, cost, and complexity.
                 </p>
                 <ul className="space-y-4">
                   {included.map((item, index) => (
@@ -231,7 +231,7 @@ const EnergyHub2 = () => {
                 <div className="aspect-square rounded-3xl overflow-hidden bg-secondary/20 border border-border">
                   <img 
                     src="https://solagen.co.nz/wp-content/uploads/Cabinet-electronics-1-768x768.jpg" 
-                    alt="Energy Hub 2 Electronics" 
+                    alt="Energy Hub Electronics" 
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -436,7 +436,7 @@ const EnergyHub2 = () => {
             <div className="max-w-3xl mx-auto">
               <iframe
                 src="https://tally.so/embed/b59BY2?alignLeft=1&transparentBackground=1&dynamicHeight=1"
-                title="Energy Hub 2 Enquiry Form"
+                title="Energy Hub Enquiry Form"
                 className="w-full min-h-[500px] border-0"
                 loading="lazy"
               />

@@ -51,7 +51,7 @@ export function EnergyHub() {
             </span>
           </div>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-foreground tracking-tight mb-6">
-            Energy Hub 2
+            Energy Hub
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Reliable off and on-grid power built for New Zealand
@@ -85,7 +85,7 @@ export function EnergyHub() {
                 Professional Off-Grid Power Systems
               </h3>
               <p className="text-muted-foreground leading-relaxed text-base">
-                The Energy Hub 2 represents the latest generation of professional 
+                The Energy Hub represents the latest generation of professional 
                 off-grid power systems, combining proven Victron technology with 
                 high-performance SOK lithium batteries in a weatherproof, 
                 installer-friendly package.
@@ -133,7 +133,7 @@ export function EnergyHub() {
                 </div>
 
                 <h4 className="text-2xl lg:text-3xl font-semibold mb-4">
-                  The SOK Energy Hub 2 Advantage
+                  The SOK Energy Hub Advantage
                 </h4>
                 <p className="text-white/70 leading-relaxed mb-8">
                   SOK batteries and Victron hardware are renowned for their 
