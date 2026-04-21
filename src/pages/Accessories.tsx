@@ -14,6 +14,7 @@ import { ProductGridSkeleton } from "@/components/products/ProductGridSkeleton";
 import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { CollectionsSidebar } from "@/components/products/CollectionsSidebar";
+import { useScrollToRef } from "@/hooks/useScrollToRef";
 
 const features = [
   {
@@ -64,6 +65,11 @@ const Accessories = () => {
   const [allProducts, setAllProducts] = useState<ShopifyProduct[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState<string>("all");
+  const { ref: productsRef, scrollToRef } = useScrollToRef<HTMLElement>();
+  const handleCategoryChange = (cat: string) => {
+    setActiveCategory(cat);
+    requestAnimationFrame(() => scrollToRef());
+  };
 
   useEffect(() => {
     async function loadProducts() {
@@ -108,7 +114,7 @@ const Accessories = () => {
           Product Type
         </h3>
         <button
-          onClick={() => setActiveCategory("all")}
+          onClick={() => handleCategoryChange("all")}
           className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
             activeCategory === "all"
               ? "bg-primary text-primary-foreground"
@@ -123,7 +129,7 @@ const Accessories = () => {
         {allTypes.map((type) => (
           <button
             key={type}
-            onClick={() => setActiveCategory(type)}
+            onClick={() => handleCategoryChange(type)}
             className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
               activeCategory === type
                 ? "bg-primary text-primary-foreground"
@@ -165,7 +171,7 @@ const Accessories = () => {
         </section>
 
         {/* Main Content: Sidebar + Products */}
-        <section className="py-10 lg:py-16">
+        <section ref={productsRef} className="py-10 lg:py-16 scroll-mt-24">
           <div className="container">
             {/* Mobile Filter Button */}
             <div className="lg:hidden mb-6">
