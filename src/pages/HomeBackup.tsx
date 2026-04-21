@@ -145,7 +145,7 @@ const HomeBackup = () => {
                       SOK rack batteries are one of New Zealand's most trusted lithium energy storage options, combining premium LiFePO₄ technology with a durable, fully serviceable design. Engineered for both off-grid and on-grid applications, these modular rack batteries deliver reliable power, high usable capacity, and excellent long-term value.
                     </p>
                     <p>
-                      Paired with Solagen's Energy Hub 2 cabinet, SOK batteries create a complete, scalable energy system built for homes, tiny houses, workshops, remote sites, and commercial installations.
+                      Paired with Solagen's Energy Hub cabinet, SOK batteries create a complete, scalable energy system built for homes, tiny houses, workshops, remote sites, and commercial installations.
                     </p>
                   </div>
                 </div>
@@ -221,7 +221,7 @@ const HomeBackup = () => {
                     SOK rack batteries handle deep daily cycling, winter load spikes, and seasonal temperature variations common in New Zealand installations. The lithium battery management system ensures clean, stable power delivery, while the serviceable aluminium casing provides added durability for long-term off-grid use.
                   </p>
                   <p className="text-[15px] text-foreground/70 leading-[1.85]">
-                    When combined with Solagen's Energy Hub 2 cabinet, you gain an integrated power solution with neat cable management, AC/DC protection, and intelligent battery-to-inverter communications for precise voltage control.
+                    When combined with Solagen's Energy Hub cabinet, you gain an integrated power solution with neat cable management, AC/DC protection, and intelligent battery-to-inverter communications for precise voltage control.
                   </p>
                 </div>
 
@@ -293,17 +293,17 @@ const HomeBackup = () => {
           </div>
         </section>
 
-        {/* Energy Hub 2 */}
+        {/* Energy Hub */}
         <section className="py-16 lg:py-24 bg-secondary/20">
           <div className="container max-w-6xl">
             <div className="grid lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] gap-10 lg:gap-16 items-start">
               <div className="space-y-10 lg:pr-4">
                 <div className="space-y-4">
                   <h2 className="text-2xl md:text-3xl font-semibold text-foreground tracking-tight leading-[1.2]">
-                    The Perfect Match: Solagen Energy Hub 2
+                    The Perfect Match: Solagen Energy Hub
                   </h2>
                   <p className="text-[15px] text-foreground/70 leading-[1.85] max-w-xl">
-                    Our Energy Hub 2 cabinet is designed specifically to pair with SOK rack batteries.
+                    Our Energy Hub cabinet is designed specifically to pair with SOK rack batteries.
                     It arrives pre-wired, pre-tested, and ready to install, with generator input options,
                     Victron monitoring, and weather-resistant construction.
                   </p>
@@ -332,13 +332,13 @@ const HomeBackup = () => {
                 <div className="aspect-[4/3] bg-secondary/20 flex items-center justify-center p-6">
                   <img
                     src="https://solagen.co.nz/wp-content/uploads/SGEH-cabinet-display800x800.jpg"
-                    alt="Solagen Energy Hub 2 Cabinet"
+                    alt="Solagen Energy Hub Cabinet"
                     className="w-full h-full object-contain rounded-xl"
                   />
                 </div>
                 <div className="p-7 space-y-2.5">
                   <h3 className="text-lg font-semibold text-foreground leading-snug">
-                    Solagen Energy Hub 2
+                    Solagen Energy Hub
                   </h3>
                   <p className="text-[14px] text-muted-foreground leading-[1.75]">
                     A powerful and expandable outdoor cabinet for urban, rural, and commercial situations — on-grid or off-grid.

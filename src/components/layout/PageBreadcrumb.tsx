@@ -29,7 +29,7 @@ const routeLabels: Record<string, string> = {
   "shipping-returns": "Shipping & Returns",
   warranty: "Warranty",
   "privacy-policy": "Privacy Policy",
-  "energy-hub-2": "Energy Hub 2",
+  "energy-hub-2": "Energy Hub",
   "rv-campers": "RV & Campers",
   "solar-systems": "Solar Systems",
   "home-backup": "Home Backup",
