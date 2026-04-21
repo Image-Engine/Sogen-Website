@@ -8,6 +8,7 @@ import { ScrollToTop } from "@/components/ScrollToTop";
 import { ShopifyCustomerProvider } from "@/contexts/ShopifyCustomerContext";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { WelcomeDialog } from "@/components/WelcomeDialog";
 import Index from "./pages/Index";
 import FAQ from "./pages/FAQ";
 import Blog from "./pages/Blog";
@@ -49,6 +50,7 @@ const App = () => (
           <ScrollToTop />
           <ShopifyCustomerProvider>
             <ErrorBoundary>
+              <WelcomeDialog />
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/faq" element={<FAQ />} />
