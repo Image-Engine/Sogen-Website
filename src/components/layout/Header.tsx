@@ -10,7 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import sokLogo from "@/assets/sok-logo.webp";
+import sokLogo from "@/assets/sogen-energy-logo.svg";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 import { fetchCollections, ShopifyCollection } from "@/lib/shopify";
 import { useShopifyCustomer } from "@/contexts/ShopifyCustomerContext";
@@ -49,8 +49,8 @@ export function Header() {
           <Link to="/" className="flex items-center shrink-0">
             <img
               src={sokLogo}
-              alt="SOK Battery - New Zealand"
-              className="h-12 lg:h-14 w-auto"
+              alt="Sogen Energy"
+              className="h-8 lg:h-10 w-auto"
             />
           </Link>
 
