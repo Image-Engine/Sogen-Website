@@ -10,6 +10,7 @@ import { fetchProducts, fetchCollections, fetchCollectionByHandle, ShopifyProduc
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { CollectionsSidebar } from "@/components/products/CollectionsSidebar";
+import { useScrollToRef } from "@/hooks/useScrollToRef";
 
 export default function Products() {
   const [allProducts, setAllProducts] = useState<ShopifyProduct[]>([]);
@@ -46,10 +47,13 @@ export default function Products() {
     return () => clearInterval(interval);
   }, []);
 
+  const { ref: productsRef, scrollToRef } = useScrollToRef<HTMLElement>();
+
   const handleCollectionClick = async (handle: string | null) => {
     setActiveCollection(handle);
     setSearchQuery("");
-    
+    requestAnimationFrame(() => scrollToRef());
+
     if (!handle) {
       setDisplayedProducts(allProducts);
       return;
@@ -170,7 +174,7 @@ export default function Products() {
         </section>
 
         {/* Main Content: Sidebar + Products */}
-        <section className="py-10 lg:py-16">
+        <section ref={productsRef} className="py-10 lg:py-16 scroll-mt-24">
           <div className="container">
             {/* Mobile Filter Button */}
             <div className="lg:hidden mb-6">
