@@ -253,73 +253,77 @@ const EnergyHub2 = () => {
             </div>
             <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
               {/* Option 1 */}
-              <div className="p-8 rounded-3xl border border-border bg-card hover:border-primary/50 transition-colors">
-                <div className="mb-6">
-                  <span className="text-sm font-medium text-primary">Option 1</span>
-                  <h3 className="text-2xl font-bold text-foreground mt-1">
-                    Victron Multiplus 48/5000
-                  </h3>
+              <Link to="/collections/energy-hub" className="block group">
+                <div className="p-8 rounded-3xl border border-border bg-card group-hover:border-primary/50 group-hover:shadow-lg transition-all h-full">
+                  <div className="mb-6">
+                    <span className="text-sm font-medium text-primary">Option 1</span>
+                    <h3 className="text-2xl font-bold text-foreground mt-1">
+                      Victron Multiplus 48/5000
+                    </h3>
+                  </div>
+                  <ul className="space-y-3 mb-8">
+                    <li className="flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                      <span className="text-muted-foreground">5 kVA inverter/charger</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                      <span className="text-muted-foreground">Victron SmartSolar MPPT 250/100 VE.Can</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                      <span className="text-muted-foreground">Minimum 2 × SOK 48V rack batteries (10 kWh)</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                      <span className="text-muted-foreground">Scalable 2 to 6 batteries (10-30 kWh total)</span>
+                    </li>
+                  </ul>
+                  <div className="pt-6 border-t border-border">
+                    <p className="text-sm text-muted-foreground mb-1">From</p>
+                    <p className="text-3xl font-bold text-foreground">$19,550 <span className="text-base font-normal text-muted-foreground">inc GST</span></p>
+                  </div>
                 </div>
-                <ul className="space-y-3 mb-8">
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                    <span className="text-muted-foreground">5 kVA inverter/charger</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                    <span className="text-muted-foreground">Victron SmartSolar MPPT 250/100 VE.Can</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                    <span className="text-muted-foreground">Minimum 2 × SOK 48V rack batteries (10 kWh)</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                    <span className="text-muted-foreground">Scalable 2 to 6 batteries (10-30 kWh total)</span>
-                  </li>
-                </ul>
-                <div className="pt-6 border-t border-border">
-                  <p className="text-sm text-muted-foreground mb-1">From</p>
-                  <p className="text-3xl font-bold text-foreground">$19,550 <span className="text-base font-normal text-muted-foreground">inc GST</span></p>
-                </div>
-              </div>
+              </Link>
 
               {/* Option 2 */}
-              <div className="p-8 rounded-3xl border-2 border-primary bg-card relative">
-                <div className="absolute -top-3 left-8">
-                  <span className="px-3 py-1 text-xs font-semibold bg-primary text-primary-foreground rounded-full">
-                    Most Popular
-                  </span>
+              <Link to="/collections/energy-hub" className="block group">
+                <div className="p-8 rounded-3xl border-2 border-primary bg-card relative group-hover:shadow-lg transition-all h-full">
+                  <div className="absolute -top-3 left-8">
+                    <span className="px-3 py-1 text-xs font-semibold bg-primary text-primary-foreground rounded-full">
+                      Most Popular
+                    </span>
+                  </div>
+                  <div className="mb-6">
+                    <span className="text-sm font-medium text-primary">Option 2</span>
+                    <h3 className="text-2xl font-bold text-foreground mt-1">
+                      Victron MultiPlus-II 48/8000
+                    </h3>
+                  </div>
+                  <ul className="space-y-3 mb-8">
+                    <li className="flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                      <span className="text-muted-foreground">Victron 8 kVA inverter/charger</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                      <span className="text-muted-foreground">Victron SmartSolar MPPT 250/100 VE.Can</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                      <span className="text-muted-foreground">Minimum 3 × SOK 48V rack batteries (15 kWh)</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                      <span className="text-muted-foreground">Scalable 3 to 6 batteries (15-30 kWh total)</span>
+                    </li>
+                  </ul>
+                  <div className="pt-6 border-t border-border">
+                    <p className="text-sm text-muted-foreground mb-1">From</p>
+                    <p className="text-3xl font-bold text-foreground">$23,990 <span className="text-base font-normal text-muted-foreground">inc GST</span></p>
+                  </div>
                 </div>
-                <div className="mb-6">
-                  <span className="text-sm font-medium text-primary">Option 2</span>
-                  <h3 className="text-2xl font-bold text-foreground mt-1">
-                    Victron MultiPlus-II 48/8000
-                  </h3>
-                </div>
-                <ul className="space-y-3 mb-8">
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                    <span className="text-muted-foreground">Victron 8 kVA inverter/charger</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                    <span className="text-muted-foreground">Victron SmartSolar MPPT 250/100 VE.Can</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                    <span className="text-muted-foreground">Minimum 3 × SOK 48V rack batteries (15 kWh)</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                    <span className="text-muted-foreground">Scalable 3 to 6 batteries (15-30 kWh total)</span>
-                  </li>
-                </ul>
-                <div className="pt-6 border-t border-border">
-                  <p className="text-sm text-muted-foreground mb-1">From</p>
-                  <p className="text-3xl font-bold text-foreground">$23,990 <span className="text-base font-normal text-muted-foreground">inc GST</span></p>
-                </div>
-              </div>
+              </Link>
             </div>
           </div>
         </section>
