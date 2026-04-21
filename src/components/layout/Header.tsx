@@ -51,6 +51,10 @@ export function Header() {
               src={sokLogo}
               alt="Sogen Energy"
               className="h-8 lg:h-10 w-auto"
+              width="200"
+              height="34"
+              decoding="async"
+              fetchPriority="high"
             />
           </Link>
 
