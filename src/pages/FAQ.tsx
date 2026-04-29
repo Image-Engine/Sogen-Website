@@ -295,7 +295,7 @@ export default function FAQ() {
                 Our team is here to help with any questions about SOK batteries.
               </p>
               <a 
-                href="mailto:info@sokbattery.co.nz" 
+                href="mailto:info@sogenenergy.co.nz" 
                 className="inline-flex items-center justify-center px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors"
               >
                 Contact Support
