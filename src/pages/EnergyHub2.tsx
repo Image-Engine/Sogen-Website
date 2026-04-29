@@ -389,10 +389,11 @@ const EnergyHub2 = () => {
                 src="https://us13.list-manage.com/contact-form?u=504cd5e073b29c3e918479b94&form_id=79344e42f279d5170ce82b9b8d5b6c36"
                 loading="lazy"
                 width="100%"
-                height="600"
+                height="1100"
                 frameBorder="0"
+                scrolling="no"
                 title="Energy Hub Enquiry Form"
-                style={{ minHeight: '600px', border: 'none' }}
+                style={{ minHeight: '1100px', border: 'none', transform: 'scale(0.95)', transformOrigin: 'top left', width: '105.3%' }}
               />
             </div>
           </div>
