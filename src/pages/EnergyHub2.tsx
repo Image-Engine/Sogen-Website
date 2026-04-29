@@ -18,6 +18,7 @@ import {
   ArrowRight
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import energyHubHero from "@/assets/sogen-energy-hub-cabinet.jpg";
 
 const features = [
   {
@@ -137,9 +138,10 @@ const EnergyHub2 = () => {
               <div className="relative">
                 <div className="aspect-square rounded-3xl overflow-hidden bg-secondary/20 border border-border">
                   <img 
-                    src="https://solagen.co.nz/wp-content/uploads/SGEH-cabinet-display800x800.jpg" 
-                    alt="Energy Hub Cabinet" 
+                    src={energyHubHero} 
+                    alt="Sogen Energy Hub outdoor cabinet" 
                     className="w-full h-full object-cover"
+                    loading="eager"
                   />
                 </div>
               </div>
