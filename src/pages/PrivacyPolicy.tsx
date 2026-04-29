@@ -186,7 +186,7 @@ export default function PrivacyPolicy() {
                   </p>
                   */}
                   <p>
-                    <a href="mailto:sales@sokbattery.co.nz" className="text-primary hover:underline">sales@sokbattery.co.nz</a>
+                    <a href="mailto:info@sogenenergy.co.nz" className="text-primary hover:underline">info@sogenenergy.co.nz</a>
                   </p>
                 </div>
               </div>

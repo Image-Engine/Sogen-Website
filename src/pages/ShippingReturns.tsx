@@ -116,7 +116,7 @@ export default function ShippingReturns() {
                   </p>
                   <p>
                     To start a return, you can contact us at{" "}
-                    <a href="mailto:sales@sokbattery.co.nz" className="text-primary hover:underline">sales@sokbattery.co.nz</a>. 
+                    <a href="mailto:info@sogenenergy.co.nz" className="text-primary hover:underline">info@sogenenergy.co.nz</a>. 
                     If your return is accepted, you will need to send it back to us at your own expense. You will receive instructions on how and where to send it once your claim is accepted. Items sent back to us without first requesting a return will not be accepted.
                   </p>
                 </div>
