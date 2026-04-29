@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import energyHubHero from "@/assets/sogen-energy-hub-cabinet.jpg";
+import energyHubIncluded from "@/assets/energy-hub-inverter-side.png";
 
 const features = [
   {
@@ -232,9 +233,10 @@ const EnergyHub2 = () => {
               <div className="relative">
                 <div className="aspect-square rounded-3xl overflow-hidden bg-secondary/20 border border-border">
                   <img 
-                    src="https://solagen.co.nz/wp-content/uploads/Cabinet-electronics-1-768x768.jpg" 
-                    alt="Energy Hub Electronics" 
+                    src={energyHubIncluded} 
+                    alt="Energy Hub interior with Victron MultiPlus-II inverter and components" 
                     className="w-full h-full object-cover"
+                    loading="lazy"
                   />
                 </div>
               </div>
