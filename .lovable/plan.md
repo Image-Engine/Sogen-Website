@@ -1,12 +1,26 @@
-## Install Google Tag Manager (GTM)
+# Fix Navbar Search
 
-Add the GTM container snippet to `index.html` in two places:
+## Problem
+The search inputs in `Header.tsx` (both desktop and mobile) are purely visual — they have no `value`, `onChange`, or submit handler, so typing does nothing.
 
-1. **GTM `<script>` in `<head>`** — placed after `<meta charset>` / `<meta viewport>` and before the existing Google Analytics (gtag.js) script. This ensures GTM loads early and can manage the dataLayer.
+## Fix
+Wire the search inputs to navigate to `/products?search=<query>` on submit, and have `Products.tsx` read that query from the URL to pre-filter the grid.
 
-2. **GTM `<noscript>` in `<body>`** — placed immediately after the opening `<body>` tag (before `<div id="root">`), as required by Google for users without JavaScript.
+## Changes
 
-The existing Google Analytics gtag.js script will remain unchanged and coexist with GTM.
+**1. `src/components/layout/Header.tsx`**
+- Add `searchQuery` state and `useNavigate` from react-router-dom.
+- Wrap both desktop and mobile search inputs in a `<form>` with an `onSubmit` that:
+  - Trims the query, navigates to `/products?search=<encoded query>`.
+  - Closes the desktop search popover / mobile menu.
+  - Clears the input.
+- Also submit on Enter (native form behavior).
 
-### Files changed
-- `index.html`
+**2. `src/pages/Products.tsx`**
+- Use `useSearchParams` to read `?search=` on mount and whenever it changes.
+- Initialize `searchQuery` state from the URL param so the existing client-side filter (already implemented on lines ~76–82) immediately runs.
+- Keep the existing in-page search input synced with the URL (optional: update URL on type, or just seed once).
+
+## Out of scope
+- No backend / Shopify search API change — we keep the existing client-side title/description filter that Products already uses.
+- No new search results page or autocomplete dropdown.

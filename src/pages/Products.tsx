@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Search, Package, Filter } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -18,8 +19,17 @@ export default function Products() {
   const [collections, setCollections] = useState<ShopifyCollection[]>([]);
   const [loading, setLoading] = useState(true);
   const [filterLoading, setFilterLoading] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchQuery, setSearchQuery] = useState(searchParams.get("search") ?? "");
   const [activeCollection, setActiveCollection] = useState<string | null>(null);
+
+  useEffect(() => {
+    const urlQuery = searchParams.get("search") ?? "";
+    setSearchQuery(urlQuery);
+    if (urlQuery) {
+      setActiveCollection(null);
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     async function loadData() {
