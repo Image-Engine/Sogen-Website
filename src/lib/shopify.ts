@@ -781,3 +781,53 @@ export async function fetchProductRecommendations(productId: string): Promise<Sh
 export async function fetchProductsByVendor(vendor: string, first: number = 250): Promise<ShopifyProduct[]> {
   return fetchProducts(first, `vendor:${vendor}`);
 }
+
+// Quick search for autocomplete: lightweight product matches
+export interface QuickSearchProduct {
+  id: string;
+  handle: string;
+  title: string;
+  vendor: string;
+  imageUrl: string | null;
+  price: { amount: string; currencyCode: string } | null;
+}
+
+const QUICK_SEARCH_QUERY = `
+  query QuickSearch($first: Int!, $query: String!) @inContext(country: NZ) {
+    products(first: $first, query: $query) {
+      edges {
+        node {
+          id
+          title
+          handle
+          vendor
+          featuredImage { url altText }
+          priceRange { minVariantPrice { amount currencyCode } }
+        }
+      }
+    }
+  }
+`;
+
+export async function searchProductsQuick(term: string, limit: number = 6): Promise<QuickSearchProduct[]> {
+  const trimmed = term.trim();
+  if (!trimmed) return [];
+  // Match title, vendor, product type, and tag with a wildcard prefix
+  const safe = trimmed.replace(/["\\]/g, '');
+  const query = `title:*${safe}* OR vendor:*${safe}* OR product_type:*${safe}* OR tag:*${safe}*`;
+  try {
+    const data = await storefrontApiRequest(QUICK_SEARCH_QUERY, { first: limit, query });
+    if (!data?.data?.products?.edges) return [];
+    return data.data.products.edges.map((e: any) => ({
+      id: e.node.id,
+      handle: e.node.handle,
+      title: e.node.title,
+      vendor: e.node.vendor,
+      imageUrl: e.node.featuredImage?.url ?? null,
+      price: e.node.priceRange?.minVariantPrice ?? null,
+    }));
+  } catch (err) {
+    console.error('Quick search failed:', err);
+    return [];
+  }
+}

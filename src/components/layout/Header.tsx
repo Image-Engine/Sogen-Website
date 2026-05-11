@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Loader2 } from "lucide-react";
 import { Search, User, Menu, X, ChevronDown, LogOut, Package, MapPin, UserCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { SearchAutocomplete } from "@/components/layout/SearchAutocomplete";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -27,17 +28,7 @@ export function Header() {
   const [collections, setCollections] = useState<ShopifyCollection[]>([]);
   const [collectionsOpen, setCollectionsOpen] = useState(false);
   const [signingIn, setSigningIn] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [mobileSearchQuery, setMobileSearchQuery] = useState("");
   const { isAuthenticated, customer, initiateLogin, logout } = useShopifyCustomer();
-  const navigate = useNavigate();
-
-  const submitSearch = (q: string, onDone?: () => void) => {
-    const trimmed = q.trim();
-    if (!trimmed) return;
-    navigate(`/products?search=${encodeURIComponent(trimmed)}`);
-    onDone?.();
-  };
 
   useEffect(() => {
     const loadCollections = async () => {
@@ -139,37 +130,12 @@ export function Header() {
             {/* Search - Desktop */}
             <div className="hidden md:flex items-center">
               {searchOpen ? (
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    submitSearch(searchQuery, () => {
-                      setSearchQuery("");
-                      setSearchOpen(false);
-                    });
-                  }}
-                  className="flex items-center gap-2 animate-fade-in"
-                >
-                  <input
-                    type="text"
-                    placeholder="Search batteries..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-40 lg:w-56 h-9 px-4 text-sm bg-secondary rounded-lg border-0 focus:outline-none focus:ring-2 focus:ring-primary/20 shrink-0"
-                    autoFocus
-                  />
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="icon-sm"
-                    onClick={() => {
-                      setSearchOpen(false);
-                      setSearchQuery("");
-                    }}
-                    className="shrink-0"
-                  >
-                    <X className="h-4 w-4" />
-                  </Button>
-                </form>
+                <SearchAutocomplete
+                  variant="desktop"
+                  autoFocus
+                  onClose={() => setSearchOpen(false)}
+                  onSubmitted={() => setSearchOpen(false)}
+                />
               ) : (
                 <Button
                   variant="ghost"
@@ -243,25 +209,10 @@ export function Header() {
             <div className="flex flex-col gap-1">
               {/* Mobile Search */}
               <div className="px-2 pb-4">
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    submitSearch(mobileSearchQuery, () => {
-                      setMobileSearchQuery("");
-                      setMobileMenuOpen(false);
-                    });
-                  }}
-                  className="relative"
-                >
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <input
-                    type="text"
-                    placeholder="Search batteries..."
-                    value={mobileSearchQuery}
-                    onChange={(e) => setMobileSearchQuery(e.target.value)}
-                    className="w-full h-10 pl-10 pr-4 text-sm bg-secondary rounded-lg border-0 focus:outline-none focus:ring-2 focus:ring-primary/20"
-                  />
-                </form>
+                <SearchAutocomplete
+                  variant="mobile"
+                  onSubmitted={() => setMobileMenuOpen(false)}
+                />
               </div>
 
               {/* All Products - Mobile */}
