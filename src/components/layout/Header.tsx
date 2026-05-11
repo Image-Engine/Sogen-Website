@@ -28,17 +28,7 @@ export function Header() {
   const [collections, setCollections] = useState<ShopifyCollection[]>([]);
   const [collectionsOpen, setCollectionsOpen] = useState(false);
   const [signingIn, setSigningIn] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [mobileSearchQuery, setMobileSearchQuery] = useState("");
   const { isAuthenticated, customer, initiateLogin, logout } = useShopifyCustomer();
-  const navigate = useNavigate();
-
-  const submitSearch = (q: string, onDone?: () => void) => {
-    const trimmed = q.trim();
-    if (!trimmed) return;
-    navigate(`/products?search=${encodeURIComponent(trimmed)}`);
-    onDone?.();
-  };
 
   useEffect(() => {
     const loadCollections = async () => {
