@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Loader2 } from "lucide-react";
 import { Search, User, Menu, X, ChevronDown, LogOut, Package, MapPin, UserCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { SearchAutocomplete } from "@/components/layout/SearchAutocomplete";
 import {
   DropdownMenu,
   DropdownMenuContent,
