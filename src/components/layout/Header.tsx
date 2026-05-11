@@ -209,25 +209,10 @@ export function Header() {
             <div className="flex flex-col gap-1">
               {/* Mobile Search */}
               <div className="px-2 pb-4">
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    submitSearch(mobileSearchQuery, () => {
-                      setMobileSearchQuery("");
-                      setMobileMenuOpen(false);
-                    });
-                  }}
-                  className="relative"
-                >
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <input
-                    type="text"
-                    placeholder="Search batteries..."
-                    value={mobileSearchQuery}
-                    onChange={(e) => setMobileSearchQuery(e.target.value)}
-                    className="w-full h-10 pl-10 pr-4 text-sm bg-secondary rounded-lg border-0 focus:outline-none focus:ring-2 focus:ring-primary/20"
-                  />
-                </form>
+                <SearchAutocomplete
+                  variant="mobile"
+                  onSubmitted={() => setMobileMenuOpen(false)}
+                />
               </div>
 
               {/* All Products - Mobile */}
