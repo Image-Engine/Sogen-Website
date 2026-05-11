@@ -130,37 +130,12 @@ export function Header() {
             {/* Search - Desktop */}
             <div className="hidden md:flex items-center">
               {searchOpen ? (
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    submitSearch(searchQuery, () => {
-                      setSearchQuery("");
-                      setSearchOpen(false);
-                    });
-                  }}
-                  className="flex items-center gap-2 animate-fade-in"
-                >
-                  <input
-                    type="text"
-                    placeholder="Search batteries..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-40 lg:w-56 h-9 px-4 text-sm bg-secondary rounded-lg border-0 focus:outline-none focus:ring-2 focus:ring-primary/20 shrink-0"
-                    autoFocus
-                  />
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="icon-sm"
-                    onClick={() => {
-                      setSearchOpen(false);
-                      setSearchQuery("");
-                    }}
-                    className="shrink-0"
-                  >
-                    <X className="h-4 w-4" />
-                  </Button>
-                </form>
+                <SearchAutocomplete
+                  variant="desktop"
+                  autoFocus
+                  onClose={() => setSearchOpen(false)}
+                  onSubmitted={() => setSearchOpen(false)}
+                />
               ) : (
                 <Button
                   variant="ghost"
