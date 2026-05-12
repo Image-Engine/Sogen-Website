@@ -60,8 +60,8 @@ export function Hero() {
             </div>
             <div className="flex flex-col items-center gap-2 text-center">
               <Award className="h-10 w-10 text-white" strokeWidth={1.5} />
-              <span className="text-sm font-semibold text-white">10-Year Warranty</span>
-              <span className="text-xs text-white/60">Full Battery Coverage</span>
+              <span className="text-sm font-semibold text-white">7-Year Warranty</span>
+              <span className="text-xs text-white/60">10 Years on Rack Batteries</span>
             </div>
             <div className="flex flex-col items-center gap-2 text-center">
               <ShieldCheck className="h-10 w-10 text-white" strokeWidth={1.5} />

@@ -87,7 +87,7 @@ export default function Warranty() {
                 </div>
                 <div className="text-muted-foreground leading-relaxed space-y-4">
                   <ul className="list-disc list-inside space-y-2 ml-4">
-                    <li>The Warranty Period for batteries purchased from SOK Battery is <strong className="text-foreground">7 or 10 years</strong> depending on model type, from the date of purchase.</li>
+                    <li>The Warranty Period for all SOK batteries is <strong className="text-foreground">7 years</strong> from the date of purchase, with <strong className="text-foreground">10 years</strong> coverage for SOK rack batteries.</li>
                     <li>For all other items excluding batteries have a warranty period of <strong className="text-foreground">12 months</strong> from date of purchase.</li>
                     <li>For all items on clearance a warranty period of <strong className="text-foreground">3 months</strong> applies from the date of purchase.</li>
                   </ul>
@@ -110,18 +110,11 @@ export default function Warranty() {
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="bg-muted/30 rounded-lg p-4">
                     <h3 className="font-semibold text-foreground mb-2">7 Years Warranty</h3>
-                    <ul className="text-sm text-muted-foreground space-y-1">
-                      <li>• SK12V100</li>
-                      <li>• SK12V206</li>
-                      <li>• SK12V280</li>
-                      <li>• SK24V100</li>
-                    </ul>
+                    <p className="text-sm text-muted-foreground">All SOK batteries (including SK12V100, SK12V206, SK12V280, SK24V100 and other standard models).</p>
                   </div>
                   <div className="bg-muted/30 rounded-lg p-4">
                     <h3 className="font-semibold text-foreground mb-2">10 Years Warranty</h3>
-                    <ul className="text-sm text-muted-foreground space-y-1">
-                      <li>• SK48V100</li>
-                    </ul>
+                    <p className="text-sm text-muted-foreground">SOK rack batteries (server rack-mounted models, including SK48V100).</p>
                   </div>
                 </div>
                 <p className="text-sm text-muted-foreground mt-4">
