@@ -379,7 +379,7 @@ export default function Product() {
               </div>
 
               {/* Trust Badges */}
-              <TrustBadges />
+              <TrustBadges warrantyYears={product.tags?.some(t => t.toLowerCase().includes('rack')) ? 10 : 7} />
 
               {/* Accordion Content */}
               <div className="pt-6 border-t border-border">
