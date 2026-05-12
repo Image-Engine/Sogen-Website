@@ -1,6 +1,10 @@
 import { Shield, RotateCcw, Award } from "lucide-react";
 
-export function TrustBadges() {
+interface TrustBadgesProps {
+  warrantyYears?: 7 | 10;
+}
+
+export function TrustBadges({ warrantyYears = 7 }: TrustBadgesProps) {
   const badges = [
     {
       icon: Shield,
@@ -15,7 +19,7 @@ export function TrustBadges() {
     {
       icon: Award,
       label: "Warranty",
-      sublabel: "Up to 10 Years",
+      sublabel: `${warrantyYears} Years`,
     },
   ];
 

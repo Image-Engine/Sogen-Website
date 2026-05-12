@@ -451,6 +451,7 @@ const GET_PRODUCT_BY_HANDLE = `
       handle
       productType
       vendor
+      tags
       priceRange {
         minVariantPrice {
           amount
@@ -737,6 +738,7 @@ export interface ProductDetails {
   }>;
   options: Array<{ name: string; values: string[] }>;
   collections: ProductCollection[];
+  tags: string[];
 }
 
 export async function fetchProductByHandle(handle: string): Promise<ProductDetails | null> {
@@ -758,6 +760,7 @@ export async function fetchProductByHandle(handle: string): Promise<ProductDetai
       variants: product.variants.edges.map((edge: { node: ProductDetails['variants'][0] }) => edge.node),
       options: product.options,
       collections: product.collections?.edges?.map((edge: { node: ProductCollection }) => edge.node) || [],
+      tags: product.tags || [],
     };
   } catch (error) {
     console.error('Error fetching product:', error);
