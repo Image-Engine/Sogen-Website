@@ -96,7 +96,7 @@ export function ProductAccordion({ description, specifications }: ProductAccordi
           <div className="space-y-4 text-muted-foreground">
             <div>
               <h4 className="font-medium text-foreground mb-1">What is the warranty?</h4>
-              <p>Warranty periods vary by product and can be found on each product's page. Warranty covers defects in materials and workmanship.</p>
+              <p>All SOK batteries carry a 7-year warranty, and SOK rack batteries are covered for 10 years. Warranty covers defects in materials and workmanship.</p>
             </div>
             <div>
               <h4 className="font-medium text-foreground mb-1">Need help with installation?</h4>

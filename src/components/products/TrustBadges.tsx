@@ -15,7 +15,7 @@ export function TrustBadges() {
     {
       icon: Award,
       label: "Warranty",
-      sublabel: "1 Year Coverage",
+      sublabel: "Up to 10 Years",
     },
   ];
 
