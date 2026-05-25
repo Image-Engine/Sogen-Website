@@ -107,9 +107,18 @@ export default function Collection() {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <SEOHead
-        title={collection?.title || "Collection"}
-        description={collection?.description || `Browse our ${handle} collection of premium batteries and solar products.`}
+        title={collection?.title || (loading ? "Collection" : "Collection Not Found")}
+        description={
+          collection?.description ||
+          (collection
+            ? `Browse our ${collection.title} collection of premium batteries and solar products.`
+            : `Browse our ${handle ?? ""} collection of premium batteries and solar products.`)
+        }
+        canonical={handle ? `/collection/${handle}` : undefined}
+        ogImage={collection?.image?.url}
+        noIndex={!loading && !collection}
       />
+
       <Header />
       <PageBreadcrumb />
       
