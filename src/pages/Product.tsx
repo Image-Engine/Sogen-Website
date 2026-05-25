@@ -183,16 +183,48 @@ export default function Product() {
   }
 
   const currentVariant = product.variants[selectedVariant];
-  const productUrl = typeof window !== 'undefined' ? window.location.href : '';
+  const productPath = `/product/${product.handle}`;
+  const absoluteProductUrl = `https://sogenenergy.co.nz${productPath}`;
+  const productUrl = typeof window !== "undefined" ? window.location.href : absoluteProductUrl;
+  const primaryImage = product.images[0]?.url;
+  const seoDescription =
+    product.description?.replace(/\s+/g, " ").trim().slice(0, 160) ||
+    `${product.title} — premium LiFePO4 battery from SOK Battery NZ.`;
+  const priceAmount = parseFloat(currentVariant?.price.amount ?? "0");
+  const priceCurrency = currentVariant?.price.currencyCode ?? "NZD";
+  const inStock = currentVariant?.availableForSale ?? false;
+
+  const productJsonLd: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.title,
+    description: product.description?.replace(/\s+/g, " ").trim() || product.title,
+    image: primaryImage ? [primaryImage] : undefined,
+    sku: currentVariant?.sku || undefined,
+    brand: { "@type": "Brand", name: product.vendor || "SOK Battery" },
+    offers: {
+      "@type": "Offer",
+      url: absoluteProductUrl,
+      priceCurrency,
+      price: priceAmount.toFixed(2),
+      availability: inStock
+        ? "https://schema.org/InStock"
+        : "https://schema.org/OutOfStock",
+      itemCondition: "https://schema.org/NewCondition",
+    },
+  };
 
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
         title={product.title}
-        description={product.description?.slice(0, 160) || `${product.title} — premium LiFePO4 battery from SOK Battery NZ.`}
-        ogImage={product.images[0]?.url}
+        description={seoDescription}
+        ogImage={primaryImage}
         ogType="product"
+        canonical={productPath}
+        jsonLd={productJsonLd}
       />
+
       <Header />
       <PageBreadcrumb items={[
         { label: "Products", href: "/products" },
