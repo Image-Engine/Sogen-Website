@@ -163,6 +163,7 @@ export default function Product() {
   if (!product) {
     return (
       <div className="min-h-screen bg-background">
+        <SEOHead title="Product Not Found" description="The product you're looking for doesn't exist." noIndex />
         <Header />
         <main className="pt-24 md:pt-28">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 text-center">
@@ -181,6 +182,7 @@ export default function Product() {
       </div>
     );
   }
+
 
   const currentVariant = product.variants[selectedVariant];
   const productPath = `/product/${product.handle}`;
