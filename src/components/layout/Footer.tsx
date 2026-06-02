@@ -29,14 +29,14 @@ const footerLinks = {
     label: "Warranty",
     href: "/warranty"
   }, {
+    label: "Terms & Conditions",
+    href: "/terms-conditions"
+  }, {
     label: "FAQs",
     href: "/faq"
   }, {
     label: "Blog",
     href: "/blog"
-  }, {
-    label: "Terms & Conditions",
-    href: "/terms-conditions"
   }],
 
   b2b: [{
