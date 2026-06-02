@@ -291,7 +291,7 @@ export default function Warranty() {
                 </p>
                 <Button asChild>
                   <a
-                    href="https://sokbattery.co.nz/wp-content/uploads/2024/07/SOK-Warranty.pdf"
+                    href={warrantyPdf.url}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
