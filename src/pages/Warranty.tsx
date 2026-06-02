@@ -4,6 +4,7 @@ import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
 import { SEOHead } from "@/components/SEOHead";
 import { Shield, Clock, Battery, Wrench, AlertTriangle, FileDown, User, Scale, Truck, Zap, Tag, Gauge, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import warrantyPdf from "@/assets/SOK_Warranty_V1.3.pdf.asset.json";
 
 export default function Warranty() {
   return (
@@ -290,7 +291,7 @@ export default function Warranty() {
                 </p>
                 <Button asChild>
                   <a
-                    href="https://sokbattery.co.nz/wp-content/uploads/2024/07/SOK-Warranty.pdf"
+                    href={warrantyPdf.url}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
