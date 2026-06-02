@@ -34,7 +34,11 @@ const footerLinks = {
   }, {
     label: "Blog",
     href: "/blog"
+  }, {
+    label: "Terms & Conditions",
+    href: "/terms-conditions"
   }],
+
   b2b: [{
     label: "Reseller Application",
     href: "https://forms.gle/TuujWLemKf3UsSqRA"
