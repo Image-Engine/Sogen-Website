@@ -1,21 +1,30 @@
-## Plan: Per-product warranty on product pages
+Replace the warranty page content with the new 12-section terms provided by the user, while preserving the current visual formatting (card sections, icons, hero banner, styled lists, and section headers).
 
-Replace the static "Up to 10 Years" warranty badge with a dynamic value driven by Shopify product tags: products tagged `rack` (case-insensitive) show **10 Years**, all others show **7 Years**.
+### What to change
+- **src/pages/Warranty.tsx**: Full content rewrite across all sections while keeping:
+  - Hero banner with Shield icon and "SOK Battery Warranty" badge
+  - Card-based section containers (`bg-card rounded-xl border border-border p-6 md:p-8`)
+  - Section header pattern (icon in `w-10 h-10 rounded-lg bg-primary/10` + h2 title)
+  - Numbered and bulleted list styling
+  - The "Download Full Warranty Document" CTA section
+  - SEOHead, Header, Footer, PageBreadcrumb wrappers
 
-### Changes
+### New content structure (12 sections)
+1. Coverage
+2. Who Is Covered
+3. What We Will Do to Correct Problems
+4. Batteries – Pro-rata Remedy
+5. How Long Does the Coverage Last? (updated periods: SOK batteries 10yr, Energy Hub 3yr, Victron per manufacturer, other items 12mo, clearance 3mo)
+6. Energy Hub Systems – Specific Terms (6.1 What Is Covered, 6.2 Installation Requirements, 6.3 Third-Party Equipment Integration)
+7. Capacity and Normal Wear
+8. Inverter / Charger Support and Warranty
+9. Shipping and Other Costs
+10. Clearance Items – Sales Terms
+11. What This Limited Warranty Does Not Cover
+12. Statutory Rights (New Zealand)
 
-**1. `src/lib/shopify.ts`**
-- Add `tags` to `GET_PRODUCT_BY_HANDLE` GraphQL query.
-- Add `tags: string[]` to the `ProductDetails` type/mapping.
-
-**2. `src/components/products/TrustBadges.tsx`**
-- Accept a `warrantyYears: 7 | 10` prop.
-- Render sublabel as `"7 Years"` or `"10 Years"` instead of `"Up to 10 Years"`.
-
-**3. `src/pages/Product.tsx`**
-- Compute `const isRack = product.tags?.some(t => t.toLowerCase().includes('rack'))`.
-- Pass `warrantyYears={isRack ? 10 : 7}` to `<TrustBadges />`.
-
-### Out of scope
-- Hero, Warranty page, ProductAccordion FAQ — already updated previously and remain accurate.
-- Non-product pages where TrustBadges isn't rendered with product context.
+### Technical details
+- Single file edit: `src/pages/Warranty.tsx`
+- No dependency changes or new files needed
+- Keep all existing imports; add any missing icons if new ones are needed
+- No routing or navigation changes
