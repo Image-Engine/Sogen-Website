@@ -4,6 +4,7 @@ import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
 import { SEOHead } from "@/components/SEOHead";
 import { Shield, Clock, Battery, Wrench, AlertTriangle, FileDown, User, Scale, Truck, Zap, Tag, Gauge, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import warrantyPdf from "@/assets/SOK_Warranty_V1.3.pdf.asset.json";
 
 export default function Warranty() {
   return (
