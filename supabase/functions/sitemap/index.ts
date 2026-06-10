@@ -1,16 +1,17 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 
 const SITE_URL = "https://sogenenergy.co.nz";
+const BLOG_SITE_URL = "https://blog.sogenenergy.co.nz";
 const SHOPIFY_STORE = "sokbattery-frontline-shine-zq4jf.myshopify.com";
 const SHOPIFY_API_VERSION = "2025-07";
 const SHOPIFY_STOREFRONT_TOKEN = "256f91dfddaeb67d0754c2f244378c30";
+const SHOPIFY_BLOG_TOKEN = "a8338a20b12c0be60e50caaf1c8c67b3";
 const STOREFRONT_URL = `https://${SHOPIFY_STORE}/api/${SHOPIFY_API_VERSION}/graphql.json`;
 
 const STATIC_PAGES = [
   { path: "/", priority: "1.0", changefreq: "daily" },
   { path: "/products", priority: "0.9", changefreq: "daily" },
   { path: "/faq", priority: "0.6", changefreq: "monthly" },
-  { path: "/blog", priority: "0.7", changefreq: "weekly" },
   { path: "/contact", priority: "0.5", changefreq: "monthly" },
   { path: "/energy-hub-2", priority: "0.7", changefreq: "monthly" },
   { path: "/rv-campers", priority: "0.7", changefreq: "monthly" },
@@ -102,15 +103,51 @@ async function fetchAllCollections(): Promise<Array<{ handle: string; updatedAt:
   return collections;
 }
 
+async function fetchAllBlogArticles(): Promise<
+  Array<{ blogHandle: string; handle: string; publishedAt: string }>
+> {
+  const query = `{
+    blog(handle: "faq") {
+      articles(first: 250, sortKey: PUBLISHED_AT, reverse: true) {
+        edges {
+          node {
+            handle
+            publishedAt
+            blog { handle }
+          }
+        }
+      }
+    }
+  }`;
+
+  const res = await fetch(STOREFRONT_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-Shopify-Storefront-Access-Token": SHOPIFY_BLOG_TOKEN,
+    },
+    body: JSON.stringify({ query }),
+  });
+
+  const json = await res.json();
+  const edges = json?.data?.blog?.articles?.edges ?? [];
+  return edges.map((edge: { node: { handle: string; publishedAt: string; blog: { handle: string } } }) => ({
+    blogHandle: edge.node.blog?.handle ?? "FAQ",
+    handle: edge.node.handle,
+    publishedAt: edge.node.publishedAt,
+  }));
+}
+
 function escapeXml(str: string): string {
   return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&apos;");
 }
 
 serve(async () => {
   try {
-    const [products, collections] = await Promise.all([
+    const [products, collections, blogArticles] = await Promise.all([
       fetchAllProducts(),
       fetchAllCollections(),
+      fetchAllBlogArticles(),
     ]);
 
     const today = new Date().toISOString().split("T")[0];
@@ -147,6 +184,25 @@ serve(async () => {
     <lastmod>${lastmod}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
+  </url>`;
+    }
+
+    xml += `
+  <url>
+    <loc>${BLOG_SITE_URL}/</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>`;
+
+    for (const article of blogArticles) {
+      const lastmod = article.publishedAt ? article.publishedAt.split("T")[0] : today;
+      xml += `
+  <url>
+    <loc>${BLOG_SITE_URL}/${escapeXml(article.blogHandle)}/${escapeXml(article.handle)}</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>`;
     }
 

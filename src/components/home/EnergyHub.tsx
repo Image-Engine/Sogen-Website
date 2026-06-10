@@ -1,5 +1,5 @@
 import { ArrowRight, Zap, Sun, Shield, CheckCircle2 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router";
 const collections = [{
   name: "Solar Panels",
   handle: "solar-panels",

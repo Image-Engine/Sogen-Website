@@ -1,12 +1,13 @@
 import { ArrowRight, Headset, Package, Award, ShieldCheck } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router";
 import { Button } from "@/components/ui/button";
 import heroBg from "@/assets/hero-bg.png";
+import { imageSrc } from "@/lib/imageSrc";
 export function Hero() {
   return <section className="relative min-h-[90vh] flex items-center overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
-        <img src={heroBg} alt="SOK Battery Professional Installation" className="w-full h-full object-cover" loading="eager" fetchPriority="high" />
+        <img src={imageSrc(heroBg)} alt="SOK Battery Professional Installation" className="w-full h-full object-cover" loading="eager" fetchPriority="high" />
         {/* Dark Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/40" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30" />

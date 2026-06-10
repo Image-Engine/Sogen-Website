@@ -20,7 +20,7 @@ const SITE_NAME = "SOK Battery NZ";
 const SITE_URL = "https://sogenenergy.co.nz";
 const DEFAULT_DESCRIPTION =
   "Shop SOK Battery LiFePO4 lithium batteries, solar panels, and energy storage solutions in New Zealand. High-performance batteries for RV, marine, off-grid, and industrial use.";
-const DEFAULT_OG_IMAGE = `${SITE_URL}/placeholder.svg`;
+const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.png`;
 
 function toAbsolute(url: string | undefined, fallback: string): string {
   if (!url) return fallback;

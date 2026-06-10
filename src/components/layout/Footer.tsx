@@ -1,6 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router";
 import { Mail, MapPin } from "lucide-react";
 import sokLogo from "@/assets/sogen-energy-logo.png";
+import { imageSrc } from "@/lib/imageSrc";
+import { blogIndexUrl, isExternalUrl } from "@/lib/blogUrls";
 
 const footerLinks = {
   products: [{
@@ -36,7 +38,7 @@ const footerLinks = {
     href: "/faq"
   }, {
     label: "Blog",
-    href: "/blog"
+    href: blogIndexUrl()
   }],
 
   b2b: [{
@@ -56,7 +58,7 @@ export function Footer() {
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-2 md:grid-cols-5 lg:gap-8">
           {/* Brand Column */}
           <div className="col-span-2 sm:col-span-2 md:col-span-4 lg:col-span-1 mb-4 lg:mb-0">
-            <img src={sokLogo} alt="Sogen Energy" className="h-8 sm:h-10 w-auto max-w-[200px] object-contain mb-3 sm:mb-4" />
+            <img src={imageSrc(sokLogo)} alt="Sogen Energy" className="h-8 sm:h-10 w-auto max-w-[200px] object-contain mb-3 sm:mb-4" />
             <p className="text-muted-foreground text-xs sm:text-sm max-w-[280px]">
               New Zealand's trusted source for premium LiFePO4 batteries and solar power solutions.
             </p>
@@ -86,9 +88,18 @@ export function Footer() {
             <ul className="space-y-2">
               {footerLinks.support.map(link => (
                 <li key={link.label}>
-                  <Link to={link.href} className="text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors">
-                    {link.label}
-                  </Link>
+                  {isExternalUrl(link.href) ? (
+                    <a
+                      href={link.href}
+                      className="text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link to={link.href} className="text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors">
+                      {link.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>

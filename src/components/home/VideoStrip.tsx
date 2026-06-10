@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Play, ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router";
 import { VideoLightbox } from "@/components/VideoLightbox";
 
 interface VideoStripProps {

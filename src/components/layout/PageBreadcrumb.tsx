@@ -1,4 +1,5 @@
-import { Link, useLocation } from "react-router-dom";
+import type { ReactNode } from "react";
+import { Link, useLocation } from "@/lib/router";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -7,14 +8,15 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { isBlogSubdomain, isExternalUrl, MAIN_SITE_URL } from "@/lib/blogUrls";
 
-interface BreadcrumbItem {
+interface BreadcrumbItemType {
   label: string;
   href?: string;
 }
 
 interface PageBreadcrumbProps {
-  items?: BreadcrumbItem[];
+  items?: BreadcrumbItemType[];
 }
 
 const routeLabels: Record<string, string> = {
@@ -23,6 +25,7 @@ const routeLabels: Record<string, string> = {
   collections: "Collections",
   collection: "Collection",
   faq: "FAQ",
+  FAQ: "Blog",
   blog: "Blog",
   contact: "Contact Us",
   "terms-conditions": "Terms & Conditions",
@@ -53,31 +56,58 @@ function formatSegment(segment: string): string {
   );
 }
 
+function BreadcrumbHref({
+  href,
+  children,
+  className,
+}: {
+  href: string;
+  children: ReactNode;
+  className?: string;
+}) {
+  if (isExternalUrl(href)) {
+    return (
+      <a href={href} className={className}>
+        {children}
+      </a>
+    );
+  }
+  return (
+    <Link to={href} className={className}>
+      {children}
+    </Link>
+  );
+}
+
 export function PageBreadcrumb({ items }: PageBreadcrumbProps) {
   const location = useLocation();
+  const onBlogHost = isBlogSubdomain();
 
-  const breadcrumbs: { label: string; href?: string }[] = [];
+  const breadcrumbs: BreadcrumbItemType[] = [];
 
   if (items) {
     breadcrumbs.push(...items);
-  } else {
-    // Routes that only exist with a child param — never link to them directly
-    const nonLinkableSegments = new Set(["product", "auth", "collections", "collection"]);
-
+  } else if (onBlogHost) {
     const segments = location.pathname.split("/").filter(Boolean);
+    if (segments.length === 2) {
+      breadcrumbs.push({ label: "Blog", href: "/" });
+      breadcrumbs.push({ label: formatSegment(segments[1]) });
+    }
+  } else {
+    const nonLinkableSegments = new Set(["product", "auth", "collections", "collection"]);
+    const segments = location.pathname.split("/").filter(Boolean);
+
     segments.forEach((segment, index) => {
       const href = "/" + segments.slice(0, index + 1).join("/");
       const isLast = index === segments.length - 1;
       const isNonLinkable = nonLinkableSegments.has(segment);
 
-      // Skip segments that are just dynamic IDs (e.g. Shopify GIDs, blog handles mid-path)
-      // For blog paths like /blog/blogHandle/articleHandle, skip the middle blogHandle segment
       if (
         segments[0] === "blog" &&
         segments.length === 3 &&
         index === 1
       ) {
-        return; // skip the blogHandle segment — it has no route
+        return;
       }
 
       breadcrumbs.push({
@@ -89,15 +119,20 @@ export function PageBreadcrumb({ items }: PageBreadcrumbProps) {
 
   if (breadcrumbs.length === 0) return null;
 
+  const homeHref = onBlogHost ? MAIN_SITE_URL : "/";
+
   return (
     <div className="container max-w-6xl pt-4 pb-2">
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
             <BreadcrumbLink asChild>
-              <Link to="/" className="text-muted-foreground hover:text-foreground">
+              <BreadcrumbHref
+                href={homeHref}
+                className="text-muted-foreground hover:text-foreground"
+              >
                 Home
-              </Link>
+              </BreadcrumbHref>
             </BreadcrumbLink>
           </BreadcrumbItem>
           {breadcrumbs.map((item, index) => (
@@ -106,9 +141,12 @@ export function PageBreadcrumb({ items }: PageBreadcrumbProps) {
               <BreadcrumbItem>
                 {item.href ? (
                   <BreadcrumbLink asChild>
-                    <Link to={item.href} className="text-muted-foreground hover:text-foreground">
+                    <BreadcrumbHref
+                      href={item.href}
+                      className="text-muted-foreground hover:text-foreground"
+                    >
                       {item.label}
-                    </Link>
+                    </BreadcrumbHref>
                   </BreadcrumbLink>
                 ) : (
                   <BreadcrumbPage>{item.label}</BreadcrumbPage>

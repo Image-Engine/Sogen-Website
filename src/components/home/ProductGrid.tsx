@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Package, ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router";
 import { fetchCollectionByHandle, ShopifyProduct } from "@/lib/shopify";
 import { ProductCard } from "@/components/products/ProductCard";
 import { ProductGridSkeleton } from "@/components/products/ProductGridSkeleton";

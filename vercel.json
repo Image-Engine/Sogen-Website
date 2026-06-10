@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    {
+      "source": "/blog",
+      "destination": "https://blog.sogenenergy.co.nz/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/:blogHandle/:articleHandle",
+      "destination": "https://blog.sogenenergy.co.nz/:blogHandle/:articleHandle",
+      "permanent": true
+    }
+  ]
+}

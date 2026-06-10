@@ -1,4 +1,5 @@
 import type { PKCEParams, ShopifyAuthTokens } from "@/types/shopifyCustomer";
+import { SUPABASE_URL } from "@/lib/env";
 
 const TOKEN_KEY = "shopify_customer_token";
 const REFRESH_KEY = "shopify_customer_refresh";
@@ -33,44 +34,55 @@ export function retrievePKCEParams(): PKCEParams | null {
   return JSON.parse(raw);
 }
 
+function safeLocalStorage(): Storage | null {
+  if (typeof window === "undefined") return null;
+  return window.localStorage;
+}
+
 export function storeTokens(tokens: ShopifyAuthTokens): void {
-  localStorage.setItem(TOKEN_KEY, tokens.access_token);
-  if (tokens.refresh_token) localStorage.setItem(REFRESH_KEY, tokens.refresh_token);
+  const storage = safeLocalStorage();
+  if (!storage) return;
+  storage.setItem(TOKEN_KEY, tokens.access_token);
+  if (tokens.refresh_token) storage.setItem(REFRESH_KEY, tokens.refresh_token);
   const expiresAt = Date.now() + tokens.expires_in * 1000;
-  localStorage.setItem(EXPIRY_KEY, expiresAt.toString());
+  storage.setItem(EXPIRY_KEY, expiresAt.toString());
 }
 
 export function getStoredToken(): string | null {
-  return localStorage.getItem(TOKEN_KEY);
+  return safeLocalStorage()?.getItem(TOKEN_KEY) ?? null;
 }
 
 export function getStoredRefreshToken(): string | null {
-  return localStorage.getItem(REFRESH_KEY);
+  return safeLocalStorage()?.getItem(REFRESH_KEY) ?? null;
 }
 
 export function clearTokens(): void {
-  localStorage.removeItem(TOKEN_KEY);
-  localStorage.removeItem(REFRESH_KEY);
-  localStorage.removeItem(EXPIRY_KEY);
+  const storage = safeLocalStorage();
+  if (!storage) return;
+  storage.removeItem(TOKEN_KEY);
+  storage.removeItem(REFRESH_KEY);
+  storage.removeItem(EXPIRY_KEY);
 }
 
 export function isTokenExpiringSoon(bufferMs = 60_000): boolean {
-  const expiry = localStorage.getItem(EXPIRY_KEY);
+  const expiry = safeLocalStorage()?.getItem(EXPIRY_KEY);
   if (!expiry) return true;
   return Date.now() + bufferMs > parseInt(expiry, 10);
 }
 
 export function getRedirectUri(): string {
   // Use current origin for the redirect URI - must match exactly what's configured in Shopify Headless settings
-  const origin = window.location.origin;
+  const origin =
+    typeof window !== "undefined"
+      ? window.location.origin
+      : process.env.NEXT_PUBLIC_SITE_URL ?? "https://sogenenergy.co.nz";
   const uri = `${origin}/auth/callback`;
   console.log("[ShopifyOAuth] redirect_uri:", uri);
   return uri;
 }
 
 export async function callEdgeFunction(functionName: string, body: Record<string, unknown>): Promise<any> {
-  const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-  const res = await fetch(`${supabaseUrl}/functions/v1/${functionName}`, {
+  const res = await fetch(`${SUPABASE_URL}/functions/v1/${functionName}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),

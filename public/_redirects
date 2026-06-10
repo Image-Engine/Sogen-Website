@@ -1,0 +1,2 @@
+/blog      https://blog.sogenenergy.co.nz/     301
+/blog/*    https://blog.sogenenergy.co.nz/:splat  301

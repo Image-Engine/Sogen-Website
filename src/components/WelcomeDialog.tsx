@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import sogenLogo from "@/assets/sogen-energy-logo.png";
+import { imageSrc } from "@/lib/imageSrc";
 
 const STORAGE_KEY = "sogen-welcome-dismissed";
 
@@ -34,7 +35,7 @@ export function WelcomeDialog() {
       <DialogContent className="w-[calc(100%-2rem)] max-w-md sm:max-w-lg p-0 overflow-hidden">
         <div className="bg-primary px-6 py-6 sm:px-8 sm:py-8 flex items-center justify-center">
           <img
-            src={sogenLogo}
+            src={imageSrc(sogenLogo)}
             alt="Sogen Energy"
             className="h-8 sm:h-10 w-auto"
           />

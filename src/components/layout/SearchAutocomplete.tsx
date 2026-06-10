@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@/lib/router";
 import { Search, Loader2, X } from "lucide-react";
 import { searchProductsQuick, QuickSearchProduct } from "@/lib/shopify";
 import { cn } from "@/lib/utils";

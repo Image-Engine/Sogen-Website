@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect, type ReactNode } from "react";
+import { Link } from "@/lib/router";
 import { Loader2 } from "lucide-react";
 import { Search, User, Menu, X, ChevronDown, LogOut, Package, MapPin, UserCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -12,15 +12,42 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import sokLogo from "@/assets/sogen-energy-logo.png";
+import { imageSrc } from "@/lib/imageSrc";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 import { fetchCollections, ShopifyCollection } from "@/lib/shopify";
 import { useShopifyCustomer } from "@/contexts/ShopifyCustomerContext";
+import { blogIndexUrl, isBlogSubdomain, isExternalUrl, MAIN_SITE_URL } from "@/lib/blogUrls";
 
 const resourceItems = [
   { label: "Video Reviews", href: "/video-reviews" },
-  { label: "Blog", href: "/blog" },
+  { label: "Blog", href: blogIndexUrl() },
   { label: "FAQ", href: "/faq" },
 ];
+
+function NavHref({
+  href,
+  className,
+  children,
+  onClick,
+}: {
+  href: string;
+  className?: string;
+  children: ReactNode;
+  onClick?: () => void;
+}) {
+  if (isExternalUrl(href)) {
+    return (
+      <a href={href} className={className} onClick={onClick}>
+        {children}
+      </a>
+    );
+  }
+  return (
+    <Link to={href} className={className} onClick={onClick}>
+      {children}
+    </Link>
+  );
+}
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -29,6 +56,10 @@ export function Header() {
   const [collectionsOpen, setCollectionsOpen] = useState(false);
   const [signingIn, setSigningIn] = useState(false);
   const { isAuthenticated, customer, initiateLogin, logout } = useShopifyCustomer();
+  const onBlogHost = isBlogSubdomain();
+  const visibleResourceItems = onBlogHost
+    ? resourceItems.filter((item) => item.label !== "Blog")
+    : resourceItems;
 
   useEffect(() => {
     const loadCollections = async () => {
@@ -47,9 +78,12 @@ export function Header() {
       <div className="container">
         <div className="flex h-16 items-center justify-between gap-4 lg:h-18">
           {/* Logo */}
-          <Link to="/" className="flex items-center shrink-0">
+          <NavHref
+            href={onBlogHost ? MAIN_SITE_URL : "/"}
+            className="flex items-center shrink-0"
+          >
             <img
-              src={sokLogo}
+              src={imageSrc(sokLogo)}
               alt="Sogen Energy"
               className="h-8 lg:h-10 w-auto"
               width="200"
@@ -57,10 +91,25 @@ export function Header() {
               decoding="async"
               fetchPriority="high"
             />
-          </Link>
+          </NavHref>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-1">
+            {onBlogHost ? (
+              <>
+                <NavHref href={`${MAIN_SITE_URL}/faq`}>
+                  <Button variant="nav" size="default">
+                    FAQ
+                  </Button>
+                </NavHref>
+                <NavHref href={MAIN_SITE_URL}>
+                  <Button variant="nav" size="default">
+                    Visit Store
+                  </Button>
+                </NavHref>
+              </>
+            ) : (
+              <>
             {/* All Products Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -114,15 +163,17 @@ export function Header() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start" className="w-48">
-                {resourceItems.map((item) => (
+                {visibleResourceItems.map((item) => (
                   <DropdownMenuItem key={item.label} asChild>
-                    <Link to={item.href} className="cursor-pointer">
+                    <NavHref href={item.href} className="cursor-pointer">
                       {item.label}
-                    </Link>
+                    </NavHref>
                   </DropdownMenuItem>
                 ))}
               </DropdownMenuContent>
             </DropdownMenu>
+              </>
+            )}
           </nav>
 
           {/* Right side actions */}
@@ -149,7 +200,7 @@ export function Header() {
             </div>
 
             {/* Account */}
-            {isAuthenticated ? (
+            {!onBlogHost && isAuthenticated ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" size="icon" className="hidden sm:flex">
@@ -169,7 +220,7 @@ export function Header() {
                   <DropdownMenuItem onClick={logout}><LogOut className="h-4 w-4 mr-2" />Sign Out</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-            ) : (
+            ) : !onBlogHost ? (
               <Button
                 variant="ghost"
                 size="icon"
@@ -182,10 +233,10 @@ export function Header() {
               >
                 {signingIn ? <Loader2 className="h-5 w-5 animate-spin" /> : <User className="h-5 w-5" />}
               </Button>
-            )}
+            ) : null}
 
             {/* Cart */}
-            <CartDrawer />
+            {!onBlogHost && <CartDrawer />}
 
             {/* Mobile menu toggle */}
             <Button
@@ -207,6 +258,25 @@ export function Header() {
         {mobileMenuOpen && (
           <nav className="lg:hidden py-4 border-t border-border animate-fade-in">
             <div className="flex flex-col gap-1">
+              {onBlogHost ? (
+                <>
+                  <NavHref
+                    href={`${MAIN_SITE_URL}/faq`}
+                    className="flex items-center justify-between px-4 py-3 text-foreground hover:bg-accent rounded-lg transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <span className="font-medium">FAQ</span>
+                  </NavHref>
+                  <NavHref
+                    href={MAIN_SITE_URL}
+                    className="flex items-center justify-between px-4 py-3 text-foreground hover:bg-accent rounded-lg transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <span className="font-medium">Visit Store</span>
+                  </NavHref>
+                </>
+              ) : (
+                <>
               {/* Mobile Search */}
               <div className="px-2 pb-4">
                 <SearchAutocomplete
@@ -274,17 +344,19 @@ export function Header() {
                 <span className="px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                   Resources
                 </span>
-                {resourceItems.map((item) => (
-                  <Link
+                {visibleResourceItems.map((item) => (
+                  <NavHref
                     key={item.label}
-                    to={item.href}
+                    href={item.href}
                     className="flex items-center px-4 py-3 text-foreground hover:bg-accent rounded-lg transition-colors"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     <span className="font-medium">{item.label}</span>
-                  </Link>
+                  </NavHref>
                 ))}
               </div>
+                </>
+              )}
             </div>
           </nav>
         )}

@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router";
 import victronTile from "@/assets/victron-tile.jpg";
+import { imageSrc } from "@/lib/imageSrc";
 const categories = [{
   title: "Solar Systems",
   description: "Grid-tied & off-grid solutions",
   image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80",
-  link: "/home-backup"
+  link: "/solar-systems"
 }, {
   title: "Home Backup",
   description: "Reliable power storage",
@@ -20,7 +21,7 @@ const categories = [{
   title: "Industrial",
   description: "Heavy-duty applications",
   image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80",
-  link: "/home-backup"
+  link: "/industrial"
 }, {
   title: "Victron",
   description: "Professional power electronics",
@@ -59,7 +60,7 @@ export function Categories() {
               className="relative overflow-hidden rounded-xl aspect-[4/5] cursor-pointer group"
             >
               <img
-                src={category.image}
+                src={imageSrc(category.image)}
                 alt={category.title}
                 loading="lazy"
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -92,7 +93,7 @@ export function Categories() {
             >
               {/* Background Image */}
               <img
-                src={category.image}
+                src={imageSrc(category.image)}
                 alt={category.title}
                 loading="lazy"
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"

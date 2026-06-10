@@ -100,7 +100,16 @@ export const useCartStore = create<CartStore>()(
     }),
     {
       name: 'shopify-cart',
-      storage: createJSONStorage(() => localStorage),
+      storage: createJSONStorage(() => {
+        if (typeof window === "undefined") {
+          return {
+            getItem: () => null,
+            setItem: () => undefined,
+            removeItem: () => undefined,
+          };
+        }
+        return localStorage;
+      }),
     }
   )
 );

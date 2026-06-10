@@ -5,7 +5,7 @@ const SHOPIFY_API_VERSION = '2025-07';
 const SHOPIFY_STORE_PERMANENT_DOMAIN = 'sokbattery-frontline-shine-zq4jf.myshopify.com';
 const SHOPIFY_STOREFRONT_URL = `https://${SHOPIFY_STORE_PERMANENT_DOMAIN}/api/${SHOPIFY_API_VERSION}/graphql.json`;
 
-// Products & Checkout (Lovable Integration)
+// Products & Checkout (Storefront API)
 const SHOPIFY_STOREFRONT_TOKEN = '256f91dfddaeb67d0754c2f244378c30';
 
 // Blog Content (Blog Reader App - has unauthenticated_read_content scope)

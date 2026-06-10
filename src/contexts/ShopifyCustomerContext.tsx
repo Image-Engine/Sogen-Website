@@ -42,8 +42,8 @@ export function useShopifyCustomer() {
 
 export function ShopifyCustomerProvider({ children }: { children: React.ReactNode }) {
   const [customer, setCustomer] = useState<ShopifyCustomer | null>(null);
-  const [accessToken, setAccessToken] = useState<string | null>(getStoredToken());
-  const [isLoading, setIsLoading] = useState(!!getStoredToken());
+  const [accessToken, setAccessToken] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
   const refreshTimer = useRef<ReturnType<typeof setInterval>>();
 
   const getToken = useCallback(() => {
@@ -80,11 +80,19 @@ export function ShopifyCustomerProvider({ children }: { children: React.ReactNod
 
   // Auto-load customer on mount if token exists
   useEffect(() => {
-    if (!accessToken) { setIsLoading(false); return; }
+    const token = getStoredToken();
+    setAccessToken(token);
+    if (!token) {
+      setIsLoading(false);
+      return;
+    }
     (async () => {
       if (isTokenExpiringSoon()) {
         const ok = await refreshAccessToken();
-        if (!ok) { setIsLoading(false); return; }
+        if (!ok) {
+          setIsLoading(false);
+          return;
+        }
       }
       await fetchCustomer();
       setIsLoading(false);

@@ -1,0 +1,35 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`link inventory > matches link inventory snapshot 1`] = `
+[
+  "/accessories",
+  "/account",
+  "/account/addresses",
+  "/account/login",
+  "/account/orders",
+  "/account/profile",
+  "/collection/48v-bundles",
+  "/collection/48v-lithium-batteries",
+  "/collections/energy-hub",
+  "/contact",
+  "/energy-hub-2",
+  "/faq",
+  "/home-backup",
+  "/industrial",
+  "/privacy-policy",
+  "/products",
+  "/rv-campers",
+  "/shipping-returns",
+  "/solar-systems",
+  "/terms-conditions",
+  "/victron",
+]
+`;
+
+exports[`link inventory > matches link inventory snapshot 2`] = `
+[
+  "/collection/48v-bundles",
+  "/collection/48v-lithium-batteries",
+  "/collections/energy-hub",
+]
+`;
