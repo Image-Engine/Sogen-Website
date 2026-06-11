@@ -1,6 +1,4 @@
 import { Link } from "@/lib/router";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
 import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
 import { SEOHead } from "@/components/SEOHead";
 import {
@@ -214,7 +212,6 @@ export default function FAQ() {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <SEOHead title="FAQ" description="Frequently asked questions about SOK Battery LiFePO4 lithium batteries, solar solutions, shipping, warranty, and more." />
-      <Header />
       <PageBreadcrumb />
       
       <main className="flex-1">
@@ -305,7 +302,6 @@ export default function FAQ() {
         </section>
       </main>
 
-      <Footer />
     </div>
   );
 }

@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "@/lib/router";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
 import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
 import { useShopifyCustomer } from "@/contexts/ShopifyCustomerContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -24,7 +22,6 @@ export default function OrderDetail() {
   if (loading) {
     return (
       <div className="min-h-screen bg-background">
-        <Header />
         <main className="container py-12 flex justify-center"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" /></main>
       </div>
     );
@@ -33,7 +30,6 @@ export default function OrderDetail() {
   if (!order) {
     return (
       <div className="min-h-screen bg-background">
-        <Header />
         <main className="container py-12 text-center">
           <p className="text-muted-foreground">Order not found.</p>
           <Link to="/account/orders"><Button variant="link">Back to orders</Button></Link>
@@ -44,7 +40,6 @@ export default function OrderDetail() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
       <PageBreadcrumb items={[
         { label: "My Account", href: "/account" },
         { label: "Orders", href: "/account/orders" },
@@ -114,7 +109,6 @@ export default function OrderDetail() {
           </div>
         )}
       </main>
-      <Footer />
     </div>
   );
 }

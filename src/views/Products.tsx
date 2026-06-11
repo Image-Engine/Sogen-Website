@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "@/lib/router";
 import { Search, Package, Filter } from "lucide-react";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
 import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
 import { SEOHead } from "@/components/SEOHead";
 import { ProductCard } from "@/components/products/ProductCard";
@@ -129,7 +127,6 @@ export default function Products() {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <SEOHead title="All Products" description="Browse our full range of LiFePO4 lithium batteries, solar panels, inverters, and accessories. Premium energy solutions for RV, marine, off-grid, and industrial use in New Zealand." />
-      <Header />
       <PageBreadcrumb />
       
       <main className="flex-1">
@@ -260,7 +257,6 @@ export default function Products() {
         </section>
       </main>
 
-      <Footer />
     </div>
   );
 }

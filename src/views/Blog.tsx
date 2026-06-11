@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import { Link } from "@/lib/router";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
 import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
 import { SEOHead } from "@/components/SEOHead";
 import { fetchBlogArticles, ShopifyArticle } from "@/lib/shopify";
@@ -40,7 +38,6 @@ export default function Blog() {
         canonical={blogIndexUrl()}
         ogType="website"
       />
-      <Header />
       <PageBreadcrumb />
       {/* Hero Section */}
       <section className="py-16 md:py-24 border-b border-border">
@@ -132,7 +129,6 @@ export default function Blog() {
         </div>
       </section>
 
-      <Footer />
     </div>
   );
 }

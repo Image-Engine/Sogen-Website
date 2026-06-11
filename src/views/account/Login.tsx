@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { Navigate } from "@/lib/router";
 import { useShopifyCustomer } from "@/contexts/ShopifyCustomerContext";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { LogIn } from "lucide-react";
 
@@ -17,7 +15,7 @@ export default function Login() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="flex-1 flex items-center justify-center py-20">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto" />
       </div>
     );
@@ -35,7 +33,7 @@ export default function Login() {
 
   if (isRedirecting) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="flex-1 flex items-center justify-center py-20">
         <div className="text-center space-y-4">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto" />
           <p className="text-muted-foreground">Redirecting to login...</p>
@@ -45,9 +43,7 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      <main className="container py-20 max-w-md text-center">
+      <main className="container py-20 max-w-md mx-auto text-center flex-1">
         <LogIn className="h-12 w-12 text-primary mx-auto mb-4" />
         <h1 className="text-2xl font-bold mb-2">Sign in to your account</h1>
         <p className="text-muted-foreground mb-8">
@@ -57,7 +53,5 @@ export default function Login() {
           Sign In
         </Button>
       </main>
-      <Footer />
-    </div>
   );
 }

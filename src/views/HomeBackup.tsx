@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
 import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
 import { SEOHead } from "@/components/SEOHead";
 import { Link } from "@/lib/router";
@@ -97,7 +95,6 @@ const HomeBackup = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <SEOHead title="Home Backup" description="Home backup battery systems from SOK Battery NZ. Reliable LiFePO4 energy storage for power outages and off-grid homes." />
-      <Header />
       <PageBreadcrumb />
       <main className="flex-1">
         {/* Hero */}
@@ -409,7 +406,6 @@ const HomeBackup = () => {
           </div>
         </section>
       </main>
-      <Footer />
     </div>
   );
 };

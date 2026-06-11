@@ -1,5 +1,3 @@
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
 import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
 import { SEOHead } from "@/components/SEOHead";
 import { Link } from "@/lib/router";
@@ -100,7 +98,6 @@ const EnergyHub2 = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <SEOHead title="Energy Hub" description="SOK Energy Hub — all-in-one solar power system for homes, RVs, and off-grid living. Features built-in inverter, MPPT, and LiFePO4 battery." />
-      <Header />
       <PageBreadcrumb />
       <main className="flex-1">
         {/* Hero Section */}
@@ -400,7 +397,6 @@ const EnergyHub2 = () => {
           </div>
         </section>
       </main>
-      <Footer />
     </div>
   );
 };

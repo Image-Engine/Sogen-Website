@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 interface RecentProduct {
   id: string;
@@ -12,25 +12,24 @@ interface RecentProduct {
 const STORAGE_KEY = "recently-viewed-products";
 const MAX_ITEMS = 8;
 
-export function useRecentlyViewed() {
-  const [recentlyViewed, setRecentlyViewed] = useState<RecentProduct[]>([]);
-
-  useEffect(() => {
+function readStoredProducts(): RecentProduct[] {
+  if (typeof window === "undefined") return [];
+  try {
     const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) {
-      try {
-        setRecentlyViewed(JSON.parse(stored));
-      } catch {
-        setRecentlyViewed([]);
-      }
-    }
-  }, []);
+    return stored ? JSON.parse(stored) : [];
+  } catch {
+    return [];
+  }
+}
+
+export function useRecentlyViewed() {
+  const [recentlyViewed, setRecentlyViewed] = useState<RecentProduct[]>(
+    readStoredProducts,
+  );
 
   const addProduct = (product: RecentProduct) => {
     setRecentlyViewed((prev) => {
-      // Remove existing entry if present
       const filtered = prev.filter((p) => p.id !== product.id);
-      // Add to beginning
       const updated = [product, ...filtered].slice(0, MAX_ITEMS);
       localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
       return updated;

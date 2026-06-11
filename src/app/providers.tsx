@@ -9,10 +9,21 @@ import { ScrollToTop } from "@/components/ScrollToTop";
 import { ShopifyCustomerProvider } from "@/contexts/ShopifyCustomerContext";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { WelcomeDialog } from "@/components/WelcomeDialog";
+import { SiteChrome } from "@/components/layout/SiteChrome";
 import { useState, type ReactNode } from "react";
 
 export function Providers({ children }: { children: ReactNode }) {
-  const [queryClient] = useState(() => new QueryClient());
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            refetchOnWindowFocus: false,
+            retry: 1,
+          },
+        },
+      }),
+  );
 
   return (
     <HelmetProvider>
@@ -22,10 +33,12 @@ export function Providers({ children }: { children: ReactNode }) {
           <Sonner />
           <ScrollToTop />
           <ShopifyCustomerProvider>
-            <ErrorBoundary>
-              <WelcomeDialog />
-              {children}
-            </ErrorBoundary>
+            <SiteChrome>
+              <ErrorBoundary>
+                <WelcomeDialog />
+                {children}
+              </ErrorBoundary>
+            </SiteChrome>
           </ShopifyCustomerProvider>
         </TooltipProvider>
       </QueryClientProvider>

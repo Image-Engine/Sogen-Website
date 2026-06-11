@@ -1,5 +1,3 @@
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
 import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
 import { SEOHead } from "@/components/SEOHead";
 import { Shield, Clock, Battery, Wrench, AlertTriangle, FileDown, User, Scale, Truck, Zap, Tag, Gauge, Settings } from "lucide-react";
@@ -10,7 +8,6 @@ export default function Warranty() {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <SEOHead title="Warranty" description="Sogen Energy warranty information. Coverage for SOK LiFePO4 batteries, Energy Hub systems, Victron equipment and more." />
-      <Header />
       <PageBreadcrumb />
 
       <main className="flex-1">
@@ -306,7 +303,6 @@ export default function Warranty() {
         </section>
       </main>
 
-      <Footer />
     </div>
   );
 }

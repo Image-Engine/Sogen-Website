@@ -1,6 +1,4 @@
 import { useEffect, useState, useRef } from "react";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
 import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
 import { SEOHead } from "@/components/SEOHead";
 import { Link } from "@/lib/router";
@@ -170,7 +168,6 @@ const Industrial = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <SEOHead title="Industrial & Commercial" description="Industrial-grade LiFePO4 batteries for commercial and industrial applications. High-capacity energy storage from SOK Battery NZ." />
-      <Header />
       <PageBreadcrumb />
       <main className="flex-1">
         {/* Hero Section */}
@@ -307,7 +304,6 @@ const Industrial = () => {
           </div>
         </section>
       </main>
-      <Footer />
     </div>
   );
 };

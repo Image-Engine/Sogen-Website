@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "@/lib/router";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
 import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
 import { SEOHead } from "@/components/SEOHead";
 import { fetchArticleByHandle, ShopifyArticle } from "@/lib/shopify";
@@ -37,7 +35,6 @@ export default function BlogArticle() {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-background">
-        <Header />
         <article className="py-16 md:py-24">
           <div className="container max-w-3xl">
             <Skeleton className="h-8 w-32 mb-8" />
@@ -51,7 +48,6 @@ export default function BlogArticle() {
             </div>
           </div>
         </article>
-        <Footer />
       </div>
     );
   }
@@ -59,7 +55,6 @@ export default function BlogArticle() {
   if (!article) {
     return (
       <div className="min-h-screen bg-background">
-        <Header />
         <div className="py-24 text-center">
           <div className="container">
             <h1 className="text-2xl font-bold mb-4">Article not found</h1>
@@ -72,7 +67,6 @@ export default function BlogArticle() {
             </Link>
           </div>
         </div>
-        <Footer />
       </div>
     );
   }
@@ -86,7 +80,6 @@ export default function BlogArticle() {
         ogImage={article.image?.url}
         ogType="article"
       />
-      <Header />
       <PageBreadcrumb items={[
         { label: "Blog", href: "/" },
         { label: article.title }
@@ -161,7 +154,6 @@ export default function BlogArticle() {
         </div>
       </article>
 
-      <Footer />
     </div>
   );
 }

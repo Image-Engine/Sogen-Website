@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
 import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
 import { useShopifyCustomer } from "@/contexts/ShopifyCustomerContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -27,7 +25,6 @@ export default function Profile() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
       <PageBreadcrumb />
       <main className="container py-12 max-w-lg">
         <h1 className="text-3xl font-bold mb-8">Profile</h1>
@@ -55,7 +52,6 @@ export default function Profile() {
           </CardContent>
         </Card>
       </main>
-      <Footer />
     </div>
   );
 }

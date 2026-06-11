@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
 import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
 import { useShopifyCustomer } from "@/contexts/ShopifyCustomerContext";
 import { Card, CardContent } from "@/components/ui/card";
@@ -58,7 +56,6 @@ export default function Addresses() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
       <PageBreadcrumb />
       <main className="container py-12 max-w-4xl">
         <div className="flex items-center justify-between mb-8">
@@ -121,7 +118,6 @@ export default function Addresses() {
           </DialogContent>
         </Dialog>
       </main>
-      <Footer />
     </div>
   );
 }

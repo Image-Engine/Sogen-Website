@@ -1,5 +1,3 @@
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
 import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
 import { SEOHead } from "@/components/SEOHead";
 import { Package, Truck, MapPin, RotateCcw, AlertCircle, CreditCard, Clock } from "lucide-react";
@@ -8,7 +6,6 @@ export default function ShippingReturns() {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <SEOHead title="Shipping & Returns" description="Shipping rates, delivery times, and return policy for SOK Battery NZ. Free shipping on select orders across New Zealand." />
-      <Header />
       <PageBreadcrumb />
       
       <main className="flex-1">
@@ -191,7 +188,6 @@ export default function ShippingReturns() {
         </section>
       </main>
 
-      <Footer />
     </div>
   );
 }

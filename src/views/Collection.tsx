@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "@/lib/router";
 import { Search, Package, Filter, ArrowLeft } from "lucide-react";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
 import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
 import { SEOHead } from "@/components/SEOHead";
 import { ProductCard } from "@/components/products/ProductCard";
@@ -119,7 +117,6 @@ export default function Collection() {
         noIndex={!loading && !collection}
       />
 
-      <Header />
       <PageBreadcrumb />
       
       <main className="flex-1">
@@ -264,7 +261,6 @@ export default function Collection() {
         </section>
       </main>
 
-      <Footer />
     </div>
   );
 }

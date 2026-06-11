@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "@/lib/router";
 import { ArrowLeft, ShoppingCart, Package, Minus, Plus, FolderOpen, Zap, Truck, Loader2 } from "lucide-react";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
 import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
 import { SEOHead } from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
-import { fetchProductByHandle, ProductDetails, createStorefrontCheckout } from "@/lib/shopify";
+import { createStorefrontCheckout } from "@/lib/shopify";
+import { useProduct } from "@/hooks/useProduct";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -22,8 +21,7 @@ import { useRecentlyViewed } from "@/hooks/useRecentlyViewed";
 
 export default function Product() {
   const { handle } = useParams<{ handle: string }>();
-  const [product, setProduct] = useState<ProductDetails | null>(null);
-  const [loading, setLoading] = useState(true);
+  const { data: product, isPending } = useProduct(handle);
   const [selectedVariant, setSelectedVariant] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [buyNowLoading, setBuyNowLoading] = useState(false);
@@ -32,14 +30,8 @@ export default function Product() {
   const { recentlyViewed, addProduct } = useRecentlyViewed();
 
   useEffect(() => {
-    async function loadProduct() {
-      if (!handle) return;
-      setLoading(true);
-      const data = await fetchProductByHandle(handle);
-      setProduct(data);
-      setLoading(false);
-    }
-    loadProduct();
+    setSelectedVariant(0);
+    setQuantity(1);
   }, [handle]);
 
   // Add to recently viewed when product loads
@@ -136,12 +128,15 @@ export default function Product() {
     }
   };
 
-  if (loading) {
+  if (isPending) {
     return (
-      <div className="min-h-screen bg-background">
-        <Header />
-        <main className="pt-24 md:pt-28">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+      <>
+        <PageBreadcrumb items={[
+          { label: "Products", href: "/products" },
+          { label: "Loading..." },
+        ]} />
+        <main className="pt-4 md:pt-6">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
               <Skeleton className="aspect-square rounded-2xl" />
               <div className="space-y-4">
@@ -155,17 +150,19 @@ export default function Product() {
             </div>
           </div>
         </main>
-        <Footer />
-      </div>
+      </>
     );
   }
 
   if (!product) {
     return (
-      <div className="min-h-screen bg-background">
+      <>
         <SEOHead title="Product Not Found" description="The product you're looking for doesn't exist." noIndex />
-        <Header />
-        <main className="pt-24 md:pt-28">
+        <PageBreadcrumb items={[
+          { label: "Products", href: "/products" },
+          { label: "Not found" },
+        ]} />
+        <main className="pt-4 md:pt-6">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 text-center">
             <Package className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
             <h1 className="text-2xl font-bold text-foreground mb-2">Product not found</h1>
@@ -178,8 +175,7 @@ export default function Product() {
             </Link>
           </div>
         </main>
-        <Footer />
-      </div>
+      </>
     );
   }
 
@@ -217,7 +213,7 @@ export default function Product() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <>
       <SEOHead
         title={product.title}
         description={seoDescription}
@@ -227,7 +223,6 @@ export default function Product() {
         jsonLd={productJsonLd}
       />
 
-      <Header />
       <PageBreadcrumb items={[
         { label: "Products", href: "/products" },
         { label: product.title }
@@ -236,7 +231,7 @@ export default function Product() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-6">
           {/* Collections Navigation */}
           {product.collections.length > 0 && (
-            <div className="mb-6 pb-6 border-b border-border animate-fade-in">
+            <div className="mb-6 pb-6 border-b border-border">
               <div className="flex items-center gap-2 mb-3">
                 <FolderOpen className="w-4 h-4 text-muted-foreground" />
                 <span className="text-sm font-medium text-muted-foreground">Browse Collections</span>
@@ -256,7 +251,7 @@ export default function Product() {
           )}
 
           {/* Breadcrumb */}
-          <nav className="mb-6 animate-fade-in">
+          <nav className="mb-6">
             <Link 
               to="/products" 
               className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors"
@@ -268,7 +263,7 @@ export default function Product() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 xl:gap-16">
             {/* Product Images */}
-            <div className="animate-fade-in" style={{ animationDelay: '0.1s' }}>
+            <div>
               <ProductImageGallery 
                 images={product.images} 
                 productTitle={product.title} 
@@ -276,7 +271,7 @@ export default function Product() {
             </div>
 
             {/* Product Info */}
-            <div className="space-y-6 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+            <div className="space-y-6">
               {/* Badges */}
               <ProductBadges 
                 availableForSale={currentVariant?.availableForSale ?? false}
@@ -436,7 +431,6 @@ export default function Product() {
         {/* Recently Viewed */}
         <RecentlyViewed products={recentlyViewed} currentHandle={product.handle} />
       </main>
-      <Footer />
-    </div>
+    </>
   );
 }

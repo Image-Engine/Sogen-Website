@@ -1,5 +1,3 @@
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
 import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
 import { SEOHead } from "@/components/SEOHead";
 import { FileText, FileSignature, ClipboardList, DollarSign, AlertOctagon, Scale, Package, ShieldAlert, Wrench, UserCheck, ShieldCheck, AlertTriangle, HeartPulse, Lock, CloudLightning, BookOpen, Ban, Edit3, Users, Gavel } from "lucide-react";
@@ -285,7 +283,6 @@ export default function TermsConditions() {
         title="Terms & Conditions"
         description="Sogen Energy Ltd Terms and Conditions governing the supply of Materials and services, including payment, warranty, liability and delivery."
       />
-      <Header />
       <PageBreadcrumb />
 
       <main className="flex-1">
@@ -337,7 +334,6 @@ export default function TermsConditions() {
         </section>
       </main>
 
-      <Footer />
     </div>
   );
 }

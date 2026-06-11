@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
 import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
 import { SEOHead } from "@/components/SEOHead";
 import { Link } from "@/lib/router";
@@ -157,7 +155,6 @@ const SolarSystems = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <SEOHead title="Solar Systems" description="Complete solar power systems and accessories. Solar panels, MPPT controllers, and off-grid solutions from SOK Battery NZ." />
-      <Header />
       <PageBreadcrumb />
       <main className="flex-1">
         {/* Hero Section */}
@@ -291,7 +288,6 @@ const SolarSystems = () => {
           </div>
         </section>
       </main>
-      <Footer />
     </div>
   );
 };

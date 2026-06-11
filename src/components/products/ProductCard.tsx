@@ -1,9 +1,11 @@
 import { useState, forwardRef } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import { Link } from "@/lib/router";
 import { ShoppingCart, Package, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
+import { prefetchProduct } from "@/hooks/useProduct";
 import { toast } from "sonner";
 
 interface ProductCardProps {
@@ -11,6 +13,7 @@ interface ProductCardProps {
 }
 
 export const ProductCard = forwardRef<HTMLAnchorElement, ProductCardProps>(function ProductCard({ product }, ref) {
+  const queryClient = useQueryClient();
   const addItem = useCartStore((state) => state.addItem);
   const node = product.node;
   const images = node.images.edges;
@@ -50,10 +53,16 @@ export const ProductCard = forwardRef<HTMLAnchorElement, ProductCardProps>(funct
   const primaryImage = images[0]?.node.url;
   const hoverImage = images[1]?.node.url || primaryImage;
 
+  const prefetch = () => {
+    void prefetchProduct(queryClient, node.handle);
+  };
+
   return (
     <Link 
       ref={ref}
       to={`/product/${node.handle}`}
+      onMouseEnter={prefetch}
+      onFocus={prefetch}
       className="group relative flex flex-col rounded-2xl bg-card border border-border overflow-hidden hover:shadow-xl hover:-translate-y-1 hover:border-primary/20 active:scale-[0.98] transition-all duration-300"
     >
       {/* Product Image with Hover Switch */}

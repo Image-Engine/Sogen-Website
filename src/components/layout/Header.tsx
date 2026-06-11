@@ -1,4 +1,4 @@
-import { useState, useEffect, type ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { Link } from "@/lib/router";
 import { Loader2 } from "lucide-react";
 import { Search, User, Menu, X, ChevronDown, LogOut, Package, MapPin, UserCircle } from "lucide-react";
@@ -14,7 +14,7 @@ import {
 import sokLogo from "@/assets/sogen-energy-logo.png";
 import { imageSrc } from "@/lib/imageSrc";
 import { CartDrawer } from "@/components/cart/CartDrawer";
-import { fetchCollections, ShopifyCollection } from "@/lib/shopify";
+import { useCollections } from "@/hooks/useCollections";
 import { useShopifyCustomer } from "@/contexts/ShopifyCustomerContext";
 import { blogIndexUrl, isBlogSubdomain, isExternalUrl, MAIN_SITE_URL } from "@/lib/blogUrls";
 
@@ -52,22 +52,14 @@ function NavHref({
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
-  const [collections, setCollections] = useState<ShopifyCollection[]>([]);
   const [collectionsOpen, setCollectionsOpen] = useState(false);
   const [signingIn, setSigningIn] = useState(false);
+  const { data: collections = [] } = useCollections();
   const { isAuthenticated, customer, initiateLogin, logout } = useShopifyCustomer();
   const onBlogHost = isBlogSubdomain();
   const visibleResourceItems = onBlogHost
     ? resourceItems.filter((item) => item.label !== "Blog")
     : resourceItems;
-
-  useEffect(() => {
-    const loadCollections = async () => {
-      const data = await fetchCollections();
-      setCollections(data);
-    };
-    loadCollections();
-  }, []);
 
   return (
     <header className="sticky top-0 z-50 w-full glass border-b border-border/50">
