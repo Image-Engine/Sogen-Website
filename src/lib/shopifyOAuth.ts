@@ -1,5 +1,4 @@
 import type { PKCEParams, ShopifyAuthTokens } from "@/types/shopifyCustomer";
-import { SUPABASE_URL } from "@/lib/env";
 
 const TOKEN_KEY = "shopify_customer_token";
 const REFRESH_KEY = "shopify_customer_refresh";
@@ -81,17 +80,22 @@ export function getRedirectUri(): string {
   return uri;
 }
 
-export async function callEdgeFunction(functionName: string, body: Record<string, unknown>): Promise<any> {
-  const res = await fetch(`${SUPABASE_URL}/functions/v1/${functionName}`, {
+export async function callEdgeFunction(
+  _functionName: string,
+  body: Record<string, unknown>,
+): Promise<any> {
+  const res = await fetch("/api/shopify-oauth", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
   });
+  const data = await res.json().catch(() => ({ error: res.statusText }));
   if (!res.ok) {
-    const err = await res.json().catch(() => ({ error: res.statusText }));
-    throw new Error(err.error || res.statusText);
+    throw new Error(
+      (data as { error?: string }).error || res.statusText,
+    );
   }
-  return res.json();
+  return data;
 }
 
 export async function buildAuthorizationUrl(): Promise<string> {

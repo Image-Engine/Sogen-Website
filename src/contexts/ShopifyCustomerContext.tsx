@@ -29,7 +29,7 @@ interface ShopifyCustomerContextValue {
   updateAddress: (addressId: string, address: Partial<ShopifyAddress>) => Promise<ShopifyAddress | null>;
   deleteAddress: (addressId: string) => Promise<boolean>;
   setDefaultAddress: (addressId: string) => Promise<boolean>;
-  updateCustomer: (data: { firstName?: string; lastName?: string; phone?: string }) => Promise<boolean>;
+  updateCustomer: (data: { firstName?: string; lastName?: string }) => Promise<boolean>;
 }
 
 const ShopifyCustomerContext = createContext<ShopifyCustomerContextValue | null>(null);
@@ -181,7 +181,7 @@ export function ShopifyCustomerProvider({ children }: { children: React.ReactNod
     return !!res.success;
   }, [getToken]);
 
-  const updateCustomerFn = useCallback(async (data: { firstName?: string; lastName?: string; phone?: string }) => {
+  const updateCustomerFn = useCallback(async (data: { firstName?: string; lastName?: string }) => {
     const token = getToken();
     if (!token) return false;
     try {

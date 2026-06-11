@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
 
 export interface GoogleReview {
   id: string;
@@ -28,24 +27,28 @@ interface GoogleReviewsResponse {
 }
 
 async function fetchGoogleReviews(): Promise<GoogleReviewsResponse> {
-  const { data, error } = await supabase.functions.invoke<GoogleReviewsResponse>(
-    "fetch-google-reviews"
-  );
+  const res = await fetch("/api/google-reviews");
+  const data = (await res.json()) as GoogleReviewsResponse;
 
-  if (error) {
-    console.error("Error fetching Google reviews:", error);
-    throw error;
+  if (!res.ok && !data.reviews?.length) {
+    console.error("Error fetching Google reviews:", data.error);
+    throw new Error(data.error || res.statusText);
   }
 
-  return data || { reviews: [], stats: { averageRating: 0, totalCount: 0, recommendPercentage: 0 } };
+  return (
+    data || {
+      reviews: [],
+      stats: { averageRating: 0, totalCount: 0, recommendPercentage: 0 },
+    }
+  );
 }
 
 export function useGoogleReviews() {
   return useQuery({
     queryKey: ["google-reviews"],
     queryFn: fetchGoogleReviews,
-    staleTime: 5 * 60 * 1000, // Consider data stale after 5 minutes
-    refetchInterval: 5 * 60 * 1000, // Refetch every 5 minutes
+    staleTime: 5 * 60 * 1000,
+    refetchInterval: 5 * 60 * 1000,
     retry: 2,
   });
 }

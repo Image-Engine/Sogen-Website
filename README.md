@@ -52,7 +52,7 @@ URL helpers are centralized in `src/lib/blogUrls.ts`. Set `NEXT_PUBLIC_BLOG_HOST
 - shadcn-ui
 - Tailwind CSS
 - Shopify Storefront API
-- Supabase (edge functions)
+- Next.js API routes (Shopify customer OAuth, Google reviews)
 
 ## Build & deploy
 

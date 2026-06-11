@@ -9,16 +9,17 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 
+const SUPPORT_EMAIL = "info@sogenenergy.co.nz";
+
 export default function Profile() {
   const { customer, updateCustomer } = useShopifyCustomer();
   const [firstName, setFirstName] = useState(customer?.firstName || "");
   const [lastName, setLastName] = useState(customer?.lastName || "");
-  const [phone, setPhone] = useState(customer?.phoneNumber?.phoneNumber || "");
   const [saving, setSaving] = useState(false);
 
   const handleSave = async () => {
     setSaving(true);
-    const ok = await updateCustomer({ firstName, lastName, phone });
+    const ok = await updateCustomer({ firstName, lastName });
     setSaving(false);
     if (ok) toast.success("Profile updated");
     else toast.error("Failed to update profile");
@@ -33,10 +34,23 @@ export default function Profile() {
         <Card>
           <CardHeader><CardTitle>Your Details</CardTitle></CardHeader>
           <CardContent className="space-y-4">
-            <div><Label>Email</Label><Input value={customer?.emailAddress?.emailAddress || ""} disabled /></div>
+            <div>
+              <Label>Email</Label>
+              <Input value={customer?.emailAddress?.emailAddress || ""} disabled />
+            </div>
+            <div>
+              <Label>Phone</Label>
+              <Input value={customer?.phoneNumber?.phoneNumber || ""} disabled />
+            </div>
+            <p className="text-sm text-muted-foreground">
+              To change your email or phone, contact us at{" "}
+              <a href={`mailto:${SUPPORT_EMAIL}`} className="text-primary hover:underline">
+                {SUPPORT_EMAIL}
+              </a>
+              .
+            </p>
             <div><Label>First Name</Label><Input value={firstName} onChange={(e) => setFirstName(e.target.value)} /></div>
             <div><Label>Last Name</Label><Input value={lastName} onChange={(e) => setLastName(e.target.value)} /></div>
-            <div><Label>Phone</Label><Input value={phone} onChange={(e) => setPhone(e.target.value)} /></div>
             <Button onClick={handleSave} disabled={saving}>{saving ? "Saving..." : "Save Changes"}</Button>
           </CardContent>
         </Card>
